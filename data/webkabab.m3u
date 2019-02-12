@@ -1,0 +1,430 @@
+#EXTM3U
+
+#EXTINF:-1 tvg-id="2.rashut2.org.il" tvg-name="קשת" group-title="A" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/1511182261.jpg" radio="false", קשת
+http://keshethlslive-i.akamaihd.net/hls/live/512033/CH2LIVE_HIGH/index_3100.m3u8|Referer=http://keshethlslive-i.akamaihd.net/hls/live
+
+#EXTINF:-1 tvg-id="2.rashut2.org.il" tvg-name="רשת" group-title="A" tvg-logo="https://isc.wcdn.co.il/w6/v/tv/ch_icons/1511182329.jpg" radio="false",רשת
+http://besttv10.aoslive.it.best-tv.com/reshet/studio/index_4.m3u8
+
+
+#EXTINF:-1 tvg-name="כאן" group-title="Israel" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/1511175924.jpg" radio="false",כאן
+https://www.kan.org.il/live/tv.aspx?stationid=2
+
+#EXTINF:-1 tvg-id="2.rashut2.org.il" tvg-name="קשת" group-title="Israel" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/1511182261.jpg" radio="false", קשת
+http://www.isramedia.net/12/%D7%A2%D7%A8%D7%95%D7%A6%D7%99%D7%9D-%D7%9E%D7%99%D7%A9%D7%A8%D7%90%D7%9C/%D7%A2%D7%A8%D7%95%D7%A5-12-%D7%A9%D7%99%D7%93%D7%95%D7%A8-%D7%97%D7%99
+
+#EXTINF:-1 tvg-id="2.rashut2.org.il" tvg-name="רשת" group-title="Israel" tvg-logo="https://isc.wcdn.co.il/w6/v/tv/ch_icons/1511182329.jpg" radio="false",רשת
+http://besttv10.aoslive.it.best-tv.com/reshet/studio/index_4.m3u8|Referer=http://reshet.tv/live/&ignore=.m3u8
+
+
+#EXTINF:-1 tvg-id="ערוץ המוסיקה" tvg-name="ערוץ המוסיקה" group-title="Israel" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/1510830970.jpg" radio="false",ערוץ המוסיקה 24
+http://tv.ifindfast.com/%D7%A2%D7%A8%D7%95%D7%A5_%D7%94%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94_24.html
+
+#EXTINF:-1 group-title="Israel" tvg-logo="https://cdn.phoenix-widget.com/wand/16/9/5b361ebf4f32fe406a00d428.jpg" ,ILand
+http://146.185.61.140:1935/live/myStream/playlist.m3u8
+
+#EXTINF:-1 group-title="Israel" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ערוץ 9 ישראל פלוס 
+http://viks.tv/520-9-kanal-izrail.html
+
+#EXTINF:-1 group-title="Israel" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ערוץ 9 ישראל פלוס (2)
+http://9tv.co.il/video/israel.html
+
+#EXTINF:-1 group-title="Israel" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ערוץ 9 ישראל פלוס (3)
+addon://com.addons.kabab/request_live_url/onlytv/0
+
+#EXTINF:-1 group-title="Israel" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ערוץ 9 ישראל פלוס (4)
+http://only-tv.org/9-kanal-izrail.html
+
+#EXTINF:-1 group-title="Radio",כאן ב
+http://62.90.90.52/ipbc_IPBCbetLAMRepeat/_definst_/smil:IPBCbetLAM.smil/chunklist_w2070241307_b74000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן ג
+http://radiocast-rr-d.vidnt.com:8000/ipbc_IPBCgimmelLAM
+
+#EXTINF:-1 group-title="Radio",Рэка כאן
+http://62.90.90.44/ipbc_IPBCrekaLAMRepeat/_definst_/smil:IPBCrekaLAM.smil/chunklist_w543211242_b74000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן ים תיכון
+http://82.80.192.30/ipbc_IPBCOrientalLARepeat/_definst_/smil:IPBCOrientalLA.smil/chunklist_w1311975992_b202000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן 80-90
+http://82.80.192.11/ipbc_IPBC80-90LARepeat/_definst_/smil:IPBC80-90LA.smil/chunklist_w338058185_b202000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן להיטים
+http://62.90.90.34/ipbc_IPBCHitsLARepeat/_definst_/smil:IPBCHitsLA.smil/chunklist_w1257886703_b202000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן קלאסי
+http://82.80.192.11/ipbc_IPBCClassicLARepeat/_definst_/smil:IPBCClassicLA.smil/chunklist_w1612571340_b202000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן נוסטלגי
+http://82.80.192.11/ipbc_IPBCNostalgiaLARepeat/_definst_/smil:IPBCNostalgiaLA.smil/chunklist_w1237567359_b202000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן שיא הרגש
+http://62.90.90.34/ipbc_IPBCRegeshLARepeat/_definst_/smil:IPBCRegeshLA.smil/chunklist_w911480163_b202000.m3u8
+
+#EXTINF:-1 group-title="Radio",כאן קצת אחרת
+http://82.80.192.11/ipbc_IPBCAlternativeLARepeat/_definst_/smil:IPBCAlternativeLA.smil/chunklist_w1131442608_b202000.m3u8
+
+#EXTINF:-1 group-title="Radio",גלגל"צ
+http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz
+
+#EXTINF:-1 group-title="Radio",רדיו עפולה
+http://radioafula.cdnwiz.com/stream
+
+#EXTINF:-1 group-title="Radio",Первое радио
+http://www.oles.tv/891fm/
+
+#EXTINF:-1 group-title="Radio",Первое радио (2)
+http://891fm.streamgates.net/891Fm
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Первый канал HD
+http://kineskop.tv/?page=watch&ch=250
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Первый канал
+http://kineskop.tv/?page=watch&ch=119
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Первый канал (2)
+http://pervii-kanal.lapti.tv
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Первый канал (3)
+http://www.online-perviy.tv/bcast/
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Первый канал европа
+http://kineskop.tv/?page=watch&ch=425
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",НТВ
+http://kineskop.tv/?page=watch&ch=98
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",НТВ HD
+http://kineskop.tv/?page=watch&ch=256
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",НТВ мир
+http://kineskop.tv/?page=watch&ch=179
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Звезда
+http://kineskop.tv/?page=watch&ch=49
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",ТВЦ
+http://kineskop.tv/?page=watch&ch=321
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Россия 1
+http://kineskop.tv/?page=watch&ch=79
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Россия 1 HD
+http://kineskop.tv/?page=watch&ch=251
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",СТС
+http://kineskop.tv/?page=watch&ch=100
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",РЕН ТВ
+http://kineskop.tv/?page=watch&ch=102
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Че
+http://kineskop.tv/?page=watch&ch=313
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",5 канал
+http://kineskop.tv/?page=watch&ch=106
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Ю
+http://kineskop.tv/?page=watch&ch=220
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",ТВ3
+http://kineskop.tv/?page=watch&ch=223
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Домашний канал
+http://kineskop.tv/?page=watch&ch=315
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Россия 24
+http://rus24.tv/perviy_kanal.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Россия К
+http://kineskop.tv/?page=watch&ch=82
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",ТНТ
+http://kineskop.tv/?page=watch&ch=114
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",ТНТ 4
+http://kineskop.tv/?page=watch&ch=93
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",ТНТ HD
+http://kineskop.tv/?page=watch&ch=429
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",ОТР 
+http://kineskop.tv/?page=watch&ch=299
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",Пятница 
+http://kineskop.tv/?page=watch&ch=273
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",РТР-Планета
+http://kineskop.tv/?page=watch&ch=42
+
+#EXTINF:-1 refresh-rate=1 group-title="Russia",RTVI
+http://kineskop.tv/?page=watch&ch=182
+
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",MTV Dance
+http://kineskop.tv/?page=watch&ch=208
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",MTV Rocks
+http://kineskop.tv/?page=watch&ch=307
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",MTV Hits
+http://kineskop.tv/?page=watch&ch=309
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",Bridge TV Dance
+http://kineskop.tv/?page=watch&ch=453
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",Bridge TV Classic
+http://kineskop.tv/?page=watch&ch=452
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",Bridge TV
+http://kineskop.tv/?page=watch&ch=319
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",Music Box
+http://kineskop.tv/?page=watch&ch=379
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",VH1 Classic
+http://kineskop.tv/?page=watch&ch=136
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",VH1 Europe
+http://kineskop.tv/?page=watch&ch=107
+
+#EXTINF:-1 refresh-rate=1 group-title="Music",Russian Music Box
+http://kineskop.tv/?page=watch&ch=380
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",History Channel
+http://kineskop.tv/?page=watch&ch=10
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",Viasat History
+http://kineskop.tv/?page=watch&ch=55
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",Viasat Nature
+http://kineskop.tv/?page=watch&ch=52
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",NAT GEO Wild
+http://kineskop.tv/?page=watch&ch=212
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",Discovery Science
+http://kineskop.tv/?page=watch&ch=206
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",Discovery Channel HD
+http://kineskop.tv/?page=watch&ch=177
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",National Geographic HD
+http://kineskop.tv/?page=watch&ch=240
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",DTX
+http://kineskop.tv/?page=watch&ch=205
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",ID Xtra
+http://kineskop.tv/?page=watch&ch=203
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",Galaxy
+http://kineskop.tv/?page=watch&ch=430
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",Психология 21
+http://kineskop.tv/?page=watch&ch=72
+
+#EXTINF:-1 refresh-rate=1 group-title="Science and Nature",История
+http://kineskop.tv/?page=watch&ch=275
+
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",TV 1000
+http://kineskop.tv/?page=watch&ch=53
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",TV 1000 Action
+http://kineskop.tv/?page=watch&ch=51
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",TV 1000 Megahit
+http://kineskop.tv/?page=watch&ch=132
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",TV 1000 Premium
+http://kineskop.tv/?page=watch&ch=131
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",TV 1000 Comedy
+http://kineskop.tv/?page=watch&ch=133
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",TV 1000 Русское кино
+http://kineskop.tv/?page=watch&ch=58
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",ЕВРОКИНО
+http://kineskop.tv/?page=watch&ch=68
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",Кино ТВ HD
+http://kineskop.tv/?page=watch&ch=274
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",Paramount Channel
+http://kineskop.tv/?page=watch&ch=75
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",Paramount Comedy
+http://kineskop.tv/?page=watch&ch=113
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",Amedia 1
+http://kineskop.tv/?page=watch&ch=295
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",Amedia 2
+http://kineskop.tv/?page=watch&ch=311
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",Amedia Premium HD
+http://kineskop.tv/?page=watch&ch=296
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",Amedia Hit
+http://kineskop.tv/?page=watch&ch=336
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",КИНОМИКС
+http://kineskop.tv/?page=watch&ch=199
+
+#EXTINF:-1 refresh-rate=1 group-title="Movies",CBS Reality
+http://kineskop.tv/?page=watch&ch=209
+
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",24 Док
+http://kineskop.tv/?page=watch&ch=50
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",Sony
+http://kineskop.tv/?page=watch&ch=86
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",Sony Turbo
+http://kineskop.tv/?page=watch&ch=45
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",Sony Sci-Fi
+http://kineskop.tv/?page=watch&ch=87
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",КИНОСЕРИЯ
+http://kineskop.tv/?page=watch&ch=188
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",CBS Drama
+http://kineskop.tv/?page=watch&ch=202
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",CBS Reality
+http://kineskop.tv/?page=watch&ch=209
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",FOX
+http://kineskop.tv/?page=watch&ch=77
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",FOX Life
+http://kineskop.tv/?page=watch&ch=78
+
+#EXTINF:-1 refresh-rate=1 group-title="Series and Documentary",AMC
+http://kineskop.tv/?page=watch&ch=207
+
+
+
+#EXTINF:-1 refresh-rate=1 group-title="Kids",Дисней
+http://kineskop.tv/?page=watch&ch=85
+
+#EXTINF:-1 refresh-rate=1 group-title="Kids",Nickolodeon
+http://kineskop.tv/?page=watch&ch=62
+
+#EXTINF:-1 refresh-rate=1 group-title="Kids",Cartoon Network
+http://kineskop.tv/?page=watch&ch=94
+
+#EXTINF:-1 refresh-rate=1 group-title="Kids",Boomerang
+http://kineskop.tv/?page=watch&ch=420
+
+#EXTINF:-1 refresh-rate=1 group-title="Kids",Gulli
+http://kineskop.tv/?page=watch&ch=262
+
+#EXTINF:-1 refresh-rate=1 group-title="Kids",Карусель 
+http://kineskop.tv/?page=watch&ch=61
+
+#EXTINF:-1 refresh-rate=1 group-title="Kids",Nick Jr
+http://kineskop.tv/?page=watch&ch=268
+
+
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч ТВ
+http://kineskop.tv/?page=watch&ch=81
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч ТВ HD
+http://kineskop.tv/?page=watch&ch=287
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Футбол 1 HD
+http://kineskop.tv/?page=watch&ch=454
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Футбол 2 HD
+http://kineskop.tv/?page=watch&ch=246
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Футбол 3 HD
+http://kineskop.tv/?page=watch&ch=455
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Футбол 1
+http://kineskop.tv/?page=watch&ch=123
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Футбол 2
+http://kineskop.tv/?page=watch&ch=172
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Наш Футбол
+http://kineskop.tv/?page=watch&ch=219
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Viasat Sport
+http://kineskop.tv/?page=watch&ch=57
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Арена
+http://kineskop.tv/?page=watch&ch=84
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Арена HD
+http://kineskop.tv/?page=watch&ch=248
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Игра
+http://kineskop.tv/?page=watch&ch=108
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Игра HD
+http://kineskop.tv/?page=watch&ch=174
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Планета
+http://kineskop.tv/?page=watch&ch=193
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Матч Боец
+http://kineskop.tv/?page=watch&ch=191
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Eurosport
+http://kineskop.tv/?page=watch&ch=90
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Eurosport HD
+http://kineskop.tv/?page=watch&ch=176
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Eurosport 2
+http://kineskop.tv/?page=watch&ch=91
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Extreme Sports
+http://kineskop.tv/?page=watch&ch=211
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",KXL
+http://kineskop.tv/?page=watch&ch=228
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",KXL HD
+http://kineskop.tv/?page=watch&ch=456
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Viasat Hockey
+http://only-tv.org/viasat-hockey.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Setana Sports
+http://only-tv.org/setanta-sports.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Спорт 1 Украина
+http://only-tv.org/sport-1-ukraina.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Спорт 2 Украина
+http://only-tv.org/sport-2-ukraina.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",X-Sports
+http://only-tv.org/xsport.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",ESPN
+http://cricfree.sx/update/espnusa.php
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",Fox Sports 1
+http://cricfree.cc/stream2watch/fox-hd.php
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",ערוץ 5
+http://ifindfast.com/tv_new/tv_source/tv_55_hd_source.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",ספורט 1
+http://ifindfast.com/tv_new/tv_source/tv_sport1_hd_source.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",ספורט 2
+http://ifindfast.com/tv_new/tv_source/tv_sport2_hd_source.html
+
+#EXTINF:-1 refresh-rate=1 group-title="Sports",ONE ספורט
+http://ifindfast.com/tv_new/tv_source/tv_one_hd_source.html
