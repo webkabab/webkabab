@@ -199,7 +199,8 @@ switch (proc) {
         // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
 		console.debug("request tv guide");
         kababMain.requestTvGuide(req);
-		TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
+		//TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
+		TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
                    
         // After all playlists were delivered - you should call the 'done' method to finish this session.
         // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
