@@ -172,20 +172,13 @@ function doInBackground() {
     com.montezumba.lib.types.ComponentManager.create(WebKababComponentManager);
     com.montezumba.lib.types.ComponentManager.instance().create();
 
-
-
-
-
-
-
-
     var kababMain = new com.addons.kabab.KababMain();
 
     console.info("Got request: " + proc);
 
     switch (proc) {
         case "request_live_playlist":	// This procedure requests a playlist (or several playlists) from this server.                
-            
+
             TiviProvider.sendPlaylist(req, "Web Kabab Channels", "https://www.dropbox.com/s/9ra1194cekuprob/webkabab.m3u?dl=1", "LIVE");
             // generate tv shows from scrappers
             var shows = {};
@@ -198,7 +191,7 @@ function doInBackground() {
             var fd = TiviProvider.createOutputFile(req, tempPath, true);
             TiviProvider.writeLineToFile(req, fd, "#EXTM3U\n");
             generateSdarotSeries(req, shows, fd);
-            TiviProvider.close(req, fd);            
+            TiviProvider.close(req, fd);
             com.montezumba.lib.io.StorageHandler.instance().rename(tempPath, seriesPath);
             TiviProvider.sendLocalPlaylist(req, "Web Kabab TV Shows", seriesPath, "VOD");
 
@@ -242,6 +235,29 @@ function doInBackground() {
 
             break;
 
+        case "request_search_query_live":
+
+            console.debug("query=" + query);
+            var results = searchKinoprofi(req, query);
+            for (var name in results) {
+                TiviProvider.sendSearchResult(req, name, results[name], false);
+            }
+
+            TiviProvider.done(req);
+            break;
+
+
+        case "request_search_query_vod":
+
+            console.debug("query=" + query);
+            var results = searchKinoprofi(req, query);
+            for (var name in results) {
+                TiviProvider.sendSearchResult(req, name, results[name], true);
+            }
+
+            TiviProvider.done(req);
+            break;
+
 
         /*
         default:
@@ -271,7 +287,7 @@ function getParameterByName(name, url) {
 
 
 function generateSdarotSeries(req, shows, fd) {
-    for(show in shows) {
+    for (show in shows) {
         var series = {}
         series[show] = parseSdarotTvShow(req, shows[show]);
         createSeriesM3U(req, series, fd);
@@ -279,17 +295,58 @@ function generateSdarotSeries(req, shows, fd) {
 }
 
 function createSeriesM3U(req, series, fd) {
-        
-    for(var show in series) {            
-        for(var season in series[show]) {
-            for(var episode in series[show][season]) {
-                var episodeName = show + " S"+season+" E"+episode;
-                TiviProvider.writeLineToFile(req, fd, "#EXTINF:-1 group-title=\""+show+"\","+episodeName+"\"");
-                TiviProvider.writeLineToFile(req, fd, series[show][season][episode]+"");
+
+    for (var show in series) {
+        for (var season in series[show]) {
+            for (var episode in series[show][season]) {
+                var episodeName = show + " S" + season + " E" + episode;
+                TiviProvider.writeLineToFile(req, fd, "#EXTINF:-1 group-title=\"" + show + "\"," + episodeName + "\"");
+                TiviProvider.writeLineToFile(req, fd, series[show][season][episode] + "");
             }
         }
-    }        
+    }
 }
+
+function searchKinoprofi(req, query) {
+    var fd = TiviProvider.openFile(req, "http://kinoprofi.vip/search/f:" + query, "UTF-8", false);
+    var content = TiviProvider.readAll(req, fd);
+    TiviProvider.close(req, fd);
+    //var reg = /class="title-main"[\\s\\S]*?itemprop/gis;        
+    var links = [];
+    var names = [];
+
+
+    var results = "";
+    var urlReg = new RegExp("class=\"title-main\"[\\s\\S]*?href=\"(.*?)\"", "g");
+    var i = 0;
+    do {
+        results = urlReg.exec(content);
+        if (results !== null) {
+            links[i] = results[1];
+        }
+        i++;
+    } while (results !== null);
+
+
+    results = "";
+    var nameReg = new RegExp("title='(.*?)'", "g");
+    i = 0;
+    do {
+        results = nameReg.exec(content);
+        if (results !== null) {
+            names[i] = results[1];
+        }
+        i++;
+    } while (results !== null);
+
+    var resultsMap = {};
+    for (i = 0; i < links.length; i++) {
+        resultsMap[names[i]] = links[i];
+    }
+
+    return resultsMap;
+}
+
 
 function parseSdarotTvShow(req, path) {
     var base = "https://sdarot.world";
@@ -301,23 +358,23 @@ function parseSdarotTvShow(req, path) {
     var reg = new RegExp("data-season=\"([0-9]+?)\"[\\s\\S]*?href=\"(.*?)\"", "g");
     var results = "";
     do {
-        results = reg.exec(content);              
-        if (results !== null) {                
-            seasons[results[1]] = {};                
+        results = reg.exec(content);
+        if (results !== null) {
+            seasons[results[1]] = {};
             var fd1 = TiviProvider.openFile(req, base + results[2], "UTF-8", false);
-            var content1 = TiviProvider.readAll(req, fd1);                
+            var content1 = TiviProvider.readAll(req, fd1);
             TiviProvider.close(req, fd1);
             //var reg1 = /data-episode="([0-9]+?)".*?href="(.*?)"/gs;
-            var reg1 = new RegExp("data-episode=\"([0-9]+?)\"[\\s\\S]*?href=\"(.*?)\"","g");
+            var reg1 = new RegExp("data-episode=\"([0-9]+?)\"[\\s\\S]*?href=\"(.*?)\"", "g");
             var results1 = "";
 
             do {
                 results1 = reg1.exec(content1);
-                if (results1 !== null) {                        
+                if (results1 !== null) {
                     seasons[results[1]][results1[1]] = base + results1[2];
                 }
             } while (results1 !== null)
-        }            
+        }
     } while (results !== null);
 
 
@@ -343,11 +400,11 @@ worker.postMessage({'proc' : proc, 'req' : req, 'url' : document.URL});
 
 
 document.querySelector("#testFiles").onchange = function() {
-    worker.postMessage({'proc' : proc, 'req' : req, 'url' : document.URL, 'testFiles' : document.querySelector("#testFiles").files});      
+    worker.postMessage({'proc' : proc, 'req' : req, 'url' : document.URL, 'testFiles' : document.querySelector("#testFiles").files});
 }
 
 /*
-worker.onmessage = function(e){   
+worker.onmessage = function(e){
 	console.info("got TiviMessage: "+e);
 	var type = e.data.type;
 	var content = e.data.content;
@@ -370,9 +427,9 @@ worker.onmessage = function(e){
 		case 'createOutputFile':
 			TiviProvider.createOutputFile(req, content.path, content.isAppend);
 			break;
-		
+
 		default:
 			console.error("bad message");
-	}    
+	}
 }
 */

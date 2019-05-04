@@ -75,6 +75,9 @@ var TiviProvider = {
                 else if (this.files[i].name === 'sidra2.html') {
                     this.testFiles['sidra2'] = this.files[i];
                 }
+                else if (this.files[i].name === 'kinoprofi_list.html') {
+                    this.testFiles['kinoprofi'] = this.files[i];
+                }
             }
         }
 
@@ -95,6 +98,9 @@ var TiviProvider = {
         }
         else if (fd.startsWith('https://sdarot.world/watch/82')) {
             return readFile(this.testFiles['sidra2']);
+        }
+        else if (fd.startsWith('http://kinoprofi.vip/search/f:memento')) {
+            return readFile(this.testFiles['kinoprofi']);
         }
         return null;
 

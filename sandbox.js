@@ -29,15 +29,53 @@ function doInBackground() {
 
         var req = "test";
         var path = "path";
-        var shows = {};
-        shows["Peaky Blinders"] = "https://sdarot.world/watch/1207";
-        shows["Game of Thrones"] = "https://sdarot.world/watch/82";
-
-        var fd = TiviProvider.createOutputFile(req, path, true);
-        TiviProvider.writeToFile(req, fd, "#EXTM3U\n");   
-        generateSdarotSeries(req, shows, fd);
-        TiviProvider.close(req, fd);
+      
+        var result = searchKinoprofi(req, "memento");
+        console.debug(result);
     }
+
+    // http://kinoprofi.vip/search/f:<search query>
+    // catch: title-main
+    function searchKinoprofi(req, query) {        
+        var fd = TiviProvider.openFile(req, "http://kinoprofi.vip/search/f:"+query, "UTF-8");
+        var content = TiviProvider.readAll(req, fd);        
+        TiviProvider.close(req, fd);
+        //var reg = /class="title-main"[\\s\\S]*?itemprop/gis;        
+        var links = [];
+        var names = [];
+
+
+        var results = "";
+        var urlReg = new RegExp("class=\"title-main\"[\\s\\S]*?href=\"(.*?)\"", "g");
+        var i = 0;
+        do {
+            results = urlReg.exec(content);              
+            if (results !== null) {                
+                links[i] = results[1];
+            } 
+            i++;           
+        } while (results !== null);
+
+
+        results = "";
+        var nameReg = new RegExp("title='(.*?)'", "g");
+        i = 0;
+        do {
+            results = nameReg.exec(content);              
+            if (results !== null) {                
+                names[i] = results[1];
+            }            
+            i++;
+        } while (results !== null);
+
+        var resultsMap = {};
+        for(i = 0; i < links.length; i++) {
+            resultsMap[names[i]] = links[i];
+        }
+
+        return resultsMap;
+    }
+
 
     /*
 
