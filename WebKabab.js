@@ -182,8 +182,10 @@ function doInBackground() {
             TiviProvider.sendPlaylist(req, "Web Kabab Channels", "https://www.dropbox.com/s/9ra1194cekuprob/webkabab.m3u?dl=1", "LIVE");
             // generate tv shows from scrappers
             var shows = {};
-            shows["Peaky Blinders"] = "https://sdarot.world/watch/1207";
-            shows["Game of Thrones"] = "https://sdarot.world/watch/82";
+            shows["Peaky Blinders"] = "https://sdarot.world/watch/1207";            
+            shows["Handmaid's Tale"] = "https://sdarot.tv/watch/2803";
+            shows["Black Mirror"] = "https://sdarot.tv/watch/144";
+            shows["Stranger Things"] = "https://sdarot.tv/watch/2435";
             var tempPath = com.montezumba.lib.io.StorageHandler.instance().getAppTempPath();
             var seriesPath = com.montezumba.lib.io.StorageHandler.instance().getAppStoragePath();
             tempPath = com.montezumba.lib.io.StorageHandler.instance().generateFullPath(tempPath, "temp_series.m3u");
