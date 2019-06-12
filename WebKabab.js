@@ -186,7 +186,7 @@ function doInBackground() {
             shows["Handmaid's Tale"] = "https://sdarot.services/watch/2803";
             shows["Black Mirror"] = "https://sdarot.services/watch/144";
             shows["Stranger Things"] = "https://sdarot.services/watch/2435";
-            shows["The Big Bang Theory"] = "https://sdarot.services/watch/19";
+            shows["Killing Eve"] = "https://sdarot.services/watch/3698"
             var tempPath = com.montezumba.lib.io.StorageHandler.instance().getAppTempPath();
             var seriesPath = com.montezumba.lib.io.StorageHandler.instance().getAppStoragePath();
             tempPath = com.montezumba.lib.io.StorageHandler.instance().generateFullPath(tempPath, "temp_series.m3u");
