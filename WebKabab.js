@@ -191,12 +191,14 @@ function doInBackground() {
             var seriesPath = com.montezumba.lib.io.StorageHandler.instance().getAppStoragePath();
             tempPath = com.montezumba.lib.io.StorageHandler.instance().generateFullPath(tempPath, "temp_series.m3u");
             seriesPath = com.montezumba.lib.io.StorageHandler.instance().generateFullPath(seriesPath, "kabab_series.m3u");
+            /*
             var fd = TiviProvider.createOutputFile(req, tempPath, true);
             TiviProvider.writeLineToFile(req, fd, "#EXTM3U\n");
             generateSdarotSeries(req, shows, fd);
             TiviProvider.close(req, fd);
             com.montezumba.lib.io.StorageHandler.instance().rename(tempPath, seriesPath);
             TiviProvider.sendLocalPlaylist(req, "Web Kabab TV Shows", seriesPath, "VOD");
+            */
 
             TiviProvider.done(req);
 
