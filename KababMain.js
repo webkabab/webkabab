@@ -341,8 +341,8 @@ var com;
                     title.refreshRate = 1 * com.montezumba.lib.types.Constants.MINUTES_$LI$();
                     com.montezumba.lib.types.MediaLog.instance().debug("Update url=" + title.url);
                     result.mediaResults.add(title.toTrasportableTitle());
-                    this.done();
                     com.treynix.tiviapplive.provider.AddonHandler.instance().sendIndexerResponse(result);
+                    //this.done();                    
                     return;
                 };
 
@@ -386,20 +386,19 @@ var com;
 							console.error(e.message+" "+e.stack);
                             //com.treynix.tiviapplive.provider.AddonHandler.instance().sendError(this.params, "Failed to open guide file");
 							TiviProvider.sendError(req,"Failed to open guide file: " +guidePath);
-                            TiviProvider.done(req);
-                        }
-                        ;
+                            //TiviProvider.done(req);
+                        }                        
                     }
                     else {
                         com.montezumba.lib.types.MediaLog.instance().debug("Cannot find guide");
                         refresh = true;
                     }
-                    if (valid) {
+                    if (valid && !refresh) {
                         com.montezumba.lib.types.MediaLog.instance().debug("Sending tv guide...");
                         //this.result.mediaResults.add(guide.toTrasportableTitle());
 						TiviProvider.sendLocalTvGuide(req, "Kabab Hebrew Guide", guidePath, 2); 
-						TiviProvider.done(req);
-                        
+                        //TiviProvider.done(req);
+                        return;                        
                     }
                     if (refresh) {
                         try {
@@ -409,18 +408,17 @@ var com;
                                 guide.startDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
                                 guide.endDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
                                 guide.endDate.addTime(com.addons.kabab.KababConfig.TV_GUIDE_VALIDITY_DAYS * com.montezumba.lib.types.Constants.DAYS_$LI$());
-                                TiviProvider.sendLocalTvGuide(req, "Web Kabab Guide", guidePath, 2);                                
-								TiviProvider.done(req);
+                                TiviProvider.sendLocalTvGuide(req, "Kabab Hebrew Guide", guidePath, 2);                                
+								//TiviProvider.done(req);
                             }
                         }
                         catch (e) {
                             com.montezumba.lib.types.MediaLog.instance().error(e.message, e);
                             if (!valid) {
                                 TiviProvider.reportError(req, "Failed to generate tv-guide");
-                                TiviProvider.done(req);
+                                //TiviProvider.done(req);
                             }
-                        }
-                        ;
+                        }                        
                     }
                 };
                 KababMain.generateThisWeek = function (today, zoneOffset) {

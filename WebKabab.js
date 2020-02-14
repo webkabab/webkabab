@@ -251,6 +251,11 @@ function doInBackground() {
             TiviProvider.done(req);
             break;
 
+        case "ping":
+            console.debug("ping request");
+            TiviProvider.done(req);
+            break;
+
 
         case "request_search_query_vod":
 
