@@ -119,11 +119,13 @@ var com;
                         var zoneString = "";
                         if (zone !== 0) {
                             var zoneHours = (zone / 60 | 0);
+                            com.montezumba.lib.types.MediaLog.instance().debug("Zone hours raw: "+zoneHours);
                             var zoneHoursStr = new String(Math.abs(zoneHours)).toString();
                             var zoneSign = (zone > 0) ? "+" : "-";
                             if (zoneHours < 10) {
                                 zoneHoursStr = "0" + zoneHoursStr;
                             }
+                            com.montezumba.lib.types.MediaLog.instance().debug("Zone hours final: "+zoneHours);
                             var zoneMinutes = zone % 60;
                             var zoneMinutesStr = new String(Math.abs(zoneMinutes)).toString();
                             if (zoneMinutes < 10) {
