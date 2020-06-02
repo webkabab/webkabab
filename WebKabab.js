@@ -402,13 +402,14 @@ var query = getParameterByName("q");
 
 doInBackground();
 
-
+/*
 async function test() {
     console.debug("async worked!!!");
 }
 
 console.debug("calling async");
 test();
+*/
 
 /*
 var worker = new Worker(URL.createObjectURL(new Blob(["("+doInBackground.toString()+")()"], {type: 'text/javascript'})));
