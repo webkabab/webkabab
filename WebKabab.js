@@ -210,15 +210,17 @@ function doInBackground() {
             // 'name' - Provides a name for this EPG. This text will be displayed in the Settings menu
             // 'url' - A URL for this EPG. Should point to a valid "XMLTV" file.
             // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
-            console.debug("request tv guide");
-            kababMain.requestTvGuide(req);
-            //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
-            TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
-
-            // After all playlists were delivered - you should call the 'done' method to finish this session.
-            // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
-            //postMessage({type: 'done'});
-            TiviProvider.done(req);
+            doInBackground(function() {
+                console.debug("request tv guide");
+                kababMain.requestTvGuide(req);
+                //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
+                TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
+    
+                // After all playlists were delivered - you should call the 'done' method to finish this session.
+                // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
+                //postMessage({type: 'done'});
+                TiviProvider.done(req);
+            });          
             break;
 
         case "request_live_url":
@@ -418,12 +420,13 @@ setTimeout(function () {
 }, 1000);
 */
 
-var spam = function(){
-    console.log("cia");
-    setTimeout(spam, 1000);
+var doInBackground = function(callback) {
+    console.log("Running in background...");
+    callback();
+    setTimeout(spam, 500);
  }
 
- spam();
+ 
 
 /*
 var promise = new Promise(function(resolve, reject) {
