@@ -221,10 +221,10 @@ function doInBackground() {
                 // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
                 //postMessage({type: 'done'});
                 TiviProvider.done(req);
-                setTimeout(doInBackground, 500);
+                
              }
 
-             doInBackground();
+             setTimeout(doInBackground, 500);
 
             break;
 
