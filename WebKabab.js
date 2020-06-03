@@ -419,7 +419,7 @@ setTimeout(function () {
 */
 
 var spam = function(){
-    console.log("cia")
+    console.log("cia");
     setTimeout(spam, 1000);
  }
 
