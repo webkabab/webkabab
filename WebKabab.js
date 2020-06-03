@@ -413,7 +413,10 @@ test();
 
 
 var promise = new Promise(function(resolve, reject) {
-    setTimeout(function () {resolve("async worked!!!")}, 1000);
+    setTimeout(function () {
+        console.debug("async workerd(1)!!!");
+        resolve("async worked!!!");
+    }, 1000);
 });
 
 
