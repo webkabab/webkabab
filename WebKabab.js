@@ -411,11 +411,21 @@ console.debug("calling async");
 test();
 */
 
+
+/*
 setTimeout(function () {
     console.debug("async workerd(2)!!!");    
 }, 1000);
+*/
 
+var spam = function(){
+    console.log("cia")
+    setTimeout(spam, 1000);
+ }
 
+ spam();
+
+/*
 var promise = new Promise(function(resolve, reject) {
     setTimeout(function () {
         console.debug("async workerd(1)!!!");
@@ -428,7 +438,7 @@ console.debug("calling async");
 promise.then(function(val) {
     console.log(val);
 });
-
+*/
 
 
 /*
