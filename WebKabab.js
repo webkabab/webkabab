@@ -412,13 +412,13 @@ test();
 */
 
 
-var promise = new Promise((resolve, reject) => {
+var promise = new Promise(function(resolve, reject) {
     setTimeout(() => resolve("async worked!!!"), 1000);
 });
 
 
 console.debug("calling async");
-promise.then((val) => {
+promise.then(function(val) {
     console.log(val);
 });
 
