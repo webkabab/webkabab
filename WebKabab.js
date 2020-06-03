@@ -411,6 +411,19 @@ console.debug("calling async");
 test();
 */
 
+
+var promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("async worked!!!"), 1000);
+});
+
+
+console.debug("calling async");
+promise.then((val) => {
+    console.log(val);
+});
+
+
+
 /*
 var worker = new Worker(URL.createObjectURL(new Blob(["("+doInBackground.toString()+")()"], {type: 'text/javascript'})));
 
