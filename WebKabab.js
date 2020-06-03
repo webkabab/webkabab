@@ -411,6 +411,10 @@ console.debug("calling async");
 test();
 */
 
+setTimeout(function () {
+    console.debug("async workerd(2)!!!");    
+}, 1000);
+
 
 var promise = new Promise(function(resolve, reject) {
     setTimeout(function () {
