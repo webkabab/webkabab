@@ -224,7 +224,8 @@ function doInBackground() {
                 
              }
 
-             setTimeout(doInBackground, 500);
+             setTimeout(doInBackground, 1000);
+             console.debug("end normal exec");
 
             break;
 
