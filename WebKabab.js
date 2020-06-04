@@ -456,30 +456,32 @@ promise.then(function(val) {
 
 function executeAsync() {
 
-    function backgroundTask(params) {
+    function backgroundTask() {
         
-        var req = params.data.req;
-        var path = params.data.url;
-
-        importScripts(path + 'j4ts.js');
-        importScripts(path + 'JavaBasic.js');
-        importScripts(path + 'montezumbaLib.js');
-        //importScripts(path + 'TiviProviderStub.js');
-        importScripts(path + 'KababConfig.js');
-        importScripts(path + 'KababMain.js');
-
-
-        console.debug("in backgroundTask... start");
-        console.debug("request tv guide");
-        kababMain.requestTvGuide(req);
-        //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
-        TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
-
-        // After all playlists were delivered - you should call the 'done' method to finish this session.
-        // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
-        //postMessage({type: 'done'});
-        TiviProvider.done(req);
-        console.debug("in backgroundTask... end");
+        onmessage = function(params) {
+            var req = params.data.req;
+            var path = params.data.url;
+    
+            importScripts(path + 'j4ts.js');
+            importScripts(path + 'JavaBasic.js');
+            importScripts(path + 'montezumbaLib.js');
+            //importScripts(path + 'TiviProviderStub.js');
+            importScripts(path + 'KababConfig.js');
+            importScripts(path + 'KababMain.js');
+    
+    
+            console.debug("in backgroundTask... start");
+            console.debug("request tv guide");
+            kababMain.requestTvGuide(req);
+            //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
+            TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
+    
+            // After all playlists were delivered - you should call the 'done' method to finish this session.
+            // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
+            //postMessage({type: 'done'});
+            TiviProvider.done(req);
+            console.debug("in backgroundTask... end");
+        }        
     }
 
     var worker = new Worker(URL.createObjectURL(new Blob(["("+backgroundTask.toString()+")()"], {type: 'text/javascript'})));
