@@ -462,8 +462,9 @@ function executeAsync() {
             var req = params.data.req;
             var path = params.data.url;
 
-            /*
             importScripts(path + 'j4ts.js');
+            /*
+            
             importScripts(path + 'JavaBasic.js');
             importScripts(path + 'montezumbaLib.js');
             //importScripts(path + 'TiviProviderStub.js');
