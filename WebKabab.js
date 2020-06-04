@@ -289,7 +289,7 @@ function doInBackground() {
             */
     }
 }
-//}
+}
 
 
 // Helper method for extracting GET parameters that are sent by the TiviApp client
