@@ -332,7 +332,15 @@ promise.then(function(val) {
 function executeAsync() {
 
     function backgroundTask() {
-    
+
+        
+        var TiviProvider = function() {
+            var done = function() {
+                console.debug("done");
+            }
+        }
+
+
         onmessage = function(params) {
 
             var req = params.data.req;
