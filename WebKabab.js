@@ -179,6 +179,7 @@ function doInBackground() {
     switch (proc) {
         case "request_live_playlist":	// This procedure requests a playlist (or several playlists) from this server.                
 
+            Console.debug("request live playlist");
             TiviProvider.sendPlaylist(req, "Web Kabab Channels", "https://www.dropbox.com/s/9ra1194cekuprob/webkabab.m3u?dl=1", "LIVE");
             // generate tv shows from scrappers
             var shows = {};
@@ -200,6 +201,7 @@ function doInBackground() {
             TiviProvider.sendLocalPlaylist(req, "Web Kabab TV Shows", seriesPath, "VOD");
             */
 
+            Console.debug("request live playlist... done");
             TiviProvider.done(req);
 
             break;
