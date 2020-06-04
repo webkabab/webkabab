@@ -53,131 +53,6 @@ function doInBackground() {
 
     var window = self;
 
-    var kababConfig = new com.addons.kabab.KababConfig();
-
-    //postMessage("req="+req+"<br/>");
-    //postMessage("proc="+proc+"<br/>");
-
-    //TiviProvider.setTestFiles(files);
-
-
-    // initialize montezumbalib stuff
-    var __extends = (this && this.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-
-
-    var TempFileReader = (function () {
-        function TempFileReader(path, encoding) {
-            this.fd = TiviProvider.openFile(req, path, encoding, true);
-            //console.info("openFile fd="+this.fd);
-            if (!this.fd) throw Error("Cannot open file: " + path);
-            return this;
-        }
-
-        TempFileReader.prototype.readAll = function () {
-            //console.info("readll fd="+this.fd);
-            return TiviProvider.readAll(req, this.fd);
-        }
-
-        TempFileReader.prototype.close = function () {
-            TiviProvider.close(req, this.fd);
-        }
-
-        return TempFileReader;
-
-    }());
-    TempFileReader["__class"] = "TempFileReader";
-
-    var TempFileWriter = (function () {
-
-
-        function TempFileWriter(path, isAppend) {
-            this.fd = TiviProvider.createOutputFile(req, path, isAppend);
-            if (this.fd === null) throw new IOException("Cannot create output file: " + path);
-            return this;
-        }
-
-        TempFileWriter.prototype.write$java_lang_String = function (input) {
-            if (!TiviProvider.writeToFile(req, this.fd, input)) {
-                throw "Cannot write to file";
-            }
-        };
-
-        TempFileWriter.prototype.close = function () {
-            TiviProvider.close(req, this.fd);
-        };
-
-        return TempFileWriter;
-    }());
-    TempFileWriter["__class"] = "TempFileWriter";
-
-    var TempStorageHandler = (function (_super) {
-        __extends(TempStorageHandler, _super);
-
-        function TempStorageHandler() { }
-
-        TempStorageHandler.prototype.getAppStoragePath = function () {
-            return "_app_";
-        };
-
-        TempStorageHandler.prototype.getAppTempPath = function () {
-            return "_app_";
-        };
-
-        TempStorageHandler.prototype.generateFullPath = function (first, second) {
-            return first + "/" + second;
-        };
-
-        TempStorageHandler.prototype.openOutputFile = function (path, isAppend) {
-            return new TempFileWriter(path, isAppend);
-        };
-
-        TempStorageHandler.prototype.openFile$java_lang_String$java_lang_String = function (path, encoding) {
-            return new TempFileReader(path, encoding);
-        };
-
-        TempStorageHandler.prototype.delete = function (path) {
-            TiviProvider.delete(req, path);
-        };
-
-        TempStorageHandler.prototype.isExist = function (path) {
-            return TiviProvider.isExist(req, path);
-        };
-
-        TempStorageHandler.prototype.rename = function (path, name) {
-            TiviProvider.rename(req, path, name);
-        };
-
-        return TempStorageHandler;
-
-    }(com.montezumba.lib.io.StorageHandler));
-    TempStorageHandler["__class"] = "TempStorageHandler";
-
-    var WebKababComponentManager = (function (_super) {
-        __extends(WebKababComponentManager, _super);
-
-        function WebKababComponentManager() {
-            var _this = _super.apply(this, arguments) || this;
-            return _this;
-        }
-
-        WebKababComponentManager.prototype.doCreate = function () {
-            com.montezumba.lib.utils.TimerFactory.create(com.montezumba.lib.utils.jsweet.TimerFactoryJSweet);
-            com.montezumba.lib.types.MediaLog.create(com.montezumba.lib.types.jsweet.MediaLogJSweet);
-            com.montezumba.lib.types.MediaLog.instance().enableAll();
-            com.montezumba.lib.io.StorageHandler.create(TempStorageHandler);
-        };
-        return WebKababComponentManager;
-    }(com.montezumba.lib.types.ComponentManager));
-    WebKababComponentManager["__class"] = "WebKababComponentManager";
-
-    com.montezumba.lib.types.ComponentManager.create(WebKababComponentManager);
-    com.montezumba.lib.types.ComponentManager.instance().create();
-
-    var kababMain = new com.addons.kabab.KababMain();
 
     console.info("Got request: " + proc);
 
@@ -457,25 +332,152 @@ promise.then(function(val) {
 function executeAsync() {
 
     function backgroundTask() {
-        
+    
         onmessage = function(params) {
+
             var req = params.data.req;
             //var path = params.data.url;
             var path = "https://webkabab.github.io/webkabab/"
 
             importScripts(path + 'j4ts.js');
-            
-            
             importScripts(path + 'JavaBasic.js');
             importScripts(path + 'montezumbaLib.js');
             //importScripts(path + 'TiviProviderStub.js');
             importScripts(path + 'KababConfig.js');
             importScripts(path + 'KababMain.js');
 
-    
+
             console.debug("in backgroundTask... start");            
-            console.debug("request tv guide");
+
+
+            var kababConfig = new com.addons.kabab.KababConfig();
+
+            //postMessage("req="+req+"<br/>");
+            //postMessage("proc="+proc+"<br/>");
+        
+            //TiviProvider.setTestFiles(files);
+        
+        
+            // initialize montezumbalib stuff
+            var __extends = (this && this.__extends) || function (d, b) {
+                for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+                function __() { this.constructor = d; }
+                d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+            };
+        
+        
+            var TempFileReader = (function () {
+                function TempFileReader(path, encoding) {
+                    this.fd = TiviProvider.openFile(req, path, encoding, true);
+                    //console.info("openFile fd="+this.fd);
+                    if (!this.fd) throw Error("Cannot open file: " + path);
+                    return this;
+                }
+        
+                TempFileReader.prototype.readAll = function () {
+                    //console.info("readll fd="+this.fd);
+                    return TiviProvider.readAll(req, this.fd);
+                }
+        
+                TempFileReader.prototype.close = function () {
+                    TiviProvider.close(req, this.fd);
+                }
+        
+                return TempFileReader;
+        
+            }());
+            TempFileReader["__class"] = "TempFileReader";
+        
+            var TempFileWriter = (function () {
+        
+        
+                function TempFileWriter(path, isAppend) {
+                    this.fd = TiviProvider.createOutputFile(req, path, isAppend);
+                    if (this.fd === null) throw new IOException("Cannot create output file: " + path);
+                    return this;
+                }
+        
+                TempFileWriter.prototype.write$java_lang_String = function (input) {
+                    if (!TiviProvider.writeToFile(req, this.fd, input)) {
+                        throw "Cannot write to file";
+                    }
+                };
+        
+                TempFileWriter.prototype.close = function () {
+                    TiviProvider.close(req, this.fd);
+                };
+        
+                return TempFileWriter;
+            }());
+            TempFileWriter["__class"] = "TempFileWriter";
+        
+            var TempStorageHandler = (function (_super) {
+                __extends(TempStorageHandler, _super);
+        
+                function TempStorageHandler() { }
+        
+                TempStorageHandler.prototype.getAppStoragePath = function () {
+                    return "_app_";
+                };
+        
+                TempStorageHandler.prototype.getAppTempPath = function () {
+                    return "_app_";
+                };
+        
+                TempStorageHandler.prototype.generateFullPath = function (first, second) {
+                    return first + "/" + second;
+                };
+        
+                TempStorageHandler.prototype.openOutputFile = function (path, isAppend) {
+                    return new TempFileWriter(path, isAppend);
+                };
+        
+                TempStorageHandler.prototype.openFile$java_lang_String$java_lang_String = function (path, encoding) {
+                    return new TempFileReader(path, encoding);
+                };
+        
+                TempStorageHandler.prototype.delete = function (path) {
+                    TiviProvider.delete(req, path);
+                };
+        
+                TempStorageHandler.prototype.isExist = function (path) {
+                    return TiviProvider.isExist(req, path);
+                };
+        
+                TempStorageHandler.prototype.rename = function (path, name) {
+                    TiviProvider.rename(req, path, name);
+                };
+        
+                return TempStorageHandler;
+        
+            }(com.montezumba.lib.io.StorageHandler));
+            TempStorageHandler["__class"] = "TempStorageHandler";
+        
+            var WebKababComponentManager = (function (_super) {
+                __extends(WebKababComponentManager, _super);
+        
+                function WebKababComponentManager() {
+                    var _this = _super.apply(this, arguments) || this;
+                    return _this;
+                }
+        
+                WebKababComponentManager.prototype.doCreate = function () {
+                    com.montezumba.lib.utils.TimerFactory.create(com.montezumba.lib.utils.jsweet.TimerFactoryJSweet);
+                    com.montezumba.lib.types.MediaLog.create(com.montezumba.lib.types.jsweet.MediaLogJSweet);
+                    com.montezumba.lib.types.MediaLog.instance().enableAll();
+                    com.montezumba.lib.io.StorageHandler.create(TempStorageHandler);
+                };
+                return WebKababComponentManager;
+            }(com.montezumba.lib.types.ComponentManager));
+            WebKababComponentManager["__class"] = "WebKababComponentManager";
+        
+            com.montezumba.lib.types.ComponentManager.create(WebKababComponentManager);
+            com.montezumba.lib.types.ComponentManager.instance().create();
+        
             var kababMain = new com.addons.kabab.KababMain();
+
+
+            console.debug("request tv guide");            
             kababMain.requestTvGuide(req);
             //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
             TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
