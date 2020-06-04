@@ -460,10 +460,11 @@ function executeAsync() {
         
         onmessage = function(params) {
             var req = params.data.req;
-            var path = params.data.url;
+            //var path = params.data.url;
+            var path = "https://webkabab.github.io/webkabab/"
 
             importScripts(path + 'j4ts.js');
-            /*
+            
             
             importScripts(path + 'JavaBasic.js');
             importScripts(path + 'montezumbaLib.js');
@@ -481,7 +482,7 @@ function executeAsync() {
             // After all playlists were delivered - you should call the 'done' method to finish this session.
             // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
             //postMessage({type: 'done'});
-            */
+            
             console.debug("Hello async wolrd!");
             TiviProvider.done(req);
             console.debug("in backgroundTask... end");
