@@ -456,7 +456,7 @@ promise.then(function(val) {
 
 function executeAsync() {
 
-    function backgroundTask() {
+    function backgroundTask(params) {
         
         var req = params.data.req;
         var path = params.data.url;
