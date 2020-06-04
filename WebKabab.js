@@ -454,9 +454,9 @@ promise.then(function(val) {
 function executeAsync(callback) {
 
     function backgroundTask() {
-        Console.debug("in backgroundTask... start");
+        console.debug("in backgroundTask... start");
         callback(); 
-        Console.debug("in backgroundTask... end");
+        console.debug("in backgroundTask... end");
     }
 
     var worker = new Worker(URL.createObjectURL(new Blob(["("+backgroundTask.toString()+")()"], {type: 'text/javascript'})));
