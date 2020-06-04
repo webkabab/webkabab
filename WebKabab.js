@@ -473,8 +473,9 @@ function executeAsync() {
             importScripts(path + 'KababMain.js');
 
     
-            console.debug("in backgroundTask... start");
+            console.debug("in backgroundTask... start");            
             console.debug("request tv guide");
+            var kababMain = new com.addons.kabab.KababMain();
             kababMain.requestTvGuide(req);
             //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
             TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
