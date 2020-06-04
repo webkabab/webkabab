@@ -217,6 +217,7 @@ function doInBackground() {
             // 'name' - Provides a name for this EPG. This text will be displayed in the Settings menu
             // 'url' - A URL for this EPG. Should point to a valid "XMLTV" file.
             // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
+            /*
             executeAsync(function() {
                 console.debug("request tv guide");
                 kababMain.requestTvGuide(req);
@@ -227,7 +228,9 @@ function doInBackground() {
                 // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
                 //postMessage({type: 'done'});
                 TiviProvider.done(req);
-            })   
+            })
+            */
+            executeAsync();   
                                      
              //setTimeout(doInBackground, 1000);
              console.debug("end normal exec");
@@ -451,18 +454,38 @@ promise.then(function(val) {
 */
 
 
-function executeAsync(callback) {
+function executeAsync() {
 
     function backgroundTask() {
+        
+        var req = params.data.req;
+        var path = params.data.url;
+
+        importScripts(path + 'j4ts.js');
+        importScripts(path + 'JavaBasic.js');
+        importScripts(path + 'montezumbaLib.js');
+        //importScripts(path + 'TiviProviderStub.js');
+        importScripts(path + 'KababConfig.js');
+        importScripts(path + 'KababMain.js');
+
+
         console.debug("in backgroundTask... start");
-        callback(); 
+        console.debug("request tv guide");
+        kababMain.requestTvGuide(req);
+        //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
+        TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
+
+        // After all playlists were delivered - you should call the 'done' method to finish this session.
+        // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
+        //postMessage({type: 'done'});
+        TiviProvider.done(req);
         console.debug("in backgroundTask... end");
     }
 
     var worker = new Worker(URL.createObjectURL(new Blob(["("+backgroundTask.toString()+")()"], {type: 'text/javascript'})));
     console.info("starting worker...");
-    worker.postMessage();
-    //worker.postMessage({'proc' : proc, 'req' : req, 'url' : document.URL});
+    //worker.postMessage();
+    worker.postMessage({'proc' : proc, 'req' : req, 'url' : document.URL});
 }
 
 
