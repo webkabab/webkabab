@@ -328,9 +328,15 @@ var com;
                     }
                     */
 
-                    for(i in batches) {
-                        setTimeout(batches[i], 1000);
+                    console.debug("processing all batches");
+                    function processBatch() {
+                        batch = batches.unshift();
+                        if(batch) {
+                            batch();
+                            setTimeout(processBatch, 1000);
+                        }
                     }
+                    setTimeout(processBatch, 1000);
                     
                 };
 
