@@ -335,7 +335,7 @@ var com;
                     console.debug("processing all batches");
                     function processBatch() {
                         console.debug("process batch");
-                        batch = batches.unshift();
+                        batch = batches.shift();
                         console.debug("batch is: "+batch);
 
                         if(batch) {
