@@ -342,7 +342,9 @@ var com;
                         if(batch) {
                             func = batch.batch;
                             date = batch.date;
-                            func(date);
+                            programPages = batch.programPages;
+                            channel = batch.channel;
+                            func(date, programPages, channel);
                             setTimeout(processBatch, 250);
                         }
                     }
