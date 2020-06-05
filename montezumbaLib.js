@@ -1227,7 +1227,8 @@ var com;
                                 _this.mLocalTime.second = second;
                                 _this.mTimezoneMinutesOffset = timezoneMinutesOffset;
                                 _this.mUTCMillis = _this.packTimeStamp(_this.mLocalTime, _this.mTimezoneMinutesOffset);
-                                _this.mLocalTime.weekDay = _this._getWeekDay(_this.mUTCMillis, _this.mTimezoneMinutesOffset);
+                                _this.mLocalTime.weekDay = _this._getWeekDay(_this.mUTCMillis, _this.mTimezoneMinutesOffset);                                
+                                _this.mLocalTime.weekDay = (_this.mLocalTime.weekDay + 1) % 7; // TODO: Patch for wrong week of day calculation
                                 if (_this.mTimezoneMinutesOffset !== 0) {
                                     _this.mUTCTime = _this.unpackTimeStamp(_this.mUTCMillis - _this.mTimezoneMinutesOffset * com.montezumba.lib.types.Constants.MINUTES_$LI$());
                                 }
@@ -1637,9 +1638,9 @@ var com;
                      */
                     TimeStamp.prototype.getWeekDay = function (isUTC) {
                         if (isUTC)                            
-                            return (this.mUTCTime.weekDay + 1) % 7; // TODO: Wrong day is returned in JS (need to understand why)
+                            return this.mUTCTime.weekDay; 
                         else
-                            return (this.mLocalTime.weekDay + 1) % 7; // TODO: Wrong day is returned in JS (need to understand why)
+                            return this.mLocalTime.weekDay;
                     };
                     /**
                      *
@@ -4962,6 +4963,7 @@ var com;
                                         result.push(parseInt(val, 10));
                                     }
                                 } return result; }()[(date.getUTCDay() | 0)];
+                                result.weekDay = (result.weekDay + 1) % 7; // TODO: Patch for wrong week of day calculation
                                 return result;
                             }
                             ;
