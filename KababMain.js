@@ -215,7 +215,7 @@ var com;
                                             programPages.add(channelPage);
                                         }
                                         
-                                        batches.push({'batch': function(date, programPages, channel) {                                            
+                                        batches.push({'batch': function(date, programPages, channel, channelContent, channelPage) {
                                         
                                         console.debug("parsing programs...");
                                         for (var index123 = programPages.iterator(); index123.hasNext();) {
@@ -302,7 +302,7 @@ var com;
                                             }
                                         }
                                         console.debug("parsing programs.... end");
-                                    }, 'date': dates[i], 'channel': channel, 'programPages': programPages});
+                                    }, 'date': dates[i], 'programPages': programPages, 'channel': channel, 'channelContent': channelContent, 'channelPage': channelPage});
                                     }
                                     ;
                                 }
@@ -319,7 +319,7 @@ var com;
                                 callback();
                             }
 
-                        }, 'date' : null, 'channel': null, 'programPages': null});
+                        }, 'date': null, 'programPages': null, 'channel': null, 'channelContent': null, 'channelPage': null});
                         
                     }
                     catch (e) {
@@ -333,6 +333,11 @@ var com;
                     }
                     */
 
+                    // In order to avoid starving the only thread in JS, we had to divide the execution of this
+                    // method into smaller peaces - each running async. but in a fixed order
+                    // in JS (earlier versions) we can do it by calling the setTimeout method.
+                    // Each 'batch' holds the piece that deals with a specific day and its parameters
+                    
                     console.debug("processing all batches");
                     function processBatch() {
                         console.debug("process batch");
@@ -344,11 +349,20 @@ var com;
                             date = batch.date;
                             programPages = batch.programPages;
                             channel = batch.channel;
-                            func(date, programPages, channel);
-                            setTimeout(processBatch, 250);
+                            channelContent = batch.channelContent;
+                            channelPage = batch.channelPage;
+                            try {
+                                func(date, programPages, channel, channelContent, channelPage);
+                                setTimeout(processBatch, 100);
+                            }
+                            catch (e) {
+                                console.error(e.message+" at:"+e.fileName+" "+e.lineNumber+" "+e.stack);
+                                com.montezumba.lib.io.StorageHandler.instance()["delete"](tempPath);
+                                that.mWriter.close();
+                            }                                                        
                         }
                     }
-                    setTimeout(processBatch, 250);
+                    setTimeout(processBatch, 100);
                     
                 };
 
