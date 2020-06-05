@@ -46,6 +46,9 @@ var com;
                  */
 
                 KababMain.prototype.generateTvGuide = function (source) {
+
+                    var batches = [];
+
                     var tempPath = null;
                     try {
                         tempPath = com.montezumba.lib.io.StorageHandler.instance().getAppTempPath();
@@ -159,6 +162,7 @@ var com;
                             }
                             ;
                         }
+                        
                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing Programs: ");
                         for (var index122 = channels.iterator(); index122.hasNext();) {
                             var channel = index122.next();
@@ -208,6 +212,9 @@ var com;
                                         else {
                                             programPages.add(channelPage);
                                         }
+                                        var that = this;
+                                        batches.push(function() {
+                                        
                                         console.debug("parsing programs...");
                                         for (var index123 = programPages.iterator(); index123.hasNext();) {
                                             var page = index123.next();
@@ -286,13 +293,14 @@ var com;
                                                         program.mDesc = programDesc;
                                                         program.mStartTime = startTime;
                                                         program.mEndTime = endTime;                                                                                                                                                                    
-                                                        this.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);                                                                                                            
+                                                        that.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);                                                                                                            
                                                     }
                                                     
                                                 }                                                
                                             }
                                         }
                                         console.debug("parsing programs.... end");
+                                    });
                                     }
                                     ;
                                 }
