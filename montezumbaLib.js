@@ -4952,12 +4952,12 @@ var com;
                             }
                             {
 
-                                var date = new Date(utcMillis);
+                                var date = new Date(Date.UTC(utcMillis));
                                 var result = new types.TimeStamp.DateTime(this.__parent);
                                 result.year = (date.getUTCFullYear() | 0);
                                 result.month = (date.getUTCMonth() | 0) + 1;
                                 result.day = (date.getUTCDate() | 0);
-                                //console.debug("Unpacking with: "+result.day+"/"+result.month+"/"+result.year+"... input ms:"+utcMillis);
+                                console.debug("Unpacking with: "+result.day+"/"+result.month+"/"+result.year+"... input ms:"+utcMillis);
                                 result.hour = (date.getUTCHours() | 0);
                                 result.minute = (date.getUTCMinutes() | 0);
                                 result.second = date.getUTCSeconds() + 0.001 * date.getUTCMilliseconds();
