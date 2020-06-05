@@ -208,6 +208,7 @@ var com;
                                         else {
                                             programPages.add(channelPage);
                                         }
+                                        console.debug("parsing programs...");
                                         for (var index123 = programPages.iterator(); index123.hasNext();) {
                                             var page = index123.next();
                                             {
@@ -237,8 +238,7 @@ var com;
                                                 }
                                                 else {
                                                     programsToParse.add(programsContent);
-                                                }
-                                                console.debug("parsing programs...");
+                                                }                                                
                                                 for (var index124 = programsToParse.iterator(); index124.hasNext();) {                                                    
                                                     var programContent = index124.next();
                                                     {
@@ -286,13 +286,13 @@ var com;
                                                         program.mDesc = programDesc;
                                                         program.mStartTime = startTime;
                                                         program.mEndTime = endTime;                                                                                                                                                                    
-                                                        this.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);                                                                                                            
+                                                        that.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);                                                                                                            
                                                     }
                                                     
-                                                }
-                                                console.debug("parsing programs...end");
+                                                }                                                
                                             }
                                         }
+                                        console.debug("parsing programs.... end");
                                     }
                                     ;
                                 }
