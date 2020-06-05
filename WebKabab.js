@@ -70,9 +70,11 @@ function doInBackground() {
 
     var TempFileReader = (function () {
         function TempFileReader(path, encoding) {
-            this.fd = TiviProvider.openFile(req, path, encoding, true);
-            //console.info("openFile fd="+this.fd);
-            if (!this.fd) throw Error("Cannot open file: " + path);
+            //setTimeout(function() {
+                this.fd = TiviProvider.openFile(req, path, encoding, true);
+                //console.info("openFile fd="+this.fd);
+                if (!this.fd) throw Error("Cannot open file: " + path);
+            //}, 1000)            
             return this;
         }
 
@@ -94,15 +96,19 @@ function doInBackground() {
 
 
         function TempFileWriter(path, isAppend) {
-            this.fd = TiviProvider.createOutputFile(req, path, isAppend);
-            if (this.fd === null) throw new IOException("Cannot create output file: " + path);
-            return this;
+            //setTimeout(function() {
+                this.fd = TiviProvider.createOutputFile(req, path, isAppend);
+                if (this.fd === null) throw new IOException("Cannot create output file: " + path);
+                return this;
+            //}, 1000);            
         }
 
         TempFileWriter.prototype.write$java_lang_String = function (input) {
-            if (!TiviProvider.writeToFile(req, this.fd, input)) {
-                throw "Cannot write to file";
-            }
+            //setTimeout(function() {
+                if (!TiviProvider.writeToFile(req, this.fd, input)) {
+                    throw "Cannot write to file";
+                }
+            //}, 1000)            
         };
 
         TempFileWriter.prototype.close = function () {

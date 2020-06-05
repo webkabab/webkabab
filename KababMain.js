@@ -240,6 +240,7 @@ var com;
                                                     programsToParse.add(programsContent);
                                                 }
                                                 for (var index124 = programsToParse.iterator(); index124.hasNext();) {
+                                                    function step() {
                                                     var programContent = index124.next();
                                                     {
                                                         var programParamsMatcher = programNameGrabber.matcher(programContent);
@@ -288,6 +289,8 @@ var com;
                                                         program.mEndTime = endTime;
                                                         this.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);
                                                     }
+                                                    }
+                                                    step();
                                                 }
                                             }
                                         }
