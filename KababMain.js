@@ -215,7 +215,7 @@ var com;
                                             programPages.add(channelPage);
                                         }
                                         
-                                        batches.push({'batch': function(date) {                                            
+                                        batches.push({'batch': function(date, programPages, channel) {                                            
                                         
                                         console.debug("parsing programs...");
                                         for (var index123 = programPages.iterator(); index123.hasNext();) {
@@ -302,7 +302,7 @@ var com;
                                             }
                                         }
                                         console.debug("parsing programs.... end");
-                                    }, 'date': dates[i]});
+                                    }, 'date': dates[i], 'channel': channel, 'programPages': programPages});
                                     }
                                     ;
                                 }
@@ -319,7 +319,7 @@ var com;
                                 callback();
                             }
 
-                        }, 'date' : null});
+                        }, 'date' : null, 'channel': null, 'programPages': null});
                         
                     }
                     catch (e) {
