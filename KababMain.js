@@ -240,7 +240,7 @@ var com;
                                                     programsToParse.add(programsContent);
                                                 }
                                                 for (var index124 = programsToParse.iterator(); index124.hasNext();) {
-                                                    function step() {
+                                                    function step(writeProgram) {
                                                     var programContent = index124.next();
                                                     {
                                                         var programParamsMatcher = programNameGrabber.matcher(programContent);
@@ -291,7 +291,7 @@ var com;
                                                     }
                                                     }
 
-                                                    step();
+                                                    step(this.writeProgram);
                                                 }
                                             }
                                         }
