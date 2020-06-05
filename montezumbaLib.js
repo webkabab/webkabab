@@ -1636,10 +1636,10 @@ var com;
                      * @return {com.montezumba.lib.types.TimeStamp.WeekDay} the value in local/UTC time
                      */
                     TimeStamp.prototype.getWeekDay = function (isUTC) {
-                        if (isUTC)
-                            return this.mUTCTime.weekDay;
+                        if (isUTC)                            
+                            return (this.mUTCTime.weekDay + 1) % 7; // TODO: Wrong day is returned in JS (need to understand why)
                         else
-                            return this.mLocalTime.weekDay;
+                            return (this.mLocalTime.weekDay + 1) % 7; // TODO: Wrong day is returned in JS (need to understand why)
                     };
                     /**
                      *

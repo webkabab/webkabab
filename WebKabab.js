@@ -223,8 +223,7 @@ function doInBackground() {
             // 'name' - Provides a name for this EPG. This text will be displayed in the Settings menu
             // 'url' - A URL for this EPG. Should point to a valid "XMLTV" file.
             // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
-            
-   
+                        
             console.debug("request tv guide");            
             kababMain.requestTvGuide(req, function() {
                 console.debug("callback");
