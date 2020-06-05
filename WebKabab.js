@@ -226,14 +226,17 @@ function doInBackground() {
             
    
             console.debug("request tv guide");            
-            kababMain.requestTvGuide(req);
-            //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
-            TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
-    
-            // After all playlists were delivered - you should call the 'done' method to finish this session.
-            // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
-            //postMessage({type: 'done'});
-            TiviProvider.done(req);
+            kababMain.requestTvGuide(req, function() {
+                console.debug("callback");
+                //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
+                TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
+                    
+                // After all playlists were delivered - you should call the 'done' method to finish this session.
+                // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
+                //postMessage({type: 'done'});
+                TiviProvider.done(req);
+            });
+            
             break;
 
         case "request_live_url":
