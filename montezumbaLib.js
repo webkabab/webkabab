@@ -4952,7 +4952,7 @@ var com;
                             }
                             {
 
-                                var date = new Date(Date.UTC(utcMillis));
+                                var date = new Date(utcMillis);
                                 var result = new types.TimeStamp.DateTime(this.__parent);
                                 result.year = (date.getUTCFullYear() | 0);
                                 result.month = (date.getUTCMonth() | 0) + 1;
