@@ -334,7 +334,10 @@ var com;
 
                     console.debug("processing all batches");
                     function processBatch() {
+                        console.debug("process batch");
                         batch = batches.unshift();
+                        console.debug("batch is: "+batch);
+
                         if(batch) {
                             batch();
                             setTimeout(processBatch, 1000);
