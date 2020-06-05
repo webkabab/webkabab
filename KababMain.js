@@ -343,10 +343,10 @@ var com;
                             func = batch.batch;
                             date = batch.date;
                             func(date);
-                            setTimeout(processBatch, 1000);
+                            setTimeout(processBatch, 250);
                         }
                     }
-                    setTimeout(processBatch, 1000);
+                    setTimeout(processBatch, 250);
                     
                 };
 
