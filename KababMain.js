@@ -287,7 +287,10 @@ var com;
                                                         program.mStartTime = startTime;
                                                         program.mEndTime = endTime;
                                                         console.debug("writing program async."+programName);
-                                                        setTimeout(this.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage), 10000);
+                                                        var that = this;
+                                                        setTimeout(function() {
+                                                            that.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);
+                                                        }, 1000);
                                                         console.debug("writing program async.. after."+programName);
                                                     }
                                                     
