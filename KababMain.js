@@ -48,6 +48,7 @@ var com;
                 KababMain.prototype.generateTvGuide = function (source, callback) {
 
                     var batches = [];
+                    
                     var that = this;
 
                     var tempPath = null;
@@ -214,7 +215,7 @@ var com;
                                             programPages.add(channelPage);
                                         }
                                         
-                                        batches.push(function() {                                            
+                                        batches.push({'batch': function(date) {                                            
                                         
                                         console.debug("parsing programs...");
                                         for (var index123 = programPages.iterator(); index123.hasNext();) {
@@ -276,8 +277,8 @@ var com;
                                                         var endMinutes = programParamsMatcher.group$int(2);
                                                         //com.montezumba.lib.types.MediaLog.instance().debug("Start time = " + startHours + ":" + startMinutes);
                                                         //com.montezumba.lib.types.MediaLog.instance().debug("End time = " + endHours + ":" + endMinutes);
-                                                        var startTime = com.montezumba.lib.utils.TimerFactory.instance().createTimeStamp$int$int$int$int$int$int$int(dates[i].getYear(true), dates[i].getMonth(true), dates[i].getDay(true), parseInt(startHours), parseInt(startMinutes), 0, 0);
-                                                        var endTime = com.montezumba.lib.utils.TimerFactory.instance().createTimeStamp$int$int$int$int$int$int$int(dates[i].getYear(true), dates[i].getMonth(true), dates[i].getDay(true), parseInt(endHours), parseInt(endMinutes), 0, 0);
+                                                        var startTime = com.montezumba.lib.utils.TimerFactory.instance().createTimeStamp$int$int$int$int$int$int$int(date.getYear(true), date.getMonth(true), date.getDay(true), parseInt(startHours), parseInt(startMinutes), 0, 0);
+                                                        var endTime = com.montezumba.lib.utils.TimerFactory.instance().createTimeStamp$int$int$int$int$int$int$int(date.getYear(true), date.getMonth(true), date.getDay(true), parseInt(endHours), parseInt(endMinutes), 0, 0);
                                                         if (startTime.getHour(true) > prevEndHour) {
                                                             startTime.addTime(1 * com.montezumba.lib.types.Constants.DAYS_$LI$());
                                                             endTime.addTime(1 * com.montezumba.lib.types.Constants.DAYS_$LI$());
@@ -294,20 +295,20 @@ var com;
                                                         program.mDesc = programDesc;
                                                         program.mStartTime = startTime;
                                                         program.mEndTime = endTime;                                                                                                                                                                    
-                                                        that.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);                                                                                                            
+                                                        that.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);
                                                     }
                                                     
                                                 }                                                
                                             }
                                         }
                                         console.debug("parsing programs.... end");
-                                    });
+                                    }, 'date': dates[i]});
                                     }
                                     ;
                                 }
                             }
                         }
-                        batches.push(function() {
+                        batches.push({'batch' : function() {
                             that.mWriter['write$java_lang_String'](KababMain.XMLTV_FOOTER);
                             com.montezumba.lib.types.MediaLog.instance().debug("Finished Grabbing");
                             com.montezumba.lib.types.MediaLog.instance().debug("Start Rename...");
@@ -318,7 +319,7 @@ var com;
                                 callback();
                             }
 
-                        });
+                        }, 'date' : null});
                         
                     }
                     catch (e) {
@@ -336,10 +337,12 @@ var com;
                     function processBatch() {
                         console.debug("process batch");
                         batch = batches.shift();
-                        console.debug("batch is: "+batch);
+                        //console.debug("batch is: "+batch);
 
                         if(batch) {
-                            batch();
+                            func = batch.batch;
+                            date = batch.date;
+                            func(date);
                             setTimeout(processBatch, 1000);
                         }
                     }
