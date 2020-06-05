@@ -286,7 +286,9 @@ var com;
                                                         program.mDesc = programDesc;
                                                         program.mStartTime = startTime;
                                                         program.mEndTime = endTime;
+                                                        console.debug("writing program async.");
                                                         setTimeout(this.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage), 1000);
+                                                        console.debug("writing program async.. after.");
                                                     }
                                                     
                                                 }
@@ -321,6 +323,7 @@ var com;
                     return grabber.matcher(input);
                 };
                 KababMain.prototype.writeProgram = function (program, zone, language) {
+                    console.debug("writing program...");
                     this.mWriter['write$java_lang_String']("\t<programme start=\"" + program.mStartTime.format("%year%%month%%day%%hour%%minute%%second%", true) + " " + zone + "\"");
                     this.mWriter['write$java_lang_String'](" stop=\"" + program.mEndTime.format("%year%%month%%day%%hour%%minute%%second%", true) + " " + zone + "\"");
                     this.mWriter['write$java_lang_String'](" channel=\"" + program.mChannel + "\">\n");
