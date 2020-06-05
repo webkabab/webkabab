@@ -4956,6 +4956,7 @@ var com;
                                 result.year = (date.getUTCFullYear() | 0);
                                 result.month = (date.getUTCMonth() | 0) + 1;
                                 result.day = (date.getUTCDate() | 0);
+                                console.debug("Unpacking with: "+day+"/"+month+"/"+year+"... input ms:"+utcMillis);
                                 result.hour = (date.getUTCHours() | 0);
                                 result.minute = (date.getUTCMinutes() | 0);
                                 result.second = date.getUTCSeconds() + 0.001 * date.getUTCMilliseconds();
