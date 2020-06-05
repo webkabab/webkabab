@@ -1380,6 +1380,7 @@ var com;
                      * @param {number} deltaMilliseconds - number of milliseconds to add
                      */
                     TimeStamp.prototype.addTime = function (deltaMilliseconds) {
+                        console.debug("adding ms="+deltaMilliseconds);
                         this.mUTCMillis += deltaMilliseconds;
                         this.mLocalTime = this.unpackTimeStamp(this.mUTCMillis);
                         this.mUTCTime = this.unpackTimeStamp(this.mUTCMillis - this.mTimezoneMinutesOffset * com.montezumba.lib.types.Constants.MINUTES_$LI$());
