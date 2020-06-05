@@ -48,6 +48,7 @@ var com;
                 KababMain.prototype.generateTvGuide = function (source) {
 
                     var batches = [];
+                    var that = this;
 
                     var tempPath = null;
                     try {
@@ -212,8 +213,8 @@ var com;
                                         else {
                                             programPages.add(channelPage);
                                         }
-                                        var that = this;
-                                        batches.push(function() {
+                                        
+                                        batches.push(function() {                                            
                                         
                                         console.debug("parsing programs...");
                                         for (var index123 = programPages.iterator(); index123.hasNext();) {
@@ -306,21 +307,34 @@ var com;
                                 }
                             }
                         }
-                        this.mWriter['write$java_lang_String'](KababMain.XMLTV_FOOTER);
-                        com.montezumba.lib.types.MediaLog.instance().debug("Finished Grabbing");
-                        com.montezumba.lib.types.MediaLog.instance().debug("Start Rename...");
-                        com.montezumba.lib.io.StorageHandler.instance().rename(tempPath, guidePath);
-                        com.montezumba.lib.types.MediaLog.instance().debug("End Rename...");
+                        batches.push(function() {
+                            that.mWriter['write$java_lang_String'](KababMain.XMLTV_FOOTER);
+                            com.montezumba.lib.types.MediaLog.instance().debug("Finished Grabbing");
+                            com.montezumba.lib.types.MediaLog.instance().debug("Start Rename...");
+                            com.montezumba.lib.io.StorageHandler.instance().rename(tempPath, guidePath);
+                            com.montezumba.lib.types.MediaLog.instance().debug("End Rename...");
+                            that.mWriter.close();
+                        });
+                        
                     }
                     catch (e) {
                         console.error(e.message+" at:"+e.fileName+" "+e.lineNumber+" "+e.stack);
                         com.montezumba.lib.io.StorageHandler.instance()["delete"](tempPath);
+                        this.mWriter.close();
                     }
+                    /*
                     finally {
                         this.mWriter.close();
                     }
-                    ;
+                    */
+
+                    for(i in batches) {
+                        setTimeout(batches[i], 1000);
+                    }
+                    
                 };
+
+
                 KababMain.prototype.getMatcher = function (grabber, input) {
                     var result;
                     if (grabber.toString().match(KababMain.FIX_GRABBER_PATTERN_STRING_$LI$())) {
