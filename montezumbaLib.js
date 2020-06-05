@@ -4957,7 +4957,7 @@ var com;
                                 result.year = (date.getUTCFullYear() | 0);
                                 result.month = (date.getUTCMonth() | 0) + 1;
                                 result.day = (date.getUTCDate() | 0);
-                                console.debug("Unpacking with: "+result.day+"/"+result.month+"/"+result.year+"... input ms:"+utcMillis);
+                                //console.debug("Unpacking with: "+result.day+"/"+result.month+"/"+result.year+"... input ms:"+utcMillis);
                                 result.hour = (date.getUTCHours() | 0);
                                 result.minute = (date.getUTCMinutes() | 0);
                                 result.second = date.getUTCSeconds() + 0.001 * date.getUTCMilliseconds();
@@ -4983,7 +4983,9 @@ var com;
                                 TimeStampJSweet.mCalendarLock = new Object();
                             }
                             {
+                                console.debug("packTime: input:"+dateTime.day+"/"+dateTime.month+"/"+dateTime.year);
                                 var date = new Date(dateTime.year, (dateTime.month - 1), dateTime.day, dateTime.hour, dateTime.minute, (dateTime.second | 0));
+                                console.debug("packTime: output:"+date.getTime());
                                 millis = (function (n) { return n < 0 ? Math.ceil(n) : Math.floor(n); })(((dateTime.second - ((dateTime.second | 0))) * com.montezumba.lib.types.Constants.SECONDS_$LI$()));
                                 millis = (function (n) { return n < 0 ? Math.ceil(n) : Math.floor(n); })(date.getTime()) + millis - zoneOffset * com.montezumba.lib.types.Constants.MINUTES_$LI$();
                             }
