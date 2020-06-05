@@ -4983,7 +4983,7 @@ var com;
                                 TimeStampJSweet.mCalendarLock = new Object();
                             }
                             {
-                                console.debug("packTime: input:"+dateTime.day+"/"+dateTime.month+"/"+dateTime.year);
+                                console.debug("packTime: input:"+dateTime.day+"/"+dateTime.month+"/"+dateTime.year+"  "+dateTime.hour+":"+dateTime.minute+":"+dateTime.second);
                                 var date = new Date(dateTime.year, (dateTime.month - 1), dateTime.day, dateTime.hour, dateTime.minute, (dateTime.second | 0));
                                 console.debug("packTime: output:"+date.getTime());
                                 millis = (function (n) { return n < 0 ? Math.ceil(n) : Math.floor(n); })(((dateTime.second - ((dateTime.second | 0))) * com.montezumba.lib.types.Constants.SECONDS_$LI$()));
