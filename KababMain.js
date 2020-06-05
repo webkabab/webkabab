@@ -239,8 +239,7 @@ var com;
                                                 else {
                                                     programsToParse.add(programsContent);
                                                 }
-                                                for (var index124 = programsToParse.iterator(); index124.hasNext();) {
-                                                    function step(writeProgram) {
+                                                for (var index124 = programsToParse.iterator(); index124.hasNext();) {                                                    
                                                     var programContent = index124.next();
                                                     {
                                                         var programParamsMatcher = programNameGrabber.matcher(programContent);
@@ -287,11 +286,9 @@ var com;
                                                         program.mDesc = programDesc;
                                                         program.mStartTime = startTime;
                                                         program.mEndTime = endTime;
-                                                        writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);
+                                                        setTimeout(this.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage), 1000);
                                                     }
-                                                    }
-
-                                                    step(this.writeProgram);
+                                                    
                                                 }
                                             }
                                         }
