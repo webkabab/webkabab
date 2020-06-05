@@ -287,9 +287,10 @@ var com;
                                                         program.mDesc = programDesc;
                                                         program.mStartTime = startTime;
                                                         program.mEndTime = endTime;
-                                                        this.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);
+                                                        writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);
                                                     }
                                                     }
+
                                                     step();
                                                 }
                                             }
