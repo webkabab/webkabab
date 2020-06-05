@@ -233,12 +233,12 @@ var com;
                                                             var programContent = programsMatcher.group$int(1);
                                                             programsToParse.add(programContent);
                                                         }
-                                                    }
-                                                    ;
+                                                    }                                                    
                                                 }
                                                 else {
                                                     programsToParse.add(programsContent);
                                                 }
+                                                console.debug("parsing programs...");
                                                 for (var index124 = programsToParse.iterator(); index124.hasNext();) {                                                    
                                                     var programContent = index124.next();
                                                     {
@@ -285,16 +285,12 @@ var com;
                                                         program.mChannel = channel.id;
                                                         program.mDesc = programDesc;
                                                         program.mStartTime = startTime;
-                                                        program.mEndTime = endTime;
-                                                        console.debug("writing program async."+programName);
-                                                        var that = this;
-                                                        setTimeout(function() {
-                                                            that.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);
-                                                        }, 1000);
-                                                        console.debug("writing program async.. after."+programName);
+                                                        program.mEndTime = endTime;                                                                                                                                                                    
+                                                        that.writeProgram(program, zoneString, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mLanguage);                                                                                                            
                                                     }
                                                     
                                                 }
+                                                console.debug("parsing programs...end");
                                             }
                                         }
                                     }
@@ -326,7 +322,7 @@ var com;
                     return grabber.matcher(input);
                 };
                 KababMain.prototype.writeProgram = function (program, zone, language) {
-                    console.debug("writing program..."+program.displayString);
+                    //console.debug("writing program..."+program.displayString);
                     this.mWriter['write$java_lang_String']("\t<programme start=\"" + program.mStartTime.format("%year%%month%%day%%hour%%minute%%second%", true) + " " + zone + "\"");
                     this.mWriter['write$java_lang_String'](" stop=\"" + program.mEndTime.format("%year%%month%%day%%hour%%minute%%second%", true) + " " + zone + "\"");
                     this.mWriter['write$java_lang_String'](" channel=\"" + program.mChannel + "\">\n");
