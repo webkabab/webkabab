@@ -45,7 +45,7 @@ var com;
                  * @param {com.montezumba.lib.types.AddonRequest} params
                  */
 
-                KababMain.prototype.generateTvGuide = function (source) {
+                KababMain.prototype.generateTvGuide = function (source, callback) {
 
                     var batches = [];
                     var that = this;
@@ -314,6 +314,10 @@ var com;
                             com.montezumba.lib.io.StorageHandler.instance().rename(tempPath, guidePath);
                             com.montezumba.lib.types.MediaLog.instance().debug("End Rename...");
                             that.mWriter.close();
+                            if(callback) {
+                                callback();
+                            }
+
                         });
                         
                     }
