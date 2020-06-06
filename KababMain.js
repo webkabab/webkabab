@@ -143,7 +143,7 @@ var com;
                         var daysOffset = void 0;
                         for (var i = 0; i < 7; ++i) {
                             {
-                                //console.debug("weekDay calc is: "+com.montezumba.lib.types.TimeStamp.WeekDay[com.montezumba.lib.types.TimeStamp.WeekDay[today.getWeekDay(true)]]);
+                                console.debug("weekDay calc is: "+com.montezumba.lib.types.TimeStamp.WeekDay[com.montezumba.lib.types.TimeStamp.WeekDay[today.getWeekDay(true)]]);
                                 if (i < com.montezumba.lib.types.TimeStamp.WeekDay[com.montezumba.lib.types.TimeStamp.WeekDay[today.getWeekDay(true)]]) {
                                     daysOffset = 7 - com.montezumba.lib.types.TimeStamp.WeekDay[com.montezumba.lib.types.TimeStamp.WeekDay[today.getWeekDay(true)]] + i;
                                 }
@@ -151,7 +151,7 @@ var com;
                                     daysOffset = i - com.montezumba.lib.types.TimeStamp.WeekDay[com.montezumba.lib.types.TimeStamp.WeekDay[today.getWeekDay(true)]];
                                 }
                                 if (daysOffset < com.addons.kabab.KababConfig.MAX_TVGUIDE_DAYS) {
-                                    //console.debug("days offset for "+i+" is: "+daysOffset);
+                                    console.debug("days offset for "+i+" is: "+daysOffset);
                                     dates[i] = com.montezumba.lib.utils.TimerFactory.instance().createTimeStamp$int$int$int$int$int$int$int(javaemul.internal.IntegerHelper.parseInt(year), javaemul.internal.IntegerHelper.parseInt(month), javaemul.internal.IntegerHelper.parseInt(day), 0, 0, 1, 0);
                                     console.debug("pure date is: "+dates[i].format("%day%-%month%-%year%", true));
                                     dates[i].addTime(daysOffset * com.montezumba.lib.types.Constants.DAYS_$LI$());
