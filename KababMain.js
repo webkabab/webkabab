@@ -45,7 +45,7 @@ var com;
                  * @param {com.montezumba.lib.types.AddonRequest} params
                  */
 
-                KababMain.prototype.generateTvGuide = function (source, callback) {
+                KababMain.prototype.generateTvGuide = function (source, callback, onError) {
 
                     var batches = [];
                     
@@ -108,7 +108,7 @@ var com;
 						console.info("baseUrl="+baseUrl+", dateGrabber="+dateGrabber);
                         var dateMatcher = dateGrabber.matcher(baseUrl);
 						
-                        if (!dateMatcher.find()) {
+                        if (!dateMatcher.find()) {                            
                             throw new java.io.IOException("Failed to grab date from: " + com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mBaseUrl);
                         }
 						
@@ -329,6 +329,7 @@ var com;
                         console.error(e.message+" at:"+e.fileName+" "+e.lineNumber+" "+e.stack);
                         com.montezumba.lib.io.StorageHandler.instance()["delete"](tempPath);
                         this.mWriter.close();
+                        if(onError) onError(e);
                     }
                     /*
                     finally {
@@ -362,6 +363,7 @@ var com;
                                 console.error(e.message+" at:"+e.fileName+" "+e.lineNumber+" "+e.stack);
                                 com.montezumba.lib.io.StorageHandler.instance()["delete"](tempPath);
                                 that.mWriter.close();
+                                if(onError) onError(e);
                             }                                                        
                         }
                     }
@@ -408,7 +410,7 @@ var com;
                     return;
                 };
 
-                KababMain.prototype.requestTvGuide = function(req) {
+                KababMain.prototype.requestTvGuide = function(req, callback) {
                     var guide = new com.montezumba.lib.types.TvGuide("Kabab Guide");
                     //var guidePath = window.localStorage.getItem("xmlguide");
                     var guidePath = com.montezumba.lib.io.StorageHandler.instance().getAppStoragePath();
@@ -447,7 +449,8 @@ var com;
                         catch (e) {
 							console.error(e.message+" "+e.stack);
                             //com.treynix.tiviapplive.provider.AddonHandler.instance().sendError(this.params, "Failed to open guide file");
-							TiviProvider.sendError(req,"Failed to open guide file: " +guidePath);
+                            TiviProvider.sendError(req,"Failed to open guide file: " +guidePath);
+                            if(callback) callback();
                             //TiviProvider.done(req);
                         }                        
                     }
@@ -460,29 +463,38 @@ var com;
                         //this.result.mediaResults.add(guide.toTrasportableTitle());
 						TiviProvider.sendLocalTvGuide(req, "Kabab Hebrew Guide", guidePath, 2); 
                         //TiviProvider.done(req);
+                        if(callback) callback();
                         return;                        
                     }
                     if (refresh) {
                         try {
 							com.montezumba.lib.types.MediaLog.instance().debug("Need to refresh...");	
-                            this.generateTvGuide(com.addons.kabab.KababConfig.TvGuideSources.YES);
-                            if (!valid && com.montezumba.lib.io.StorageHandler.instance().isExist(guidePath)) {
-                                guide.startDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
-                                guide.endDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
-                                guide.endDate.addTime(com.addons.kabab.KababConfig.TV_GUIDE_VALIDITY_DAYS * com.montezumba.lib.types.Constants.DAYS_$LI$());
-                                TiviProvider.sendLocalTvGuide(req, "Kabab Hebrew Guide", guidePath, 2);                                
-								//TiviProvider.done(req);
-                            }
+                            this.generateTvGuide(com.addons.kabab.KababConfig.TvGuideSources.YES, function() {
+                                if (!valid && com.montezumba.lib.io.StorageHandler.instance().isExist(guidePath)) {
+                                    guide.startDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
+                                    guide.endDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
+                                    guide.endDate.addTime(com.addons.kabab.KababConfig.TV_GUIDE_VALIDITY_DAYS * com.montezumba.lib.types.Constants.DAYS_$LI$());
+                                    TiviProvider.sendLocalTvGuide(req, "Kabab Hebrew Guide", guidePath, 2);
+                                    if(callback) callback();
+                                    //TiviProvider.done(req);
+                                }
+                            }, function() {
+                                TiviProvider.reportError(req, "Failed to generate tv-guide");
+                                if(callback) callback();
+                            });
+                            
                         }
                         catch (e) {
                             com.montezumba.lib.types.MediaLog.instance().error(e.message, e);
                             if (!valid) {
                                 TiviProvider.reportError(req, "Failed to generate tv-guide");
+                                if(callback) callback();
                                 //TiviProvider.done(req);
                             }
                         }                        
                     }
                 };
+
                 KababMain.generateThisWeek = function (today, zoneOffset) {
                     var dates = [null, null, null, null, null, null, null];
                     var daysOffset;
