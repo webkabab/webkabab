@@ -312,6 +312,7 @@ var com;
                             }
                         }
                         batches.push({'batch' : function() {
+                            console.debug("final batch...");
                             that.mWriter['write$java_lang_String'](KababMain.XMLTV_FOOTER);
                             com.montezumba.lib.types.MediaLog.instance().debug("Finished Grabbing");
                             com.montezumba.lib.types.MediaLog.instance().debug("Start Rename...");
@@ -319,6 +320,7 @@ var com;
                             com.montezumba.lib.types.MediaLog.instance().debug("End Rename...");
                             that.mWriter.close();
                             if(callback) {
+                                console.debug("calling callback...");
                                 callback();
                             }
 
@@ -344,7 +346,7 @@ var com;
                     
                     //console.debug("processing all batches");
                     function processBatch() {
-                        //console.debug("process batch");
+                        console.debug("process batch");
                         batch = batches.shift();
                         //console.debug("batch is: "+batch);
 
