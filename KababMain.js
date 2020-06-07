@@ -472,16 +472,21 @@ var com;
                         try {
 							com.montezumba.lib.types.MediaLog.instance().debug("Need to refresh...");	
                             this.generateTvGuide(com.addons.kabab.KababConfig.TvGuideSources.YES, function() {
-                                if (!valid && com.montezumba.lib.io.StorageHandler.instance().isExist(guidePath)) {
+                                if (com.montezumba.lib.io.StorageHandler.instance().isExist(guidePath)) {
+                                    /*
                                     guide.startDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
                                     guide.endDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
-                                    guide.endDate.addTime(com.addons.kabab.KababConfig.TV_GUIDE_VALIDITY_DAYS * com.montezumba.lib.types.Constants.DAYS_$LI$());
+                                    guide.endDate.addTime(com.addons.kabab.KababConfig.TV_GUIDE_VALIDITY_DAYS * com.montezumba.lib.types.Constants.DAYS_$LI$());                                    
+                                    */
                                     TiviProvider.sendLocalTvGuide(req, "Kabab Hebrew Guide", guidePath, 2);
-                                    if(callback) callback();
                                     //TiviProvider.done(req);
                                 }
+                                else {
+                                    TiviProvider.reportError(req, "Failed to generate tv-guide (2)");    
+                                }                                
+                                if(callback) callback();
                             }, function() {
-                                TiviProvider.reportError(req, "Failed to generate tv-guide");
+                                TiviProvider.reportError(req, "Failed to generate tv-guide (1)");
                                 if(callback) callback();
                             });
                             
