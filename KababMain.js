@@ -346,11 +346,12 @@ var com;
                     
                     //console.debug("processing all batches");
                     function processBatch() {
-                        console.debug("process batch");
+                        console.debug("process batch... start");
                         batch = batches.shift();
                         //console.debug("batch is: "+batch);
 
                         if(batch) {
+                            console.debug("process batch... processing");
                             func = batch.batch;
                             date = batch.date;
                             programPages = batch.programPages;
@@ -368,6 +369,7 @@ var com;
                                 if(onError) onError(e);
                             }                                                        
                         }
+                        console.debug("process batch... done");
                     }
                     setTimeout(processBatch, 100);
                     
