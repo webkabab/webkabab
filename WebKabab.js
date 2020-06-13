@@ -191,7 +191,10 @@ function doInBackground() {
         case "request_live_playlist":	// This procedure requests a playlist (or several playlists) from this server.                
 
             console.debug("request live playlist");
-            TiviProvider.sendPlaylist(req, "Web Kabab Channels", "https://www.dropbox.com/s/9ra1194cekuprob/webkabab.m3u?dl=1", "LIVE");
+            TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://www.dropbox.com/s/9ra1194cekuprob/webkabab.m3u?dl=1", "LIVE");
+            TiviProvider.sendPlaylist(req, "Kabab Russian Channels", "https://smarttvnews.ru/apps/iptvchannels.m3u", "LIVE");
+
+            //https://smarttvnews.ru/apps/iptvchannels.m3u
             // generate tv shows from scrappers
             var shows = {};
             shows["Peaky Blinders"] = "https://sdarot.services/watch/1207";            
