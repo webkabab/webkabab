@@ -229,6 +229,8 @@ function doInBackground() {
             // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
                         
             console.debug("request tv guide");            
+            // TODO: Yes and Walla don't allow grabbing anymore
+            /*
             kababMain.requestTvGuide(req, function() {
                 console.debug("callback");
                 //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
@@ -239,6 +241,10 @@ function doInBackground() {
                 //postMessage({type: 'done'});
                 TiviProvider.done(req);
             });
+            */
+            TiviProvider.sendTvGuide(req, "Kabab Hebrew Guide", "https://shahaf1122.github.io/regular.xml", 5);
+            TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
+            TiviProvider.done(req);
             
             break;
 
