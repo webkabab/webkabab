@@ -186,41 +186,79 @@ var com;
                 TvGuideSources["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
                 TvGuideSources["_$wrappers"] = [
                 new TvGuideSources_$WRAPPER(0, 
-                    "WALLA", 
-                    "https://tv-guide.walla.co.il", 
-                    "<a class=\"tv-guide-channels-logos-title\" href=\"/channel/([0-9]+)\">.*?<span class=\"screen-reader\">([^<]*?)</span>", 
-                    "", 
-                    "https://tv-guide.walla.co.il/?ts=<@3@>", 
-                    "", 
-                    "<h2 class=\"screen-reader\"><@2@></h2> <ol class=\"tv-guide-channel\">(.*?)</ol>", 
-                    "data-obj=\'(.*?)\'", 
-                    "\"name\":\"(.*?)\",", 
-                    "\"description\":\"(.*?)\",", 
-                    "\"start_time\":\"([0-9][0-9])[:]([0-9][0-9])\",", 
-                    "\"end_time\":\"([0-9][0-9])[:]([0-9][0-9])\"", 
-                    "<li class=\"selected\">[^<]*?<a href=\"[?]ts=([0-9]{4})-([0-9]{2})-([0-9]{2})\">", 
-                    "UTF-8", 
-                    "he",
-                    "Asia/Jerusalem"
-                ), 
+                    "TEMPLATE", // Name of this grabber
+                    "<TBD>", // BaseURL: Url where we can find channel information with ChannelIdGrabber (see below) + Current Date
+                    "<TBD>", // ChannelIdGrabber: Grabs channel IDs (specific to provider) and their names. We can skip this grabbing, by providing an encoded list as input. O: [Channel ID][Channel Name]
+                    "", // ProgramIdGrabber: (Optional) Grabs program ID in a channel's page. Should be specified if ProgramURL is specified. (ProgramURL take this output as its input). O: [Program ID]
+                    "", // ChannelURL: (Optional) Specific channel URL where we can find all programs. I: <1: Channel ID><2: Week Day><3: Date YYYY-MM-DD><4: Day Order>. If not specified - all channels' information is assumed to be in BeseUrl
+                    "", // ProgramURL: (Optional) Specific program URL where we can find program information. I: <1: Channel ID><2: Program ID><3: Weekday>. If not specified - all programs' information is assumed to be in BaseURL
+                    "", // ChannelInfoGrabber: (Optional) Grabs channel-specific content to extract programs from. (Should be used where there are several channels in a ChannelURL/BaseURL page) O: [Channel Programs HTML]. If not specified, all programs' information is assumed to be in ChannelURL
+                    "", // ProgramInfoGrabber: (Optional) Grabs program-specific content to extract program details from. (Should be used where there are several programs are in a ProgramURL/ChannelURL/BaseURL page) O: [Program-Specific HTML]. If not specified, are programs' information is assumed to be in ProgramlURL
+                    "<TBD>", // ProgramNameGrabber: Grabs the program's name from the ProgramURL/ProgramInfo content
+                    "<TBD>", // ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content
+                    "<TBD>", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content
+                    "<TBD>", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content
+                    "<TBD>", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. [Year][Month][Day]
+                    "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
+                    "he", // Language: ISO specification
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                ),
                 new TvGuideSources_$WRAPPER(1, 
-                    "YES", 
-                    "https://www.yes.co.il/content/tvguide", 
-                    "@@<TV50,\u05d9\u05e9\u05e8\u05d0\u05dc \u05e4\u05dc\u05d5\u05e1>;<TV04,\u05e2\u05e8\u05d5\u05e5 \u05e2\u05e9\u05e8>;<CH30,HD \u05db\u05d0\u05df>;<CH36,\u05e8\u05e9\u05ea>;<CH34,\u05e7\u05e9\u05ea>;<TV67,\u05de\u05d5\u05e1\u05d9\u05e7\u05d4 24>@@", 
-                    "Schedule_Item_ID=\"([0-9]+?)\"", 
-                    "https://www.yes.co.il/content/YesChannelsHandler.ashx?action=GetDailyShowsByDayAndChannelCode&dayValue=<@4@>&dayPartByHalfHour=0&channelCode=<@1@>", 
-                    "https://www.yes.co.il/content/YesChannelsHandler.ashx?action=GetProgramDataByScheduleItemID&ScheduleItemID=<@2@>", 
-                    "", 
-                    "", 
-                    "\"Hebrew_Name\":\"(.*?)\"", 
-                    "\"PreviewText\":\"(.*?)\"", 
-                    "\"Start_Time_Fix\":\"([0-9][0-9])[:]([0-9][0-9])\"", 
-                    "\"End_Time_Fix\":\"([0-9][0-9])[:]([0-9][0-9])\"", 
-                    "clientServerTimeDelta: new Date[(]\"([0-9]{4})-([0-9]{2})-([0-9]{2})", 
-                    "UTF-8", 
-                    "he", 
-                    "Asia/Jerusalem"
-                )];
+                    "WALLA", // Name of this grabber
+                    "https://tv-guide.walla.co.il",  // BaseURL: Url where we can find channel information with ChannelIdGrabber (see below) + Current Date
+                    "<a class=\"tv-guide-channels-logos-title\" href=\"/channel/([0-9]+)\">.*?<span class=\"screen-reader\">([^<]*?)</span>", // ChannelIdGrabber: Grabs channel IDs (specific to provider) and their names. We can skip this grabbing, by providing an encoded list as input. O: [Channel ID][Channel Name]
+                    "", // ProgramIdGrabber: (Optional) Grabs program ID in a channel's page. Should be specified if ProgramURL is specified. (ProgramURL take this output as its input). O: [Program ID]
+                    "https://tv-guide.walla.co.il/?ts=<@3@>", // ChannelURL: (Optional) Specific channel URL where we can find all programs. I: <1: Channel ID><2: Week Day><3: Date YYYY-MM-DD><4: Day Order>. If not specified - all channels' information is assumed to be in BeseUrl
+                    "", // ProgramURL: (Optional) Specific program URL where we can find program information. I: <1: Channel ID><2: Program ID><3: Weekday>. If not specified - all programs' information is assumed to be in BaseURL
+                    "<h2 class=\"screen-reader\"><@2@></h2> <ol class=\"tv-guide-channel\">(.*?)</ol>", // ChannelInfoGrabber: (Optional) Grabs channel-specific content to extract programs from. (Should be used where there are several channels in a ChannelURL/BaseURL page) O: [Channel Programs HTML]. If not specified, all programs' information is assumed to be in ChannelURL
+                    "data-obj=\'(.*?)\'", // ProgramInfoGrabber: (Optional) Grabs program-specific content to extract program details from. (Should be used where there are several programs are in a ProgramURL/ChannelURL/BaseURL page) O: [Program-Specific HTML]. If not specified, are programs' information is assumed to be in ProgramlURL
+                    "\"name\":\"(.*?)\",", // ProgramNameGrabber: Grabs the program's name from the ProgramURL/ProgramInfo content
+                    "\"description\":\"(.*?)\",", // ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content
+                    "\"start_time\":\"([0-9][0-9])[:]([0-9][0-9])\",", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content
+                    "\"end_time\":\"([0-9][0-9])[:]([0-9][0-9])\"", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content
+                    "<li class=\"selected\">[^<]*?<a href=\"[?]ts=([0-9]{4})-([0-9]{2})-([0-9]{2})\">", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. [Year][Month][Day]
+                    "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
+                    "he", // Language: ISO specification
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                ), 
+                new TvGuideSources_$WRAPPER(2, 
+                    "YES", // Name of this grabber
+                    "https://www.yes.co.il/content/tvguide", // BaseURL: Url where we can find channel information with ChannelIdGrabber (see below) + Current Date
+                    "@@<TV50,\u05d9\u05e9\u05e8\u05d0\u05dc \u05e4\u05dc\u05d5\u05e1>;<TV04,\u05e2\u05e8\u05d5\u05e5 \u05e2\u05e9\u05e8>;<CH30,HD \u05db\u05d0\u05df>;<CH36,\u05e8\u05e9\u05ea>;<CH34,\u05e7\u05e9\u05ea>;<TV67,\u05de\u05d5\u05e1\u05d9\u05e7\u05d4 24>@@", // ChannelIdGrabber: Grabs channel IDs (specific to provider) and their names. We can skip this grabbing, by providing an encoded list as input. O: [Channel ID][Channel Name]
+                    "Schedule_Item_ID=\"([0-9]+?)\"", // ProgramIdGrabber: (Optional) Grabs program ID in a channel's page. Should be specified if ProgramURL is specified. (ProgramURL take this output as its input). O: [Program ID]
+                    "https://www.yes.co.il/content/YesChannelsHandler.ashx?action=GetDailyShowsByDayAndChannelCode&dayValue=<@4@>&dayPartByHalfHour=0&channelCode=<@1@>", // ChannelURL: (Optional) Specific channel URL where we can find all programs. I: <1: Channel ID><2: Week Day><3: Date YYYY-MM-DD><4: Day Order>. If not specified - all channels' information is assumed to be in BeseUrl
+                    "https://www.yes.co.il/content/YesChannelsHandler.ashx?action=GetProgramDataByScheduleItemID&ScheduleItemID=<@2@>", // ProgramURL: (Optional) Specific program URL where we can find program information. I: <1: Channel ID><2: Program ID><3: Weekday>. If not specified - all programs' information is assumed to be in BaseURL
+                    "", // ChannelInfoGrabber: (Optional) Grabs channel-specific content to extract programs from. (Should be used where there are several channels in a ChannelURL/BaseURL page) O: [Channel Programs HTML]. If not specified, all programs' information is assumed to be in ChannelURL
+                    "", // ProgramInfoGrabber: (Optional) Grabs program-specific content to extract program details from. (Should be used where there are several programs are in a ProgramURL/ChannelURL/BaseURL page) O: [Program-Specific HTML]. If not specified, are programs' information is assumed to be in ProgramlURL
+                    "\"Hebrew_Name\":\"(.*?)\"", // ProgramNameGrabber: Grabs the program's name from the ProgramURL/ProgramInfo content
+                    "\"PreviewText\":\"(.*?)\"", // ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content
+                    "\"Start_Time_Fix\":\"([0-9][0-9])[:]([0-9][0-9])\"", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content
+                    "\"End_Time_Fix\":\"([0-9][0-9])[:]([0-9][0-9])\"", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content
+                    "clientServerTimeDelta: new Date[(]\"([0-9]{4})-([0-9]{2})-([0-9]{2})", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. [Year][Month][Day]
+                    "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
+                    "he", // Language: ISO specification
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                ),
+                new TvGuideSources_$WRAPPER(3, 
+                    "HOT", // Name of this grabber
+                    "https://www.hot.net.il/heb/TV/TVGuide/", // BaseURL: Url where we can find channel information with ChannelIdGrabber (see below) + Current Date
+                    "<TBD>", // ChannelIdGrabber: Grabs channel IDs (specific to provider) and their names. We can skip this grabbing, by providing an encoded list as input. O: [Channel ID][Channel Name]
+                    "", // ProgramIdGrabber: (Optional) Grabs program ID in a channel's page. Should be specified if ProgramURL is specified. (ProgramURL take this output as its input). O: [Program ID]
+                    "", // ChannelURL: (Optional) Specific channel URL where we can find all programs. I: <1: Channel ID><2: Week Day><3: Date YYYY-MM-DD><4: Day Order>. If not specified - all channels' information is assumed to be in BeseUrl
+                    "", // ProgramURL: (Optional) Specific program URL where we can find program information. I: <1: Channel ID><2: Program ID><3: Weekday>. If not specified - all programs' information is assumed to be in BaseURL
+                    "", // ChannelInfoGrabber: (Optional) Grabs channel-specific content to extract programs from. (Should be used where there are several channels in a ChannelURL/BaseURL page) O: [Channel Programs HTML]. If not specified, all programs' information is assumed to be in ChannelURL
+                    "", // ProgramInfoGrabber: (Optional) Grabs program-specific content to extract program details from. (Should be used where there are several programs are in a ProgramURL/ChannelURL/BaseURL page) O: [Program-Specific HTML]. If not specified, are programs' information is assumed to be in ProgramlURL
+                    "<TBD>", // ProgramNameGrabber: Grabs the program's name from the ProgramURL/ProgramInfo content
+                    "<TBD>", // ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content
+                    "<TBD>", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content
+                    "<TBD>", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content
+                    "margin-left: 5px;\">[\\s]*<option value=\"([0-9]{2})\\/([0-9]{2})\\/([0-9]{4}) ", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. [Year][Month][Day]
+                    "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
+                    "he", // Language: ISO specification
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                ),
+            
+            ];
             })(KababConfig = kabab.KababConfig || (kabab.KababConfig = {}));
         })(kabab = addons.kabab || (addons.kabab = {}));
     })(addons = com.addons || (com.addons = {}));

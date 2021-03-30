@@ -242,7 +242,7 @@ function doInBackground() {
                 TiviProvider.done(req);
             });
             */
-            TiviProvider.sendTvGuide(req, "Kabab Hebrew Guide", "https://shahaf1122.github.io/regular.xml", 5);
+            //TiviProvider.sendTvGuide(req, "Kabab Hebrew Guide", "https://shahaf1122.github.io/regular.xml", 5);
             TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
             TiviProvider.done(req);
             
