@@ -106,7 +106,7 @@ var com;
                         ;
                         this.writeChannels(channels);
                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing date");
-						console.info("baseUrl="+baseUrl+", dateGrabber="+dateGrabber);
+						//console.info("baseUrl="+baseUrl+", dateGrabber="+dateGrabber);
                         //var dateMatcher = dateGrabber.matcher(baseUrl); // TODO: debug
                         var dateMatcher = dateGrabber.exec(baseUrl);
 						
@@ -218,9 +218,9 @@ var com;
                                                 {
                                                     var id = programMatcher.group$int(1);
                                                     var page = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramUrl.split("<@1@>").join(channel.id).split("<@2@>").join(id).split("<@3@>").join(weekday);
-                                                    com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
+                                                    //com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
                                                     if(!programPages.contains(page)) {
-                                                        com.montezumba.lib.types.MediaLog.instance().debug("Adding program url=" + page);
+                                                        //com.montezumba.lib.types.MediaLog.instance().debug("Adding program url=" + page);
                                                         programPages.add(page);
                                                     }
                                                 }
@@ -272,13 +272,13 @@ var com;
                                                             throw new java.io.IOException("Failed to grab program name from: " + programContent);
                                                         }
                                                         var programName = org.apache.commons.lang3.StringEscapeUtils.unescapeJava(programParamsMatcher.group$int(1));
-                                                        com.montezumba.lib.types.MediaLog.instance().debug("name = " + programName);
+                                                        //com.montezumba.lib.types.MediaLog.instance().debug("name = " + programName);
                                                         programParamsMatcher = programDescGrabber.matcher(programContent);
                                                         if (!programParamsMatcher.find()) {
                                                             throw new java.io.IOException("Failed to grab program description from: " + programContent);
                                                         }
                                                         var programDesc = org.apache.commons.lang3.StringEscapeUtils.unescapeJava(programParamsMatcher.group$int(1));
-                                                        com.montezumba.lib.types.MediaLog.instance().debug("desc = " + programDesc);
+                                                        //com.montezumba.lib.types.MediaLog.instance().debug("desc = " + programDesc);
                                                         programParamsMatcher = programStartTimeGrabber.matcher(programContent);
                                                         if (!programParamsMatcher.find()) {
                                                             throw new java.io.IOException("Failed to grab start time description from: " + programContent);
@@ -291,8 +291,8 @@ var com;
                                                         }
                                                         var endHours = programParamsMatcher.group$int(1);
                                                         var endMinutes = programParamsMatcher.group$int(2);
-                                                        com.montezumba.lib.types.MediaLog.instance().debug("Start time = " + startHours + ":" + startMinutes);
-                                                        com.montezumba.lib.types.MediaLog.instance().debug("End time = " + endHours + ":" + endMinutes);
+                                                        //com.montezumba.lib.types.MediaLog.instance().debug("Start time = " + startHours + ":" + startMinutes);
+                                                        //com.montezumba.lib.types.MediaLog.instance().debug("End time = " + endHours + ":" + endMinutes);
                                                         var startTime = com.montezumba.lib.utils.TimerFactory.instance().createTimeStamp$int$int$int$int$int$int$int(date.getYear(true), date.getMonth(true), date.getDay(true), parseInt(startHours), parseInt(startMinutes), 0, 0);
                                                         var endTime = com.montezumba.lib.utils.TimerFactory.instance().createTimeStamp$int$int$int$int$int$int$int(date.getYear(true), date.getMonth(true), date.getDay(true), parseInt(endHours), parseInt(endMinutes), 0, 0);
                                                         if (startTime.getHour(true) > prevEndHour) {

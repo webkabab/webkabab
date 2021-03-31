@@ -200,10 +200,10 @@ var com;
                     "<TBD>", // ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content. O: [1: Description]
                     "<TBD>", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content. O: [1: Hour HH][2: Minute MM]
                     "<TBD>", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content O: [1: Hour HH][2: Minute MM]
-                    "<TBD>", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: [1: Year YYYY][1: Month MM][3: Day DD]
+                    "<TBD>", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: ["year": Year YYYY]["month": Month MM]["day": Day DD]
                     "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
                     "he", // Language: ISO specification
-                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition of the provider-set times and dates. Will be used to shift program times when necessary
                 ),
                 new TvGuideSources_$WRAPPER(1, 
                     "WALLA", // Name of this grabber
@@ -218,10 +218,10 @@ var com;
                     "\"description\":\"(.*?)\",", // ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content. O: [1: Description]
                     "\"start_time\":\"([0-9][0-9])[:]([0-9][0-9])\",", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content. O: [1: Hour HH][2: Minute MM]
                     "\"end_time\":\"([0-9][0-9])[:]([0-9][0-9])\"", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content O: [1: Hour HH][2: Minute MM]
-                    "<li class=\"selected\">[^<]*?<a href=\"[?]ts=([0-9]{4})-([0-9]{2})-([0-9]{2})\">", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: [1: Year YYYY][1: Month MM][3: Day DD]
+                    "<li class=\"selected\">[^<]*?<a href=\"[?]ts=([0-9]{4})-([0-9]{2})-([0-9]{2})\">", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: ["year": Year YYYY]["month": Month MM]["day": Day DD]
                     "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
                     "he", // Language: ISO specification
-                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition of the provider-set times and dates. Will be used to shift program times when necessary
                 ), 
                 new TvGuideSources_$WRAPPER(2, 
                     "YES", // Name of this grabber
@@ -236,15 +236,15 @@ var com;
                     "\"PreviewText\":\"(.*?)\"", // ProgramDescGrabber: ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content. O: [1: Description]
                     "\"Start_Time_Fix\":\"([0-9][0-9])[:]([0-9][0-9])\"", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content. O: [1: Hour HH][2: Minute MM]
                     "\"End_Time_Fix\":\"([0-9][0-9])[:]([0-9][0-9])\"", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content O: [1: Hour HH][2: Minute MM]
-                    "clientServerTimeDelta: new Date[(]\"([0-9]{4})-([0-9]{2})-([0-9]{2})", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: [1: Year YYYY][1: Month MM][3: Day DD]
+                    "clientServerTimeDelta: new Date[(]\"([0-9]{4})-([0-9]{2})-([0-9]{2})", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: ["year": Year YYYY]["month": Month MM]["day": Day DD]
                     "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
                     "he", // Language: ISO specification
-                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition of the provider-set times and dates. Will be used to shift program times when necessary
                 ),
                 new TvGuideSources_$WRAPPER(3, 
                     "HOT", // Name of this grabber
                     "https://www.hot.net.il/heb/TV/TVGuide/LineUpAdvanceSearch/", // BaseURL: Url where we can find channel information with ChannelIdGrabber (see below) + Current Date
-                    "@@<861,\u05e7\u05e9\u05ea>;<863,\u05ea\u05e9\u05e8>;<839,\u05db\u05d0\u05df \u0031\u0031>;<431,\u05d9\u05e9\u05e8\u05d0\u05dc \u05e4\u05dc\u05d5\u05e1>@@", // ChannelIdGrabber: Grabs channel IDs (specific to provider) and their names. We can skip this grabbing, by providing an encoded list as input. O: [Channel ID][Channel Name]
+                    "@@<861,\u05e7\u05e9\u05ea>;<863,\u05e8\u05e9\u05ea>;<839,\u05db\u05d0\u05df \u0031\u0031>;<431,\u05d9\u05e9\u05e8\u05d0\u05dc \u05e4\u05dc\u05d5\u05e1>@@", // ChannelIdGrabber: Grabs channel IDs (specific to provider) and their names. We can skip this grabbing, by providing an encoded list as input. O: [Channel ID][Channel Name]
                     "aspx[?]LineUpId=([0-9]+)", // ProgramIdGrabber: (Optional) Grabs program ID in a channel's page. Should be specified if ProgramURL is specified. (ProgramURL take this output as its input). O: [Program ID]
                     "https://www.hot.net.il/PageHandlers/LineUpAdvanceSearch.aspx?text=&channel=<@1@>&genre=-1&ageRating=-1&publishYear=-1&productionCountry=-1&startDate=<@3@>/<@4@>/<@5@>&endDate=01/01/3000&pageSize=50&pageIndex=1", // ChannelURL: (Optional) Specific channel URL where we can find all programs. I: <1: Channel ID><2: Week Day><3: Day DD><4: Month MM><5: Year YYYY><6: Day Order>. If not specified - all channels' information is assumed to be in BeseUrl
                     "https://www.hot.net.il/PageHandlers/LineUpDetails.aspx?lcid=1037&luid=<@2@>", // ProgramURL: (Optional) Specific program URL where we can find program information. I: <1: Channel ID><2: Program ID><3: Weekday>. If not specified - all programs' information is assumed to be in BaseURL
@@ -254,10 +254,10 @@ var com;
                     "<div class=\"show\">\\s*([^<]+?)\\s*<\\/div>", // ProgramDescGrabber: ProgramDescGrabber: Grabs the program's description from the ProgramURL/ProgramInfo content. O: [1: Description]
                     "<div class=\"LineUpDetailsTime\">\\s*.*?([0-9]{2}):([0-9]{2})\\s*\\-", // ProgramStartTimeGrabber: Grabs the program's start time from the ProgramURL/ProgramInfo content. O: [1: Hour HH][2: Minute MM]
                     "([0-9]{2}):([0-9]{2})\\s*<\\/div>", // ProgramEndTimeGrabber: Grabs the program's end time from the ProgramURL/ProgramInfo content O: [1: Hour HH][2: Minute MM]
-                    "option selected='selected' value=\"(?<day>[0-9]{2})\\/(?<month>[0-9]{2})\\/(?<year>[0-9]{4})", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: [1: Year YYYY][1: Month MM][3: Day DD]
+                    "option selected='selected' value=\"(?<day>[0-9]{2})\\/(?<month>[0-9]{2})\\/(?<year>[0-9]{4})", // CurrentDateGrabber: Grabs current date from BaseURL. This date will be used to calculate dates for 3-5 days ahead. O: ["year": Year YYYY]["month": Month MM]["day": Day DD]
                     "UTF-8", // Site encoding (usually UTF-8, unless some other wierd hebrew character set)
                     "he", // Language: ISO specification
-                    "Asia/Jerusalem" // Country: actually more of standard-zone definition. Will be used to shift program times when necessary
+                    "Asia/Jerusalem" // Country: actually more of standard-zone definition of the provider-set times and dates. Will be used to shift program times when necessary
                 )            
             ];
             })(KababConfig = kabab.KababConfig || (kabab.KababConfig = {}));
