@@ -65,7 +65,8 @@ var com;
                         var programDescGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramDescGrabber);
                         var programStartTimeGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramStartTimeGrabber);
                         var programEndTimeGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramEndTimeGrabber);
-                        var dateGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
+                        //var dateGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
+                        var dateGrabber = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber;
                         var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber);
                         var matcher = null;
                         var channels = (new java.util.HashSet());
@@ -106,15 +107,21 @@ var com;
                         this.writeChannels(channels);
                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing date");
 						console.info("baseUrl="+baseUrl+", dateGrabber="+dateGrabber);
-                        var dateMatcher = dateGrabber.matcher(baseUrl);
+                        //var dateMatcher = dateGrabber.matcher(baseUrl); // TODO: debug
+                        var dateMatcher = dateGrabber.exec(baseUrl);
 						
-                        if (!dateMatcher.find()) {                            
+                        if (dateMatcher == null) {                            
                             throw new java.io.IOException("Failed to grab date from: " + com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mBaseUrl);
                         }
 						
-                        var year = dateMatcher.group$string("year");						
-                        var month = dateMatcher.group$string("month");						
-                        var day = dateMatcher.group$string("day");
+                        var year = dateMatcher.groups.year;						
+                        var month = dateMatcher.groups.month;						
+                        var day = dateMatcher.groups.day;
+
+                        //var year = dateMatcher.group$string("year");						
+                        //var month = dateMatcher.group$string("month");						
+                        //var day = dateMatcher.group$string("day");
+
                         com.montezumba.lib.types.MediaLog.instance().debug("Current date is = " + day + "/" + month + "/" + year);
                         var zone = com.montezumba.lib.utils.TimerFactory.instance().getTimeZoneOffset(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCountry);
                         com.montezumba.lib.types.MediaLog.instance().debug("Zone offset is = " + zone);
