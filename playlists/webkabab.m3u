@@ -10,10 +10,10 @@ addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_ur
 #EXTINF:-1 tvg-id="13reshet.il" tvg-name="רשת" group-title="ישראל" tvg-logo="https://isc.wcdn.co.il/w6/v/tv/ch_icons/1511182329.jpg" radio="false",רשת
 https://cdnapisec.kaltura.com/p/2748741/sp/2748741/playManifest/entryId/1_ubg28z0w/deliveryProfileId/672/protocol/https/format/applehttp/a.m3u8
 
-#EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ערוץ 9 ישראל פלוס 
+#EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ישראל פלוס 
 http://ovego.tv/publ/live_tv/razvlekatelnye/9channel_israel/7-1-0-950
 
-#EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ערוץ 9 ישראל פלוס (1)
+#EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ישראל פלוס (1)
 http://ontivi.net/9-kanal-izrailtv.html
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/HtuClSDdyUIU2Ptof2wk53xn6YhKSAcAQnUMdixj.png" ,כאן ב 
