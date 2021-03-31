@@ -22,7 +22,7 @@ var com;
                     KababConfig.RUSSIAN_STREAM = "http://178.162.205.76/video/zWLP_WvNCMBCQKNnTfwt0w/" + KababConfig.PARAM_ENCODING + "/playlist.m3u8"; return KababConfig.RUSSIAN_STREAM; };
                 ;
                 KababConfig.sRequestedChannels_$LI$ = function () { if (KababConfig.sRequestedChannels == null)
-                    KababConfig.sRequestedChannels = ["\u05e2\u05e8\u05d5\u05e5 \u05e2\u05e9\u05e8", "\u05e7\u05e9\u05ea", "\u05e8\u05e9\u05ea", "\u05d9\u05e9\u05e8\u05d0\u05dc \u05e4\u05dc\u05d5\u05e1", "\u05de\u05d5\u05e1\u05d9\u05e7\u05d4 24", "HD \u05db\u05d0\u05df"]; return KababConfig.sRequestedChannels; };
+                    KababConfig.sRequestedChannels = ["\u05e7\u05e9\u05ea", "\u05e8\u05e9\u05ea", "\u05db\u05d0\u05df \u0031\u0031", "\u05d9\u05e9\u05e8\u05d0\u05dc \u05e4\u05dc\u05d5\u05e1"]; return KababConfig.sRequestedChannels; };
                 ;
                 return KababConfig;
             }());
