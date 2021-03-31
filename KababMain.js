@@ -185,9 +185,13 @@ var com;
                                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing for day = " + weekday);
                                         var channelPage = baseUrl;
                                         if (!(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mChannelUrl.length === 0)) {
-                                            var date = dates[i].format("%year%-%month%-%day%", true);
+                                            //var date = dates[i].format("%year%-%month%-%day%", true);
+                                            var day = dates[i].format("%day%", true);
+                                            var month = dates[i].format("%month%", true);
+                                            var year = dates[i].format("%year%", true);
+                                         
                                             var dayOrder = dates[i].getDay(true) - today.getDay(true);
-                                            var channelUrl = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mChannelUrl.split("<@1@>").join(channel.id).split("<@2@>").join(weekday).split("<@3@>").join(date).split("<@4@>").join(/* valueOf */ new String(dayOrder).toString());
+                                            var channelUrl = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mChannelUrl.split("<@1@>").join(channel.id).split("<@2@>").join(weekday).split("<@3@>").join(day).split("<@4@>").join(month).split("<@5@>").join(year).split("<@6@>").join(/* valueOf */ new String(dayOrder).toString());
                                             com.montezumba.lib.types.MediaLog.instance().debug("Grabbing from " + channelUrl);
                                             channelPage = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(channelUrl, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mEncoding).readAll();
                                         }
@@ -209,7 +213,9 @@ var com;
                                                     var id = programMatcher.group$int(1);
                                                     var page = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramUrl.split("<@1@>").join(channel.id).split("<@2@>").join(id).split("<@3@>").join(weekday);
                                                     //com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
-                                                    programPages.add(page);
+                                                    if(!programPages.contains(page)) {
+                                                        programPages.add(page);
+                                                    }
                                                 }
                                             }
                                             ;
@@ -473,7 +479,7 @@ var com;
                     if (refresh) {
                         try {
 							com.montezumba.lib.types.MediaLog.instance().debug("Need to refresh...");	
-                            this.generateTvGuide(com.addons.kabab.KababConfig.TvGuideSources.YES, function() {
+                            this.generateTvGuide(com.addons.kabab.KababConfig.TvGuideSources.HOT, function() {
                                 if (com.montezumba.lib.io.StorageHandler.instance().isExist(guidePath)) {
                                     /*
                                     guide.startDate = com.montezumba.lib.utils.TimerFactory.instance().getCurrentTime().toLocalTime();
