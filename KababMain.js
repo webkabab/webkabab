@@ -66,7 +66,7 @@ var com;
                         var programStartTimeGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramStartTimeGrabber);
                         var programEndTimeGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramEndTimeGrabber);
                         //var dateGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
-                        var dateGrabber = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber;
+                        var dateGrabber = new RegExp(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
                         var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber);
                         var matcher = null;
                         var channels = (new java.util.HashSet());
