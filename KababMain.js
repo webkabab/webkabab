@@ -112,10 +112,9 @@ var com;
                             throw new java.io.IOException("Failed to grab date from: " + com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mBaseUrl);
                         }
 						
-                        var year = dateMatcher.group$int(1);						
-                        var month = dateMatcher.group$int(2);
-						
-                        var day = dateMatcher.group$int(3);
+                        var year = dateMatcher.group$string("year");						
+                        var month = dateMatcher.group$string("month");						
+                        var day = dateMatcher.group$string("day");
                         com.montezumba.lib.types.MediaLog.instance().debug("Current date is = " + day + "/" + month + "/" + year);
                         var zone = com.montezumba.lib.utils.TimerFactory.instance().getTimeZoneOffset(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCountry);
                         com.montezumba.lib.types.MediaLog.instance().debug("Zone offset is = " + zone);
