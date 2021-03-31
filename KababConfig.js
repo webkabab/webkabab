@@ -123,10 +123,10 @@ var com;
                 PlaylistSource["_$wrappers"] = [new PlaylistSource_$WRAPPER(0, "ISRAEL", "Israeli & Russian Channels", "https://www.dropbox.com/s/y9yyi16nuwploav/myRussianList.m3u?dl=1"), new PlaylistSource_$WRAPPER(1, "TV545", "\u0420\u0443\u0441\u0441\u043a\u0438\u0435 \u043a\u0430\u043d\u0430\u043b\u044b [545-tv.com]", "http://545-tv.com/iptvRU.m3u8")];
                 var TvGuideSources;
                 (function (TvGuideSources) {
+                    TvGuideSources[TvGuideSources["TEMPLATE"] = 0] = "TEMPLATE";
                     TvGuideSources[TvGuideSources["WALLA"] = 1] = "WALLA";
                     TvGuideSources[TvGuideSources["YES"] = 2] = "YES";
-                    TvGuideSources[TvGuideSources["HOT"] = 3] = "HOT";
-                    TvGuideSources[TvGuideSources["TEMPLATE"] = 0] = "TEMPLATE";
+                    TvGuideSources[TvGuideSources["HOT"] = 3] = "HOT";                    
                 })(TvGuideSources = KababConfig.TvGuideSources || (KababConfig.TvGuideSources = {}));
                 /** @ignore */
                 var TvGuideSources_$WRAPPER = (function () {
