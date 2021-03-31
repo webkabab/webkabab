@@ -228,9 +228,7 @@ function doInBackground() {
             // 'url' - A URL for this EPG. Should point to a valid "XMLTV" file.
             // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
                         
-            console.debug("request tv guide");            
-            // TODO: Yes and Walla don't allow grabbing anymore
-            
+            console.debug("request tv guide");                                
             kababMain.requestTvGuide(req, function() {
                 console.debug("callback");
                 //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
