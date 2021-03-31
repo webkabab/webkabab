@@ -107,7 +107,7 @@ var com;
                         this.writeChannels(channels);
                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing date");
 						//console.info("baseUrl="+baseUrl+", dateGrabber="+dateGrabber);
-                        //var dateMatcher = dateGrabber.matcher(baseUrl); // TODO: debug
+                        
                         var dateMatcher = dateGrabber.exec(baseUrl);
 						
                         if (dateMatcher == null) {                            
@@ -238,7 +238,7 @@ var com;
                                             var page = index123.next();
                                             {
                                                 var programsContent = void 0;
-                                                com.montezumba.lib.types.MediaLog.instance().debug("Grabbing programs from=" + page);
+                                                //com.montezumba.lib.types.MediaLog.instance().debug("Grabbing programs from=" + page);
                                                 if ((function (o1, o2) { if (o1 && o1.equals) {
                                                     return o1.equals(o2);
                                                 }
