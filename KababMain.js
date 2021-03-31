@@ -73,7 +73,7 @@ var com;
                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing Channels: ");
 						var file = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mBaseUrl, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mEncoding);
                         var baseUrl = file.readAll();
-                        com.montezumba.lib.types.MediaLog.instance().debug("baseUrl="+baseUrl);
+                        //com.montezumba.lib.types.MediaLog.instance().debug("baseUrl="+baseUrl);
                         matcher = this.getMatcher(channelIdGrabber, baseUrl);
                         while ((matcher.find())) {
                             {
@@ -218,8 +218,9 @@ var com;
                                                 {
                                                     var id = programMatcher.group$int(1);
                                                     var page = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramUrl.split("<@1@>").join(channel.id).split("<@2@>").join(id).split("<@3@>").join(weekday);
-                                                    //com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
+                                                    com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
                                                     if(!programPages.contains(page)) {
+                                                        com.montezumba.lib.types.MediaLog.instance().debug("Adding program url=" + page);
                                                         programPages.add(page);
                                                     }
                                                 }
