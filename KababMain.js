@@ -255,8 +255,9 @@ var com;
                                                 var programsToParse = (new java.util.ArrayList());
                                                 if (programGrabber != null) {
                                                     programGrabber = programGrabber.split("<@1@>").join(dayStr).split("<@2@>").join(monthStr).split("<@3@>").join(yearStr);
+                                                    console.debug("program grabber="+programGrabber);
                                                     programGrabber = new RegExp(programGrabber, "gm");
-                                                    var programsMatcher = programGrabber.exec(programsContent);
+                                                    //var programsMatcher = programGrabber.exec(programsContent);
                                                     while (match = programGrabber.exec(programsContent)) {
                                                         {
                                                             var programContent = match[1];
