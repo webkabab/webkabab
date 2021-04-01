@@ -215,7 +215,7 @@ var com;
                                         var programPages = (new java.util.ArrayList());
                                         if (!(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramUrl.length === 0)) {
                                             var programMatcher = programIdGrabber.split("<@1@>").join(dayStr).split("<@2@>").join(monthStr).split("<@3@>").join(yearStr);
-                                            ProgramMatcher = new RegExp(programMatcher);
+                                            programMatcher = new RegExp(programMatcher, "gm");
                                             //var programMatcher = programIdGrabber.matcher(channelContent);
                                             while (match = programMatcher.exec(channelContent)) {
                                                 {
