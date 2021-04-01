@@ -60,15 +60,15 @@ var com;
                         this.mWriter = com.montezumba.lib.io.StorageHandler.instance().openOutputFile(tempPath, false);
                         this.mWriter['write$java_lang_String'](KababMain.XMLTV_HEADER);
                         var channelIdGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mChannelIdsGrabber);
-                        var programIdGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramIdsGrabber);
+                        //var programIdGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramIdsGrabber);
+                        var programIdGrabber = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramIdsGrabber;
                         var programNameGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramNameGrabber);
                         var programDescGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramDescGrabber);
                         var programStartTimeGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramStartTimeGrabber);
                         var programEndTimeGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramEndTimeGrabber);
                         //var dateGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
                         var dateGrabber = new RegExp(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
-                        //var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber);
-                        var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber;
+                        var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber);                        
                         var matcher = null;
                         var channels = (new java.util.HashSet());
                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing Channels: ");
@@ -214,10 +214,13 @@ var com;
                                         }
                                         var programPages = (new java.util.ArrayList());
                                         if (!(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramUrl.length === 0)) {
-                                            var programMatcher = programIdGrabber.matcher(channelContent);
-                                            while ((programMatcher.find())) {
+                                            var programMatcher = programIdGrabber.split("<@1@>").join(dayStr).split("<@2@>").join(monthStr).split("<@3@>").join(yearStr);
+                                            ProgramMatcher = new RegExp(programMatcher);
+                                            //var programMatcher = programIdGrabber.matcher(channelContent);
+                                            while (match = programMatcher.exec(channelContent)) {
                                                 {
-                                                    var id = programMatcher.group$int(1);
+                                                    //var id = programMatcher.group$int(1);
+                                                    var id = match[1];
                                                     var page = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramUrl.split("<@1@>").join(channel.id).split("<@2@>").join(id).split("<@3@>").join(weekday);
                                                     //com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
                                                     if(!programPages.contains(page)) {
@@ -253,14 +256,11 @@ var com;
 													programsContent = programsContent.replace(/\\u([0-9]+)/g, "&#x$1");
                                                 }
                                                 var programsToParse = (new java.util.ArrayList());
-                                                if (programGrabber != null) {
-                                                    programGrabber = programGrabber.split("<@1@>").join(dayStr).split("<@2@>").join(monthStr).split("<@3@>").join(yearStr);
-                                                    console.debug("program grabber="+programGrabber);
-                                                    programGrabber = new RegExp(programGrabber, "gm");
-                                                    //var programsMatcher = programGrabber.exec(programsContent);
-                                                    while (match = programGrabber.exec(programsContent)) {
+                                                if (programGrabber != null) {                                                    
+                                                    var programsMatcher = programGrabber.matcher(programsContent);
+                                                    while ((programsMatcher.find())) {
                                                         {
-                                                            var programContent = match[1];
+                                                            var programContent = programsMatcher.group$int(1);
                                                             programsToParse.add(programContent);
                                                         }
                                                     }                                                    
