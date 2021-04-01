@@ -222,9 +222,9 @@ var com;
                                                     //var id = programMatcher.group$int(1);
                                                     var id = match[1];
                                                     var page = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramUrl.split("<@1@>").join(channel.id).split("<@2@>").join(id).split("<@3@>").join(weekday);
-                                                    //com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
+                                                    com.montezumba.lib.types.MediaLog.instance().debug("Found program url=" + page);
                                                     if(!programPages.contains(page)) {
-                                                        //com.montezumba.lib.types.MediaLog.instance().debug("Adding program url=" + page);
+                                                        com.montezumba.lib.types.MediaLog.instance().debug("Adding program url=" + page);
                                                         programPages.add(page);
                                                     }
                                                 }
