@@ -67,7 +67,8 @@ var com;
                         var programEndTimeGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramEndTimeGrabber);
                         //var dateGrabber = java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
                         var dateGrabber = new RegExp(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mCurrentDateGrabber);
-                        var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber);
+                        //var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : java.util.regex.Pattern.compile$java_lang_String(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber);
+                        var programGrabber = (com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber.length === 0) ? null : com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mProgramInfoGrabber;
                         var matcher = null;
                         var channels = (new java.util.HashSet());
                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing Channels: ");
@@ -188,16 +189,16 @@ var com;
                                         var prevStartHour = 24;
                                         var prevEndHour = 24;
                                         var weekday = KababMain.sDays_$LI$()[i];
+                                        var dayStr = dates[i].format("%day%", true);
+                                        var monthStr = dates[i].format("%month%", true);
+                                        var yearStr = dates[i].format("%year%", true);
+
                                         com.montezumba.lib.types.MediaLog.instance().debug("Grabbing for day = " + weekday);
                                         var channelPage = baseUrl;
                                         if (!(com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mChannelUrl.length === 0)) {
-                                            //var date = dates[i].format("%year%-%month%-%day%", true);
-                                            var day = dates[i].format("%day%", true);
-                                            var month = dates[i].format("%month%", true);
-                                            var year = dates[i].format("%year%", true);
-                                         
+                                            //var date = dates[i].format("%year%-%month%-%day%", true);                                                                                 
                                             var dayOrder = dates[i].getDay(true) - today.getDay(true);
-                                            var channelUrl = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mChannelUrl.split("<@1@>").join(channel.id).split("<@2@>").join(weekday).split("<@3@>").join(day).split("<@4@>").join(month).split("<@5@>").join(year).split("<@6@>").join(/* valueOf */ new String(dayOrder).toString());
+                                            var channelUrl = com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mChannelUrl.split("<@1@>").join(channel.id).split("<@2@>").join(weekday).split("<@3@>").join(dayStr).split("<@4@>").join(monthStr).split("<@5@>").join(yearStr).split("<@6@>").join(/* valueOf */ new String(dayOrder).toString());
                                             com.montezumba.lib.types.MediaLog.instance().debug("Grabbing from " + channelUrl);
                                             channelPage = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(channelUrl, com.addons.kabab.KababConfig.TvGuideSources["_$wrappers"][source].mEncoding).readAll();
                                         }
@@ -253,10 +254,12 @@ var com;
                                                 }
                                                 var programsToParse = (new java.util.ArrayList());
                                                 if (programGrabber != null) {
-                                                    var programsMatcher = programGrabber.matcher(programsContent);
-                                                    while ((programsMatcher.find())) {
+                                                    programGrabber = programGrabber.split("<@1@>").join(dayStr).split("<@2@>").join(monthStr).split("<@3@>").join(yearStr);
+                                                    programGrabber = new RegExp(programGrabber, "gm");
+                                                    var programsMatcher = programGrabber.exec(programsContent);
+                                                    while (match = programGrabber.exec(programsContent)) {
                                                         {
-                                                            var programContent = programsMatcher.group$int(1);
+                                                            var programContent = match[1];
                                                             programsToParse.add(programContent);
                                                         }
                                                     }                                                    
