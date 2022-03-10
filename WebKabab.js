@@ -193,9 +193,10 @@ function doInBackground() {
             console.debug("request live playlist");
             //TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://www.dropbox.com/s/9ra1194cekuprob/webkabab.m3u?dl=1", "LIVE");
             TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://raw.githubusercontent.com/webkabab/webkabab/master/playlists/webkabab.m3u", "LIVE");
-            TiviProvider.sendPlaylist(req, "Kabab Russian Channels", "https://smarttvnews.ru/apps/iptvchannels.m3u", "LIVE");
+            TiviProvider.sendPlaylist(req, "Kabab Russian Channels", "https://smarttvnews.ru/apps/freeiptv.m3u", "LIVE");
 
             //https://smarttvnews.ru/apps/iptvchannels.m3u
+            // https://smarttvnews.ru/samoobnovlyaemyie-iptv-pleylistyi/
             // generate tv shows from scrappers
             var shows = {};
             shows["Peaky Blinders"] = "https://sdarot.services/watch/1207";            
