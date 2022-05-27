@@ -252,11 +252,14 @@ function doInBackground() {
 
             switch (query) {
                 case "keshet":
-                    var makoJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String("https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=gt&lp=/hls/live/512036/CH2LIVE_OTT/index.m3u8?as=1&rv=AKAMAI", "UTF-8").readAll();
+                    //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=gt&lp=/hls/live/512036/CH2LIVE_OTT/index.m3u8?as=1&rv=AKAMAI";
+                    var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/2033791/k12dvr/index.m3u8?&rv=AKAMAI";
+                    var makoJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(tokenUrl, "UTF-8").readAll();
                     console.debug(makoJson);
                     var json = JSON.parse(makoJson);
                     var tickets = json['tickets'];
-                    var result = "http://keshethlslive-i.akamaihd.net/hls/live/512036/CH2LIVE_OTT/index.m3u8?" + tickets[0]['ticket'] + "&as=1";
+                    //var result = "http://keshethlslive-i.akamaihd.net/hls/live/512036/CH2LIVE_OTT/index.m3u8?" + tickets[0]['ticket'] + "&as=1";
+                    var result = "https://mako-streaming.akamaized.net/stream/hls/live/2033791/k12dvr/index.m3u8?" + tickets[0]['ticket'];
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
