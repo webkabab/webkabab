@@ -1,13 +1,13 @@
 #EXTM3U
 
 
-#EXTINF:-1 tvg-id="channel11.il" group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Kan11Logo.svg/1200px-Kan11Logo.svg.png" radio="false",כאן 11
+#EXTINF:-1 tvg-id="channel11.il" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",כאן 11
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/kan
 
 #EXTINF:-1 tvg-id="12keshet.il" tvg-name="קשת" group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Keshet12_2018.svg/1200px-Keshet12_2018.svg.png" radio="false",קשת
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/keshet
 
-#EXTINF:-1 tvg-id="13reshet.il" tvg-name="רשת" group-title="ישראל" tvg-logo="https://media.reshet.tv/image/upload/v1638175012/assets/2021/RESHET13.png" radio="false",רשת
+#EXTINF:-1 tvg-id="13reshet.il" tvg-name="רשת" group-title="ישראל" tvg-logo="https://play-lh.googleusercontent.com/jASs65c2HfEmGU5Jz-Ogz7BaHgmL8YY41xYXbdQM84Tbh8WMvGw_HTwRasAjnHt_oQ" radio="false",רשת
 https://cdnapisec.kaltura.com/p/2748741/sp/2748741/playManifest/entryId/1_ubg28z0w/deliveryProfileId/672/protocol/https/format/applehttp/a.m3u8
 
 #EXTINF:-1 tvg-id="TV40" group-title="ישראל" tvg-logo="https://www.now14.co.il/wp-content/themes/14-child/assets/logo14/logoHeader.png" radio="false",ערוץ 14
