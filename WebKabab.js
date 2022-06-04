@@ -446,7 +446,10 @@ function extractDailymotion(url) {
     var metadataURL =
     'https://www.dailymotion.com/player/metadata/video/' + vidID;
         
-    var json = JSON.parse(url);    
+
+    var dmJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(metadataURL, "UTF-8").readAll();                
+    var json = JSON.parse(dmJson);    
+
     var qualities = json["qualities"];
     for(quality in qualities) {
         return qualities[quality][0]["url"];        
