@@ -255,7 +255,7 @@ function doInBackground() {
                     //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=gt&lp=/hls/live/512036/CH2LIVE_OTT/index.m3u8?as=1&rv=AKAMAI";
                     var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/2033791/k12dvr/index.m3u8?&rv=AKAMAI";
                     var makoJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(tokenUrl, "UTF-8").readAll();
-                    console.debug(makoJson);
+                    //console.debug(makoJson);
                     var json = JSON.parse(makoJson);
                     var tickets = json['tickets'];
                     //var result = "http://keshethlslive-i.akamaihd.net/hls/live/512036/CH2LIVE_OTT/index.m3u8?" + tickets[0]['ticket'] + "&as=1";
@@ -263,6 +263,23 @@ function doInBackground() {
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
+                
+                case "kan":
+                    /*
+                    var regex = /<iframe.*class="embedly-embed".*src="(.+?)"/g;
+                    var matches = regex.exec(source);
+                    if (matches[1]) {
+                      if (matches[1].includes('dailymotion')) {
+                        extractDailymotion(matches[1]);
+                      }
+                    }
+                    */  
+                    var dmURL = "https://www.dailymotion.com/embed/video/x7wjmog?autoplay=1";
+                    var result = extractDailymotion(dmURL);
+                    TiviProvider.sendResolvedVideo(req, result);
+                    TiviProvider.done(req);
+                    break;
+
                 default:
                     TiviProvider.sendError(req, "Cannot identify query=" + query);
                     TiviProvider.done();
@@ -422,6 +439,19 @@ function parseSdarotTvShow(req, path) {
     return seasons;
 }
 
+function extractDailymotion(url) {
+    // Get metadata link:
+    var parts = url.split('/');
+    var vidID = parts[parts.length - 1].split('?')[0];
+    var metadataURL =
+    'https://www.dailymotion.com/player/metadata/video/' + vidID;
+        
+    var json = JSON.parse(url);    
+    var qualities = json["qualities"];
+    for(quality in qualities) {
+        return qualities[quality][0]["url"];        
+    }
+}
 
 // Read the 'req' argument, which identifies the current request
 var req = getParameterByName("req");
