@@ -2,7 +2,7 @@
 
 
 #EXTINF:-1 tvg-id="channel11.il" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/1511175924.jpg" radio="false",כאן 11
-https://stream-05.dc3.dailymotion.com/sec(RiWEtJG0nU_F5iuiUOWAl6ywb-42hUfgeUAq-xMs49j6M-Wr5VPHFPG5ECN33rx3)/dm/3/x7wjmog/s/live-4.m3u8#cell=lcore
+addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/kan
 
 #EXTINF:-1 tvg-id="12keshet.il" tvg-name="קשת" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/1511182261.jpg" radio="false",קשת
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/keshet
