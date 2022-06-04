@@ -451,6 +451,7 @@ function extractDailymotion(url) {
     for(quality in qualities) {
         return qualities[quality][0]["url"];        
     }
+    return "";
 }
 
 // Read the 'req' argument, which identifies the current request
