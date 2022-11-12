@@ -66,3 +66,6 @@ https://sport5-lh.akamaihd.net/i/radio5_0@65353/master.m3u8
 
 #EXTINF:-1 refresh-rate=1 group-title="רדיו",ספורט 5 רדיו סטודיו
 https://sport5-lh.akamaihd.net/i/radiolivev_0@698733/master.m3u8
+
+#EXTINF:-1 tvg-name="Россия 1" group-title="Россия" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Keshet12_2018.svg/1200px-Keshet12_2018.svg.png" radio="false",Россия 1
+addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/russia_1
