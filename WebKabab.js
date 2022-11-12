@@ -264,18 +264,30 @@ function doInBackground() {
                     TiviProvider.done(req);
                     break;
                 
-                case "kan":
-                    /*
-                    var regex = /<iframe.*class="embedly-embed".*src="(.+?)"/g;
-                    var matches = regex.exec(source);
-                    if (matches[1]) {
-                      if (matches[1].includes('dailymotion')) {
-                        extractDailymotion(matches[1]);
-                      }
-                    }
-                    */  
+                case "kan":                    
                     var dmURL = "https://www.dailymotion.com/embed/video/x7wjmog?autoplay=1";
                     var result = extractDailymotion(dmURL);
+                    TiviProvider.sendResolvedVideo(req, result);
+                    TiviProvider.done(req);
+                    break;
+
+                case "russia_1":                    
+                    var dmURL = "https://player.smotrim.ru/iframe/datalive/id/2961/sid/smotrim_r1";
+                    var result = extractSmotrimRu(dmURL);
+                    TiviProvider.sendResolvedVideo(req, result);
+                    TiviProvider.done(req);
+                    break;
+
+                case "russia_24":                    
+                    var dmURL = "https://player.smotrim.ru/iframe/datalive/id/21/sid/smotrim_r24";
+                    var result = extractSmotrimRu(dmURL);
+                    TiviProvider.sendResolvedVideo(req, result);
+                    TiviProvider.done(req);
+                    break;
+
+                case "russia_24":                    
+                    var dmURL = "https://player.smotrim.ru/iframe/datalive/id/4941/sid/smotrim_rtr";
+                    var result = extractSmotrimRu(dmURL);
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
@@ -455,6 +467,19 @@ function extractDailymotion(url) {
         return qualities[quality][0]["url"];        
     }
     return "";
+}
+
+function extractSmotrimRu(url) {
+    // Open URL
+    var dmJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(url, "UTF-8").readAll();
+    var json = JSON.parse(dmJson);    
+    try {
+        var sources = json["data"]["playlist"]["medialist"]["sources"];
+        return source["m3u8"]["auto"];        
+    } catch(error) {
+        console.error(error);
+        return "";
+    }    
 }
 
 // Read the 'req' argument, which identifies the current request
