@@ -474,7 +474,7 @@ function extractSmotrimRu(url) {
     var dmJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(url, "UTF-8").readAll();
     var json = JSON.parse(dmJson);    
     try {
-        var sources = json["data"]["playlist"]["medialist"]["sources"];
+        var sources = json["data"]["playlist"]["medialist"][0]["sources"];
         return sources["m3u8"]["auto"];        
     } catch(error) {
         console.error(error);
