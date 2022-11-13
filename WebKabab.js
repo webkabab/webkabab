@@ -285,7 +285,7 @@ function doInBackground() {
                     TiviProvider.done(req);
                     break;
 
-                case "russia_24":                    
+                case "russia_rtr":                    
                     var dmURL = "https://player.smotrim.ru/iframe/datalive/id/4941/sid/smotrim_rtr";
                     var result = extractSmotrimRu(dmURL);
                     TiviProvider.sendResolvedVideo(req, result);
@@ -475,7 +475,7 @@ function extractSmotrimRu(url) {
     var json = JSON.parse(dmJson);    
     try {
         var sources = json["data"]["playlist"]["medialist"]["sources"];
-        return source["m3u8"]["auto"];        
+        return sources["m3u8"]["auto"];        
     } catch(error) {
         console.error(error);
         return "";
