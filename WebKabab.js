@@ -292,6 +292,13 @@ function doInBackground() {
                     TiviProvider.done(req);
                     break;
 
+                case "perviy_kanal":                    
+                    var dmURL = "https://stream.1tv.ru/api/playlist/1tvch-v1_as_array.json";
+                    var result = extractPerviyKanal(dmURL);
+                    TiviProvider.sendResolvedVideo(req, result);
+                    TiviProvider.done(req);
+                    break;
+
                 default:
                     TiviProvider.sendError(req, "Cannot identify query=" + query);
                     TiviProvider.done();
@@ -476,6 +483,18 @@ function extractSmotrimRu(url) {
     try {
         var sources = json["data"]["playlist"]["medialist"][0]["sources"];
         return sources["m3u8"]["auto"];        
+    } catch(error) {
+        console.error(error);
+        return "";
+    }    
+}
+
+function extractPerviyKanal(url) {
+    // Open URL
+    var dmJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(url, "UTF-8").readAll();
+    var json = JSON.parse(dmJson);    
+    try {
+        return json["mpd"][0];           
     } catch(error) {
         console.error(error);
         return "";
