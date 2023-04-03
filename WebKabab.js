@@ -313,6 +313,7 @@ function doInBackground() {
                         TiviProvider.done();    
                     }
 
+                    console.debug("extract sdarot video... series="+series+", s="+season+", e="+episode);
                     extractSdarotVideo(series, season, episode, result => {
                         TiviProvider.sendResolvedVideo(req, result);
                         TiviProvider.done(req);
@@ -553,6 +554,7 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
 
     // Send token request
     try {
+        console.debug("sending query 1...");
         let token = sendPostRequest(req, API_LINK, headers, params);
         console.debug("Got token="+token);
 
