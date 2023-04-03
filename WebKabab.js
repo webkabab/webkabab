@@ -190,32 +190,16 @@ function doInBackground() {
     switch (proc) {
         case "request_live_playlist":	// This procedure requests a playlist (or several playlists) from this server.                
 
-            console.debug("request live playlist");
-            //TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://www.dropbox.com/s/9ra1194cekuprob/webkabab.m3u?dl=1", "LIVE");
+            console.debug("request live playlist");            
             TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://raw.githubusercontent.com/webkabab/webkabab/master/playlists/webkabab.m3u", "LIVE");
-            TiviProvider.sendPlaylist(req, "Kabab Russian Channels", "https://prodigtv.ru/play/iptv.m3u", "LIVE");
+            TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://raw.githubusercontent.com/webkabab/webkabab/master/playlists/webkabab_vod.m3u", "VOD");
+            //TiviProvider.sendPlaylist(req, "Kabab Russian Channels", "https://prodigtv.ru/play/iptv.m3u", "LIVE");
 
-            //https://smarttvnews.ru/apps/iptvchannels.m3u
-            // https://smarttvnews.ru/samoobnovlyaemyie-iptv-pleylistyi/
-            // generate tv shows from scrappers
-            var shows = {};
-            shows["Peaky Blinders"] = "https://sdarot.services/watch/1207";            
-            shows["Handmaid's Tale"] = "https://sdarot.services/watch/2803";
-            shows["Black Mirror"] = "https://sdarot.services/watch/144";
-            shows["Stranger Things"] = "https://sdarot.services/watch/2435";
-            shows["Killing Eve"] = "https://sdarot.services/watch/3698"
             var tempPath = com.montezumba.lib.io.StorageHandler.instance().getAppTempPath();
             var seriesPath = com.montezumba.lib.io.StorageHandler.instance().getAppStoragePath();
             tempPath = com.montezumba.lib.io.StorageHandler.instance().generateFullPath(tempPath, "temp_series.m3u");
             seriesPath = com.montezumba.lib.io.StorageHandler.instance().generateFullPath(seriesPath, "kabab_series.m3u");
-            /*
-            var fd = TiviProvider.createOutputFile(req, tempPath, true);
-            TiviProvider.writeLineToFile(req, fd, "#EXTM3U\n");
-            generateSdarotSeries(req, shows, fd);
-            TiviProvider.close(req, fd);
-            com.montezumba.lib.io.StorageHandler.instance().rename(tempPath, seriesPath);
-            TiviProvider.sendLocalPlaylist(req, "Web Kabab TV Shows", seriesPath, "VOD");
-            */
+            
 
             console.debug("request live playlist... done");
             TiviProvider.done(req);
@@ -239,18 +223,16 @@ function doInBackground() {
                 // WARNING: If you don't call the 'done' method, your Provider will be considered as "not responding". You must finish any request (even if errors were found) by calling 'done'
                 //postMessage({type: 'done'});
                 TiviProvider.done(req);
-            });
-            
-            //TiviProvider.sendTvGuide(req, "Kabab Hebrew Guide", "https://shahaf1122.github.io/regular.xml", 5);
-            
-            //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3);
-            //TiviProvider.done(req);
+            });            
             
             break;
 
         case "request_live_url":
 
-            switch (query) {
+            // Parse several parts:
+            var parts = query.split("&");
+            
+            switch (parts[0]) {
                 case "keshet":
                     //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=gt&lp=/hls/live/512036/CH2LIVE_OTT/index.m3u8?as=1&rv=AKAMAI";
                     var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/2033791/k12dvr/index.m3u8?&rv=AKAMAI";
@@ -298,6 +280,49 @@ function doInBackground() {
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
+
+                case "sdarot":
+                    var series = null;
+                    var season = null;
+                    var episode = null;
+                    
+                    for(let i in parts) {
+                        let part = parts[i];
+                        let keyValue = part.split("=");
+                        if(keyValue.length === 2) {
+                            let key = keyValue[0];
+                            let value = keyValue[1];
+                            switch(key) {
+                                case "series":
+                                    series = value;
+                                    break;
+
+                                case "season":
+                                    season = value;
+                                    break;
+
+                                case "ep":
+                                    episode = value;
+                                    break;
+                            }
+                        }
+                    }
+
+                    if(series == null || season == null || episode == null) {
+                        TiviProvider.sendError(req, "Invalid SDAROT query=" + query);
+                        TiviProvider.done();    
+                    }
+
+                    extractSdarotVideo(series, season, episode, result => {
+                        TiviProvider.sendResolvedVideo(req, result);
+                        TiviProvider.done(req);
+                    }, error => {
+                        TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
+                        TiviProvider.done();    
+                    });
+                   
+                    break;
+
 
                 default:
                     TiviProvider.sendError(req, "Cannot identify query=" + query);
@@ -501,6 +526,93 @@ function extractPerviyKanal(url) {
     }    
 }
 
+function extractSdarotVideo(series, season, episode, onSuccess, onError) {
+    let API_LINK = "https://sdarot.tw/ajax/watch";
+
+    // Build general headers:
+    let headers = new Map();
+    headers.set("Accept", "*/*");
+    headers.set("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    headers.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36");
+    headers.set("sec-ch-ua-mobile", "0?");
+    headers.set("sec-ch-ua-platform", "\"Windows\"");
+    headers.set("sec-ch-ua", "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"");
+    headers.set("X-Requested-With", "XMLHttpRequest");
+    headers.set("Referer", "http://sdarot.tw");
+    // Set cookies
+    // TODO: Update those
+    let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22sheldom%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22484d953e6d3b040ed93c4168d88633a4aa6288ea3afccfb9db8595f46e6b5e43e780de14da73e5684c2ea9e5e3e36f77298a9590e95eb86794c0d5d279b48dbb%22%3B%7D";
+    let SDAROT_COOKIE = "Sdarot=vowaGTphKoJIvj8917cuiXTg4zzViDY8OesG0ncPkpNOnrrta7PXjc0jionsuYNPn8Ey1jT203PyJOpcvFid2WVakB7IFBfL6LeuaNhHjzpwuBb7JljS6KeHbIE6WfeV";
+    headers.set("Cookie", REMEMBER_COOKIE + ";"+SDAROT_COOKIE);
+
+    let params = new Map();
+    params.set("SID", String(series));
+    params.set("season", String(season));
+    params.set("ep", String(episode));
+    params.set("preWatch", "false");
+
+    // Send token request
+    try {
+        let token = sendPostRequest(req, API_LINK, headers, params);
+        console.debug("Got token="+token);
+
+        setTimeout(() => {    
+            params.clear();
+            params.set("serie", String(series));
+            params.set("season", String(season));
+            params.set("episode", String(episode));
+            params.set("type", "episode");
+            params.set("watch", "false");
+            params.set("token", token);
+
+            try {
+
+                let stream = sendPostRequest(req, API_LINK, headers, params);
+
+                if(stream) {
+                    if(stream["error"]) {
+                        onError(stream["error"]);                
+                    }
+                    else if(stream["watch"]) {
+                        console.debug("Got stream="+stream["watch"]);
+                        onSuccess("https:"+stream["watch"]["480"])
+                    }
+                }
+                else {
+                    onError("got nothing");
+                }
+            } catch(e) {
+                onError(e);
+            }
+
+
+        }, 30000);
+    } catch(e) {
+        onError(e);
+    }
+
+}
+
+
+function sendPostRequest(req, url, headers, params)  {
+    let response = TiviProvider.sendHTTPRequest(req, "PoST", url, Object.fromEntries(headers), Object.fromEntries(params));
+
+    let responseCode = response.substring(0, 3);
+    if(responseCode == "000") {        
+        throw Error(response.substring(3));
+    }
+    if(responseCode < 400 || responseCode >= 500) {
+        if(responseCode == "000") {
+            throw Error("http error: " + response.substring(3));
+        }
+        else {
+            throw Error("http bad response code: " + responseCode);
+        }
+    } 
+
+    return response.substring(3);
+}
+
 // Read the 'req' argument, which identifies the current request
 var req = getParameterByName("req");
 // Read the 'proc' argument, which identifies the requested procedure
@@ -510,40 +622,8 @@ var query = getParameterByName("q");
 
 doInBackground();
 
-/*
-async function test() {
-    console.debug("async worked!!!");
-}
-
-console.debug("calling async");
-test();
-*/
 
 
-/*
-setTimeout(function () {
-    console.debug("async workerd(2)!!!");    
-}, 1000);
-*/
-
-
-
- 
-
-/*
-var promise = new Promise(function(resolve, reject) {
-    setTimeout(function () {
-        console.debug("async workerd(1)!!!");
-        resolve("async worked!!!");
-    }, 1000);
-});
-
-
-console.debug("calling async");
-promise.then(function(val) {
-    console.log(val);
-});
-*/
 
 
 function executeAsync() {
@@ -551,8 +631,7 @@ function executeAsync() {
     function backgroundTask() {
 
         
-        
-
+    
 
         onmessage = function(params) {
 
@@ -577,46 +656,3 @@ function executeAsync() {
 }
 
 
-/*
-var worker = new Worker(URL.createObjectURL(new Blob(["("+doInBackground.toString()+")()"], {type: 'text/javascript'})));
-
-console.info("starting worker...");
-worker.postMessage({'proc' : proc, 'req' : req, 'url' : document.URL});
-*/
-
-/*
-document.querySelector("#testFiles").onchange = function() {
-    worker.postMessage({'proc' : proc, 'req' : req, 'url' : document.URL, 'testFiles' : document.querySelector("#testFiles").files});
-}
-*/
-
-/*
-worker.onmessage = function(e){
-	console.info("got TiviMessage: "+e);
-	var type = e.data.type;
-	var content = e.data.content;
-	switch(type) {
-		case 'sendPlaylist':
-			TiviProvider.sendPlaylist(req, content.name, content.url);
-			break;
-		case 'sendTvGuide':
-			TiviProvider.sendTvGuide(req, content.name, content.url, content.days);
-			break;
-		case 'sendTvGuide':
-			TiviProvider.sendLocalTvGuide(req, content.name, content.url, content.days);
-			break;
-		case 'done':
-			TiviProvider.done(req);
-			break;
-		case 'readFromUrl':
-			TiviProvider.readFromUrl(req, content.url, content.encoding);
-			break;
-		case 'createOutputFile':
-			TiviProvider.createOutputFile(req, content.path, content.isAppend);
-			break;
-
-		default:
-			console.error("bad message");
-	}
-}
-*/

@@ -1,0 +1,4 @@
+#EXTM3U
+
+#EXTINF:-1 tvg-id="" group-title="סדרות" tvg-logo="" radio="false",Atlanta S04E01
+addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot&series=2637&season=4&ep=1
