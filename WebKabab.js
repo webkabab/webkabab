@@ -192,7 +192,7 @@ function doInBackground() {
 
             console.debug("request live playlist");            
             TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://raw.githubusercontent.com/webkabab/webkabab/master/playlists/webkabab.m3u", "LIVE");
-            TiviProvider.sendPlaylist(req, "Kabab Hebrew Channels", "https://raw.githubusercontent.com/webkabab/webkabab/master/playlists/webkabab_vod.m3u", "VOD");
+            TiviProvider.sendPlaylist(req, "Kabab VOD Channels", "https://raw.githubusercontent.com/webkabab/webkabab/master/playlists/webkabab_vod.m3u", "VOD");
             //TiviProvider.sendPlaylist(req, "Kabab Russian Channels", "https://prodigtv.ru/play/iptv.m3u", "LIVE");
 
             var tempPath = com.montezumba.lib.io.StorageHandler.instance().getAppTempPath();
