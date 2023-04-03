@@ -598,7 +598,7 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
 
 
 function sendPostRequest(req, url, headers, params)  {
-    let response = TiviProvider.sendHTTPRequest(req, "PoST", url, Object.fromEntries(headers), Object.fromEntries(params));
+    let response = TiviProvider.sendHTTPRequest(req, "POST", url, Object.fromEntries(headers), Object.fromEntries(params));
 
     let responseCode = response.substring(0, 3);
     if(responseCode == "000") {        

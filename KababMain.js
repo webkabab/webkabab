@@ -501,11 +501,11 @@ var com;
                                     //TiviProvider.done(req);
                                 }
                                 else {
-                                    TiviProvider.reportError(req, "Failed to generate tv-guide (2)");    
+                                    TiviProvider.sendError(req, "Failed to generate tv-guide (2)");    
                                 }                                
                                 if(callback) callback();
                             }, function() {
-                                TiviProvider.reportError(req, "Failed to generate tv-guide (1)");
+                                TiviProvider.sendError(req, "Failed to generate tv-guide (1)");
                                 if(callback) callback();
                             });
                             
@@ -513,7 +513,7 @@ var com;
                         catch (e) {
                             com.montezumba.lib.types.MediaLog.instance().error(e.message, e);
                             if (!valid) {
-                                TiviProvider.reportError(req, "Failed to generate tv-guide");
+                                TiviProvider.sendError(req, "Failed to generate tv-guide");
                                 if(callback) callback();
                                 //TiviProvider.done(req);
                             }
