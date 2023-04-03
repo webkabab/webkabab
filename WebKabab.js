@@ -231,6 +231,7 @@ function doInBackground() {
 
             // Parse several parts:
             var parts = query.split("&");
+            console.debug("full query="+query+", query name="+parts[0]);
             
             switch (parts[0]) {
                 case "keshet":
@@ -319,7 +320,7 @@ function doInBackground() {
                         TiviProvider.done(req);
                     }, error => {
                         TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
-                        TiviProvider.done();    
+                        TiviProvider.done(req);    
                     });
                    
                     break;
@@ -327,7 +328,7 @@ function doInBackground() {
 
                 default:
                     TiviProvider.sendError(req, "Cannot identify query=" + query);
-                    TiviProvider.done();
+                    TiviProvider.done(req);
             }
 
             break;
