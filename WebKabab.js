@@ -622,6 +622,9 @@ var req = getParameterByName("req");
 var proc = getParameterByName("proc");
 // Read the 'q' argument, which identifies the requested query
 var query = getParameterByName("q");
+if(query) {
+    query = decodeURIComponent(query);
+}
 
 doInBackground();
 
