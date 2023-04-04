@@ -532,26 +532,26 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
     let API_LINK = "https://sdarot.tw/ajax/watch";
 
     // Build general headers:
-    let headers = new Map();
-    headers.set("Accept", "*/*");
-    headers.set("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-    headers.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36");
-    headers.set("sec-ch-ua-mobile", "0?");
-    headers.set("sec-ch-ua-platform", "\"Windows\"");
-    headers.set("sec-ch-ua", "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"");
-    headers.set("X-Requested-With", "XMLHttpRequest");
-    headers.set("Referer", "http://sdarot.tw");
+    let headers = {};
+    headers["Accept"] =  "*/*";
+    headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
+    headers["User-Agent"], "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36";
+    headers["sec-ch-ua-mobile"] = "0?";
+    headers["sec-ch-ua-platform"] =  "\"Windows\"";
+    headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
+    headers["X-Requested-With"] = "XMLHttpRequest";
+    headers["Referer"] = "http://sdarot.tw";
     // Set cookies
     // TODO: Update those
     let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22sheldom%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22484d953e6d3b040ed93c4168d88633a4aa6288ea3afccfb9db8595f46e6b5e43e780de14da73e5684c2ea9e5e3e36f77298a9590e95eb86794c0d5d279b48dbb%22%3B%7D";
     let SDAROT_COOKIE = "Sdarot=vowaGTphKoJIvj8917cuiXTg4zzViDY8OesG0ncPkpNOnrrta7PXjc0jionsuYNPn8Ey1jT203PyJOpcvFid2WVakB7IFBfL6LeuaNhHjzpwuBb7JljS6KeHbIE6WfeV";
     headers.set("Cookie", REMEMBER_COOKIE + ";"+SDAROT_COOKIE);
 
-    let params = new Map();
-    params.set("SID", String(series));
-    params.set("season", String(season));
-    params.set("ep", String(episode));
-    params.set("preWatch", "false");
+    let params = {};
+    params["SID"] = String(series);
+    params["season"] = String(season);
+    params["ep"] = String(episode);
+    params["preWatch"] = "false";
 
     // Send token request
     try {
@@ -560,13 +560,13 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
         console.debug("Got token="+token);
 
         setTimeout(() => {    
-            params.clear();
-            params.set("serie", String(series));
-            params.set("season", String(season));
-            params.set("episode", String(episode));
-            params.set("type", "episode");
-            params.set("watch", "false");
-            params.set("token", token);
+            params = {};
+            params["serie"] = String(series);
+            params["season"] = String(season);
+            params["episode"] = String(episode);
+            params["type"] = "episode";
+            params["watch"] = "false";
+            params["token"] = token;
 
             try {
 
@@ -598,8 +598,23 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
 
 
 function sendPostRequest(req, url, headers, params)  {
-    let response = TiviProvider.sendHTTPRequest(req, "POST", url, Object.fromEntries(headers), Object.fromEntries(params));
+    
+    let response = TiviProvider.sendHTTPRequest(req, "POST", url, JSON.stringify(headers), JSON.stringify(params));
 
+    if(!response) {
+        throw Error("Bad http response");
+    }
+    response = JSON.parse(response);
+    if(response.code == 999) {
+        throw Error("http error: " + response.message);
+    }
+    if(response.code < 200 || response.code >= 400) {
+        throw Error("http bad response code: "+response.code);
+    }
+
+    return response.message;
+
+    /*
     let responseCode = response.substring(0, 3);
     if(responseCode == "000") {        
         throw Error(response.substring(3));
@@ -614,6 +629,7 @@ function sendPostRequest(req, url, headers, params)  {
     } 
 
     return response.substring(3);
+    */
 }
 
 // Read the 'req' argument, which identifies the current request
