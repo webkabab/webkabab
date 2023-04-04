@@ -560,6 +560,7 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
         console.debug("Got token="+token);
 
         setTimeout(() => {    
+            console.debug("After 30 sec.");
             params = {};
             params["serie"] = String(series);
             params["season"] = String(season);
