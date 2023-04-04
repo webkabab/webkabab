@@ -545,7 +545,7 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
     // TODO: Update those
     let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22sheldom%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22484d953e6d3b040ed93c4168d88633a4aa6288ea3afccfb9db8595f46e6b5e43e780de14da73e5684c2ea9e5e3e36f77298a9590e95eb86794c0d5d279b48dbb%22%3B%7D";
     let SDAROT_COOKIE = "Sdarot=vowaGTphKoJIvj8917cuiXTg4zzViDY8OesG0ncPkpNOnrrta7PXjc0jionsuYNPn8Ey1jT203PyJOpcvFid2WVakB7IFBfL6LeuaNhHjzpwuBb7JljS6KeHbIE6WfeV";
-    headers.set("Cookie", REMEMBER_COOKIE + ";"+SDAROT_COOKIE);
+    headers["Cookie"] =  REMEMBER_COOKIE + ";"+SDAROT_COOKIE;
 
     let params = {};
     params["SID"] = String(series);
