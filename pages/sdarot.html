@@ -8,7 +8,7 @@ body {
 
 .countdown {
   color: white;
-  font-size: 60px;
+  font-size: 80px;
   text-align: center;
 }
 
@@ -20,6 +20,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.line {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border-top: 5px solid red;
+    transform-origin: center bottom; 
+    animation-name: spin; 
+    animation-duration: 1s; 
+    animation-timing-function: linear; 
+    animation-iteration-count: infinite; 
 }
 
 .container {
@@ -35,6 +48,7 @@ body {
 <div class="container">
     <div class="circle">
         <div class="countdown" id="countdown"></div>
+        <div class="line"></div>
     </div>
 </div>
 
