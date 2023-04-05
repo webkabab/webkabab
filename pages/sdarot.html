@@ -7,6 +7,18 @@
 			background-color: white;
 		}
 	</style>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const serie = urlParams.get('serie');
+        const s = urlParams.get('s');
+        const e = urlParams.get('e');
+        const token = urlParams.get('token');
+
+        document.write(`<p>Serie: ${serie}</p>`);
+        document.write(`<p>S: ${s}</p>`);
+        document.write(`<p>E: ${e}</p>`);
+        document.write(`<p>Token: ${token}</p>`);
+    </script>
 </head>
 <body>
 	<h1>Hello World!</h1>
