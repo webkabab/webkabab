@@ -569,7 +569,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             token = sendPostRequest(req, API_LINK, headers, params);
             console.debug("Got token="+token);
             // Need to wait for 30 seconds. Send a special html that will trigger back to this page
-            onSuccess("https://raw.githubusercontent.com/webkabab/webkabab/master/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token)
+            onSuccess("https://raw.githubusercontent.com/webkabab/webkabab/master/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token);
             return;
         }
 
