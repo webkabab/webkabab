@@ -20,6 +20,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* Add this line */
 }
 
 .line {
@@ -34,6 +35,19 @@ body {
     animation-timing-function: linear; 
     animation-iteration-count: infinite; 
 }
+
+.line::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 15px 10px;
+    border-color: transparent transparent red transparent;
+    top: -15px;
+    left: calc(50% - 10px);
+}
+
 
 .container {
     display: flex;
