@@ -14,6 +14,18 @@
         const e = urlParams.get('e');
         const token = urlParams.get('token');
 
+        var timeLeft = 30;
+		var countdownTimer = setInterval(function() {
+			timeLeft--;
+			document.getElementById("countdown").innerHTML = timeLeft;
+
+			if (timeLeft <= 0) {
+				clearInterval(countdownTimer);
+				document.getElementById("countdown").innerHTML = "Time's up!";
+			}
+		}, 1000);
+
+
         document.write(`<p>Serie: ${serie}</p>`);
         document.write(`<p>S: ${s}</p>`);
         document.write(`<p>E: ${e}</p>`);
