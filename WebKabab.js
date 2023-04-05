@@ -286,6 +286,7 @@ function doInBackground() {
                     var series = null;
                     var season = null;
                     var episode = null;
+                    var token = null;
                     
                     for(let i in parts) {
                         let part = parts[i];
@@ -305,17 +306,22 @@ function doInBackground() {
                                 case "ep":
                                     episode = value;
                                     break;
+
+                                case "token":
+                                    token = value;
+                                    break;
                             }
                         }
                     }
 
-                    if(series == null || season == null || episode == null) {
+                    if(!series || !season || !episode) {
                         TiviProvider.sendError(req, "Invalid SDAROT query=" + query);
                         TiviProvider.done();    
                     }
+                    
 
-                    console.debug("extract sdarot video... series="+series+", s="+season+", e="+episode);
-                    extractSdarotVideo(series, season, episode, result => {
+                    console.debug("extract sdarot video... series="+series+", s="+season+", e="+episode);                    
+                    extractSdarotVideo(series, season, episode, token, result => {
                         TiviProvider.sendResolvedVideo(req, result);
                         TiviProvider.done(req);
                     }, error => {
@@ -528,7 +534,9 @@ function extractPerviyKanal(url) {
     }    
 }
 
-function extractSdarotVideo(series, season, episode, onSuccess, onError) {
+function extractSdarotVideo(series, season, episode, token, onSuccess, onError) {
+
+
     let API_LINK = "https://sdarot.tw/ajax/watch";
 
     // Build general headers:
@@ -554,10 +562,14 @@ function extractSdarotVideo(series, season, episode, onSuccess, onError) {
     params["preWatch"] = "false";
 
     // Send token request
-    try {
-        console.debug("sending query 1...");
-        let token = sendPostRequest(req, API_LINK, headers, params);
-        console.debug("Got token="+token);
+    try {    
+        if(!token) {
+            console.debug("sending token query...");
+            token = sendPostRequest(req, API_LINK, headers, params);
+            console.debug("Got token="+token);
+            // Need to wait for 30 seconds. Send a special html that will trigger back to this page
+            return "https://raw.githubusercontent.com/webkabab/webkabab/master/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token;
+        }
 
         setTimeout(() => {    
             console.debug("After 30 sec.");
