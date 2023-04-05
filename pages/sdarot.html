@@ -12,11 +12,23 @@ body {
   text-align: center;
   margin-top: 200px;
 }
+
+.circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 </head>
 <body>
 
-<div class="countdown" id="countdown"></div>
+<div class="circle">
+    <div class="countdown" id="countdown"></div>
+</div>
 
 <script>
 var timeleft = 30;
