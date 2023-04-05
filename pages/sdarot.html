@@ -1,77 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body {
-  background-color: black;
-}
+    <head>
+        <style>
+            body {
+            background-color: black;
+            }
 
-.countdown {
-  color: white;
-  font-size: 80px;
-  text-align: center;
-}
+            .countdown {
+            color: white;
+            font-size: 80px;
+            text-align: center;
+            }
 
-.circle {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 10px solid white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Add this line */
-}
-
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-p {
-	color: white;
-}
-
-</style>
-</head>
-<body>
-
-    <p id="e"></p>
-	<p id="s"></p>
-	<p id="serie"></p>
-	<p id="token"></p>
+            .circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 10px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* Add this line */
+            }
 
 
-<div class="container">
-    <div class="circle">
-        <div class="countdown" id="countdown"></div>        
-    </div>
-</div>
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
 
-<script>
-    var timeleft = 30;
-    var downloadTimer = setInterval(function(){
-    if(timeleft <= 0){
-        clearInterval(downloadTimer);
-        document.getElementById("countdown").innerHTML = "0";
-    } else {
-        document.getElementById("countdown").innerHTML = timeleft;
-    }
-    timeleft -= 1;
-    }, 1000);
+            p {
+                color: white;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <p id="debug"></p>
+        <p id="s"></p>
+        <p id="serie"></p>
+        <p id="token"></p>
 
 
-    var urlParams = new URLSearchParams(window.location.search);
-    document.getElementById("e").innerHTML = "e: " + urlParams.get('e');
-    document.getElementById("s").innerHTML = "s: " + urlParams.get('s');
-    document.getElementById("serie").innerHTML = "serie: " + urlParams.get('serie');
-    document.getElementById("token").innerHTML = "token: " + urlParams.get('token');
-	
+        <div class="container">
+            <div class="circle">
+                <div class="countdown" id="countdown"></div>        
+            </div>
+        </div>
 
-</script>
+        <script>
+            var timeleft = 5; // TODO: debug
+            var downloadTimer = setInterval(function(){
+            if(timeleft <= 0){
+                clearInterval(downloadTimer);
+                document.getElementById("countdown").innerHTML = "0";
+                window.location.href = "http://www.google.com";
+            } else {
+                document.getElementById("countdown").innerHTML = timeleft;
+            }
+            timeleft -= 1;
+            }, 1000);
 
-</body>
+
+            var urlParams = new URLSearchParams(window.location.search);
+            document.getElementById("debug").innerHTML = "e: " + urlParams.get('e') + 
+            ",s: " + urlParams.get('s') + ",serie: " + urlParams.get('serie') 
+            + "token: " + urlParams.get('token');
+            
+            
+
+        </script>
+
+    </body>
 </html>
