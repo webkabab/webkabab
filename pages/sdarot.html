@@ -10,7 +10,6 @@ body {
   color: white;
   font-size: 60px;
   text-align: center;
-  margin-top: 200px;
 }
 
 .circle {
@@ -22,12 +21,21 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 </style>
 </head>
 <body>
 
-<div class="circle">
-    <div class="countdown" id="countdown"></div>
+<div class="container">
+    <div class="circle">
+        <div class="countdown" id="countdown"></div>
+    </div>
 </div>
 
 <script>
