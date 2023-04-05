@@ -52,23 +52,30 @@
         </div>
 
         <script>
-            var timeleft = 5; // TODO: debug
-            var downloadTimer = setInterval(function(){
-            if(timeleft <= 0){
-                clearInterval(downloadTimer);
-                document.getElementById("countdown").innerHTML = "0";
-                window.location.href = "http://www.google.com";
-            } else {
-                document.getElementById("countdown").innerHTML = timeleft;
-            }
-            timeleft -= 1;
+            let urlParams = new URLSearchParams(window.location.search);
+            let serie = urlParams.get('serie');
+            let season = urlParams.get('s');
+            let episode = urlParams.get('e');
+            let token = urlParams.get('token');
+            let timeleft = 5; // TODO: debug
+            let downloadTimer = setInterval(function(){
+                if(timeleft <= 0){
+                    clearInterval(downloadTimer);
+                    document.getElementById("countdown").innerHTML = "0";
+                    window.location.href = 
+                        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
+                        + "&series=" + serie
+                        + "&season=" + season 
+                        + "&ep=" + episode
+                        + "&token=" + token;
+                } else {
+                    document.getElementById("countdown").innerHTML = timeleft;
+                }
+                timeleft -= 1;
             }, 1000);
 
 
-            var urlParams = new URLSearchParams(window.location.search);
-            document.getElementById("debug").innerHTML = "e: " + urlParams.get('e') + 
-            ",s: " + urlParams.get('s') + ",serie: " + urlParams.get('serie') 
-            + "token: " + urlParams.get('token');
+            document.getElementById("debug").innerHTML = "e: " + episode +  ",s: " + season + ",serie: " + serie + "token: " + token;
             
             
 
