@@ -590,6 +590,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             let stream = sendPostRequest(req, API_LINK, headers, params);
             
             if(stream) {
+                stream = decodeURIComponent(stream);
                 console.debug("Got a JSON with info: "+stream);
                 stream = JSON.parse(stream);
                 if(stream["error"]) {
