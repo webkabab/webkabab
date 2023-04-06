@@ -563,19 +563,22 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     params["preWatch"] = "false";
 
     // Send token request
-    try {    
+    try {
         if(!token) {
             console.debug("sending token query...");
             token = sendPostRequest(req, API_LINK, headers, params);
-            console.debug("Got token="+token);
-            // Need to wait for 30 seconds. Send a special html that will trigger back to this page
-            onSuccess("https://webkabab.github.io/webkabab/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token);
-            //onSuccess("https://google.com");
-            return;
+            if(token) {    
+                console.debug("Got token="+token);
+                // Need to wait for 30 seconds. Send a special html that will trigger back to this page
+                onSuccess("https://webkabab.github.io/webkabab/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token);
+            }
+            else {
+                onError("Failed to get token");
+            }
         }
-
-        setTimeout(() => {    
-            console.debug("After 30 sec.");
+        else {
+    
+            console.debug("sending stream query...");
             params = {};
             params["serie"] = String(series);
             params["season"] = String(season);
@@ -583,32 +586,29 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             params["type"] = "episode";
             params["watch"] = "false";
             params["token"] = token;
-
-            try {
-
-                let stream = sendPostRequest(req, API_LINK, headers, params);
-
-                if(stream) {
-                    if(stream["error"]) {
-                        onError(stream["error"]);                
-                    }
-                    else if(stream["watch"]) {
-                        console.debug("Got stream="+stream["watch"]);
-                        onSuccess("https:"+stream["watch"]["480"])
-                    }
+                
+            let stream = sendPostRequest(req, API_LINK, headers, params);
+            
+            if(stream) {
+                stream = JSON.parse(stream);
+                if(stream["error"]) {
+                    onError(stream["error"]);                
                 }
-                else {
-                    onError("got nothing");
+                else if(stream["watch"]) {
+                    console.debug("Got stream="+stream["watch"]);
+                    onSuccess("https:"+stream["watch"]["480"]+"|"+encodeURIComponent("Cookie="+SDAROT_COOKIE));
                 }
-            } catch(e) {
-                onError(e);
             }
-
-
-        }, 30000);
-    } catch(e) {
+            else {
+                onError("got no stream JSON");
+            }
+            
+        }          
+    }
+    catch(e) {
         onError(e);
     }
+        
 
 }
 
@@ -630,22 +630,6 @@ function sendPostRequest(req, url, headers, params)  {
 
     return response.message;
 
-    /*
-    let responseCode = response.substring(0, 3);
-    if(responseCode == "000") {        
-        throw Error(response.substring(3));
-    }
-    if(responseCode < 400 || responseCode >= 500) {
-        if(responseCode == "000") {
-            throw Error("http error: " + response.substring(3));
-        }
-        else {
-            throw Error("http bad response code: " + responseCode);
-        }
-    } 
-
-    return response.substring(3);
-    */
 }
 
 // Read the 'req' argument, which identifies the current request
