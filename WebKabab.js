@@ -616,7 +616,9 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 
 function sendPostRequest(req, url, headers, params)  {
     
+    console.debug("Sending HTTP request...");
     let response = TiviProvider.sendHTTPRequest(req, "POST", url, JSON.stringify(headers), JSON.stringify(params));
+    console.debug("Got response="+response);
 
     if(!response) {
         throw Error("Bad http response");
