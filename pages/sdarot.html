@@ -40,9 +40,7 @@
     <body>
 
         <p id="debug"></p>
-        <p id="s"></p>
-        <p id="serie"></p>
-        <p id="token"></p>
+        <p id="error"></p>        
 
 
         <div class="container">
@@ -57,6 +55,7 @@
             let season = urlParams.get('s');
             let episode = urlParams.get('e');
             let token = urlParams.get('token');
+            let error = urlParams.get('error');
             let timeleft = 30;
             document.getElementById("countdown").innerHTML = timeleft;
             let downloadTimer = setInterval(function(){
@@ -77,6 +76,9 @@
 
 
             document.getElementById("debug").innerHTML = "e: " + episode +  " ,s: " + season + " ,serie: " + serie + " ,token: " + token;
+            if(error) {
+                document.getElementById("debug").innerHTML = "error: " + error;
+            }
             
             
 

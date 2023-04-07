@@ -568,6 +568,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     params["season"] = String(season);
     params["ep"] = String(episode);
     params["preWatch"] = "false";
+    let error = "";
 
 
     let getToken = function() {
@@ -581,7 +582,8 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         if(token) {    
             console.debug("Got token="+token);
             // Need to wait for 30 seconds. Send a special html that will trigger back to this page
-            onSuccess("https://webkabab.github.io/webkabab/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token);
+            onSuccess("https://webkabab.github.io/webkabab/pages/sdarot.html?serie="
+                        +series+"&s="+season+"&e="+episode+"&token="+token+"&error="+error);
         }
         else {
             onError("Failed to get token");
@@ -613,6 +615,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
                 if(stream["error"]) {
                     //onError(stream["error"]); // TODO: debug
                     TiviProvider.showToast("Kabab: " + stream["error"]);
+                    console.debug("error: "+stream["error"]);
                     getToken();
                 }
                 else if(stream["watch"]) {
