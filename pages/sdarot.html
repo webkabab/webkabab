@@ -57,7 +57,7 @@
             let season = urlParams.get('s');
             let episode = urlParams.get('e');
             let token = urlParams.get('token');
-            let timeleft = 5; // TODO: debug
+            let timeleft = 30; // TODO: debug
             let downloadTimer = setInterval(function(){
                 if(timeleft <= 0){
                     clearInterval(downloadTimer);
@@ -75,7 +75,7 @@
             }, 1000);
 
 
-            document.getElementById("debug").innerHTML = "e: " + episode +  ",s: " + season + ",serie: " + serie + "token: " + token;
+            document.getElementById("debug").innerHTML = "e: " + episode +  " ,s: " + season + " ,serie: " + serie + " ,token: " + token;
             
             
 
