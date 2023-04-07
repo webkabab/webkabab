@@ -58,7 +58,9 @@
             let episode = urlParams.get('e');
             let token = urlParams.get('token');
             let timeleft = 30;
+            document.getElementById("countdown").innerHTML = timeleft;
             let downloadTimer = setInterval(function(){
+                timeleft -= 1;
                 if(timeleft <= 0){
                     clearInterval(downloadTimer);
                     document.getElementById("countdown").innerHTML = "0";
@@ -70,8 +72,7 @@
                         + "&token=" + token;
                 } else {
                     document.getElementById("countdown").innerHTML = timeleft;
-                }
-                timeleft -= 1;
+                }                
             }, 1000);
 
 
