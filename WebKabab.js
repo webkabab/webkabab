@@ -568,8 +568,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     // Send token request
     try {
         if(!token) {
-            console.debug("sending token query...");
-            //headers["Content-Length"] = "37"; // TODO: debug
+            console.debug("sending token query...");            
             token = sendPostRequest(req, API_LINK, headers, params);
             if(token) {    
                 console.debug("Got token="+token);
@@ -583,9 +582,6 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         else {
     
             console.debug("sending stream query...");
-
-            //headers["Content-Length"] = "74"; // TODO: debug
-
             params = {};
             params["serie"] = String(series);
             params["season"] = String(season);

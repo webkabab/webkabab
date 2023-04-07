@@ -57,7 +57,7 @@
             let season = urlParams.get('s');
             let episode = urlParams.get('e');
             let token = urlParams.get('token');
-            let timeleft = 10; // TODO: debug
+            let timeleft = 30;
             let downloadTimer = setInterval(function(){
                 if(timeleft <= 0){
                     clearInterval(downloadTimer);
