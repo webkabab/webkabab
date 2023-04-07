@@ -549,6 +549,8 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     headers["sec-ch-ua-platform"] =  "\"Windows\"";
     headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
     headers["X-Requested-With"] = "XMLHttpRequest";
+    headers["Host"] = "sdarot.tw";
+    headers["Accept-Encoding"] = "gzip, deflate, br";
     headers["Referer"] = "http://sdarot.tw";
     // Set cookies
     // TODO: Update those
