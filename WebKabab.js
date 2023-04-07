@@ -569,19 +569,24 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     params["ep"] = String(episode);
     params["preWatch"] = "false";
 
+
+    let getToken = function() {
+        console.debug("sending token query...");            
+        token = sendPostRequest(req, API_LINK, headers, params);
+        if(token) {    
+            console.debug("Got token="+token);
+            // Need to wait for 30 seconds. Send a special html that will trigger back to this page
+            onSuccess("https://webkabab.github.io/webkabab/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token);
+        }
+        else {
+            onError("Failed to get token");
+        }
+    };
+
     // Send token request
     try {
         if(!token) {
-            console.debug("sending token query...");            
-            token = sendPostRequest(req, API_LINK, headers, params);
-            if(token) {    
-                console.debug("Got token="+token);
-                // Need to wait for 30 seconds. Send a special html that will trigger back to this page
-                onSuccess("https://webkabab.github.io/webkabab/pages/sdarot.html?serie="+series+"&s="+season+"&e="+episode+"&token="+token);
-            }
-            else {
-                onError("Failed to get token");
-            }
+            getToken();
         }
         else {
     
@@ -601,7 +606,8 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
                 console.debug("Got a JSON with info: "+stream);
                 stream = JSON.parse(stream);
                 if(stream["error"]) {
-                    onError(stream["error"]);                
+                    //onError(stream["error"]); // TODO: debug
+                    getToken();
                 }
                 else if(stream["watch"]) {
                     console.debug("Got stream="+stream["watch"]);
