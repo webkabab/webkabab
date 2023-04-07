@@ -607,6 +607,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
                 stream = JSON.parse(stream);
                 if(stream["error"]) {
                     //onError(stream["error"]); // TODO: debug
+                    TiviProvider.showToast("Kabab: " + stream["error"]);
                     getToken();
                 }
                 else if(stream["watch"]) {
