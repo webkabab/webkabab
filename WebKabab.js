@@ -605,7 +605,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
                 }
                 else if(stream["watch"]) {
                     console.debug("Got stream="+stream["watch"]);
-                    onSuccess("https:"+stream["watch"]["480"]+"|"+encodeURIComponent("Cookie="+SDAROT_COOKIE));
+                    onSuccess("https:"+stream["watch"]["480"]+"|Cookie="+encodeURIComponent(SDAROT_COOKIE));
                 }
             }
             else {
