@@ -213,7 +213,10 @@ function doInBackground() {
             // 'url' - A URL for this EPG. Should point to a valid "XMLTV" file.
             // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
                         
-            console.debug("request tv guide");                                
+            console.debug("request tv guide");
+            //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3); // TODO: restore once upgraded TiviApp
+            TiviProvider.done(req);
+            /*  // TODO: disable until we find a better source than HOT                              
             kababMain.requestTvGuide(req, function() {
                 console.debug("callback");
                 //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://api.torrent-tv.ru/ttv.xmltv.xml.gz", 3);
@@ -224,6 +227,7 @@ function doInBackground() {
                 //postMessage({type: 'done'});
                 TiviProvider.done(req);
             });            
+            */
             
             break;
 
