@@ -635,7 +635,7 @@ function sendPostRequest(req, url, headers, params)  {
         throw Error("http bad response code: "+response.code);
     }
 
-    return response.message;
+    return decodeURIComponent(response.message);
 
 }
 
