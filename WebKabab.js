@@ -571,6 +571,11 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 
 
     let getToken = function() {
+        params = {};
+        params["SID"] = String(series);
+        params["season"] = String(season);
+        params["ep"] = String(episode);
+        params["preWatch"] = "false";
         console.debug("sending token query...");            
         token = sendPostRequest(req, API_LINK, headers, params);
         if(token) {    
