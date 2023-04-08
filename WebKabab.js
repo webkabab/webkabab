@@ -657,6 +657,7 @@ function searchSdarot(req, query) {
     if(searchResults) {        
         searchResults = JSON.parse(searchResults);
         for(let searchResult in searchResults) {
+            console.log("got search result: "+JSON.stringify(searchResult));
             let seriesId = searchResult["id"];
             let name = searchResult["name"];
             console.debug("Got search result... name="+name+", series="+seriesId);
