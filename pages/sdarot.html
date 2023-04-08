@@ -3,24 +3,24 @@
     <head>
         <style>
             body {
-            background-color: black;
+                background-color: black;
             }
 
             .countdown {
-            color: white;
-            font-size: 80px;
-            text-align: center;
+                color: white;
+                font-size: 80px;
+                text-align: center;
             }
 
             .circle {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 10px solid white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative; 
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border: 10px solid white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative; 
             }
 
 
@@ -44,6 +44,7 @@
 
             #error {
                 color:coral;
+                direction: rtl;
             }
 
         </style>
@@ -96,7 +97,7 @@
                 document.getElementById("error").innerHTML = error;
             }
             else {
-                document.getElementById("error").innerHTML = "Loading... Please wait";
+                document.getElementById("error").innerHTML = "טוען את הפרק...";
             }
             
             
