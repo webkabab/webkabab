@@ -659,6 +659,7 @@ function searchSdarot(req, query) {
         for(searchResult in searchResults) {
             let seriesId = searchResult["id"];
             let name = searchResult["name"];
+            console.debug("Got search result... name="+name+", series="+seriesId);
             results[name] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
             + "&series=" + seriesId
             + "&season=" + "1" // TODO: debug
