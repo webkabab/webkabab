@@ -541,8 +541,8 @@ function extractPerviyKanal(url) {
 
 function extractSdarotVideo(series, season, episode, token, onSuccess, onError) {
 
-
-    let API_LINK = "https://sdarot.tw/ajax/watch";
+    let BASE_SITE = "https://sdarot.tw";
+    let API_LINK = BASE_SITE + "/ajax/watch";
 
     // Build general headers:
     let headers = {};
@@ -572,13 +572,17 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 
 
     let getToken = function() {
+
+        // First, visit the main site to set an up-to-date cookie
+        sendHTTPRequest(req, API_LINK, "GET", {}, {}, false);
+
         params = {};
         params["SID"] = String(series);
         params["season"] = String(season);
         params["ep"] = String(episode);
         params["preWatch"] = "false";
         console.debug("sending token query...");            
-        token = sendPostRequest(req, API_LINK, headers, params);
+        token = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
         if(token) {    
             console.debug("Got token="+token);
             // Need to wait for 30 seconds. Send a special html that will trigger back to this page
@@ -590,9 +594,10 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         }
     };
 
+
     // Send token request
     try {
-        if(!token) {
+        if(!token) {            
             getToken();
         }
         else {
@@ -606,7 +611,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             params["watch"] = "false";
             params["token"] = token;
                 
-            let stream = sendPostRequest(req, API_LINK, headers, params);
+            let stream = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
             
             if(stream) {
                 stream = decodeURIComponent(stream);
@@ -638,10 +643,10 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 }
 
 
-function sendPostRequest(req, url, headers, params)  {
+function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
     
     console.debug("Sending HTTP request...");
-    let response = TiviProvider.sendHTTPRequest(req, "POST", url, JSON.stringify(headers), JSON.stringify(params));
+    let response = TiviProvider.sendHTTPRequest(req, method, url, JSON.stringify(headers), JSON.stringify(params), readResponse);
     console.debug("Got response="+response);
 
     if(!response) {
@@ -658,6 +663,8 @@ function sendPostRequest(req, url, headers, params)  {
     return decodeURIComponent(response.message);
 
 }
+
+
 
 // Read the 'req' argument, which identifies the current request
 var req = getParameterByName("req");
