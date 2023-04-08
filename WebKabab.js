@@ -575,7 +575,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     let getToken = function() {
 
         // First, visit the main site to set an up-to-date cookie
-        //sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false); // TODO: debug
+        sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false); // TODO: debug
 
         params = {};
         params["SID"] = String(series);
