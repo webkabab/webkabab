@@ -54,6 +54,7 @@ function doInBackground() {
     var window = self;
     var kababConfig = new com.addons.kabab.KababConfig();
 
+
     //postMessage("req="+req+"<br/>");
     //postMessage("proc="+proc+"<br/>");
 
@@ -347,7 +348,7 @@ function doInBackground() {
         case "request_search_query_live":
 
             console.debug("query=" + query);
-            var results = searchKinoprofi(req, query);
+            var results = searchKinoprofi(req, query);            
             for (var name in results) {
                 TiviProvider.sendSearchResult(req, name, results[name], false);
             }
@@ -364,7 +365,8 @@ function doInBackground() {
         case "request_search_query_vod":
 
             console.debug("query=" + query);
-            var results = searchKinoprofi(req, query);
+            //var results = searchKinoprofi(req, query);
+            var results = searchSdarot(req, query);
             for (var name in results) {
                 TiviProvider.sendSearchResult(req, name, results[name], true);
             }
@@ -420,6 +422,7 @@ function createSeriesM3U(req, series, fd) {
         }
     }
 }
+
 
 function searchKinoprofi(req, query) {
     var fd = TiviProvider.openFile(req, "http://kinoprofi.vip/search/f:" + query, "UTF-8", false);
@@ -541,29 +544,11 @@ function extractPerviyKanal(url) {
 
 function extractSdarotVideo(series, season, episode, token, onSuccess, onError) {
 
-    let BASE_SITE = "https://sdarot.tw/";
-    let API_LINK = BASE_SITE + "ajax/watch";
+   
+    let API_LINK = SDAROT_BASE + "/ajax/watch";
 
     // Build general headers:
-    let headers = {};
-    headers["Accept"] =  "*/*";
-    headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-    headers["User-Agent"], "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36";
-    headers["sec-ch-ua-mobile"] = "0?";
-    headers["sec-ch-ua-platform"] =  "\"Windows\"";
-    headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
-    headers["X-Requested-With"] = "XMLHttpRequest";
-    headers["Host"] = "sdarot.tw";    
-    //headers["Accept-Encoding"] = "gzip, deflate, br";
-    headers["Connection"] = "keep-alive";
-    headers["Referer"] = "http://sdarot.tw";    
-    // Set cookies
-    // TODO: Figure out why the "remember" cookie isn't working
-    //let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22sheldom%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22484d953e6d3b040ed93c4168d88633a4aa6288ea3afccfb9db8595f46e6b5e43e780de14da73e5684c2ea9e5e3e36f77298a9590e95eb86794c0d5d279b48dbb%22%3B%7D";    
-    let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22kabab11%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22f4ce9c4c4c0bfd714f6432cf3ed733be339d31073ecfcb9317c2af16b0f0e025061a6fa646d422c5011dcc5fb04cf0540dc713aad177a382e867d9cdd30d61b9%22%3B%7D";
-    // This cookie is very important - it set also the login state
-    let SDAROT_COOKIE = "Sdarot=U9hZieAjV8h2INHQRy4jvXMmqZQ4SL1f35ieKY2uUd7Uulm568Xc%2C5ctviqiTvZfS3YL0Yn0dYbKROie3Uz-MrbN1Ik5KeUNicjT0uqp2fHMjAmVHzCiMZ%2C78EO1tBFb";
-    headers["Cookie"] =  /*REMEMBER_COOKIE + "; " +*/ SDAROT_COOKIE; // TODO: debug
+    let headers = getSdarotHeaders();
 
     let params = {};
     params["SID"] = String(series);
@@ -576,7 +561,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     let getToken = function() {
 
         // First, visit the main site to set an up-to-date cookie
-        //sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false); // TODO: debug
+        //sendHTTPRequest(req, SDAROT_BASE, "GET", headers, {}, false); // TODO: debug
         // Perform login
 
         // TODO: debug
@@ -587,7 +572,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         params["location"] = "/index";
         params["submit_login"] = "";
         */
-        sendHTTPRequest(req, BASE_SITE, "POST", headers, params, false); // TODO: debug
+        //sendHTTPRequest(req, SDAROT_BASE, "POST", headers, params, false); // TODO: debug
 
         params = {};
         params["SID"] = String(series);
@@ -657,9 +642,54 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     }
     catch(e) {
         onError(e);
-    }
-        
+    }        
+}
 
+
+function searchSdarot(req, query) {
+    let SEARCH_API = SDAROT_BASE + "/ajax/index";
+    let results = {};
+    let headers = getSdarotHeaders();
+    let params = {};
+    params["search"] = query;
+    let searchResults = TiviProvider.sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+    console.log("Got search results for q="+query+": "+searchResults);
+    if(searchResults) {
+        searchResults = JSON.parse(searchResults);
+        for(searchResult in searchResults) {
+            let seriesId = searchResult["id"];
+            let name = searchResult["name"];
+            results[name] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
+            + "&series=" + seriesId
+            + "&season=" + "1" // TODO: debug
+            + "&ep=" + "1"; // TODO: debug
+        }
+    }
+    return results;
+}
+
+function getSdarotHeaders() {
+    let headers = {};
+    headers["Accept"] =  "*/*";
+    headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
+    headers["User-Agent"], "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36";
+    headers["sec-ch-ua-mobile"] = "0?";
+    headers["sec-ch-ua-platform"] =  "\"Windows\"";
+    headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
+    headers["X-Requested-With"] = "XMLHttpRequest";
+    headers["Host"] = "sdarot.tw";    
+    //headers["Accept-Encoding"] = "gzip, deflate, br";
+    headers["Connection"] = "keep-alive";
+    headers["Referer"] = "http://sdarot.tw";    
+    // Set cookies
+    // TODO: Figure out why the "remember" cookie isn't working
+    //let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22sheldom%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22484d953e6d3b040ed93c4168d88633a4aa6288ea3afccfb9db8595f46e6b5e43e780de14da73e5684c2ea9e5e3e36f77298a9590e95eb86794c0d5d279b48dbb%22%3B%7D";    
+    let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22kabab11%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22f4ce9c4c4c0bfd714f6432cf3ed733be339d31073ecfcb9317c2af16b0f0e025061a6fa646d422c5011dcc5fb04cf0540dc713aad177a382e867d9cdd30d61b9%22%3B%7D";
+    // This cookie is very important - it set also the login state
+    let SDAROT_COOKIE = "Sdarot=U9hZieAjV8h2INHQRy4jvXMmqZQ4SL1f35ieKY2uUd7Uulm568Xc%2C5ctviqiTvZfS3YL0Yn0dYbKROie3Uz-MrbN1Ik5KeUNicjT0uqp2fHMjAmVHzCiMZ%2C78EO1tBFb";
+    headers["Cookie"] =  /*REMEMBER_COOKIE + "; " +*/ SDAROT_COOKIE; // TODO: debug
+    
+    return headers;
 }
 
 
@@ -683,6 +713,15 @@ function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
     return decodeURIComponent(response.message);
 
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var SDAROT_BASE = "https://sdarot.tw";
+
+
+
+
+
 
 
 
