@@ -553,7 +553,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     headers["sec-ch-ua-platform"] =  "\"Windows\"";
     headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
     headers["X-Requested-With"] = "XMLHttpRequest";
-    headers["Host"] = "sdarot.tw";
+    headers["Host"] = "sdarot.tw";    
     //headers["Accept-Encoding"] = "gzip, deflate, br";
     headers["Connection"] = "keep-alive";
     headers["Referer"] = "http://sdarot.tw";    
@@ -576,6 +576,14 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 
         // First, visit the main site to set an up-to-date cookie
         sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false); // TODO: debug
+        // Perform login
+
+        params = {};
+        params["username"] = "kabab11";
+        params["password"] = "Kabab4ever123";
+        params["location"] = "/index";
+        params["submit_login"] = "";
+        sendHTTPRequest(req, BASE_SITE, "POST", headers, params, false); // TODO: debug
 
         params = {};
         params["SID"] = String(series);
