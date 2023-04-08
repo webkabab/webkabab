@@ -20,7 +20,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative; /* Add this line */
+            position: relative; 
             }
 
 
@@ -33,13 +33,15 @@
 
             p {
                 color: white;
+                display: block;
+                margin: auto;
             }
 
         </style>
     </head>
     <body>
 
-        <p id="debug"></p>
+        
         <p id="error"></p>        
 
 
@@ -48,6 +50,8 @@
                 <div class="countdown" id="countdown"></div>        
             </div>
         </div>
+
+        <p id="debug"></p>
 
         <script>
             let urlParams = new URLSearchParams(window.location.search);
@@ -77,7 +81,10 @@
 
             document.getElementById("debug").innerHTML = "e: " + episode +  " ,s: " + season + " ,serie: " + serie + " ,token: " + token;
             if(error) {
-                document.getElementById("error").innerHTML = "Error: " + error;
+                document.getElementById("error").innerHTML = error;
+            }
+            else {
+                document.getElementById("error").innerHTML = "Loading... Please wait";
             }
             
             
