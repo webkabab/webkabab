@@ -602,6 +602,11 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         }
         else {
     
+            console.debug("sending VAST query...")
+            params = {};
+            params["vast"] = "true";
+            sendHTTPRequest(req, API_LINK, "POST", headers, params, false);
+
             console.debug("sending stream query...");
             params = {};
             params["serie"] = String(series);
