@@ -541,8 +541,8 @@ function extractPerviyKanal(url) {
 
 function extractSdarotVideo(series, season, episode, token, onSuccess, onError) {
 
-    let BASE_SITE = "https://sdarot.tw";
-    let API_LINK = BASE_SITE + "/ajax/watch";
+    let BASE_SITE = "https://sdarot.tw/";
+    let API_LINK = BASE_SITE + "ajax/watch";
 
     // Build general headers:
     let headers = {};
