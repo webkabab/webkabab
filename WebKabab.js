@@ -561,7 +561,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     let getToken = function() {
 
         // First, visit the main site to set an up-to-date cookie
-        //sendHTTPRequest(req, SDAROT_BASE, "GET", headers, {}, false); // TODO: debug
+        sendHTTPRequest(req, SDAROT_BASE, "GET", headers, {}, false); // TODO: debug
         // Perform login
 
         // TODO: debug
@@ -690,7 +690,8 @@ function getSdarotHeaders() {
     let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22kabab11%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22f4ce9c4c4c0bfd714f6432cf3ed733be339d31073ecfcb9317c2af16b0f0e025061a6fa646d422c5011dcc5fb04cf0540dc713aad177a382e867d9cdd30d61b9%22%3B%7D";
     // This cookie is very important - it set also the login state
     let SDAROT_COOKIE = "Sdarot=U9hZieAjV8h2INHQRy4jvXMmqZQ4SL1f35ieKY2uUd7Uulm568Xc%2C5ctviqiTvZfS3YL0Yn0dYbKROie3Uz-MrbN1Ik5KeUNicjT0uqp2fHMjAmVHzCiMZ%2C78EO1tBFb";
-    headers["Cookie"] =  /*REMEMBER_COOKIE + "; " +*/ SDAROT_COOKIE; // TODO: debug
+    //headers["Cookie"] =  /*REMEMBER_COOKIE + "; " +*/ SDAROT_COOKIE; // TODO: debug
+    headers["Cookie"] =  REMEMBER_COOKIE; // TODO: debug
     
     return headers;
 }
