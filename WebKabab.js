@@ -574,7 +574,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     let getToken = function() {
 
         // First, visit the main site to set an up-to-date cookie
-        sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false);
+        //sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false); // TODO: debug
 
         params = {};
         params["SID"] = String(series);
@@ -602,10 +602,12 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         }
         else {
     
+            /* // TODO: debug
             console.debug("sending VAST query...")
             params = {};
             params["vast"] = "true";
             sendHTTPRequest(req, API_LINK, "POST", headers, params, false);
+            */
 
             console.debug("sending stream query...");
             params = {};
