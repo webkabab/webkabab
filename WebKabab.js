@@ -652,7 +652,7 @@ function searchSdarot(req, query) {
     let headers = getSdarotHeaders();
     let params = {};
     params["search"] = query;
-    let searchResults = TiviProvider.sendHTTPRequest(req, "GET", SEARCH_API , headers, params, true);
+    let searchResults = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
     console.log("Got search results for q="+query+": "+searchResults);
     if(searchResults) {
         searchResults = JSON.parse(searchResults);
