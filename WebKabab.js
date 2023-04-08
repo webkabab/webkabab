@@ -561,8 +561,8 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     // TODO: Update those
     //let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22sheldom%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22484d953e6d3b040ed93c4168d88633a4aa6288ea3afccfb9db8595f46e6b5e43e780de14da73e5684c2ea9e5e3e36f77298a9590e95eb86794c0d5d279b48dbb%22%3B%7D";
     let REMEMBER_COOKIE = "remember=a%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22kabab11%22%3Bs%3A5%3A%22check%22%3Bs%3A128%3A%22f4ce9c4c4c0bfd714f6432cf3ed733be339d31073ecfcb9317c2af16b0f0e025061a6fa646d422c5011dcc5fb04cf0540dc713aad177a382e867d9cdd30d61b9%22%3B%7D";
-    let SDAROT_COOKIE = "Sdarot=IMluGd3P5kiHeBoKFLsNhQ4m2aRmtrEuuMYpE3XwS5LQMOpBZ9Wcvg%2CXzXz64dCJ7IKP3Gefjcx6kVxzdLQT-%2C-%2C%2CrwZ1Ff%2CbrUMpYPdoNQJ%2CuTkxfahUFcrDswcRwHJ";
-    //headers["Cookie"] =  REMEMBER_COOKIE;// + "; " + SDAROT_COOKIE; // TODO: debug
+    let SDAROT_COOKIE = "Sdarot=U9hZieAjV8h2INHQRy4jvXMmqZQ4SL1f35ieKY2uUd7Uulm568Xc%2C5ctviqiTvZfS3YL0Yn0dYbKROie3Uz-MrbN1Ik5KeUNicjT0uqp2fHMjAmVHzCiMZ%2C78EO1tBFb";
+    headers["Cookie"] =  REMEMBER_COOKIE + "; " + SDAROT_COOKIE; // TODO: debug
 
     let params = {};
     params["SID"] = String(series);
@@ -575,15 +575,17 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     let getToken = function() {
 
         // First, visit the main site to set an up-to-date cookie
-        sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false); // TODO: debug
+        //sendHTTPRequest(req, BASE_SITE, "GET", headers, {}, false); // TODO: debug
         // Perform login
 
         // TODO: debug
+        /*
         params = {};
         params["username"] = "kabab11";
         params["password"] = "Kabab4ever123";
         params["location"] = "/index";
         params["submit_login"] = "";
+        */
         sendHTTPRequest(req, BASE_SITE, "POST", headers, params, false); // TODO: debug
 
         params = {};
@@ -611,14 +613,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             getToken();
         }
         else {
-    
-                // TODO: debug
-            params = {};
-            params["username"] = "kabab11";
-            params["password"] = "Kabab4ever123";
-            params["location"] = "/index";
-            params["submit_login"] = "";
-            sendHTTPRequest(req, BASE_SITE, "POST", headers, params, false); // TODO: debug
+
             /* // TODO: debug
             console.debug("sending VAST query...")
             params = {};
