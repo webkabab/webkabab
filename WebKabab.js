@@ -616,13 +616,20 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             params["type"] = "episode";
             params["watch"] = "false";
             params["token"] = token;
+
+            //let stream = "";
+            //let cookies = "";
                 
-            let stream = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
+            let {stream, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);            
             
-            if(stream) {
+            if(stream && cookies) {
                 stream = decodeURIComponent(stream);
                 console.debug("Got a JSON with info: "+stream);
-                stream = JSON.parse(stream);
+                stream = JSON.parse(stream);                
+                cookies = decodeURIComponent(cookies);
+                console.debug("Got cookies="+cookies);
+                cookies = JSON.parse(cookies);
+
                 if(stream["error"]) {
                     //onError(stream["error"]); // TODO: debug
                     TiviProvider.showToast("Kabab: " + stream["error"]);
@@ -630,9 +637,12 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
                     error = stream["error"];
                     getToken();
                 }
-                else if(stream["watch"]) {
+                else if(stream["watch"] && cookies["Sdarot"]) {
                     console.debug("Got stream="+stream["watch"]);
-                    onSuccess("https:"+stream["watch"]["480"]+"|Cookie="+encodeURIComponent(SDAROT_COOKIE));
+                    onSuccess("https:"+stream["watch"]["480"]+"|Cookie="+encodeURIComponent("Sdarot="+cookies["Sdarot"]));
+                }
+                else {
+                    onError("strange json structure...");
                 }
             }
             else {
@@ -706,7 +716,7 @@ function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
 
     if(!response) {
         throw Error("Bad http response");
-    }
+    }    
     response = JSON.parse(response);
     if(response.code == 999) {
         throw Error("http error: " + response.message);
@@ -714,8 +724,9 @@ function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
     if(response.code < 200 || response.code >= 400) {
         throw Error("http bad response code: "+response.code);
     }
+    
 
-    return decodeURIComponent(response.message);
+    return {"message" : decodeURIComponent(response.message), "cookies" : decodeURIComponent(response.cookies)};
 
 }
 
