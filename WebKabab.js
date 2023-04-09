@@ -715,7 +715,7 @@ function searchSdarot(req, query) {
                 // get the episodes for each season
                 let episodeListUrl = SDAROT_BASE + "/ajax/watch?episodeList="+seriesId+"&season="+season;
                 console.debug("getting episode list="+episodeListUrl);
-                fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
+                fd = TiviProvider.openFile(req, episodeListUrl, "UTF-8", false);
                 content = TiviProvider.readAll(req, fd);            
                 TiviProvider.close(req, fd);
 
