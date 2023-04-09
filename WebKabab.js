@@ -560,12 +560,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 
     let getToken = function() {
 
-        // First, visit the main site to set an up-to-date cookie
-        //sendHTTPRequest(req, SDAROT_BASE, "GET", headers, {}, false); // TODO: debug
         // Perform login
-
-        // TODO: debug
-        
         let LOGIN_API = SDAROT_BASE + "/login";
         params = {};
         params["username"] = "kabab11";
@@ -573,7 +568,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         params["location"] = "/index";
         params["login_remember"] = "1";
         params["submit_login"] = "";        
-        sendHTTPRequest(req, LOGIN_API, "POST", headers, params, false); // TODO: debug
+        sendHTTPRequest(req, LOGIN_API, "POST", headers, params, false); 
 
         params = {};
         params["SID"] = String(series);
@@ -617,9 +612,6 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             params["type"] = "episode";
             params["watch"] = "false";
             params["token"] = token;
-
-            //let stream = "";
-            //let cookies = "";
                 
             let {message, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
             let stream = message;           
@@ -634,9 +626,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
                 console.debug("Got cookies="+cookies);
                 cookies = JSON.parse(cookies);
 
-                if(stream["error"]) {
-                    //onError(stream["error"]); // TODO: debug
-                    //TiviProvider.showToast("Kabab: " + stream["error"]);
+                if(stream["error"]) {                    
                     console.debug("error: "+stream["error"]);
                     error = stream["error"];
                     getToken();
@@ -678,7 +668,28 @@ function searchSdarot(req, query) {
             let seriesId = searchResult["id"];
             let name = searchResult["name"];
             console.debug("Got search result... name="+name+", series="+seriesId);
-            results[name] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
+
+            // visit the series page to get more info
+            let seriesUrl = SDAROT_BASE + "/watch/"+seriesId;
+            let fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
+            let content = TiviProvider.readAll(req, fd);
+            TiviProvider.close(req, fd);
+            // find the regex with the english name
+            let matches = "";            
+            let englishName = "";
+            let nameReg = new RegExp("<span class=\"ltr\">(.*?)<\/span><\/strong>", "g");                        
+            matches = urlReg.exec(content);
+            if (matches !== null) {
+                englishName = results[1];
+            }
+            else {
+                console.error("Cannot find english name in="+content);
+                englishName = name;
+            }
+            console.debug("English name="+englishName);
+            
+          
+            results[englishName] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
             + "&series=" + seriesId
             + "&season=" + "1" // TODO: debug
             + "&ep=" + "1"; // TODO: debug
