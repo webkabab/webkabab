@@ -699,10 +699,10 @@ function searchSdarot(req, query) {
             let seasonReg = new RegExp("([0-9]+)[:]\\s*{}", "g");            
             matches = "";
             do {
-                matches = nameReg.exec(content);
-                    if (matches !== null) {
-                        seasons.push(matches[1]);
-                    }
+                matches = seasonReg.exec(content);
+                if (matches !== null) {
+                    seasons.push(matches[1]);
+                }
             } while(matches !== null);
             if(seasons.length == 0) {
                 console.error("Cannot find any seasons");
