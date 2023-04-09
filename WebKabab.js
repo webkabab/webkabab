@@ -581,7 +581,8 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         params["ep"] = String(episode);
         params["preWatch"] = "false";
         console.debug("sending token query...");            
-        token = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
+        let {message, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
+        token = message;
         if(token) {    
             console.debug("Got token="+token);
             // Need to wait for 30 seconds. Send a special html that will trigger back to this page
@@ -666,7 +667,8 @@ function searchSdarot(req, query) {
     let headers = getSdarotHeaders();
     let params = {};
     params["search"] = query;
-    let searchResults = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+    let {message, cookies} = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+    let searchResults = message;
     console.log("Got search results for q="+query+": "+searchResults);
     if(searchResults) {        
         searchResults = JSON.parse(searchResults);
