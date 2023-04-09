@@ -653,7 +653,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 
 function searchSdarot(req, query) {
     let SEARCH_API = SDAROT_BASE + "/ajax/index";
-    let LIMIT_RESULTS = 3;
+    let LIMIT_RESULTS = 1;
 
     let results = {};
     let headers = getSdarotHeaders();
