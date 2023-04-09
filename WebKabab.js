@@ -679,8 +679,7 @@ function searchSdarot(req, query) {
             // visit the series page to get more info
             let seriesUrl = SDAROT_BASE + "/watch/"+seriesId;
             let fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
-            let content = TiviProvider.readAll(req, fd);
-            //console.debug("content="+content);
+            let content = TiviProvider.readAll(req, fd);            
             TiviProvider.close(req, fd);
             // find the regex with the english name
             let matches = "";            
@@ -712,10 +711,37 @@ function searchSdarot(req, query) {
             
             for(let j in seasons) {
                 let season = seasons[j];
-                results[englishName + " S"+season+"E01"] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
-                + "&series=" + seriesId
-                + "&season=" + season
-                + "&ep=" + "1"; // TODO: debug
+
+                // get the episodes for each season
+                let episodeListUrl = SDAROT_BASE + "/ajax/watch?episodeList="+seriesId+"&season="+season;
+                console.debug("getting episode list="+episodeListUrl);
+                fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
+                content = TiviProvider.readAll(req, fd);            
+                TiviProvider.close(req, fd);
+
+                let episodes = [];
+                let episodesReg = new RegExp("<li\\s*data\\-episode=\"([0-9]+)\"", "g");
+                matches = "";
+                do {
+                    matches = episodesReg.exec(content);
+                    if(matches !== null) {
+                        console.debug("found episode="+matches[1]);
+                        episodes.push(matches[1]);
+                    }
+                } while(matches !== null);
+                if(episodes.length == 0) {
+                    console.error("Cannot find any episodes");
+                }
+
+                for(let k in episodes) {
+                    let episode = episodes[k];
+                    
+                    results[englishName + " S"+season+"E"+episode] = 
+                            "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
+                    + "&series=" + seriesId
+                    + "&season=" + season
+                    + "&ep=" + episode;
+                }
             }
 
             
