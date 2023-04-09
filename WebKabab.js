@@ -620,7 +620,8 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             //let stream = "";
             //let cookies = "";
                 
-            let {stream, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);           
+            let {message, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
+            let stream = message;           
             console.debug("Got a JSON with info: "+stream);
             console.debug("Got cookies="+cookies);
 
