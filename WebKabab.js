@@ -678,7 +678,7 @@ function searchSdarot(req, query) {
             let matches = "";            
             let englishName = "";
             let nameReg = new RegExp("<span class=\"ltr\">(.*?)<\/span><\/strong>", "g");                        
-            matches = urlReg.exec(content);
+            matches = nameReg.exec(content);
             if (matches !== null) {
                 englishName = results[1];
             }
