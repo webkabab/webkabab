@@ -694,12 +694,30 @@ function searchSdarot(req, query) {
                 englishName = name;
             }
             console.debug("English name="+englishName);
+            // find the regex with all seasons
+            let seasons = [];
+            let seasonReg = new RegExp("([0-9]+)[:]\\s*{}", "g");            
+            matches = "";
+            do {
+                matches = nameReg.exec(content);
+                    if (matches !== null) {
+                        seasons.push(matches[1]);
+                    }
+            } while(matches !== null);
+            if(seasons.length == 0) {
+                console.error("Cannot find any seasons");
+            }
+            
+            for(let j in seasons) {
+                let season = seasons[i];
+                results[englishName] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
+                + "&series=" + seriesId
+                + "&season=" + season
+                + "&ep=" + "1"; // TODO: debug
+            }
+
             
           
-            results[englishName] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
-            + "&series=" + seriesId
-            + "&season=" + "1" // TODO: debug
-            + "&ep=" + "1"; // TODO: debug
         }
     }
     return results;
