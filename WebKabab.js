@@ -703,6 +703,9 @@ function searchSdarot(req, query) {
                 if (matches !== null) {
                     seasons.push(matches[1]);
                 }
+                else {
+                    console.error("Cannon find season. content="+content);
+                }
             } while(matches !== null);
             if(seasons.length == 0) {
                 console.error("Cannot find any seasons");
