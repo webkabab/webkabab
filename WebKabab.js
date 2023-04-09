@@ -629,13 +629,13 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
                 stream = decodeURIComponent(stream);
                 console.debug("Got a JSON with info: "+stream);
                 stream = JSON.parse(stream);                
-                cookies = decodeURIComponent(cookies);
+                //cookies = decodeURIComponent(cookies);
                 console.debug("Got cookies="+cookies);
                 cookies = JSON.parse(cookies);
 
                 if(stream["error"]) {
                     //onError(stream["error"]); // TODO: debug
-                    TiviProvider.showToast("Kabab: " + stream["error"]);
+                    //TiviProvider.showToast("Kabab: " + stream["error"]);
                     console.debug("error: "+stream["error"]);
                     error = stream["error"];
                     getToken();
