@@ -680,7 +680,7 @@ function searchSdarot(req, query) {
             let seriesUrl = SDAROT_BASE + "/watch/"+seriesId;
             let fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
             let content = TiviProvider.readAll(req, fd);
-            console.debug("content="+content);
+            //console.debug("content="+content);
             TiviProvider.close(req, fd);
             // find the regex with the english name
             let matches = "";            
@@ -697,7 +697,7 @@ function searchSdarot(req, query) {
             console.debug("English name="+englishName);
             // find the regex with all seasons
             let seasons = [];
-            let seasonReg = new RegExp("([0-9]+)[:]\\s*{}", "g");            
+            let seasonReg = new RegExp("<li\\s*data\\-season=\"([0-9]+)\"", "g");            
             matches = "";
             do {
                 matches = seasonReg.exec(content);
@@ -713,7 +713,7 @@ function searchSdarot(req, query) {
             }
             
             for(let j in seasons) {
-                let season = seasons[i];
+                let season = seasons[j];
                 results[englishName] =  "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
                 + "&series=" + seriesId
                 + "&season=" + season
