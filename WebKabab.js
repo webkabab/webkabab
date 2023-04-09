@@ -702,11 +702,9 @@ function searchSdarot(req, query) {
             do {
                 matches = seasonReg.exec(content);
                 if (matches !== null) {
+                    console.debug("found season="+matches[1]);
                     seasons.push(matches[1]);
-                }
-                else {
-                    console.error("Cannon find season. content="+content);
-                }
+                }                
             } while(matches !== null);
             if(seasons.length == 0) {
                 console.error("Cannot find any seasons");
