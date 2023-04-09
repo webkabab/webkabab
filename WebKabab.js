@@ -696,7 +696,7 @@ function searchSdarot(req, query) {
             console.debug("English name="+englishName);
             // find the regex with all seasons
             let seasons = [];
-            let seasonReg = new RegExp("([0-9]+)[:]\\s*[{][}]", "gm");            
+            let seasonReg = new RegExp("([0-9]+)[:]", "gm");            
             matches = "";
             do {
                 matches = seasonReg.exec(content);
