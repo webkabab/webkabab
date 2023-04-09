@@ -653,16 +653,23 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 
 function searchSdarot(req, query) {
     let SEARCH_API = SDAROT_BASE + "/ajax/index";
+    let LIMIT_RESULTS = 3;
+
     let results = {};
     let headers = getSdarotHeaders();
     let params = {};
     params["search"] = query;
     let {message, cookies} = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
     let searchResults = message;
-    console.log("Got search results for q="+query+": "+searchResults);
+    console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {        
+        let count = 0;
         searchResults = JSON.parse(searchResults);
         for(let i in searchResults) {
+            if(count >= LIMIT_RESULTS) 
+                break;
+            count = count + 1;
+
             let searchResult = searchResults[i];
             console.log("got search result: "+JSON.stringify(searchResult));
             let seriesId = searchResult["id"];
