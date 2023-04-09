@@ -680,6 +680,7 @@ function searchSdarot(req, query) {
             let seriesUrl = SDAROT_BASE + "/watch/"+seriesId;
             let fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
             let content = TiviProvider.readAll(req, fd);
+            console.debug("content="+content);
             TiviProvider.close(req, fd);
             // find the regex with the english name
             let matches = "";            
@@ -696,7 +697,7 @@ function searchSdarot(req, query) {
             console.debug("English name="+englishName);
             // find the regex with all seasons
             let seasons = [];
-            let seasonReg = new RegExp("([0-9]+)[:]", "g");            
+            let seasonReg = new RegExp("([0-9]+)[:]\\s*{}", "g");            
             matches = "";
             do {
                 matches = seasonReg.exec(content);
