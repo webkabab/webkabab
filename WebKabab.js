@@ -680,7 +680,7 @@ function searchSdarot(req, query) {
             let nameReg = new RegExp("<span class=\"ltr\">(.*?)<\/span><\/strong>", "g");                        
             matches = nameReg.exec(content);
             if (matches !== null) {
-                englishName = results[1];
+                englishName = matches[1];
             }
             else {
                 console.error("Cannot find english name in="+content);
