@@ -620,8 +620,10 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             //let stream = "";
             //let cookies = "";
                 
-            let {stream, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);            
-            
+            let {stream, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);           
+            console.debug("Got a JSON with info: "+stream);
+            console.debug("Got cookies="+cookies);
+
             if(stream && cookies) {
                 stream = decodeURIComponent(stream);
                 console.debug("Got a JSON with info: "+stream);
@@ -726,7 +728,7 @@ function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
     }
     
 
-    return {"message" : decodeURIComponent(response.message), "cookies" : decodeURIComponent(response.cookies)};
+    return {message : decodeURIComponent(response.message), cookies : decodeURIComponent(response.cookies)};
 
 }
 
