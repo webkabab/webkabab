@@ -366,11 +366,15 @@ function doInBackground() {
 
             console.debug("query=" + query);
             //var results = searchKinoprofi(req, query);
-            var results = searchSdarot(req, query);
-            for (var name in results) {
-                TiviProvider.sendSearchResult(req, name, results[name], true);
+            try {
+                var results = searchSdarot(req, query);
+                for (var name in results) {
+                    TiviProvider.sendSearchResult(req, name, results[name], true);
+                }
             }
-
+            catch(e) {
+                TiviProvider.sendError(req, "Failed to search="+query+" error="+e);
+            }
             TiviProvider.done(req);
             break;
 
