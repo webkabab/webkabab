@@ -808,7 +808,11 @@ function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
     }
     
 
-    return {message : decodeURIComponent(response.message), cookies : decodeURIComponent(response.cookies)};
+    let result = {
+        message : decodeURIComponent(response.message), 
+        cookies : decodeURIComponent(response.cookies)
+    };
+    return result;
 
 }
 
