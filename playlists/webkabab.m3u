@@ -67,14 +67,14 @@ https://sport5-lh.akamaihd.net/i/radio5_0@65353/master.m3u8
 #EXTINF:-1 refresh-rate=1 group-title="רדיו",ספורט 5 רדיו סטודיו
 https://sport5-lh.akamaihd.net/i/radiolivev_0@698733/master.m3u8
 
-#EXTINF:-1 tvg-id="711" tvg-name="Россия 1" group-title="רוסיה" tvg-logo="https://static.wikia.nocookie.net/tvpedia/images/b/b8/%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_8_%28%D0%B2%D0%B5%D1%80%D1%82%D0%B8%D0%BA%D0%B0%D0%BB%D1%8C%2C_%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82_2%29.svg/revision/latest/scale-to-width-down/250?cb=20210904203237&path-prefix=ru" radio="false",Россия 1
+#EXTINF:-1 tvg-id="711" tvg-name="" group-title="רוסיה" tvg-logo="https://static.wikia.nocookie.net/tvpedia/images/b/b8/%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_8_%28%D0%B2%D0%B5%D1%80%D1%82%D0%B8%D0%BA%D0%B0%D0%BB%D1%8C%2C_%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82_2%29.svg/revision/latest/scale-to-width-down/250?cb=20210904203237&path-prefix=ru" radio="false",Россия 1
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/russia_1
 
-#EXTINF:-1 tvg-id="1683" tvg-name="Россия 24" group-title="רוסיה" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTNp3-5fTZCNtwE_zA97ib8W9A-GSQH8LLeQ&usqp=CAU" radio="false",Россия 24
+#EXTINF:-1 tvg-id="1683" tvg-name="" group-title="רוסיה" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTNp3-5fTZCNtwE_zA97ib8W9A-GSQH8LLeQ&usqp=CAU" radio="false",Россия 24
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/russia_24
 
-#EXTINF:-1 tvg-id="2547" tvg-name="Россия РТР" group-title="רוסיה" tvg-logo="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/112019/rtr_planeta_.gif?To7EG5YZX57I3nPDXAEl2gUJhR30RonL&itok=f4HdMT5B" radio="false",Россия РТР
+#EXTINF:-1 tvg-id="2547" tvg-name="" group-title="רוסיה" tvg-logo="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/112019/rtr_planeta_.gif?To7EG5YZX57I3nPDXAEl2gUJhR30RonL&itok=f4HdMT5B" radio="false",Россия РТР
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/russia_rtr
 
-#EXTINF:-1 tvg-id="146" tvg-name="Первый канал" group-title="רוסיה" tvg-logo="https://raketa.com/w/wp-content/uploads/sites/4/2021/03/1%D0%BA%D0%B0%D0%BD%D0%B0%D0%BB-5.svg_-1-4.png" radio="false",Первый Канал
+#EXTINF:-1 tvg-id="146" tvg-name="" group-title="רוסיה" tvg-logo="https://raketa.com/w/wp-content/uploads/sites/4/2021/03/1%D0%BA%D0%B0%D0%BD%D0%B0%D0%BB-5.svg_-1-4.png" radio="false",Первый Канал
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/perviy_kanal
