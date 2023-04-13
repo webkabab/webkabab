@@ -586,8 +586,8 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
         params["ep"] = String(episode);
         params["preWatch"] = "false";
         console.debug("sending token query...");            
-        let {message, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
-        token = message;
+        let result = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
+        token = result.message;
         if(token) {    
             console.debug("Got token="+token);
             // Need to wait for 30 seconds. Send a special html that will trigger back to this page
@@ -623,8 +623,9 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
             params["watch"] = "false";
             params["token"] = token;
                 
-            let {message, cookies} = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
-            let stream = message;           
+            let result = sendHTTPRequest(req, API_LINK, "POST", headers, params, true);
+            let stream = result.message;           
+            let cookies = result.cookies;
             console.debug("Got a JSON with info: "+stream);
             console.debug("Got cookies="+cookies);
 
@@ -669,8 +670,8 @@ function searchSdarot(req, query) {
     let headers = getSdarotHeaders();
     let params = {};
     params["search"] = query;
-    let {message, cookies} = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
-    let searchResults = message;
+    let result = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+    let searchResults = result.message;
     console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {        
         let count = 0;
@@ -728,8 +729,8 @@ function searchSdarot(req, query) {
                 //fd = TiviProvider.openFile(req, episodeListUrl, "UTF-8", false);
                 //content = TiviProvider.readAll(req, fd);            
                 //TiviProvider.close(req, fd);
-                let {message, cookies} = sendHTTPRequest(req, episodeListUrl, "GET", headers, params, true);
-                content = decodeURIComponent(message).replace(/\+/g, " ");                
+                let result = sendHTTPRequest(req, episodeListUrl, "GET", headers, params, true);
+                content = decodeURIComponent(result.message).replace(/\+/g, " ");                
 
                 let episodes = [];
                 let episodesReg = new RegExp("<li\\s*data\\-episode=\"([0-9]+)\"", "g");
