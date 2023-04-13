@@ -333,7 +333,7 @@ function doInBackground() {
                         TiviProvider.sendResolvedVideo(req, result);
                         TiviProvider.done(req);
                     }
-                    let onError = function(result) {
+                    let onError = function(error) {
                         TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
                         TiviProvider.done(req);    
                     }
