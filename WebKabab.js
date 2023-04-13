@@ -723,7 +723,7 @@ function searchSdarot(req, query) {
                 //content = TiviProvider.readAll(req, fd);            
                 //TiviProvider.close(req, fd);
                 let {message, cookies} = sendHTTPRequest(req, episodeListUrl, "GET", headers, params, true);
-                content = decodeURIComponent(message);
+                content = decodeURIComponent(message).replace(/\+/g, " ");
                 console.debug(content);
 
                 let episodes = [];
