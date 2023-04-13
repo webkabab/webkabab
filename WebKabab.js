@@ -328,14 +328,17 @@ function doInBackground() {
 
                     console.debug("extract sdarot video... series="+series+", s="+season+", e="+episode);                    
                     
-                    extractSdarotVideo(series, season, episode, token, result => {
+                    let onSucess = function(result) {
                         console.debug("Got result: "+result);
                         TiviProvider.sendResolvedVideo(req, result);
                         TiviProvider.done(req);
-                    }, error => {
+                    }
+                    let onError = function(result) {
                         TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
                         TiviProvider.done(req);    
-                    });
+                    }
+
+                    extractSdarotVideo(series, season, episode, token, onSucess, onError);
                    
                     break;
 
