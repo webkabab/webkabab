@@ -327,6 +327,7 @@ function doInBackground() {
                     
 
                     console.debug("extract sdarot video... series="+series+", s="+season+", e="+episode);                    
+                    
                     extractSdarotVideo(series, season, episode, token, result => {
                         console.debug("Got result: "+result);
                         TiviProvider.sendResolvedVideo(req, result);
