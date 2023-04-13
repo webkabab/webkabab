@@ -216,7 +216,7 @@ function doInBackground() {
             // 'validity' - A number of days for which this TV Guide is valid. After this period an automatic retrieval of a newer version will occur.
                         
             console.debug("request tv guide");
-            //TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3); // TODO: restore once upgraded TiviApp
+            TiviProvider.sendTvGuide(req, "Kabab Russian Guide", "http://epg.it999.ru/edem.xml.gz", 3); // TODO: restore once upgraded TiviApp
             TiviProvider.done(req);
             /*  // TODO: disable until we find a better source than HOT                              
             kababMain.requestTvGuide(req, function() {
