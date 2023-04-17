@@ -82,5 +82,26 @@ addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_ur
 #EXTINF:-1 tvg-name="UA TV"  group-title="רוסיה" tvg-logo="https://yt3.googleusercontent.com/hq8Ez4Aso26HVHY2jxiJ2pXFbHVCHac2qsGlWxnwwv_T1QpePpJZBW5aYz2uWstvXzVHKVKj9g4=s900-c-k-c0x00ffffff-no-rj" radio="false",FREEДОМ
 https://freedom.cdn-02.cosmonova.net.ua/mobile-app/main/freedom/master.m3u8
 
-#EXTINF:-1 tvg-name="Discovery science"  group-title="רוסיה" tvg-logo="" radio="false",Discovery Science2
+#EXTINF:-1 tvg-name="Discovery science"  group-title="מדע וטבע" tvg-logo="" radio="false",Discovery Science
 http://smotri.only-tv.org/discovery-science.html
+
+#EXTINF:-1 tvg-name="National Geographic"  group-title="מדע וטבע" tvg-logo="" radio="false",National Geographic
+http://smotri.only-tv.org/national-geographic.html
+
+#EXTINF:-1 tvg-name="VH 1"  group-title="מוזיקה" tvg-logo="" radio="false",VH 1
+http://smotri.only-tv.org/vh1.html
+
+#EXTINF:-1 tvg-name="MTV"  group-title="מוזיקה" tvg-logo="" radio="false",MTV
+http://smotri.only-tv.org/mtv-russia.html
+
+#EXTINF:-1 tvg-name="Dange TV"  group-title="מוזיקה" tvg-logo="" radio="false",Dange TV
+http://smotri.only-tv.org/dange-tv.html
+
+#EXTINF:-1 tvg-name="M2"  group-title="מוזיקה" tvg-logo="" radio="false",M2
+http://smotri.only-tv.org/m2.html
+
+#EXTINF:-1 tvg-name="ТНТ Music"  group-title="מוזיקה" tvg-logo="" radio="false",ТНТ Music
+http://smotri.only-tv.org/tnt-music.html
+
+#EXTINF:-1 tvg-name="Nick Jr."  group-title="ילדים" tvg-logo="" radio="false",Nick Jr.
+http://smotri.only-tv.org/nick-jr.html
