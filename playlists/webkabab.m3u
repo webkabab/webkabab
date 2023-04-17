@@ -82,11 +82,35 @@ addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_ur
 #EXTINF:-1 tvg-name="UA TV"  group-title="רוסיה" tvg-logo="https://yt3.googleusercontent.com/hq8Ez4Aso26HVHY2jxiJ2pXFbHVCHac2qsGlWxnwwv_T1QpePpJZBW5aYz2uWstvXzVHKVKj9g4=s900-c-k-c0x00ffffff-no-rj" radio="false",FREEДОМ
 https://freedom.cdn-02.cosmonova.net.ua/mobile-app/main/freedom/master.m3u8
 
+#EXTINF:-1 tvg-name="Дождь"  group-title="רוסיה" tvg-logo="" radio="false",Дождь
+http://smotri.only-tv.org/dozhd.html
+
 #EXTINF:-1 tvg-name="Discovery science"  group-title="מדע וטבע" tvg-logo="" radio="false",Discovery Science
 http://smotri.only-tv.org/discovery-science.html
 
 #EXTINF:-1 tvg-name="National Geographic"  group-title="מדע וטבע" tvg-logo="" radio="false",National Geographic
 http://smotri.only-tv.org/national-geographic.html
+
+#EXTINF:-1 tvg-name="Discovery"  group-title="מדע וטבע" tvg-logo="" radio="false",Discovery
+http://smotri.only-tv.org/discovery.html
+
+#EXTINF:-1 tvg-name="Nat GEo Wild"  group-title="מדע וטבע" tvg-logo="" radio="false",Nat GEo Wild
+http://smotri.only-tv.org/nat-geo-wild.html
+
+#EXTINF:-1 tvg-name="Viasat Nature"  group-title="מדע וטבע" tvg-logo="" radio="false",Viasat Nature
+http://smotri.only-tv.org/viasat-nature.html
+
+#EXTINF:-1 tvg-name="Viasat History"  group-title="מדע וטבע" tvg-logo="" radio="false",Viasat History
+http://smotri.only-tv.org/viasat-history.html
+
+#EXTINF:-1 tvg-name="Техно 24"  group-title="מדע וטבע" tvg-logo="" radio="false",Техно 24
+http://smotri.only-tv.org/24-tekhno.html
+
+#EXTINF:-1 tvg-name="History Channel"  group-title="מדע וטבע" tvg-logo="" radio="false",History Channel
+http://smotri.only-tv.org/history-channel.html
+
+#EXTINF:-1 tvg-name="Galaxy"  group-title="מדע וטבע" tvg-logo="" radio="false",Galaxy
+http://smotri.only-tv.org/tajny-galaktiki.html
 
 #EXTINF:-1 tvg-name="VH 1"  group-title="מוזיקה" tvg-logo="" radio="false",VH 1
 http://smotri.only-tv.org/vh1.html
@@ -105,3 +129,15 @@ http://smotri.only-tv.org/tnt-music.html
 
 #EXTINF:-1 tvg-name="Nick Jr."  group-title="ילדים" tvg-logo="" radio="false",Nick Jr.
 http://smotri.only-tv.org/nick-jr.html
+
+#EXTINF:-1 tvg-name="Nick"  group-title="ילדים" tvg-logo="" radio="false",Nickolodeon
+http://smotri.only-tv.org/nickelodeon.html
+
+#EXTINF:-1 tvg-name="Мульт"  group-title="ילדים" tvg-logo="" radio="false",Мульт
+http://smotri.only-tv.org/mult.html
+
+#EXTINF:-1 tvg-name="Мульт"  group-title="Disney" tvg-logo="" radio="false",Disney
+http://smotri.only-tv.org/disney.html
+
+#EXTINF:-1 tvg-name="JimJam"  group-title="Disney" tvg-logo="" radio="false",JimJam
+http://smotri.only-tv.org/jimjam.html
