@@ -23,35 +23,26 @@ http://ontivi.net/9-kanal-izrailtv.html
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/HtuClSDdyUIU2Ptof2wk53xn6YhKSAcAQnUMdixj.png" ,כאן ב 
 https://kanbet.media.kan.org.il/hls/live/2024811/2024811/kanbet_mp3/chunklist.m3u8
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/Q4IUO2dHHBgUhGxvj5jvCiOGOPedRATh0yvbuzeU.png",כאן ג
-https://kanlivep2event-i.akamaihd.net/hls/live/749625/749625/master.m3u8
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/tdGoDH47Dvfknxn1UDfuqhgqFr8XTxTIlxVNhJPn.png",88 FM
+https://kan88.media.kan.org.il/hls/live/2024812/2024812/kan88_mp3/chunklist.m3u8
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/JjGq4Fr3bg6xJoceNcKXih2kx10QD51bmI81N5ki.png",Рэка כאן
-https://kanlivep2event-i.akamaihd.net/hls/live/749633/749633/master.m3u8
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/Q4IUO2dHHBgUhGxvj5jvCiOGOPedRATh0yvbuzeU.png",כאן ג
+https://kangimmel.media.kan.org.il/hls/live/2024813/2024813/kangimmel_mp3/chunklist.m3u8
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/k06ZnxGIJJYJs4P3OFBm4NWTnvsHSNJ4puVsPk02.png",כאן תרבות
-https://kanlivep2event-i.akamaihd.net/hls/live/749634/749634/master.m3u8
-
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/tdGoDH47Dvfknxn1UDfuqhgqFr8XTxTIlxVNhJPn.png",88 FM
-https://kanlivep2event-i.akamaihd.net/hls/live/749623/749623/master.m3u8
-
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/E3WqpMPnuIumjkgAdpMuJ8cYzabsVJpL0A1wDpG9.png",כאן מורשת
-https://kanlivep2event-i.akamaihd.net/hls/live/749629/749629/master.m3u8
+https://kantarbut.media.kan.org.il/hls/live/2024816/2024816/kantarbut_mp3/chunklist.m3u8
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/ljI0mzQdkQZBzL8MZ29OQSQQ0zHRWPoxnHYlkPF0.png",קול המוסיקה
-https://kanlivep2event-i.akamaihd.net/hls/live/749627/749627/master.m3u8
+https://kankolhamusica.media.kan.org.il/hls/live/2024817/2024817/kanclassical_mp3/chunklist.m3u8
 
-#EXTINF:-1 group-title="רדיו",כאן נוסטלגיה
-https://kanlivep2event-i.akamaihd.net/hls/live/749630/749630/master.m3u8
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/E3WqpMPnuIumjkgAdpMuJ8cYzabsVJpL0A1wDpG9.png",כאן מורשת
+https://kanmoreshet.media.kan.org.il/hls/live/2024814/2024814/kanmoreshet_mp3/chunklist.m3u8
 
-#EXTINF:-1 group-title="רדיו",כאן מזרח תיכוני
-https://kanlivep2event-i.akamaihd.net/hls/live/749632/749632/master.m3u8
-
-#EXTINF:-1 group-title="רדיו",כאן להיטים
-https://kanlivep2event-i.akamaihd.net/hls/live/749626/749626/master.m3u8
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/JjGq4Fr3bg6xJoceNcKXih2kx10QD51bmI81N5ki.png",Рэка כאן
+https://kanreka.media.kan.org.il/hls/live/2024815/2024815/kanreka_mp3/chunklist.m3u8
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/rcnSeagIC4FdJ5MW0902ptuJiezUQPmR7jVJIxIJ.png",גלגל"צ
-http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz
+https://glzwizzlv.bynetcdn.com/glglz_mp3
 
 #EXTINF:-1 group-title="רדיו",רדיו עפולה
 http://radioafula.cdnwiz.com/stream
