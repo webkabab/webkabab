@@ -21,7 +21,7 @@ http://ovego.tv/publ/live_tv/razvlekatelnye/9channel_israel/7-1-0-950
 http://ontivi.net/9-kanal-izrailtv.html
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/HtuClSDdyUIU2Ptof2wk53xn6YhKSAcAQnUMdixj.png" ,כאן ב 
-https://kanlivep2event-i.akamaihd.net/hls/live/749624/749624/master.m3u8
+https://kanbet.media.kan.org.il/hls/live/2024811/2024811/kanbet_mp3/chunklist.m3u8
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/Q4IUO2dHHBgUhGxvj5jvCiOGOPedRATh0yvbuzeU.png",כאן ג
 https://kanlivep2event-i.akamaihd.net/hls/live/749625/749625/master.m3u8
