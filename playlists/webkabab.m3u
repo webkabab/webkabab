@@ -53,15 +53,6 @@ http://radioafula.cdnwiz.com/stream
 #EXTINF:-1 group-title="רדיו",Первое радио
 http://www.oles.tv/891fm/
 
-#EXTINF:-1 group-title="רדיו",Первое радио (2)
-http://891fm.streamgates.net/891Fm
-
-#EXTINF:-1 refresh-rate=1 group-title="רדיו",ספורט 5 רדיו לייב
-https://sport5-lh.akamaihd.net/i/radio5_0@65353/master.m3u8
-
-#EXTINF:-1 refresh-rate=1 group-title="רדיו",ספורט 5 רדיו סטודיו
-https://sport5-lh.akamaihd.net/i/radiolivev_0@698733/master.m3u8
-
 #EXTINF:-1 tvg-id="711" group-title="רוסיה" tvg-logo="https://static.wikia.nocookie.net/tvpedia/images/b/b8/%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_8_%28%D0%B2%D0%B5%D1%80%D1%82%D0%B8%D0%BA%D0%B0%D0%BB%D1%8C%2C_%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82_2%29.svg/revision/latest/scale-to-width-down/250?cb=20210904203237&path-prefix=ru" radio="false",Россия 1
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/russia_1
 
