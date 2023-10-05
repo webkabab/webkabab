@@ -44,6 +44,9 @@ https://kanreka.media.kan.org.il/hls/live/2024815/2024815/kanreka_mp3/chunklist.
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/rcnSeagIC4FdJ5MW0902ptuJiezUQPmR7jVJIxIJ.png",גלגל"צ
 https://glzwizzlv.bynetcdn.com/glglz_mp3
 
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://scontent.ftlv6-1.fna.fbcdn.net/v/t39.30808-6/283679924_468170051980772_912775954997165298_n.png?_nc_cat=109&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=rC-EWHRxWcMAX9DQSKG&_nc_ht=scontent.ftlv6-1.fna&oh=00_AfBb4XEzHDRpek1Z2-D903GQSYyHAoj9SFADJvn-pC2-XA&oe=652472CF",Лучшее радио
+https://edge-fs-10.cybercdn.live/TheBest/live/chunks.m3u8
+
 #EXTINF:-1 group-title="רדיו",רדיו עפולה
 http://radioafula.cdnwiz.com/stream
 
