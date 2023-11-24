@@ -6,6 +6,8 @@ plugins["sdarot"] = function() {
     console.debug("hello sdarot!");
 }
 
+var sdarot = "sdarot";
+
 function extractSdarotVideo(series, season, episode, token, onSuccess, onError) {
 
    

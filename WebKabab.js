@@ -289,7 +289,7 @@ function doInBackground() {
                     break;
 
                 case "sdarot":
-                    console.debug("plugins="+plugins);
+                    console.debug("plugins="+sdarot);
                     var series = null;
                     var season = null;
                     var episode = null;
