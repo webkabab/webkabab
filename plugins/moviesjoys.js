@@ -93,7 +93,7 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
             if(server_api) {
                 console.debug("Got server API: "+server_api);
                 let matchURL = new URL(server_api);
-                let refererStr = matchURL.protocol + "://"+matchURL.host;
+                let refererStr = matchURL.protocol + "//"+matchURL.host;
                 console.debug("Server host path="+refererStr);
                 
                 headers["Referer"] = refererStr;
