@@ -374,7 +374,7 @@ function doInBackground() {
             //var results = searchKinoprofi(req, query);
             try {
                 //console.debug("temp: "+temp);
-                console.debug("plugins="+searchPlugins);
+                //console.debug("plugins="+searchPlugins);
                 //var results = searchSdarot(req, query);
                 if(searchPlugins) {
                     for (var i in searchPlugins) {
