@@ -87,7 +87,7 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
         console.debug("Got cookies="+cookies);
     
         if(message) {
-            let re = /<iframe src="(.*)"/g;
+            let re = /src="(.*)"/g;
             let match = re.exec(message);
             let server_api = match[1];
             if(server_api) {
