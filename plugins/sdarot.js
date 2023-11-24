@@ -1,10 +1,4 @@
 
-if(plugins == undefined) {
-    plugins = {}
-}
-plugins["sdarot"] = function() {
-    console.debug("hello sdarot!");
-}
 
 var sdarot = "sdarot";
 
