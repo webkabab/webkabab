@@ -16,6 +16,7 @@ var sdarot = "sdarot";
 
 
 function resolveSdarotVOD(parts, onSucess, onError) {
+    console.debug("inside resolve sdarot VOD");
     var series = null;
     var season = null;
     var episode = null;

@@ -299,7 +299,8 @@ function doInBackground() {
                             TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
                             TiviProvider.done(req);    
                         }
-                        resolverPlugins["sdarot"](onSucess, onError);
+                        console.debug("resolving sdarot...");
+                        resolverPlugins["sdarot"](parts, onSucess, onError);
                     }
                     else {
                         TiviProvider.sendError(req, "SDAROT is not defined");
@@ -337,7 +338,7 @@ function doInBackground() {
             console.debug("query=" + query);            
             try {                
                 if(searchPlugins) {
-                    for (var i in searchPlugins) {
+                    for (var i in searchPlugins) {                        
                         var results = searchPlugins[i](req, query);
                         for (var name in results) {
                             TiviProvider.sendSearchResult(req, name, results[name], true);
