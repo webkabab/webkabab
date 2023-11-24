@@ -70,10 +70,10 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
         headers["Referer"] = SITE_BASE;
     
         let params = {};
-        params["series"] = String(series);
+        params["ep"] = String(series);
         params["s"] = String(season);
         params["e"] = String(episode);
-        params["server"] = String(server);
+        params["server_name"] = String(server);
         params["type"] = String(type);        
 
         console.debug("sending stream query...");              
