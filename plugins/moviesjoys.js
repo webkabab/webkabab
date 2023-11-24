@@ -104,11 +104,15 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                 console.debug("Got server API: "+server_api);
                 let matchURL = new URL(server_api);
                 let refererStr = matchURL.protocol + "//"+matchURL.host;
+                params = {};
+                for (const [key, value] of matchURL.searchParams) {
+                    params[key] = value;
+                }
                 console.debug("Server host path="+refererStr);
                 
                 //headers["Host"] = refererStr;  
                 headers["Referer"] = refererStr;
-                result = sendHTTPRequest(req, server_api, "GET", headers, {}, true);
+                result = sendHTTPRequest(req, server_api, "GET", headers, params, true);
                 message = result.message;           
                 cookies = result.cookies;
                             
