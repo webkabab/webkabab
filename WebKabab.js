@@ -375,9 +375,14 @@ function doInBackground() {
             try {
                 //console.debug("temp: "+temp);
                 console.debug("plugins="+searchPlugins);
-                var results = searchSdarot(req, query);
-                for (var name in results) {
-                    TiviProvider.sendSearchResult(req, name, results[name], true);
+                //var results = searchSdarot(req, query);
+                if(searchPlugins) {
+                    for (var plugin in searchPlugins) {
+                        var results = plugin(req, query);
+                        for (var name in results) {
+                            TiviProvider.sendSearchResult(req, name, results[name], true);
+                        }
+                    }                
                 }
             }
             catch(e) {

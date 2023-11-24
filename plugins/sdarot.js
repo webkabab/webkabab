@@ -1,8 +1,10 @@
 if(typeof searchPlugins === 'undefined') {
-    searchPlugins = {};
+    searchPlugins = [];
 }
 
-searchPlugins["sdarot"] = true;
+searchPlugins.push(function(req, query) {
+    return searchSdarot(req, query);
+});
 
 var sdarot = "sdarot";
 
