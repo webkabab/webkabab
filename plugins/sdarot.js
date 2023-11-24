@@ -108,6 +108,9 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
 }
 
 var temp = "Hello World";
+(function(temp){
+    console.debug("here!");
+})(temp || (temp = {}));
 
 export function searchSdarot(req, query) {
     let SEARCH_API = SDAROT_BASE + "/ajax/index";
