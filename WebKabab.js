@@ -238,8 +238,9 @@ function doInBackground() {
             // Parse several parts:
             var parts = query.split("&");
             console.debug("full query="+query+", query name="+parts[0]);
+            var resolverName = parts[0];
             
-            switch (parts[0]) {
+            switch (resolverName) {
                 case "keshet":
                     //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=gt&lp=/hls/live/512036/CH2LIVE_OTT/index.m3u8?as=1&rv=AKAMAI";
                     var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/2033791/k12dvr/index.m3u8?&rv=AKAMAI";
@@ -287,9 +288,11 @@ function doInBackground() {
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
-
-                case "sdarot":                    
-                    if(resolverPlugins && resolverPlugins["sdarot"]) {                        
+                    
+                default:
+                    // Plugin resolvers... 
+                    // TODO: need to move all of them to here
+                    if(resolverPlugins && resolverPlugins[resolverName]) {                        
                         var onSucess = function(result) {
                             console.debug("Got result: "+result);
                             TiviProvider.sendResolvedVideo(req, result);
@@ -298,18 +301,10 @@ function doInBackground() {
                         var onError = function(error) {
                             TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
                             TiviProvider.done(req);    
-                        }
-                        console.debug("resolving sdarot...");
-                        resolverPlugins["sdarot"](parts, onSucess, onError);
+                        }                        
+                        resolverPlugins[resolverName](parts, onSucess, onError);
                     }
-                    else {
-                        TiviProvider.sendError(req, "SDAROT is not defined");
-                        TiviProvider.done(req);    
-                    }                    
-                    break;
-
-
-                default:
+                    
                     TiviProvider.sendError(req, "Cannot identify query=" + query);
                     TiviProvider.done(req);
             }

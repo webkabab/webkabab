@@ -12,8 +12,6 @@ if(typeof searchPlugins === 'undefined') {
 }
 searchPlugins.push(searchSdarot);
 
-var sdarot = "sdarot";
-
 
 function resolveSdarotVOD(parts, onSucess, onError) {
     console.debug("inside resolve sdarot VOD");
