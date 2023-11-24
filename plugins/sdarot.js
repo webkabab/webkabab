@@ -1,4 +1,8 @@
+if(typeof searchPlugins === 'undefined') {
+    searchPlugins = {};
+}
 
+searchPlugins["sdarot"] = true;
 
 var sdarot = "sdarot";
 
