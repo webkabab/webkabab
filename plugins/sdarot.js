@@ -1,3 +1,11 @@
+
+if(!plugins) {
+    plugins = {}
+}
+plugins["sdarot"] = function() {
+    console.debug("hello sdarot!");
+}
+
 function extractSdarotVideo(series, season, episode, token, onSuccess, onError) {
 
    
@@ -107,10 +115,6 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     }        
 }
 
-var temp = "Hello World";
-(function(temp){
-    console.debug("here!");
-})(temp || (temp = {}));
 
 function searchSdarot(req, query) {
     let SEARCH_API = SDAROT_BASE + "/ajax/index";
