@@ -109,6 +109,8 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                     params[key] = value;
                 }
                 console.debug("Server host path="+refererStr);
+                server_api = refererStr + "/" + matchURL.pathname;
+                console.debug("Got URL="+server_api);
                 
                 //headers["Host"] = refererStr;  
                 headers["Referer"] = refererStr;
