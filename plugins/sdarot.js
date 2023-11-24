@@ -2,9 +2,7 @@ if(typeof searchPlugins === 'undefined') {
     searchPlugins = [];
 }
 
-searchPlugins.push(function(req, query) {
-    return searchSdarot(req, query);
-});
+searchPlugins.push(searchSdarot);
 
 var sdarot = "sdarot";
 

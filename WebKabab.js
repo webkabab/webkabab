@@ -377,8 +377,8 @@ function doInBackground() {
                 console.debug("plugins="+searchPlugins);
                 //var results = searchSdarot(req, query);
                 if(searchPlugins) {
-                    for (var plugin in searchPlugins) {
-                        var results = plugin(req, query);
+                    for (var i in searchPlugins) {
+                        var results = searchPlugins[i](req, query);
                         for (var name in results) {
                             TiviProvider.sendSearchResult(req, name, results[name], true);
                         }
