@@ -4,7 +4,7 @@ var SDAROT_BASE = "https://sdarot.tw";
 if(typeof resolverPlugins === 'undefined') {
     resolverPlugins = {};
 }
-resolverPlugins["sdarot"] = resolveSdarotVOD;
+//resolverPlugins["sdarot"] = resolveSdarotVOD; // TODO: enable once working
 
 // register for search plugins
 if(typeof searchPlugins === 'undefined') {
