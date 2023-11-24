@@ -288,8 +288,7 @@ function doInBackground() {
                     TiviProvider.done(req);
                     break;
 
-                case "sdarot":
-                    console.debug("plugins="+sdarot);
+                case "sdarot":                    
                     var series = null;
                     var season = null;
                     var episode = null;
@@ -375,6 +374,7 @@ function doInBackground() {
             //var results = searchKinoprofi(req, query);
             try {
                 //console.debug("temp: "+temp);
+                console.debug("plugins="+sdarot);
                 var results = searchSdarot(req, query);
                 for (var name in results) {
                     TiviProvider.sendSearchResult(req, name, results[name], true);
