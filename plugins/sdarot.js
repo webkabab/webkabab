@@ -112,7 +112,7 @@ var temp = "Hello World";
     console.debug("here!");
 })(temp || (temp = {}));
 
-export function searchSdarot(req, query) {
+function searchSdarot(req, query) {
     let SEARCH_API = SDAROT_BASE + "/ajax/index";
     let LIMIT_RESULTS = 1;
 
