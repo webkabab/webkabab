@@ -106,6 +106,7 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                 let refererStr = matchURL.protocol + "//"+matchURL.host;
                 console.debug("Server host path="+refererStr);
                 
+                headers["Host"] = refererStr;  
                 headers["Referer"] = refererStr;
                 result = sendHTTPRequest(req, server_api, "GET", headers, {}, true);
                 message = result.message;           
