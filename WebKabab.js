@@ -288,7 +288,7 @@ function doInBackground() {
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
-                    
+
                 default:
                     // Plugin resolvers... 
                     // TODO: need to move all of them to here
@@ -299,7 +299,7 @@ function doInBackground() {
                             TiviProvider.done(req);
                         }
                         var onError = function(error) {
-                            TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
+                            TiviProvider.sendError(req, "Error in query=" + query + "for resolver="+resolverName+" error: "+ error);
                             TiviProvider.done(req);    
                         }                        
                         resolverPlugins[resolverName](parts, onSucess, onError);
@@ -430,40 +430,6 @@ function searchKinoprofi(req, query) {
     return resultsMap;
 }
 
-
-function parseSdarotTvShow(req, path) {
-    var base = "https://sdarot.world";
-    var fd = TiviProvider.openFile(req, path, "UTF-8", false);
-    var content = TiviProvider.readAll(req, fd);
-    TiviProvider.close(req, fd);
-    var seasons = {};
-    //var reg = /data-season="([0-9]+?)".*?href="(.*?)"/gs;
-    var reg = new RegExp("data-season=\"([0-9]+?)\"[\\s\\S]*?href=\"(.*?)\"", "g");
-    var results = "";
-    do {
-        results = reg.exec(content);
-        if (results !== null) {
-            seasons[results[1]] = {};
-            var fd1 = TiviProvider.openFile(req, base + results[2], "UTF-8", false);
-            var content1 = TiviProvider.readAll(req, fd1);
-            TiviProvider.close(req, fd1);
-            //var reg1 = /data-episode="([0-9]+?)".*?href="(.*?)"/gs;
-            var reg1 = new RegExp("data-episode=\"([0-9]+?)\"[\\s\\S]*?href=\"(.*?)\"", "g");
-            var results1 = "";
-
-            do {
-                results1 = reg1.exec(content1);
-                if (results1 !== null) {
-                    seasons[results[1]][results1[1]] = base + results1[2];
-                }
-            } while (results1 !== null)
-        }
-    } while (results !== null);
-
-
-
-    return seasons;
-}
 
 function extractDailymotion(url) {
     // Get metadata link:
