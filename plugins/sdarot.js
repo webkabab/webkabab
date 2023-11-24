@@ -1,5 +1,5 @@
 
-if(!plugins) {
+if(plugins == undefined) {
     plugins = {}
 }
 plugins["sdarot"] = function() {
