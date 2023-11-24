@@ -289,58 +289,22 @@ function doInBackground() {
                     break;
 
                 case "sdarot":                    
-                    var series = null;
-                    var season = null;
-                    var episode = null;
-                    var token = null;
-                    
-                    for(let i in parts) {
-                        let part = parts[i];
-                        let keyValue = part.split("=");
-                        if(keyValue.length === 2) {
-                            let key = keyValue[0];
-                            let value = keyValue[1];
-                            switch(key) {
-                                case "series":
-                                    series = value;
-                                    break;
-
-                                case "season":
-                                    season = value;
-                                    break;
-
-                                case "ep":
-                                    episode = value;
-                                    break;
-
-                                case "token":
-                                    token = value;
-                                    break;
-                            }
+                    if(resolverPlugins && resolverPlugins["sdarot"]) {                        
+                        var onSucess = function(result) {
+                            console.debug("Got result: "+result);
+                            TiviProvider.sendResolvedVideo(req, result);
+                            TiviProvider.done(req);
                         }
+                        var onError = function(error) {
+                            TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
+                            TiviProvider.done(req);    
+                        }
+                        resolverPlugins["sdarot"](onSucess, onError);
                     }
-
-                    if(!series || !season || !episode) {
-                        TiviProvider.sendError(req, "Invalid SDAROT query=" + query);
-                        TiviProvider.done();    
-                    }
-                    
-
-                    console.debug("extract sdarot video... series="+series+", s="+season+", e="+episode);                    
-                    
-                    
-                    let onSucess = function(result) {
-                        console.debug("Got result: "+result);
-                        TiviProvider.sendResolvedVideo(req, result);
-                        TiviProvider.done(req);
-                    }
-                    let onError = function(error) {
-                        TiviProvider.sendError(req, "Error in SDAROT query=" + query + " error: "+ error);
+                    else {
+                        TiviProvider.sendError(req, "SDAROT is not defined");
                         TiviProvider.done(req);    
-                    }
-
-                    extractSdarotVideo(series, season, episode, token, onSucess, onError);
-                   
+                    }                    
                     break;
 
 
@@ -370,12 +334,8 @@ function doInBackground() {
 
         case "request_search_query_vod":
 
-            console.debug("query=" + query);
-            //var results = searchKinoprofi(req, query);
-            try {
-                //console.debug("temp: "+temp);
-                //console.debug("plugins="+searchPlugins);
-                //var results = searchSdarot(req, query);
+            console.debug("query=" + query);            
+            try {                
                 if(searchPlugins) {
                     for (var i in searchPlugins) {
                         var results = searchPlugins[i](req, query);
@@ -419,13 +379,6 @@ function getParameterByName(name, url) {
 }
 
 
-function generateSdarotSeries(req, shows, fd) {
-    for (show in shows) {
-        var series = {}
-        series[show] = parseSdarotTvShow(req, shows[show]);
-        createSeriesM3U(req, series, fd);
-    }
-}
 
 function createSeriesM3U(req, series, fd) {
 
@@ -589,7 +542,7 @@ function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var SDAROT_BASE = "https://sdarot.tw";
+
 
 
 // Read the 'req' argument, which identifies the current request

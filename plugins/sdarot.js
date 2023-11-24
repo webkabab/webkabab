@@ -1,10 +1,66 @@
+var SDAROT_BASE = "https://sdarot.tw";
+
+// register for resolver plugins
+if(typeof resolverPlugins === 'undefined') {
+    resolverPlugins = {};
+}
+resolverPlugins.push("sdarot", resolveSdarotVOD);
+
+// register for search plugins
 if(typeof searchPlugins === 'undefined') {
     searchPlugins = [];
 }
-
 searchPlugins.push(searchSdarot);
 
 var sdarot = "sdarot";
+
+
+function resolveSdarotVOD(parts, onSucess, onError) {
+    var series = null;
+    var season = null;
+    var episode = null;
+    var token = null;
+    
+    for(let i in parts) {
+        let part = parts[i];
+        let keyValue = part.split("=");
+        if(keyValue.length === 2) {
+            let key = keyValue[0];
+            let value = keyValue[1];
+            switch(key) {
+                case "series":
+                    series = value;
+                    break;
+
+                case "season":
+                    season = value;
+                    break;
+
+                case "ep":
+                    episode = value;
+                    break;
+
+                case "token":
+                    token = value;
+                    break;
+            }
+        }
+    }
+
+    if(!series || !season || !episode) {
+        //TiviProvider.sendError(req, "Invalid SDAROT query=" + query);
+        //TiviProvider.done();    
+        if(onError) {
+            onError.error("Invalid SDAROT query=" + query);
+        }
+        return;
+    }
+    
+
+    console.debug("extract sdarot video... series="+series+", s="+season+", e="+episode);    
+    extractSdarotVideo(series, season, episode, token, onSucess, onError);
+                   
+}
 
 function extractSdarotVideo(series, season, episode, token, onSuccess, onError) {
 
@@ -241,4 +297,13 @@ function getSdarotHeaders() {
     //headers["Cookie"] =  REMEMBER_COOKIE; // TODO: debug
     
     return headers;
+}
+
+
+function generateSdarotSeries(req, shows, fd) {
+    for (show in shows) {
+        var series = {}
+        series[show] = parseSdarotTvShow(req, shows[show]);
+        createSeriesM3U(req, series, fd);
+    }
 }
