@@ -373,6 +373,7 @@ function doInBackground() {
             console.debug("query=" + query);
             //var results = searchKinoprofi(req, query);
             try {
+                console.debug("temp: "+temp);
                 var results = searchSdarot(req, query);
                 for (var name in results) {
                     TiviProvider.sendSearchResult(req, name, results[name], true);

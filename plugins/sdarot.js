@@ -107,6 +107,7 @@ function extractSdarotVideo(series, season, episode, token, onSuccess, onError) 
     }        
 }
 
+var temp = "Hello World";
 
 export function searchSdarot(req, query) {
     let SEARCH_API = SDAROT_BASE + "/ajax/index";
