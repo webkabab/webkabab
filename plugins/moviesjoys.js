@@ -68,15 +68,15 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
 
         let headers = {};
         headers["Accept"] =  "*/*";
-        headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-        headers["User-Agent"], "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36";
-        headers["sec-ch-ua-mobile"] = "0?";
-        headers["sec-ch-ua-platform"] =  "\"Windows\"";
-        headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
+        //headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
+        //headers["User-Agent"], "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36";
+        //headers["sec-ch-ua-mobile"] = "0?";
+        //headers["sec-ch-ua-platform"] =  "\"Windows\"";
+        //headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
         //headers["X-Requested-With"] = "XMLHttpRequest";
-        headers["Host"] = SITE_BASE;    
+        //headers["Host"] = SITE_BASE;    
         //headers["Accept-Encoding"] = "gzip, deflate, br";
-        headers["Connection"] = "keep-alive";
+        //headers["Connection"] = "keep-alive";
         headers["Referer"] = SITE_BASE;
     
         let params = {};
@@ -106,7 +106,7 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                 let refererStr = matchURL.protocol + "//"+matchURL.host;
                 console.debug("Server host path="+refererStr);
                 
-                headers["Host"] = refererStr;  
+                //headers["Host"] = refererStr;  
                 headers["Referer"] = refererStr;
                 result = sendHTTPRequest(req, server_api, "GET", headers, {}, true);
                 message = result.message;           
