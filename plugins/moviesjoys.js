@@ -176,7 +176,7 @@ function searchMoviesJoys(req, query) {
     console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {        
         let count = 0;
-        let re = /class="name"[+]href="\/(.*?)-watch\/(*.?)"/g;
+        let re = /class="name"[+]href="\/(.*?)-watch\/(.*?)"/g;
         let match = re.exec(searchResults);
         let type = match[1];
         let name = match[2];        
