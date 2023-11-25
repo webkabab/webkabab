@@ -177,8 +177,7 @@ function searchMoviesJoys(req, query) {
     if(searchResults) {        
         let count = 0;
         let re = /class="name"[+]href="\/(.*?)-watch\/(.*?)"/g;
-        let match = re.exec(searchResults);
-        if(match) {
+        while(match = re.exec(searchResults)) {
             let type = match[1];
             let name = match[2];        
             if(type == "series") {
@@ -190,10 +189,7 @@ function searchMoviesJoys(req, query) {
             else {
                 console.log("Got movies result: "+name+" of type="+type);
             }
-        }
-        else {
-            console.error("Didn't get results for: "+query);
-        }
+        }        
         
 
         /*
