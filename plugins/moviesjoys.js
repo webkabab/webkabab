@@ -169,6 +169,7 @@ function searchMoviesJoys(req, query) {
 
     let results = {};
     let params = {};
+    let series = {};
 
     params["s"] = query;
     let result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
@@ -180,13 +181,18 @@ function searchMoviesJoys(req, query) {
         while(match = itemRegex.exec(searchResults)) {
             let type = match[1];
             let name = match[2];        
-            if(type == "tvshow") {                
+            if(type == "tvshow") {
                 let tvShowsRegex = /(.*?)-season-([0-9]+)/g
                 let match1 = tvShowsRegex.exec(name);
                 if(match1) {
                     name = match1[1];
                     let season = match1[2];
-                    console.log("Got series result: "+name+" of type="+type+" season="+season);
+                    console.log("Got series result: "+name+" of type="+type+" season="+season);                    
+                    if(!(name in seasons)) {
+                        series[name] = {};
+                    }
+                    let seasons = series[name];
+                    seasons[season] = "season="+season;
                 }
                 else {
                     console.error("Can't capture series params in: "+name);
@@ -198,8 +204,11 @@ function searchMoviesJoys(req, query) {
             else {
                 console.log("Got bad result: "+match[0]);
             }
-        }        
+        }
         
+        for(var serie in series) {
+            console.debug("Recorded series "+series[serie]+" with "+series[serie].length+" seasons");
+        }
 
         /*
         searchResults = JSON.parse(searchResults);
