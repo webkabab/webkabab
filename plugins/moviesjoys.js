@@ -176,12 +176,14 @@ function searchMoviesJoys(req, query) {
     console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {        
         let count = 0;
-        let re = /class="name"[+]href="\/(.*?)-watch\/(.*?)-season-([0-9]+)"/g;
+        let re = /class="name"[+]href="\/(.*?)-watch\/(*.?)"/g;
         let match = re.exec(searchResults);
         let type = match[1];
-        let name = match[2];
+        let name = match[2];        
         if(type == "series") {
-            let season = match[3];
+            re = /(*.?)-season-([0-9]+)/g
+            name = match[1];
+            let season = match[2];
             console.log("Got series result: "+name+" of type="+type+" season="+season);
         }
         else {
