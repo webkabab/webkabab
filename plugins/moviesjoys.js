@@ -232,8 +232,11 @@ function searchMoviesJoys(req, query) {
             }
         }
         
+        let seriesNames = [];
+
         for(var serie in series) {
             console.debug("Recorded series "+serie+" with "+Object.keys(series[serie]).length+" seasons");
+            seriesNames.push(serie);
             let cleanSeries = serie.replaceAll("-", " ");
             cleanSeries.toLowerCase();
             let cleanQuery = query.toLowerCase();            
@@ -244,6 +247,22 @@ function searchMoviesJoys(req, query) {
                 console.debug("   Season: "+season+" has "+series[serie][season].length+" episodes");
             }
             */
+        }
+
+        let cleanQuery = query.toLowerCase();
+        seriesNames.sort(function(a,b) {
+            let cleanA = a.replaceAll("-", " ");
+            cleanA.toLowerCase();
+            let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
+            let cleanB = b.replaceAll("-", " ");
+            cleanB.toLowerCase();
+            let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
+            return similarityA - similarityB;
+        });
+
+        console.debug("Sorted series:");
+        for(var serieName in seriesNames) {
+            console.debug("  Serie: "+serieName);
         }
 
         /*
