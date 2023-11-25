@@ -120,14 +120,18 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                             
                 if(message) {
                     console.debug("Got server API response: "+message);
-                    let re = /playerInstance[.]setup[(](.*?)[)]/g;
+                    //let re = /playerInstance[.]setup[(](.*?)[)]/g;
+                    let re = /file:\s*"(.*?)"/g;
                     let match = re.exec(message);
-                    let server_response_json = match[1];
-                    if(server_response_json) {                        
-                        server_response_json = server_response_json.replaceAll("+"," ");
-                        console.debug("Got json response from stream server="+server_response_json);
-                        stream_json = JSON.parse(server_response_json);
-                        sources = stream_json.sources;
+                    //let server_response_json = match[1];
+                    let stream_url = match[1];
+                    if(stream_url) {                        
+                        ///server_response_json = server_response_json.replaceAll("+"," ");
+                        console.debug("Got json response from stream server="+stream_url);                        
+                        onSuccess(sources[i]);
+                        //stream_json = JSON.parse(server_response_json);
+                        //sources = stream_json.sources;
+                        /*
                         if(sources) {
                             for(var i in sources) {
                                 console.debug("Got source: "+sources[i]);
@@ -137,6 +141,7 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                         else {
                             onError("Got no sources!");
                         }
+                        */                        
                     }
                 }
                 else {
