@@ -234,7 +234,7 @@ function searchMoviesJoys(req, query) {
         
         for(var serie in series) {
             console.debug("Recorded series "+serie+" with "+Object.keys(series[serie]).length+" seasons");
-            let cleanSeries = serie.replace("-", " ");
+            let cleanSeries = serie.replaceAll("-", " ");
             cleanSeries.toLowerCase();
             let cleanQuery = query.toLowerCase();            
             let similarity = exports.stringSimilarity(cleanSeries, cleanQuery);
