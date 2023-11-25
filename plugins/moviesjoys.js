@@ -187,8 +187,8 @@ function searchMoviesJoys(req, query) {
                 if(match1) {
                     name = match1[1];
                     let season = match1[2];
-                    console.log("Got series result: "+name+" of type="+type+" season="+season);                    
-                    if(!(name in seasons)) {
+                    console.log("Got series result: "+name+" of type="+type+" season="+season);                                        
+                    if(!(name in series)) {
                         series[name] = {};
                     }
                     let seasons = series[name];
