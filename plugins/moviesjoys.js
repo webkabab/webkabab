@@ -171,7 +171,7 @@ function searchMoviesJoys(req, query) {
     let params = {};
 
     params["s"] = query;
-    let result = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+    let result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
     let searchResults = result.message;
     console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {        
