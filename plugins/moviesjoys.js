@@ -262,7 +262,7 @@ function searchMoviesJoys(req, query) {
 
         console.debug("Sorted series:");
         for(var serieName in seriesNames) {
-            console.debug("  Serie: "+serieName);
+            console.debug("  Serie: "+seriesNames[serieName]);
         }
 
         /*
