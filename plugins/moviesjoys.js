@@ -176,15 +176,21 @@ function searchMoviesJoys(req, query) {
     console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {        
         let count = 0;
-        let re = /class="name"[+]href="\/([a-zA-Z]*?)-watch\/(.*?)"/g;
-        while(match = re.exec(searchResults)) {
+        let itemRegex = /class="name"[+]href="\/([a-zA-Z]*?)-watch\/(.*?)"/g;
+        let tvShowsRegex = /(.*?)-season-([0-9]+)/g
+        while(match = itemRegex.exec(searchResults)) {
             let type = match[1];
             let name = match[2];        
-            if(type == "tvshow") {
-                re = /(.*?)-season-([0-9]+)/g
-                name = match[1];
-                let season = match[2];
-                console.log("Got series result: "+name+" of type="+type+" season="+season);
+            if(type == "tvshow") {                
+                let match1 = tvShowsRegex.exec(name);
+                if(match1) {
+                    name = match1[1];
+                    let season = match1[2];
+                    console.log("Got series result: "+name+" of type="+type+" season="+season);
+                }
+                else {
+                    console.error("Can't capture series params in: "+name);
+                }
             }            
             else if(type == "movie") {
                 console.log("Got movies result: "+name+" of type="+type);
