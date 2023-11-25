@@ -128,7 +128,7 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                     if(stream_url) {                        
                         ///server_response_json = server_response_json.replaceAll("+"," ");
                         console.debug("Got json response from stream server="+stream_url);                        
-                        onSuccess(sources[i]);
+                        onSuccess(stream_url);
                         //stream_json = JSON.parse(server_response_json);
                         //sources = stream_json.sources;
                         /*
