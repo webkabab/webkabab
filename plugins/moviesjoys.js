@@ -182,7 +182,7 @@ function searchMoviesJoys(req, query) {
             let type = match[1];
             let name = match[2];        
             if(type == "series") {
-                re = /(*.?)-season-([0-9]+)/g
+                re = /(.*?)-season-([0-9]+)/g
                 name = match[1];
                 let season = match[2];
                 console.log("Got series result: "+name+" of type="+type+" season="+season);
