@@ -121,7 +121,7 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
                 if(message) {
                     console.debug("Got server API response: "+message);
                     //let re = /playerInstance[.]setup[(](.*?)[)]/g;
-                    let re = /file:\s*"(.*?)"/g;
+                    let re = /file:[+]"(.*?)"/g;
                     let match = re.exec(message);
                     //let server_response_json = match[1];
                     let stream_url = match[1];
