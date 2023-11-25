@@ -210,7 +210,7 @@ function searchMoviesJoys(req, query) {
                             series[name][season].push(episode);
                         }
                         else {
-                            console.error("Can't capture episode params for: "+name+" in season="+season);
+                            console.error("Can't capture episode params for: "+name+" in season="+season+" raw="+seasonsInfo);
                         }
                     }
                     else {
