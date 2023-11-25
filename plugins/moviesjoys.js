@@ -191,7 +191,31 @@ function searchMoviesJoys(req, query) {
                     if(!(name in series)) {
                         series[name] = {};
                     }            
-                    series[name][season] = "season="+season;
+                    series[name][season] = [];
+                    // Get all episodes of this season
+                    let SEASONS_API = SITE_BASE + "/j/ul-vrf.php";
+                    params = {};
+                    params["t"] = name;
+                    params["s"] = season;
+                    params["vrf"] = "true";
+                    let headers = {};
+                    headers["Referer"] = SITE_BASE;
+                    result = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+                    let seasonsInfo = result.message;
+                    if(seasonsInfo) {
+                        let episodesRegex = /myFunction[)]">([0-9]+)<\/a>/g;
+                        let match2 = episodesRegex.exec(seasonsInfo);
+                        if(match2) {
+                            let episode = match2[1];
+                            series[name][season].push(episode);
+                        }
+                        else {
+                            console.error("Can't capture episode params for: "+name+" in season="+season);
+                        }
+                    }
+                    else {
+                        console.error("Failed to get seasons info of: "+name+" season="+season);
+                    }
                 }
                 else {
                     console.error("Can't capture series params in: "+name);
@@ -207,6 +231,9 @@ function searchMoviesJoys(req, query) {
         
         for(var serie in series) {
             console.debug("Recorded series "+serie+" with "+Object.keys(series[serie]).length+" seasons");
+            for(season in series[serie]) {
+                console.debug("   Season: "+season+" has "+series[serie][season].length+" episodes");
+            }
         }
 
         /*
