@@ -190,9 +190,8 @@ function searchMoviesJoys(req, query) {
                     console.log("Got series result: "+name+" of type="+type+" season="+season);                                        
                     if(!(name in series)) {
                         series[name] = {};
-                    }
-                    let seasons = series[name];
-                    seasons[season] = "season="+season;
+                    }            
+                    series[name][season] = "season="+season;
                 }
                 else {
                     console.error("Can't capture series params in: "+name);
@@ -207,7 +206,7 @@ function searchMoviesJoys(req, query) {
         }
         
         for(var serie in series) {
-            console.debug("Recorded series "+series[serie]+" with "+series[serie].length+" seasons");
+            console.debug("Recorded series "+serie+" with "+Object.keys(series[serie]).length+" seasons");
         }
 
         /*
