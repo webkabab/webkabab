@@ -180,7 +180,7 @@ function searchMoviesJoys(req, query) {
         while(match = re.exec(searchResults)) {
             let type = match[1];
             let name = match[2];        
-            if(type == "series") {
+            if(type == "tvshow") {
                 re = /(.*?)-season-([0-9]+)/g
                 name = match[1];
                 let season = match[2];
