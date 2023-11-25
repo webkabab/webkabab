@@ -10,7 +10,7 @@ resolverPlugins["moviesjoys"] = resolveMoviesJoysVOD;
 if(typeof searchPlugins === 'undefined') {
     searchPlugins = [];
 }
-//searchPlugins.push(searchMoviesJoys); // TODO: enable once working
+searchPlugins.push(searchMoviesJoys);
 
 function resolveMoviesJoysVOD(parts, onSucess, onError) {
     console.debug("inside resolve moviesjoys VOD");
@@ -161,4 +161,121 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
     }        
 }
 
+function searchMoviesJoys(req, query) {
+    
+    let SEARCH_API = SITE_BASE + "/searchs/";
+    
+    let LIMIT_RESULTS = 3;
 
+    let results = {};
+    let params = {};
+
+    params["s"] = query;
+    let result = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+    let searchResults = result.message;
+    console.log("Got search results for q="+query+": "+searchResults);    
+    if(searchResults) {        
+        let count = 0;
+        let re = /class="name" href="\/(.*?)-watch\/(*.?)-season-([0-9]+)"/g;
+        let match = re.exec(searchResults);
+        let type = match[1];
+        let name = match[2];
+        if(type == "series") {
+            let season = match[3];
+            console.log("Got series result: "+name+" of type="+type+" season="+season);
+        }
+        else {
+            console.log("Got movies result: "+name+" of type="+type);
+        }
+        
+
+        /*
+        searchResults = JSON.parse(searchResults);
+        for(let i in searchResults) {
+            if(count >= LIMIT_RESULTS) 
+                break;
+            count = count + 1;
+
+            let searchResult = searchResults[i];
+            console.log("got search result: "+JSON.stringify(searchResult));
+            let seriesId = searchResult["id"];
+            let name = searchResult["name"];
+            console.debug("Got search result... name="+name+", series="+seriesId);
+
+            // visit the series page to get more info
+            let seriesUrl = SDAROT_BASE + "/watch/"+seriesId;
+            let fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
+            let content = TiviProvider.readAll(req, fd);            
+            TiviProvider.close(req, fd);
+            // find the regex with the english name
+            let matches = "";            
+            let englishName = "";
+            let nameReg = new RegExp("<span class=\"ltr\">(.*?)<\/span><\/strong>", "g");                        
+            matches = nameReg.exec(content);
+            if (matches !== null) {
+                englishName = matches[1];
+            }
+            else {
+                console.error("Cannot find english name in="+content);
+                englishName = name;
+            }
+            console.debug("English name="+englishName);
+            // find the regex with all seasons
+            let seasons = [];
+            let seasonReg = new RegExp("<li\\s*data\\-season=\"([0-9]+)\"", "g");            
+            matches = "";
+            do {
+                matches = seasonReg.exec(content);
+                if (matches !== null) {
+                    console.debug("found season="+matches[1]);
+                    seasons.push(matches[1]);
+                }                
+            } while(matches !== null);
+            if(seasons.length == 0) {
+                console.error("Cannot find any seasons");
+            }
+            
+            for(let j in seasons) {
+                let season = seasons[j];
+
+                // get the episodes for each season
+                let episodeListUrl = SDAROT_BASE + "/ajax/watch?episodeList="+seriesId+"&season="+season;
+                console.debug("getting episode list="+episodeListUrl);
+                //fd = TiviProvider.openFile(req, episodeListUrl, "UTF-8", false);
+                //content = TiviProvider.readAll(req, fd);            
+                //TiviProvider.close(req, fd);
+                let result = sendHTTPRequest(req, episodeListUrl, "GET", headers, params, true);
+                content = decodeURIComponent(result.message).replace(/\+/g, " ");                
+
+                let episodes = [];
+                let episodesReg = new RegExp("<li\\s*data\\-episode=\"([0-9]+)\"", "g");
+                matches = "";
+                do {
+                    matches = episodesReg.exec(content);
+                    if(matches !== null) {
+                        console.debug("found episode="+matches[1]);
+                        episodes.push(matches[1]);
+                    }
+                } while(matches !== null);
+                if(episodes.length == 0) {
+                    console.error("Cannot find any episodes");
+                }
+
+                for(let k in episodes) {
+                    let episode = episodes[k];
+                    
+                    results[englishName + " S"+season+"E"+episode] = 
+                            "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
+                    + "&series=" + seriesId
+                    + "&season=" + season
+                    + "&ep=" + episode;
+                }
+            }
+
+            
+          
+        }
+        */
+    }
+    return results;
+}
