@@ -185,9 +185,12 @@ function searchMoviesJoys(req, query) {
                 name = match[1];
                 let season = match[2];
                 console.log("Got series result: "+name+" of type="+type+" season="+season);
+            }            
+            else if(type == "movie") {
+                console.log("Got movies result: "+name+" of type="+type);
             }
             else {
-                console.log("Got movies result: "+name+" of type="+type);
+                console.log("Got bad result: "+match[0]);
             }
         }        
         
