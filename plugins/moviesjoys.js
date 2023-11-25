@@ -234,9 +234,16 @@ function searchMoviesJoys(req, query) {
         
         for(var serie in series) {
             console.debug("Recorded series "+serie+" with "+Object.keys(series[serie]).length+" seasons");
+            let cleanSeries = serie.replace("-", " ");
+            cleanSeries.toLowerCase();
+            let cleanQuery = query.toLowerCase();
+            let similarity = stringSimilarity.compareTwoStrings(cleanSeries, cleanQuery);
+            console.debug(" Similarity of serie="+cleanSeries+" to query="+cleanQuery+" is: "+similarity);
+            /*
             for(season in series[serie]) {
                 console.debug("   Season: "+season+" has "+series[serie][season].length+" episodes");
             }
+            */
         }
 
         /*
