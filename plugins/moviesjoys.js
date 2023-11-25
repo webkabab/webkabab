@@ -200,7 +200,7 @@ function searchMoviesJoys(req, query) {
                     params["vrf"] = "true";
                     let headers = {};
                     headers["Referer"] = SITE_BASE;
-                    result = sendHTTPRequest(req, SEARCH_API, "GET", headers, params, true);
+                    result = sendHTTPRequest(req, SEASONS_API, "GET", headers, params, true);
                     let seasonsInfo = result.message;
                     if(seasonsInfo) {
                         let episodesRegex = /myFunction[)]">([0-9]+)<\/a>/g;
