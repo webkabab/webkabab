@@ -257,7 +257,7 @@ function searchMoviesJoys(req, query) {
             let cleanB = b.replaceAll("-", " ");
             cleanB.toLowerCase();
             let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
-            return similarityA - similarityB;
+            return similarityB - similarityA;
         });
 
         console.debug("Sorted series:");
