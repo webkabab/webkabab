@@ -204,14 +204,17 @@ function searchMoviesJoys(req, query) {
                     let seasonsInfo = result.message;
                     if(seasonsInfo) {
                         let episodesRegex = /myFunction[)]">([0-9]+)<\/a>/g;
-                        let match2 = episodesRegex.exec(seasonsInfo);
-                        if(match2) {
-                            let episode = match2[1];
-                            series[name][season].push(episode);
+                        let match2;
+                        while(match2 = episodesRegex.exec(seasonsInfo)) {
+                            if(match2) {
+                                let episode = match2[1];                                
+                                series[name][season].push(episode);
+                            }
+                            else {
+                                console.error("Can't capture episode params for: "+name+" in season="+season+" raw="+seasonsInfo);
+                            }
                         }
-                        else {
-                            console.error("Can't capture episode params for: "+name+" in season="+season+" raw="+seasonsInfo);
-                        }
+                        
                     }
                     else {
                         console.error("Failed to get seasons info of: "+name+" season="+season);
