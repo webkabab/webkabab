@@ -1,4 +1,5 @@
 var SITE_BASE = "https://moviesjoys.cc";
+var MAX_SEARCH_PAGES = 3;
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
@@ -178,17 +179,36 @@ function searchMoviesJoys(req, query) {
     console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {        
         let count = 0;
-        let itemRegex = /class="name"[+]href="\/([a-zA-Z]*?)-watch\/(.*?)"/g;        
-        while(match = itemRegex.exec(searchResults)) {
-            let type = match[1];
-            let name = match[2];        
-            console.debug("Got media item: "+name+" of type: "+type);
-            mediaItems.push({
-                'name' : name,
-                'type' : type
-            });           
-        }
+        let pageMatch;
+        let pageRegex = /[&]page=([0-9])">/g;
+        let pageIdx = 1;
+        do {
+            if(pageMatch) {
+                pageIdx = pageMatch[1];
+                console.debug("Found page: "+pageIdx);
+                if(pageIdx && pageIdx > 1 && pageIdx <= MAX_SEARCH_PAGES) {
+                    params["page"] = pageIdx;
+                    result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
+                    searchResults = result.message;
+                }
+            }
+
+            if(pageIdx > 1 && searchResults) {
+                let itemRegex = /class="name"[+]href="\/([a-zA-Z]*?)-watch\/(.*?)"/g;        
+                while(match = itemRegex.exec(searchResults)) {
+                    let type = match[1];
+                    let name = match[2];        
+                    console.debug("Got media item: "+name+" of type: "+type);
+                    mediaItems.push({
+                        'name' : name,
+                        'type' : type
+                    });           
+                }
+            }
+                        
+        } while(pageMatch = pageRegex.exec(searchResults));
         
+
         let cleanQuery = query.toLowerCase();
         mediaItems.sort(function(a,b) {
             let cleanA = a['name'].replaceAll("-", " ");
