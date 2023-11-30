@@ -170,6 +170,7 @@ function searchMoviesJoys(req, query) {
     let results = {};
     let params = {};
     let series = {};
+    let mediaItems = [];
 
     params["s"] = query;
     let result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
@@ -181,88 +182,27 @@ function searchMoviesJoys(req, query) {
         while(match = itemRegex.exec(searchResults)) {
             let type = match[1];
             let name = match[2];        
-            if(type == "tvshow") {
-                let tvShowsRegex = /(.*?)-season-([0-9]+)/g
-                let match1 = tvShowsRegex.exec(name);
-                if(match1) {
-                    name = match1[1];
-                    let season = match1[2];
-                    console.log("Got series result: "+name+" of type="+type+" season="+season);                                        
-                    if(!(name in series)) {
-                        series[name] = {};
-                    }            
-                    series[name][season] = [];
-                    // Get all episodes of this season
-                    let SEASONS_API = SITE_BASE + "/j/ul-vrf.php";
-                    params = {};
-                    params["t"] = name;
-                    params["s"] = season;
-                    params["vrf"] = "true";
-                    let headers = {};
-                    headers["Referer"] = SITE_BASE;
-                    result = sendHTTPRequest(req, SEASONS_API, "GET", headers, params, true);
-                    let seasonsInfo = result.message;
-                    if(seasonsInfo) {
-                        let episodesRegex = /myFunction[)]">([0-9]+)<\/a>/g;
-                        let match2;
-                        while(match2 = episodesRegex.exec(seasonsInfo)) {
-                            if(match2) {
-                                let episode = match2[1];                                
-                                series[name][season].push(episode);
-                            }
-                            else {
-                                console.error("Can't capture episode params for: "+name+" in season="+season+" raw="+seasonsInfo);
-                            }
-                        }
-                        
-                    }
-                    else {
-                        console.error("Failed to get seasons info of: "+name+" season="+season);
-                    }
-                }
-                else {
-                    console.error("Can't capture series params in: "+name);
-                }
-            }            
-            else if(type == "movie") {
-                console.log("Got movies result: "+name+" of type="+type);
-            }
-            else {
-                console.log("Got bad result: "+match[0]);
-            }
+            console.debug("Got media item: "+name+" of type: "+type);
+            mediaItems.push({
+                'name' : name,
+                'type' : type
+            });           
         }
         
-        let seriesNames = [];
-
-        for(var serie in series) {
-            console.debug("Recorded series "+serie+" with "+Object.keys(series[serie]).length+" seasons");
-            seriesNames.push(serie);
-            let cleanSeries = serie.replaceAll("-", " ");
-            cleanSeries.toLowerCase();
-            let cleanQuery = query.toLowerCase();            
-            let similarity = exports.stringSimilarity(cleanSeries, cleanQuery);
-            console.debug(" Similarity of serie="+cleanSeries+" to query="+cleanQuery+" is: "+similarity);
-            /*
-            for(season in series[serie]) {
-                console.debug("   Season: "+season+" has "+series[serie][season].length+" episodes");
-            }
-            */
-        }
-
         let cleanQuery = query.toLowerCase();
-        seriesNames.sort(function(a,b) {
-            let cleanA = a.replaceAll("-", " ");
+        mediaItems.sort(function(a,b) {
+            let cleanA = a['name'].replaceAll("-", " ");
             cleanA.toLowerCase();
             let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
-            let cleanB = b.replaceAll("-", " ");
+            let cleanB = b['name'].replaceAll("-", " ");
             cleanB.toLowerCase();
             let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
             return similarityB - similarityA;
         });
 
-        console.debug("Sorted series:");
-        for(var serieName in seriesNames) {
-            console.debug("  Serie: "+seriesNames[serieName]);
+        console.debug("Sorted items:");
+        for(var item in mediaItems) {
+            console.debug("  Item: "+mediaItems[item]['name']+" type: "+mediaItems[item]['type']);
         }
 
         /*
@@ -353,5 +293,61 @@ function searchMoviesJoys(req, query) {
         }
         */
     }
+
+
+    /*
+    if(type == "tvshow") {
+
+        let tvShowsRegex = /(.*?)-season-([0-9]+)/g
+        let match1 = tvShowsRegex.exec(name);
+        if(match1) {
+            name = match1[1];
+            let season = match1[2];
+            console.log("Got series result: "+name+" of type="+type+" season="+season);                                        
+            if(!(name in series)) {
+                series[name] = {};
+            }            
+            series[name][season] = [];
+            // Get all episodes of this season
+            let SEASONS_API = SITE_BASE + "/j/ul-vrf.php";
+            params = {};
+            params["t"] = name;
+            params["s"] = season;
+            params["vrf"] = "true";
+            let headers = {};
+            headers["Referer"] = SITE_BASE;
+            result = sendHTTPRequest(req, SEASONS_API, "GET", headers, params, true);
+            let seasonsInfo = result.message;
+            if(seasonsInfo) {
+                let episodesRegex = /myFunction[)]">([0-9]+)<\/a>/g;
+                let match2;
+                while(match2 = episodesRegex.exec(seasonsInfo)) {
+                    if(match2) {
+                        let episode = match2[1];                                
+                        series[name][season].push(episode);
+                    }
+                    else {
+                        console.error("Can't capture episode params for: "+name+" in season="+season+" raw="+seasonsInfo);
+                    }
+                }
+                
+            }
+            else {
+                console.error("Failed to get seasons info of: "+name+" season="+season);
+            }
+        }
+        else {
+            console.error("Can't capture series params in: "+name);
+        }
+    }            
+    else if(type == "movie") {
+        console.log("Got movies result: "+name+" of type="+type);
+    }
+    else {
+        console.log("Got bad result: "+match[0]);
+    }
+    */
+
+
     return results;
 }
