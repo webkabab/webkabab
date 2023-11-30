@@ -204,8 +204,16 @@ function searchMoviesJoys(req, query) {
                         let tvShowsRegex = /(.*?)-season-([0-9]+)/g
                         let showMatch = tvShowsRegex.exec(name);
                         if(showMatch) {
-                            name = showMatch[1]
+                            name = showMatch[1];
                             season = showMatch[2];
+                        }
+                    }
+                    else if(type == "movie") {
+                        let movieRegex = /(.*?)-([0-9]+)/g;
+                        let movieMatch = movieRegex.exec(name);
+                        if(movieMatch) {
+                            name = movieMatch[1];
+                            season = movieMatch[2];
                         }
                     }
                     console.debug("Got media item: "+name+" of type: "+type+" season: "+season);
