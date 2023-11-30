@@ -193,7 +193,7 @@ function searchMoviesJoys(req, query) {
                 }
             }
 
-            if(pageIdx > 1 && searchResults) {
+            if(pageIdx >= 1 && searchResults) {
                 let itemRegex = /class="name"[+]href="\/([a-zA-Z]*?)-watch\/(.*?)"/g;        
                 while(match = itemRegex.exec(searchResults)) {
                     let type = match[1];
