@@ -1,5 +1,6 @@
 var SITE_BASE = "https://moviesjoys.cc";
 var MAX_SEARCH_PAGES = 3;
+var MAX_SEARCH_ITEMS = 3;
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
@@ -256,8 +257,10 @@ function searchMoviesJoys(req, query) {
 
         console.debug("Sorted items:");
         for(var item in uniqueNames) {
-            //console.debug("  Item: "+mediaItems[item]['name']+" type: "+mediaItems[item]['type']);
-            console.debug(" Item: "+uniqueNames[item]);
+            if(item >= MAX_SEARCH_ITEMS) {
+                break;
+            }                        
+            console.debug(" Item: "+uniqueNames[item]);             
         }
 
         /*
