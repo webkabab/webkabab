@@ -219,9 +219,24 @@ function searchMoviesJoys(req, query) {
                         
         } while(pageMatch = pageRegex.exec(searchResults));
         
+        let tvShows = {};
+        let uniqueNames = [];
+        for(var i in mediaItems) {            
+            let item = mediaItems[i];
+            if(item.type == "tvshow") {                
+                if(!tvShows[item.name]) {
+                    tvShows[item.name] = [];
+                    uniqueNames.push(item.name);
+                }
+                tvShows[item.name].push(item.season);
+            }
+            else {
+                uniqueNames.push(item.name);
+            }
+        }
 
         let cleanQuery = query.toLowerCase();
-        mediaItems.sort(function(a,b) {
+        uniqueNames.sort(function(a,b) {
             let cleanA = a['name'].replaceAll("-", " ");
             cleanA.toLowerCase();
             let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
@@ -232,8 +247,9 @@ function searchMoviesJoys(req, query) {
         });
 
         console.debug("Sorted items:");
-        for(var item in mediaItems) {
-            console.debug("  Item: "+mediaItems[item]['name']+" type: "+mediaItems[item]['type']);
+        for(var item in uniqueNames) {
+            //console.debug("  Item: "+mediaItems[item]['name']+" type: "+mediaItems[item]['type']);
+            console.debug(" Item: "+uniqueNames[item]);
         }
 
         /*
