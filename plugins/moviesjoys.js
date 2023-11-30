@@ -181,7 +181,7 @@ function searchMoviesJoys(req, query) {
         let count = 0;
         let pageMatch;
         let pageRegex = /[&]page=([0-9])">/g;
-        let pageIdx = 1;
+        let pageIdx = 0;
         do {
             if(pageMatch) {
                 pageIdx = pageMatch[1];
@@ -193,7 +193,7 @@ function searchMoviesJoys(req, query) {
                 }
             }
 
-            if(pageIdx >= 1 && searchResults) {
+            if((pageIdx == 0 || pageIdx > 1) && searchResults) {
                 let itemRegex = /class="name"[+]href="\/([a-zA-Z]*?)-watch\/(.*?)"/g;        
                 while(match = itemRegex.exec(searchResults)) {
                     let type = match[1];
