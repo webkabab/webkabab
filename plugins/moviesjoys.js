@@ -237,10 +237,10 @@ function searchMoviesJoys(req, query) {
 
         let cleanQuery = query.toLowerCase();
         uniqueNames.sort(function(a,b) {
-            let cleanA = a['name'].replaceAll("-", " ");
+            let cleanA = a.replaceAll("-", " ");
             cleanA.toLowerCase();
             let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
-            let cleanB = b['name'].replaceAll("-", " ");
+            let cleanB = b.replaceAll("-", " ");
             cleanB.toLowerCase();
             let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
             return similarityB - similarityA;
