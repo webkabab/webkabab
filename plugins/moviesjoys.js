@@ -198,10 +198,21 @@ function searchMoviesJoys(req, query) {
                 while(match = itemRegex.exec(searchResults)) {
                     let type = match[1];
                     let name = match[2];        
-                    console.debug("Got media item: "+name+" of type: "+type);
+                    let season = -1;
+                    // check for series
+                    if(type == "tvshow") {
+                        let tvShowsRegex = /(.*?)-season-([0-9]+)/g
+                        let showMatch = tvShowsRegex.exec(name);
+                        if(showMatch) {
+                            name = showMatch[1]
+                            season = showMatch[2];
+                        }
+                    }
+                    console.debug("Got media item: "+name+" of type: "+type+" season: "+season);
                     mediaItems.push({
                         'name' : name,
-                        'type' : type
+                        'type' : type,
+                        'season' : season
                     });           
                 }
             }
