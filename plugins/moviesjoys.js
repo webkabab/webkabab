@@ -21,6 +21,9 @@ function resolveMoviesJoysVOD(parts, onSucess, onError) {
     var episode = null;    
     var server = null;
     var type = null;
+    var token = null;
+    var movie = null;
+    var id = null;
     
     for(let i in parts) {
         let part = parts[i];
@@ -48,23 +51,104 @@ function resolveMoviesJoysVOD(parts, onSucess, onError) {
                 case "type":
                     type = value;
                     break;
+
+                case "movie":
+                    movie = value;
+                    break;
+
+                case "id":
+                    id = value;
+                    break;
+
+                case "token":
+                    token = value;
+                    break;                    
             }
         }
     }
 
-    if(!series || !season || !episode) {        
+    if(series && season && episode && server && type) {
+        console.debug("extract moviesjoys series="+series+", s="+season+", e="+episode);    
+        extractMoviesJoysSeries(series, season, episode, server, type, onSucess, onError);
+    }
+    else if(movie && server && id && token) {
+        console.debug("extract moviesjoys movie="+movie);    
+        extractMoviesJoysMovie(movie, id, server, token, onSucess, onError);
+    }
+    else {
         if(onError) {
             onError.error("Invalid MoviesJoys query=" + query);
         }
-        return;
-    }
-    
-    console.debug("extract moviesjoys video... series="+series+", s="+season+", e="+episode);    
-    extractMoviesJoysVideo(series, season, episode, server, type, onSucess, onError);
+    }    
 }
 
+function extractMoviesJoysStream(streamApi, onSuccess, onError) {
+    let matchURL = new URL(streamApi);
+    let refererStr = matchURL.protocol + "//"+matchURL.host;
+    params = {};
+    for (const [key, value] of matchURL.searchParams) {
+        params[key] = value;
+    }                    
+    streamApi = refererStr + matchURL.pathname;                                                        
+    headers["Referer"] = refererStr;
+    result = sendHTTPRequest(req, streamApi, "GET", headers, params, true);
+    message = result.message;           
+    cookies = result.cookies;
+                
+    if(message) {
+        console.debug("Got server API response: "+message);                        
+        let re = /file:[+]"(.*?)"/g;
+        let match = re.exec(message);                      
+        if(match)  {
+            let stream_url = match[1];
+            if(stream_url) {                                                    
+                console.debug("Got json response from stream server="+stream_url);                        
+                onSuccess(stream_url);                            
+            }
+        }
+        else {
+            onError("Bad server API response: "+message);
+        }
+        
+    }
+    else {
+        onError("Can't get valid response from the server API");
+    }    
+}
 
-function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess, onError) {
+function extractMoviesJoysMovie(movie, id, server, token, onSucess, onError) {
+    try {
+
+        let MOVIE_STREAM_API = SITE_BASE + "/ajax/episode/info/";
+
+        let headers = {};
+        headers["Accept"] =  "*/*";
+        headers["Referer"] = SITE_BASE;
+    
+        let params = {};
+        params["id"] = String(token);
+        params["server"] = String(server);
+       
+        let result = sendHTTPRequest(req, MOVIE_STREAM_API, "GET", headers, params, true);
+        let message = result.message;
+        if(message) {
+            console.debug("Got result: "+message);
+            let moviesJson = JSON.parse(message);
+            let target = moviesJson.target;
+            target = target.replaceAll(SITE_BASE, movie + "-" + id);
+            console.debug("Got stream API: "+ target);
+            extractMoviesJoysStream(target, onSucess, onError);            
+        }
+        else {
+            onError("Can't get response from movies API: "+MOVIE_STREAM_API);
+        }        
+    }
+    catch(e) {
+        onError(e);
+    }
+}
+
+function extractMoviesJoysSeries(series, season, episode, server, type, onSuccess, onError) {
     
     try {    
 
@@ -88,39 +172,9 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
             let re = /src="(.*?)"/g;
             let match = re.exec(message);
             if(match) {
-                let server_api = match[1];
-                if(server_api) {                    
-                    let matchURL = new URL(server_api);
-                    let refererStr = matchURL.protocol + "//"+matchURL.host;
-                    params = {};
-                    for (const [key, value] of matchURL.searchParams) {
-                        params[key] = value;
-                    }                    
-                    server_api = refererStr + matchURL.pathname;                                                        
-                    headers["Referer"] = refererStr;
-                    result = sendHTTPRequest(req, server_api, "GET", headers, params, true);
-                    message = result.message;           
-                    cookies = result.cookies;
-                                
-                    if(message) {
-                        console.debug("Got server API response: "+message);                        
-                        let re = /file:[+]"(.*?)"/g;
-                        let match = re.exec(message);                      
-                        if(match)  {
-                            let stream_url = match[1];
-                            if(stream_url) {                                                    
-                                console.debug("Got json response from stream server="+stream_url);                        
-                                onSuccess(stream_url);                            
-                            }
-                        }
-                        else {
-                            onError("Bad server API response: "+message);
-                        }
-                        
-                    }
-                    else {
-                        onError("Can't get valid response from the server API");
-                    }    
+                let streamApi = match[1];
+                if(streamApi) {                                 
+                    extractMoviesJoysStream(streamApi, onSucess, onError);                    
                 }
                 else {
                     onError("Can't capture server URI");                
@@ -437,6 +491,7 @@ function extractMovie(results, name, id) {
                         "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys"
                         + "&movie=" + name
                         + "&server=" + serverId
+                        + "&id=" + id
                         + "&token=" + token;
         }
         else {
