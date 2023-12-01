@@ -227,43 +227,18 @@ function searchMoviesJoys(req, query) {
             }
                         
         } while(pageMatch = pageRegex.exec(searchResults));
+
+        return filterSearchResults(query, mediaItems);    
         
-        let tvShows = {};
-        let uniqueNames = [];
-        for(var i in mediaItems) {            
-            let item = mediaItems[i];
-            if(item.type == "tvshow") {                
-                if(!tvShows[item.name]) {
-                    tvShows[item.name] = [];
-                    uniqueNames.push(item.name);
-                }
-                tvShows[item.name].push(item.season);
-            }
-            else {
-                uniqueNames.push(item.name);
-            }
-        }
+    }
+    else {
+        console.error("Cannot open search page for query: "+query);
+        return {};
+    }
+}
 
-        let cleanQuery = query.toLowerCase();
-        uniqueNames.sort(function(a,b) {
-            let cleanA = a.replaceAll("-", " ");
-            cleanA.toLowerCase();
-            let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
-            let cleanB = b.replaceAll("-", " ");
-            cleanB.toLowerCase();
-            let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
-            return similarityB - similarityA;
-        });
 
-        console.debug("Sorted items:");
-        for(var item in uniqueNames) {
-            if(item >= MAX_SEARCH_ITEMS) {
-                break;
-            }                        
-            console.debug(" Item: "+uniqueNames[item]);             
-        }
-
-        /*
+    /*
         searchResults = JSON.parse(searchResults);
         for(let i in searchResults) {
             if(count >= LIMIT_RESULTS) 
@@ -350,53 +325,11 @@ function searchMoviesJoys(req, query) {
           
         }
         */
-    }
-
 
     /*
     if(type == "tvshow") {
 
-        let tvShowsRegex = /(.*?)-season-([0-9]+)/g
-        let match1 = tvShowsRegex.exec(name);
-        if(match1) {
-            name = match1[1];
-            let season = match1[2];
-            console.log("Got series result: "+name+" of type="+type+" season="+season);                                        
-            if(!(name in series)) {
-                series[name] = {};
-            }            
-            series[name][season] = [];
-            // Get all episodes of this season
-            let SEASONS_API = SITE_BASE + "/j/ul-vrf.php";
-            params = {};
-            params["t"] = name;
-            params["s"] = season;
-            params["vrf"] = "true";
-            let headers = {};
-            headers["Referer"] = SITE_BASE;
-            result = sendHTTPRequest(req, SEASONS_API, "GET", headers, params, true);
-            let seasonsInfo = result.message;
-            if(seasonsInfo) {
-                let episodesRegex = /myFunction[)]">([0-9]+)<\/a>/g;
-                let match2;
-                while(match2 = episodesRegex.exec(seasonsInfo)) {
-                    if(match2) {
-                        let episode = match2[1];                                
-                        series[name][season].push(episode);
-                    }
-                    else {
-                        console.error("Can't capture episode params for: "+name+" in season="+season+" raw="+seasonsInfo);
-                    }
-                }
-                
-            }
-            else {
-                console.error("Failed to get seasons info of: "+name+" season="+season);
-            }
-        }
-        else {
-            console.error("Can't capture series params in: "+name);
-        }
+        
     }            
     else if(type == "movie") {
         console.log("Got movies result: "+name+" of type="+type);
@@ -406,6 +339,146 @@ function searchMoviesJoys(req, query) {
     }
     */
 
+    //return results;
+
+
+function filterSearchResults(query, mediaItems) {
+
+    let results = {};
+    let tvShows = {};
+    let movies = {};
+    let uniqueNames = [];
+    for(var i in mediaItems) {            
+        let item = mediaItems[i];
+        if(item.type == "tvshow") {                
+            if(!tvShows[item.name]) {
+                tvShows[item.name] = [];
+                uniqueNames.push({
+                    'name' : item.name,
+                    'type' : item.type
+                });
+            }
+            tvShows[item.name].push(item.season);
+        }
+        else {
+            movies[item.name] = item.season;
+            uniqueNames.push({
+                'name' : item.name,
+                'type' : item.type                
+            });
+        }
+    }
+
+    let cleanQuery = query.toLowerCase();
+    uniqueNames.sort(function(a,b) {
+        let cleanA = a.name.replaceAll("-", " ");
+        cleanA.toLowerCase();
+        let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
+        let cleanB = b.name.replaceAll("-", " ");
+        cleanB.toLowerCase();
+        let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
+        return similarityB - similarityA;
+    });
+
+    console.debug("Sorted items:");
+    for(var item in uniqueNames) {
+        if(item >= MAX_SEARCH_ITEMS) {
+            break;
+        }             
+        let uniqueItem = uniqueNames[item];           
+        console.debug(" Item: "+uniqueItem.name);  
+        if(uniqueItem.type == 'tvshow') {
+            // extract all episodes
+            extractTvShow(results, uniqueItem.name, tvShows[uniqueItem.name]);
+        }
+        else {
+            extractMovie(results, uniqueItem.name, movies[uniqueItem.name]);
+        }
+    }
 
     return results;
+}
+
+function extractTvShow(results, name, seasons) {
+       
+    for(var i in seasons) {
+        let season = seasons[i];
+        // Get all episodes of this season
+        let SEASONS_API = SITE_BASE + "/j/ul-vrf.php";
+        params = {};
+        params["t"] = name;
+        params["s"] = season;
+        params["vrf"] = "true";
+        let headers = {};
+        headers["Referer"] = SITE_BASE;
+        let result = sendHTTPRequest(req, SEASONS_API, "GET", headers, params, true);
+        let seasonsInfo = result.message;
+        if(seasonsInfo) {
+            let episodesRegex = /&server_name=(.+?)&s=[0-9]+&e=[0-9]+&type=(.+?)',[+]myFunction[)]">([0-9]+)<\/a>/g;
+            let match;
+            while(match = episodesRegex.exec(seasonsInfo)) {
+                if(match) {
+                    let server = match[1];
+                    let type = match[2];
+                    let episode = match[3];                                
+                    results[formatName(name) + " S"+season+"E"+episode] = 
+                        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys"
+                        + "&series=" + name
+                        + "&season=" + season
+                        + "&ep=" + episode
+                        + "&server=" + server
+                        + "&type=" + type;                    
+                }
+                else {
+                    console.error("Can't capture episode params for: "+name+" in season="+season+" raw="+seasonsInfo);
+                }
+            }
+            
+        }
+        else {
+            console.error("Failed to get seasons info of: "+name+" season="+season);
+        }
+    }    
+}
+
+function extractMovie(results, name, id) {
+    let MOVIE_API = SITE_BASE + "/movie-watch/" + name + "-" + id;
+    let result = sendHTTPRequest(req, SEASONS_API, "GET", headers, params, true);
+    let moviesInfo = result.message;
+    if(moviesInfo) {
+        // TODO: it captures only the first server.
+        let movieRegex = /<div[+]id="servers">.*?<div[+]class="server[+]row"[+]data-type="iframe"[+]data-id="([0-9]+)">.*?<a class=".*?"[+]data-id="(.*+))"/g;
+        let match = movieRegex.exec(moviesInfo);
+        if(match) {
+            let serverId = match[1];
+            let token = match[2];
+            results[formatName(name)] = 
+                        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys"
+                        + "&movie=" + name
+                        + "&server=" + serverId
+                        + "&token=" + token;
+        }
+        else {
+            console.error("Can't find any server... "+MOVIE_API);
+        }
+    }
+}
+
+function formatName(name) {
+    let result = name.replaceAll('-', ' ');
+    // split the string into an array of words
+    let words = result.split (' ');
+    // map each word to a new word with the first letter capitalized
+    let capitalizedWords = words.map (word => {
+        // get the first letter and make it uppercase
+        let firstLetter = word[0].toUpperCase ();
+        // get the rest of the word and keep it lowercase
+        let restOfWord = word.slice(1).toLowerCase ();
+        // return the new word
+        return firstLetter + restOfWord;
+    });
+    // join the array of words back into a string
+    result = capitalizedWords.join (' '); 
+    console.debug("Formatted name: "+name+" into: "+result);
+    return result;
 }
