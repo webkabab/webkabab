@@ -70,15 +70,6 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
 
         let headers = {};
         headers["Accept"] =  "*/*";
-        //headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-        //headers["User-Agent"], "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36";
-        //headers["sec-ch-ua-mobile"] = "0?";
-        //headers["sec-ch-ua-platform"] =  "\"Windows\"";
-        //headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"";
-        //headers["X-Requested-With"] = "XMLHttpRequest";
-        //headers["Host"] = SITE_BASE;    
-        //headers["Accept-Encoding"] = "gzip, deflate, br";
-        //headers["Connection"] = "keep-alive";
         headers["Referer"] = SITE_BASE;
     
         let params = {};
@@ -87,72 +78,58 @@ function extractMoviesJoysVideo(series, season, episode, server, type, onSuccess
         params["e"] = String(episode);
         params["server_name"] = String(server);
         params["type"] = String(type);        
-
-        console.debug("sending stream query...");              
+        
         let apiLink = SITE_BASE + "/j/grabber.php";
         let result = sendHTTPRequest(req, apiLink, "GET", headers, params, true);
         let message = result.message;           
         let cookies = result.cookies;
-
-    
-        console.debug("Got a stream server part: "+message);        
-        console.debug("Got cookies="+cookies);
     
         if(message) {
             let re = /src="(.*?)"/g;
             let match = re.exec(message);
-            let server_api = match[1];
-            if(server_api) {
-                console.debug("Got server API: "+server_api);
-                let matchURL = new URL(server_api);
-                let refererStr = matchURL.protocol + "//"+matchURL.host;
-                params = {};
-                for (const [key, value] of matchURL.searchParams) {
-                    params[key] = value;
-                }
-                console.debug("Server host path="+refererStr);
-                server_api = refererStr + matchURL.pathname;
-                console.debug("Got URL="+server_api);
-                
-                //headers["Host"] = refererStr;  
-                headers["Referer"] = refererStr;
-                result = sendHTTPRequest(req, server_api, "GET", headers, params, true);
-                message = result.message;           
-                cookies = result.cookies;
-                            
-                if(message) {
-                    console.debug("Got server API response: "+message);
-                    //let re = /playerInstance[.]setup[(](.*?)[)]/g;
-                    let re = /file:[+]"(.*?)"/g;
-                    let match = re.exec(message);
-                    //let server_response_json = match[1];
-                    let stream_url = match[1];
-                    if(stream_url) {                        
-                        ///server_response_json = server_response_json.replaceAll("+"," ");
-                        console.debug("Got json response from stream server="+stream_url);                        
-                        onSuccess(stream_url);
-                        //stream_json = JSON.parse(server_response_json);
-                        //sources = stream_json.sources;
-                        /*
-                        if(sources) {
-                            for(var i in sources) {
-                                console.debug("Got source: "+sources[i]);
-                                onSuccess(sources[i]);
+            if(match) {
+                let server_api = match[1];
+                if(server_api) {                    
+                    let matchURL = new URL(server_api);
+                    let refererStr = matchURL.protocol + "//"+matchURL.host;
+                    params = {};
+                    for (const [key, value] of matchURL.searchParams) {
+                        params[key] = value;
+                    }                    
+                    server_api = refererStr + matchURL.pathname;                                                        
+                    headers["Referer"] = refererStr;
+                    result = sendHTTPRequest(req, server_api, "GET", headers, params, true);
+                    message = result.message;           
+                    cookies = result.cookies;
+                                
+                    if(message) {
+                        console.debug("Got server API response: "+message);                        
+                        let re = /file:[+]"(.*?)"/g;
+                        let match = re.exec(message);                      
+                        if(match)  {
+                            let stream_url = match[1];
+                            if(stream_url) {                                                    
+                                console.debug("Got json response from stream server="+stream_url);                        
+                                onSuccess(stream_url);                            
                             }
                         }
                         else {
-                            onError("Got no sources!");
+                            onError("Bad server API response: "+message);
                         }
-                        */                        
+                        
                     }
+                    else {
+                        onError("Can't get valid response from the server API");
+                    }    
                 }
                 else {
-                    onError("Can't get valid response from the server API");
-                }    
+                    onError("Can't capture server URI");                
+                }            
             }
             else {
-                onError("Can't capture server URI");                
-            }            
+                onError("Got API error: "+message);
+            }
+            
         }
         else {
             onError("Got bad result from the API");
@@ -178,8 +155,7 @@ function searchMoviesJoys(req, query) {
     let result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
     let searchResults = result.message;
     console.log("Got search results for q="+query+": "+searchResults);    
-    if(searchResults) {        
-        let count = 0;
+    if(searchResults) {                
         let pageMatch;
         let pageRegex = /[&]page=([0-9])">/g;
         let pageIdx = 0;
