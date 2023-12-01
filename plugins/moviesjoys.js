@@ -86,6 +86,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
     let matchURL = new URL(streamApi);
     let refererStr = matchURL.protocol + "//"+matchURL.host;
     params = {};
+    headers = {};    
     for (const [key, value] of matchURL.searchParams) {
         params[key] = value;
     }                    
@@ -266,110 +267,6 @@ function searchMoviesJoys(req, query) {
         return {};
     }
 }
-
-
-    /*
-        searchResults = JSON.parse(searchResults);
-        for(let i in searchResults) {
-            if(count >= LIMIT_RESULTS) 
-                break;
-            count = count + 1;
-
-            let searchResult = searchResults[i];
-            console.log("got search result: "+JSON.stringify(searchResult));
-            let seriesId = searchResult["id"];
-            let name = searchResult["name"];
-            console.debug("Got search result... name="+name+", series="+seriesId);
-
-            // visit the series page to get more info
-            let seriesUrl = SDAROT_BASE + "/watch/"+seriesId;
-            let fd = TiviProvider.openFile(req, seriesUrl, "UTF-8", false);
-            let content = TiviProvider.readAll(req, fd);            
-            TiviProvider.close(req, fd);
-            // find the regex with the english name
-            let matches = "";            
-            let englishName = "";
-            let nameReg = new RegExp("<span class=\"ltr\">(.*?)<\/span><\/strong>", "g");                        
-            matches = nameReg.exec(content);
-            if (matches !== null) {
-                englishName = matches[1];
-            }
-            else {
-                console.error("Cannot find english name in="+content);
-                englishName = name;
-            }
-            console.debug("English name="+englishName);
-            // find the regex with all seasons
-            let seasons = [];
-            let seasonReg = new RegExp("<li\\s*data\\-season=\"([0-9]+)\"", "g");            
-            matches = "";
-            do {
-                matches = seasonReg.exec(content);
-                if (matches !== null) {
-                    console.debug("found season="+matches[1]);
-                    seasons.push(matches[1]);
-                }                
-            } while(matches !== null);
-            if(seasons.length == 0) {
-                console.error("Cannot find any seasons");
-            }
-            
-            for(let j in seasons) {
-                let season = seasons[j];
-
-                // get the episodes for each season
-                let episodeListUrl = SDAROT_BASE + "/ajax/watch?episodeList="+seriesId+"&season="+season;
-                console.debug("getting episode list="+episodeListUrl);
-                //fd = TiviProvider.openFile(req, episodeListUrl, "UTF-8", false);
-                //content = TiviProvider.readAll(req, fd);            
-                //TiviProvider.close(req, fd);
-                let result = sendHTTPRequest(req, episodeListUrl, "GET", headers, params, true);
-                content = decodeURIComponent(result.message).replace(/\+/g, " ");                
-
-                let episodes = [];
-                let episodesReg = new RegExp("<li\\s*data\\-episode=\"([0-9]+)\"", "g");
-                matches = "";
-                do {
-                    matches = episodesReg.exec(content);
-                    if(matches !== null) {
-                        console.debug("found episode="+matches[1]);
-                        episodes.push(matches[1]);
-                    }
-                } while(matches !== null);
-                if(episodes.length == 0) {
-                    console.error("Cannot find any episodes");
-                }
-
-                for(let k in episodes) {
-                    let episode = episodes[k];
-                    
-                    results[englishName + " S"+season+"E"+episode] = 
-                            "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot"
-                    + "&series=" + seriesId
-                    + "&season=" + season
-                    + "&ep=" + episode;
-                }
-            }
-
-            
-          
-        }
-        */
-
-    /*
-    if(type == "tvshow") {
-
-        
-    }            
-    else if(type == "movie") {
-        console.log("Got movies result: "+name+" of type="+type);
-    }
-    else {
-        console.log("Got bad result: "+match[0]);
-    }
-    */
-
-    //return results;
 
 
 function filterSearchResults(query, mediaItems) {
