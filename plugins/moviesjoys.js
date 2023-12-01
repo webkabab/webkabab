@@ -241,7 +241,7 @@ function searchMoviesJoys(req, query) {
                         }
                     }
                     else if(type == "movie") {
-                        let movieRegex = /(.*?)-([0-9]+)/g;
+                        let movieRegex = /(.*)-([0-9]+)/g;
                         let movieMatch = movieRegex.exec(name);
                         if(movieMatch) {
                             name = movieMatch[1];
