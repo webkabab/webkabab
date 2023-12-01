@@ -1,10 +1,10 @@
 #EXTM3U
 
 #EXTINF:-1 tvg-id="" group-title="סדרות" tvg-logo="" radio="false",Atlanta S04E01
-addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot&series=2637&season=4&ep=1
+#addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/sdarot&series=2637&season=4&ep=1
 
 #EXTINF:-1 tvg-id="" group-title="סדרות" tvg-logo="" radio="false",Game of Thrones S01E01
-addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys&series=game-of-thrones&season=1&ep=1&server=doki_joy&type=series
+#addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys&series=game-of-thrones&season=1&ep=1&server=doki_joy&type=series
 
 #EXTINF:-1 tvg-id="" group-title="סדרות" tvg-logo="" radio="false",Squid Game S01E01
-addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys&series=squid-game&season=1&ep=1&server=doki_joy&type=series
+#addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys&series=squid-game&season=1&ep=1&server=doki_joy&type=series
