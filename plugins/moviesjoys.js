@@ -450,7 +450,8 @@ function extractMovie(results, name, id) {
     let moviesInfo = result.message;
     if(moviesInfo) {
         // TODO: it captures only the first server.
-        let movieRegex = /<div[+]id="servers">.*?<div[+]class="server[+]row"[+]data-type="iframe"[+]data-id="([0-9]+)">.*?<a class=".*?"[+]data-id="(.*?)"/gms;
+        //let movieRegex = /<div[+]id="servers">.*?<div[+]class="server[+]row"[+]data-type="iframe"[+]data-id="([0-9]+)">.*?<a class=".*?"[+]data-id="(.*?)"/gms;
+        let movieRegex = /<div[+]id="servers">.*?<div[+]class="server[+]row"[+]data-type="iframe"[+]data-id="([0-9]+)">.*?<a[+]class=".*?"[+]data-id="(.*?)"/gms;
         console.debug(moviesInfo);
         let match = movieRegex.exec(moviesInfo);
         if(match) {
