@@ -442,8 +442,11 @@ function extractTvShow(results, name, seasons) {
 }
 
 function extractMovie(results, name, id) {
+    let params = {};
+    let headers = {};
+
     let MOVIE_API = SITE_BASE + "/movie-watch/" + name + "-" + id;
-    let result = sendHTTPRequest(req, SEASONS_API, "GET", headers, params, true);
+    let result = sendHTTPRequest(req, MOVIE_API, "GET", headers, params, true);
     let moviesInfo = result.message;
     if(moviesInfo) {
         // TODO: it captures only the first server.
