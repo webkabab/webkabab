@@ -98,7 +98,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
                 
     if(message) {       
         // Get the subtitles
-        let subRegex = /tracks:[+](.*?),.*?image/g;
+        let subRegex = /tracks:[+](.*?),[+\s]*?image/g;
         let match = subRegex.exec(message);
         if(match) {
             let tracks = match[1];
