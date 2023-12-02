@@ -102,6 +102,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
         let match = subRegex.exec(message);
         if(match) {
             let tracks = match[1];
+            console.debug("Got subs JSON: "+tracks);
             let subs = JSON.parse(tracks);
             for(var i in subs) {
                 let track = subs[i];
