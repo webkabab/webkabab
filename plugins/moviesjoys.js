@@ -302,7 +302,9 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
                 let subURL = track.file;
                 let language = track.label;                
                 let languageCode = LANGUAGE_CODES[language];
+                if(!languageCode) languageCode = "en" // default
                 console.debug("Found sub: "+subURL+" language: "+language+" code: "+languageCode);
+                sendSubtitle(req, language, subURL, languageCode);                
             }
         }
         else {
