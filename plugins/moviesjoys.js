@@ -109,7 +109,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
                 let track = subs[i];
                 let subURL = track.file;
                 let language = track.label;                
-                let languageCode = languageNames.of (language);
+                let languageCode = languageNames.of(language);
                 console.debug("Found sub: "+subURL+" language: "+language+" code: "+languageCode);
             }
         }
