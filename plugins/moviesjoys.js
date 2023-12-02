@@ -190,7 +190,7 @@ var LANGUAGE_CODES = {
 };
 
 LANGUAGE_CODES = Object.keys(LANGUAGE_CODES).reduce((acc, key) => {
-    acc[obj[key]] = key;
+    acc[LANGUAGE_CODES[key]] = key;
     return acc;
 }, {});
 
