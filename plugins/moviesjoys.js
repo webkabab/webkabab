@@ -112,7 +112,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
             onError("Bad server API response: "+message);
         }
         // Get the subtitles
-        let subRegex = /tracks:[+](.*?),image/g;
+        let subRegex = /tracks:[+](.*?),.*?image/g;
         match = subRegex.exec(message);
         if(match) {
             let tracks = match[1];
