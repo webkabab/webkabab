@@ -97,6 +97,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
     cookies = result.cookies;
                 
     if(message) {
+        // Get the stream
         console.debug("Got server API response: "+message);                        
         let re = /file:[+]"(.*?)"/g;
         let match = re.exec(message);                      
@@ -110,7 +111,22 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
         else {
             onError("Bad server API response: "+message);
         }
-        
+        // Get the subtitles
+        let subRegex = /tracks:[+](.*?),image/g;
+        match = subRegex.exec(message);
+        if(match) {
+            let tracks = match[1];
+            let subs = JSON.parse(tracks);
+            for(var i in subs) {
+                let track = subs[i];
+                let subURL = track.file;
+                let language = track.label;
+                console.debug("Found sub: "+subURL+" language: "+language);
+            }
+        }
+        else {
+            console.error("Failed to fetch subtitles "+message);
+        }
     }
     else {
         onError("Can't get valid response from the server API");
