@@ -100,6 +100,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
         // Get the subtitles
         let subRegex = /tracks:[+](.*?),[+\s]*?image/g;
         let match = subRegex.exec(message);
+        let languageNames = new Intl.DisplayNames (['en'], {type: 'language'});
         if(match) {
             let tracks = match[1];
             console.debug("Got subs JSON: "+tracks);
@@ -107,8 +108,9 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
             for(var i in subs) {
                 let track = subs[i];
                 let subURL = track.file;
-                let language = track.label;
-                console.debug("Found sub: "+subURL+" language: "+language);
+                let language = track.label;                
+                let languageCode = languageNames.of (language);
+                console.debug("Found sub: "+subURL+" language: "+language+" code: "+languageCode);
             }
         }
         else {
