@@ -512,10 +512,10 @@ function filterSearchResults(query, mediaItems) {
     let cleanQuery = query.toLowerCase();
     uniqueNames.sort(function(a,b) {
         console.log("a="+JSON.stringify(a));
-        let cleanA = String(a['name']).replaceAll(/-/g, " ");
+        let cleanA = a.name.replace(/-/g, " ");
         cleanA.toLowerCase();
         let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
-        let cleanB = b['name'].replace("-", " ");
+        let cleanB = b.name.replace(/-/g, " ");
         cleanB.toLowerCase();
         let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
         return similarityB - similarityA;
