@@ -512,10 +512,10 @@ function filterSearchResults(query, mediaItems) {
     let cleanQuery = query.toLowerCase();
     uniqueNames.sort(function(a,b) {
         console.log("a="+JSON.stringify(a));
-        let cleanA = a['name'].replace("/-/g", " ");
+        let cleanA = a['name'].replaceAll("-", " ");
         cleanA.toLowerCase();
         let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
-        let cleanB = b['name'].replace("/-/g", " ");
+        let cleanB = b['name'].replace("-", " ");
         cleanB.toLowerCase();
         let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
         return similarityB - similarityA;
@@ -612,7 +612,7 @@ function extractMovie(results, name, id) {
 }
 
 function formatName(name) {
-    let result = name.replace('/-/g', ' ');
+    let result = name.replaceAll('-', ' ');
     // split the string into an array of words
     let words = result.split (' ');
     // map each word to a new word with the first letter capitalized
