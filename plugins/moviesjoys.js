@@ -349,7 +349,7 @@ function extractMoviesJoysMovie(movie, id, server, token, onSucess, onError) {
             console.debug("Got result: "+message);
             let moviesJson = JSON.parse(message);
             let target = moviesJson.target;
-            target = target.replaceAll(SITE_BASE, movie + "-" + id);
+            target = target.replace(SITE_BASE, movie + "-" + id);
             console.debug("Got stream API: "+ target);
             extractMoviesJoysStream(target, onSucess, onError);            
         }
