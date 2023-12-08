@@ -612,7 +612,7 @@ function extractMovie(results, name, id) {
 }
 
 function formatName(name) {
-    let result = name.replaceAll('-', ' ');
+    let result = name.replaceA(/-/g, ' ');
     // split the string into an array of words
     let words = result.split (' ');
     // map each word to a new word with the first letter capitalized
