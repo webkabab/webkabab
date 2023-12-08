@@ -501,7 +501,7 @@ function filterSearchResults(query, mediaItems) {
             tvShows[item.name].push(item.season);
         }
         else {
-            movies[item.name] = item.season;
+            movies[item.name] = item.season;            
             uniqueNames.push({
                 'name' : item.name,
                 'type' : item.type                
@@ -511,6 +511,7 @@ function filterSearchResults(query, mediaItems) {
 
     let cleanQuery = query.toLowerCase();
     uniqueNames.sort(function(a,b) {
+        console.log("a="+a);
         let cleanA = a['name'].replaceAll("-", " ");
         cleanA.toLowerCase();
         let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
