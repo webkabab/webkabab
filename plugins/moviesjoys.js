@@ -206,7 +206,7 @@ if(typeof searchPlugins === 'undefined') {
 }
 searchPlugins.push(searchMoviesJoys);
 
-function resolveMoviesJoysVOD(parts, onSucess, onError) {
+function resolveMoviesJoysVOD(parts, onSuccess, onError) {
     console.debug("inside resolve moviesjoys VOD");
     var series = null;
     var season = null;
@@ -261,11 +261,11 @@ function resolveMoviesJoysVOD(parts, onSucess, onError) {
 
     if(series && season && episode && server && type) {
         console.debug("extract moviesjoys series="+series+", s="+season+", e="+episode);    
-        extractMoviesJoysSeries(series, season, episode, server, type, onSucess, onError);
+        extractMoviesJoysSeries(series, season, episode, server, type, onSuccess, onError);
     }
     else if(movie && server && id && token) {
         console.debug("extract moviesjoys movie="+movie);    
-        extractMoviesJoysMovie(movie, id, server, token, onSucess, onError);
+        extractMoviesJoysMovie(movie, id, server, token, onSuccess, onError);
     }
     else {
         if(onError) {
@@ -330,7 +330,7 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
     }    
 }
 
-function extractMoviesJoysMovie(movie, id, server, token, onSucess, onError) {
+function extractMoviesJoysMovie(movie, id, server, token, onSuccess, onError) {
     try {
 
         let MOVIE_STREAM_API = SITE_BASE + "/ajax/episode/info/";
@@ -351,7 +351,7 @@ function extractMoviesJoysMovie(movie, id, server, token, onSucess, onError) {
             let target = moviesJson.target;
             target = target.replace(SITE_BASE, movie + "-" + id);
             console.debug("Got stream API: "+ target);
-            extractMoviesJoysStream(target, onSucess, onError);            
+            extractMoviesJoysStream(target, onSuccess, onError);            
         }
         else {
             onError("Can't get response from movies API: "+MOVIE_STREAM_API);
@@ -388,7 +388,7 @@ function extractMoviesJoysSeries(series, season, episode, server, type, onSucces
             if(match) {
                 let streamApi = match[1];
                 if(streamApi) {                                 
-                    extractMoviesJoysStream(streamApi, onSucess, onError);                    
+                    extractMoviesJoysStream(streamApi, onSuccess, onError);                    
                 }
                 else {
                     onError("Can't capture server URI");                
