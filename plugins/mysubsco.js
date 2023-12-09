@@ -21,7 +21,7 @@ function searchSubs(name, season, episode, languages) {
     if(message) {
         let re = /list-group-item"[+]title="(.*?)"[+]href="(.*?)">/g;        
         while(match = re.exec(message)) {
-            let title = match[1];
+            let title = formatName(match[1]);
             let href = match[2];
             console.debug("Got title="+title+" href="+href);
             searchResults.push({
@@ -46,6 +46,7 @@ function searchSubs(name, season, episode, languages) {
                 let url = beseResult.url;
                 // replace season and episode numbers for series
                 if(season > 0 && episode > 0) {
+                    console.debug("Fetcing sub for series... s="+season+" e="+episode);
                     let seriesNumRegex = /showlistsubtitles-([0-9]+?)-(.+?)/g;
                     let match = seriesNumRegex.exec(url);
                     if(match) {
@@ -63,6 +64,7 @@ function searchSubs(name, season, episode, languages) {
                 let result = sendHTTPRequest(req, SEARCH_RESULT_PAGE, "GET", {}, {}, true);
                 let message = result.message;
                 if(message) {
+                    console.debug("Getting subs...");
                     let subsRegex = /Language[+][:].*?<i>(.+?)<.*?rel="nofollow"[+]href="(.+?)"/g;
                     let subtitles = [];
                     while(match = subsRegex.exec(message)) {
