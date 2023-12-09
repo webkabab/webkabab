@@ -65,7 +65,7 @@ function searchSubs(name, season, episode, languages) {
                 let message = result.message;
                 if(message) {
                     console.debug("Getting subs...");
-                    let subsRegex = /"flag-icon[+]flag-icon-sa"[+]title="(.+?)".*?rel="nofollow"[+]href="(.+?)"/gms;
+                    let subsRegex = /"flag-icon[+]flag-icon-.*?"[+]title="(.+?)".*?rel="nofollow"[+]href="(.+?)"/gms;
                     let subtitles = [];
                     while(match = subsRegex.exec(message)) {
                         let language = match[1];
