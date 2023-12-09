@@ -71,7 +71,7 @@ function searchSubs(name, season, episode, languages) {
                         let language = match[1];
                         let subtitleUrl = match[2];
                         console.debug("Found ext. subtitle: "+subtitleUrl+" language: "+language);
-                        if(LANGUAGE_CODES[language] in languages) {
+                        if(languages.includes(LANGUAGE_CODES[language])) {
                             console.debug("Found ext subtitle of langauge: "+language);
                             subtitles.push({
                                 "name" : language,
