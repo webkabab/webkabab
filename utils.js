@@ -1,4 +1,4 @@
-var LANGUAGE_CODES = {
+var LANGUAGE_NAMES = {
     "aa": "Afar",
     "ab": "Abkhazian",
     "ae": "Avestan",
@@ -185,7 +185,7 @@ var LANGUAGE_CODES = {
     "zu": "Zulu"
 };
 
-LANGUAGE_CODES = Object.keys(LANGUAGE_CODES).reduce((acc, key) => {
+var LANGUAGE_CODES = Object.keys(LANGUAGE_NAMES).reduce((acc, key) => {
     acc[LANGUAGE_CODES[key]] = key;
     return acc;
 }, {});

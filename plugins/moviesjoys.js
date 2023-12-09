@@ -84,7 +84,7 @@ function resolveMoviesJoysVOD(parts, onSuccess, onError) {
     }    
 }
 
-function extractMoviesJoysStream(streamApi, name, onSuccess, onError) {
+function extractMoviesJoysStream(streamApi, name, season, episode, onSuccess, onError) {
     let matchURL = new URL(streamApi);
     let refererStr = matchURL.protocol + "//"+matchURL.host;
     params = {};
@@ -119,8 +119,12 @@ function extractMoviesJoysStream(streamApi, name, onSuccess, onError) {
                 console.debug("Found sub: "+subURL+" language: "+language+" code: "+languageCode);
                 TiviProvider.sendSubtitle(req, language, subURL, languageCode);                
             }
-            if(!hebrewFound) {
+            if(!hebrewFound && subsPlugins) {
                 //fetchExternalSubs(name, ["he"]);
+                for(var i in subsPlugins) {
+                    let fetchExtSubtitle = subsPlugins[i];
+                    fetchExtSubtitle(name, season, episode, ["he"]);
+                }
             }
         }
         else {
@@ -167,7 +171,7 @@ function extractMoviesJoysMovie(movie, id, server, token, onSuccess, onError) {
             let target = moviesJson.target;
             target = target.replace(SITE_BASE, movie + "-" + id);
             console.debug("Got stream API: "+ target);
-            extractMoviesJoysStream(target, formatName(movie), onSuccess, onError);            
+            extractMoviesJoysStream(target, formatName(movie), -1, -1, onSuccess, onError);            
         }
         else {
             onError("Can't get response from movies API: "+MOVIE_STREAM_API);
@@ -204,7 +208,7 @@ function extractMoviesJoysSeries(series, season, episode, server, type, onSucces
             if(match) {
                 let streamApi = match[1];
                 if(streamApi) {                                 
-                    extractMoviesJoysStream(streamApi, formatName(series), onSuccess, onError);                    
+                    extractMoviesJoysStream(streamApi, formatName(series), season, episode, onSuccess, onError);                    
                 }
                 else {
                     onError("Can't capture server URI");                
@@ -329,10 +333,10 @@ function filterSearchResults(query, mediaItems) {
     uniqueNames.sort(function(a,b) {
         console.log("a="+JSON.stringify(a));
         let cleanA = a.name.replace(/-/g, " ");
-        cleanA.toLowerCase();
+        cleanA = cleanA.toLowerCase();
         let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
         let cleanB = b.name.replace(/-/g, " ");
-        cleanB.toLowerCase();
+        cleanB = cleanB.toLowerCase();
         let similarityB = exports.stringSimilarity(cleanB, cleanQuery);
         return similarityB - similarityA;
     });
