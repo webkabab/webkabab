@@ -2,197 +2,7 @@ var SITE_BASE = "https://moviesjoys.cc";
 var MAX_SEARCH_PAGES = 3;
 var MAX_SEARCH_ITEMS = 3;
 
-var LANGUAGE_CODES = {
-    "aa": "Afar",
-    "ab": "Abkhazian",
-    "ae": "Avestan",
-    "af": "Afrikaans",
-    "ak": "Akan",
-    "am": "Amharic",
-    "an": "Aragonese",
-    "ar": "Arabic",
-    "as": "Assamese",
-    "av": "Avaric",
-    "ay": "Aymara",
-    "az": "Azerbaijani",
-    "ba": "Bashkir",
-    "be": "Belarusian",
-    "bg": "Bulgarian",
-    "bh": "Bihari languages",
-    "bi": "Bislama",
-    "bm": "Bambara",
-    "bn": "Bengali",
-    "bo": "Tibetan",
-    "br": "Breton",
-    "bs": "Bosnian",
-    "ca": "Catalan",
-    "ce": "Chechen",
-    "ch": "Chamorro",
-    "co": "Corsican",
-    "cr": "Cree",
-    "cs": "Czech",
-    "cu": "Church Slavic",
-    "cv": "Chuvash",
-    "cy": "Welsh",
-    "da": "Danish",
-    "de": "German",
-    "dv": "Divehi",
-    "dz": "Dzongkha",
-    "ee": "Ewe",
-    "el": "Greek",
-    "en": "English",
-    "eo": "Esperanto",
-    "es": "Spanish",
-    "et": "Estonian",
-    "eu": "Basque",
-    "fa": "Persian",
-    "ff": "Fulah",
-    "fi": "Finnish",
-    "fj": "Fijian",
-    "fo": "Faroese",
-    "fr": "French",
-    "fy": "Western Frisian",
-    "ga": "Irish",
-    "gd": "Gaelic; Scomttish Gaelic",
-    "gl": "Galician",
-    "gn": "Guarani",
-    "gu": "Gujarati",
-    "gv": "Manx",
-    "ha": "Hausa",
-    "he": "Hebrew",
-    "hi": "Hindi",
-    "ho": "Hiri Motu",
-    "hr": "Croatian",
-    "ht": "Haitian",
-    "hu": "Hungarian",
-    "hy": "Armenian",
-    "hz": "Herero",
-    "ia": "Interlingua",
-    "id": "Indonesian",
-    "ie": "Interlingue",
-    "ig": "Igbo",
-    "ii": "Sichuan Yi",
-    "ik": "Inupiaq",
-    "io": "Ido",
-    "is": "Icelandic",
-    "it": "Italian",
-    "iu": "Inuktitut",
-    "ja": "Japanese",
-    "jv": "Javanese",
-    "ka": "Georgian",
-    "kg": "Kongo",
-    "ki": "Kikuyu",
-    "kj": "Kuanyama",
-    "kk": "Kazakh",
-    "kl": "Kalaallisut",
-    "km": "Central Khmer",
-    "kn": "Kannada",
-    "ko": "Korean",
-    "kr": "Kanuri",
-    "ks": "Kashmiri",
-    "ku": "Kurdish",
-    "kv": "Komi",
-    "kw": "Cornish",
-    "ky": "Kirghiz",
-    "la": "Latin",
-    "lb": "Luxembourgish",
-    "lg": "Ganda",
-    "li": "Limburgan",
-    "ln": "Lingala",
-    "lo": "Lao",
-    "lt": "Lithuanian",
-    "lu": "Luba-Katanga",
-    "lv": "Latvian",
-    "mg": "Malagasy",
-    "mh": "Marshallese",
-    "mi": "Maori",
-    "mk": "Macedonian",
-    "ml": "Malayalam",
-    "mn": "Mongolian",
-    "mr": "Marathi",
-    "ms": "Malay",
-    "mt": "Maltese",
-    "my": "Burmese",
-    "na": "Nauru",
-    "nb": "Norwegian1",
-    "nd": "Ndebele, North; North Ndebele",
-    "ne": "Nepali",
-    "ng": "Ndonga",
-    "nl": "Dutch",
-    "nn": "Norwegian Nynorsk",
-    "no": "Norwegian",
-    "nr": "Ndebele, South; South Ndebele",
-    "nv": "Navajo; Navaho",
-    "ny": "Chichewa; Chewa; Nyanja",
-    "oc": "Occitan (post 1500)",
-    "oj": "Ojibwa",
-    "om": "Oromo",
-    "or": "Oriya",
-    "os": "Ossetian; Ossetic",
-    "pa": "Panjabi; Punjabi",
-    "pi": "Pali",
-    "pl": "Polish",
-    "ps": "Pushto; Pashto",
-    "pt": "Portuguese",
-    "qu": "Quechua",
-    "rm": "Romansh",
-    "rn": "Rundi",
-    "ro": "Romanian",
-    "ru": "Russian",
-    "rw": "Kinyarwanda",
-    "sa": "Sanskrit",
-    "sc": "Sardinian",
-    "sd": "Sindhi",
-    "se": "Northern Sami",
-    "sg": "Sango",
-    "si": "Sinhala",
-    "sk": "Slovak",
-    "sl": "Slovenian",
-    "sm": "Samoan",
-    "sn": "Shona",
-    "so": "Somali",
-    "sq": "Albanian",
-    "sr": "Serbian",
-    "ss": "Swati",
-    "st": "Sotho, Southern",
-    "su": "Sundanese",
-    "sv": "Swedish",
-    "sw": "Swahili",
-    "ta": "Tamil",
-    "te": "Telugu",
-    "tg": "Tajik",
-    "th": "Thai",
-    "ti": "Tigrinya",
-    "tk": "Turkmen",
-    "tl": "Tagalog",
-    "tn": "Tswana",
-    "to": "Tonga (Tonga Islands)",
-    "tr": "Turkish",
-    "ts": "Tsonga",
-    "tt": "Tatar",
-    "tw": "Twi",
-    "ty": "Tahitian",
-    "ug": "Uighur; Uyghur",
-    "uk": "Ukrainian",
-    "ur": "Urdu",
-    "uz": "Uzbek",
-    "ve": "Venda",
-    "vi": "Vietnamese",
-    "vo": "Volapük",
-    "wa": "Walloon",
-    "wo": "Wolof",
-    "xh": "Xhosa",
-    "yi": "Yiddish",
-    "yo": "Yoruba",
-    "za": "Zhuang",
-    "zh": "Chinese",
-    "zu": "Zulu"
-};
 
-LANGUAGE_CODES = Object.keys(LANGUAGE_CODES).reduce((acc, key) => {
-    acc[LANGUAGE_CODES[key]] = key;
-    return acc;
-}, {});
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
@@ -274,7 +84,7 @@ function resolveMoviesJoysVOD(parts, onSuccess, onError) {
     }    
 }
 
-function extractMoviesJoysStream(streamApi, onSuccess, onError) {
+function extractMoviesJoysStream(streamApi, name, onSuccess, onError) {
     let matchURL = new URL(streamApi);
     let refererStr = matchURL.protocol + "//"+matchURL.host;
     params = {};
@@ -291,20 +101,26 @@ function extractMoviesJoysStream(streamApi, onSuccess, onError) {
     if(message) {       
         // Get the subtitles
         let subRegex = /tracks:[+](.*?),[+\s]*?image/g;
-        let match = subRegex.exec(message);
-        //let languageNames = new Intl.DisplayNames (['en'], {type: 'language'});
+        let match = subRegex.exec(message);        
         if(match) {
             let tracks = match[1];
             console.debug("Got subs JSON: "+tracks);
             let subs = JSON.parse(tracks);
+            let hebrewFound = false;
             for(var i in subs) {
                 let track = subs[i];
                 let subURL = track.file;
                 let language = track.label;                
                 let languageCode = LANGUAGE_CODES[language];
+                if(languageCode == "he") {
+                    hebrewFound = true;
+                }
                 if(!languageCode) languageCode = "en" // default
                 console.debug("Found sub: "+subURL+" language: "+language+" code: "+languageCode);
                 TiviProvider.sendSubtitle(req, language, subURL, languageCode);                
+            }
+            if(!hebrewFound) {
+                //fetchExternalSubs(name, ["he"]);
             }
         }
         else {
@@ -351,7 +167,7 @@ function extractMoviesJoysMovie(movie, id, server, token, onSuccess, onError) {
             let target = moviesJson.target;
             target = target.replace(SITE_BASE, movie + "-" + id);
             console.debug("Got stream API: "+ target);
-            extractMoviesJoysStream(target, onSuccess, onError);            
+            extractMoviesJoysStream(target, formatName(movie), onSuccess, onError);            
         }
         else {
             onError("Can't get response from movies API: "+MOVIE_STREAM_API);
@@ -388,7 +204,7 @@ function extractMoviesJoysSeries(series, season, episode, server, type, onSucces
             if(match) {
                 let streamApi = match[1];
                 if(streamApi) {                                 
-                    extractMoviesJoysStream(streamApi, onSuccess, onError);                    
+                    extractMoviesJoysStream(streamApi, formatName(series), onSuccess, onError);                    
                 }
                 else {
                     onError("Can't capture server URI");                
@@ -611,21 +427,4 @@ function extractMovie(results, name, id) {
     }
 }
 
-function formatName(name) {
-    let result = name.replace(/-/g, ' ');
-    // split the string into an array of words
-    let words = result.split (' ');
-    // map each word to a new word with the first letter capitalized
-    let capitalizedWords = words.map (word => {
-        // get the first letter and make it uppercase
-        let firstLetter = word[0].toUpperCase ();
-        // get the rest of the word and keep it lowercase
-        let restOfWord = word.slice(1).toLowerCase ();
-        // return the new word
-        return firstLetter + restOfWord;
-    });
-    // join the array of words back into a string
-    result = capitalizedWords.join (' '); 
-    console.debug("Formatted name: "+name+" into: "+result);
-    return result;
-}
+
