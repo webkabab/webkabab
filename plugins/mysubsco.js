@@ -19,7 +19,7 @@ function searchSubs(name, season, episode, languages) {
     let message = result.message;
     let searchResults = [];
     if(message) {
-        let re = /title="(.*?)"[\s+]href="(.*?)">/g;        
+        let re = /list-group-item"[+]title="(.*?)"[+]href="(.*?)">/g;        
         while(match = re.exec(message)) {
             let title = match[1];
             let href = match[2];
