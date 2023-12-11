@@ -73,11 +73,28 @@ function searchSubs(name, season, episode, languages) {
                         console.debug("Found ext. subtitle: "+subtitleUrl+" language: "+language);
                         if(languages.includes(LANGUAGE_CODES[language])) {
                             console.debug("Found ext subtitle of langauge: "+language);
-                            subtitles.push({
-                                "name" : language,
-                                "language" : LANGUAGE_CODES[language],
-                                "url" : MYSUBS_BASE + subtitleUrl
-                            });
+                            // get the subs download page
+                            let downloadUrl = MYSUBS_BASE + subtitleUrl;
+                            let result = sendHTTPRequest(req, downloadUrl, "GET", {}, {}, true);
+                            let message = result.message;
+                            if(message) {
+                                let downloadRegex = /href="(.*?)"><button/g;
+                                match = downloadRegex.exec(message);
+                                if(match) {
+                                    subtitles.push({
+                                        "name" : language,
+                                        "language" : LANGUAGE_CODES[language],
+                                        "url" : MYSUBS_BASE + match[1]
+                                    });
+                                }
+                                else {
+                                    console.error("Cannot get download link");
+                                }
+                            }
+                            else {
+                                console.error("Cannot get download page: "+downloadUrl);                                
+                            }
+                            
                         }
                     }
                     for(var i in subtitles) {
