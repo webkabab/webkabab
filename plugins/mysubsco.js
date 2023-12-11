@@ -81,11 +81,12 @@ function searchSubs(name, season, episode, languages) {
                                 let downloadRegex = /<a[+]href="([^>]*?)"><button/g;
                                 match = downloadRegex.exec(message);
                                 if(match) {
-                                    console.debug("Got sub download link: "+ match[1]);
+                                    let subUrl = match[1];
+                                    console.debug("Got sub download link: "+ subUrl);
                                     subtitles.push({
                                         "name" : language,
                                         "language" : LANGUAGE_CODES[language],
-                                        "url" : MYSUBS_BASE + match[1]
+                                        "url" : MYSUBS_BASE + subUrl
                                     });
                                 }
                                 else {
