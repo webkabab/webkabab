@@ -78,9 +78,10 @@ function searchSubs(name, season, episode, languages) {
                             let result = sendHTTPRequest(req, downloadUrl, "GET", {}, {}, true);
                             let message = result.message;
                             if(message) {
-                                let downloadRegex = /href="(.*?)"><button/g;
+                                let downloadRegex = /<a[+]href="([^>]*?)"><button/g;
                                 match = downloadRegex.exec(message);
                                 if(match) {
+                                    console.debug("Got sub download link: "+ match[1]);
                                     subtitles.push({
                                         "name" : language,
                                         "language" : LANGUAGE_CODES[language],
