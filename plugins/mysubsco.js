@@ -86,7 +86,7 @@ function searchSubs(name, season, episode, languages) {
                                     subtitles.push({
                                         "name" : language,
                                         "language" : LANGUAGE_CODES[language],
-                                        "url" : MYSUBS_BASE + subUrl
+                                        "url" : MYSUBS_BASE + subUrl + "|Referer=https://my-subs.co"
                                     });
                                 }
                                 else {
