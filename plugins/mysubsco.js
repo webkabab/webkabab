@@ -1,5 +1,6 @@
 var MYSUBS_BASE = "https://my-subs.co/";
 var SIMILARTY_THRESHOLD = 0.7;
+var MAX_SUBTITLES = 3;
 
 
 // register for search plugins
@@ -100,6 +101,7 @@ function searchSubs(name, season, episode, languages) {
                         }
                     }
                     for(var i in subtitles) {
+                        if(i >= MAX_SUBTITLES) break;
                         let subtitle = subtitles[i];
                         TiviProvider.sendSubtitle(req, subtitle.name, subtitle.url, subtitle.language);   
                     }
