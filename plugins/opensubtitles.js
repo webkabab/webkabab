@@ -8,7 +8,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
 
     let API_BASE = "https://api.opensubtitles.com/api/v1/";
     let SIMILARTY_THRESHOLD = 0.8;
-    let MAX_SUBTITLES = 1;
+    let MAX_SUBTITLES = 2;
     let OPENSUBTITLES_CACHE_KEY = "OpenSubtitles";
     let API_KEY = "gSpy0LRf1Rez8yR96GB2orq7r9niG937";
 
@@ -92,7 +92,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                 if(link) {
                     console.debug("Using cached subtitile: "+link);
                     TiviProvider.sendSubtitle(req, CODE_TO_LANGUAGE[sub.language], link, sub.language);
-                    return true;
+                    found = true;
                 }
                 else {
                     let DOWNLOAD_SUBS_API = API_BASE + "download";
