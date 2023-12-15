@@ -187,33 +187,7 @@ function doInBackground() {
     var kababMain = new com.addons.kabab.KababMain();
 
 
-    // TODO: debug experiment with cookies
 
-    let t = Cookies.get('test');
-    console.debug("Got cookie="+t);
-    Cookies.set('test', 'kuku');
-    /*
-    var name = "username=";
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      while (cookie.charAt(0) == ' ') {
-        cookie = cookie.substring(1); // remove leading spaces
-      }
-      if (cookie.indexOf(name) == 0) {
-        var value = cookie.substring(name.length);
-        console.debug("Found cookie: "+value);
-        break; // found the cookie
-      }
-    }
-    var date = new Date();
-    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)); // 7 days in milliseconds
-    var expires = "; expires=" + date.toUTCString();
-    document.cookie = "username=John Doe" + expires + "; path=/";
-    */
-
-
-    
 
     console.info("Got request: " + proc);
 
