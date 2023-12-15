@@ -123,7 +123,9 @@ function extractMoviesJoysStream(streamApi, name, season, episode, onSuccess, on
                 //fetchExternalSubs(name, ["he"]);
                 for(var i in subsPlugins) {
                     let fetchExtSubtitle = subsPlugins[i];
-                    fetchExtSubtitle(name, season, episode, ["he"]);
+                    if(fetchExtSubtitle(name, season, episode, ["he"])) {
+                        break;
+                    }
                 }
             }
         }

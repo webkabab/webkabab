@@ -1,16 +1,17 @@
-var MYSUBS_BASE = "https://my-subs.co/";
-var SIMILARTY_THRESHOLD = 0.7;
-var MAX_SUBTITLES = 3;
-
-
-// register for search plugins
+// register for subtitle search plugins
 if(typeof subsPlugins === 'undefined') {
     subsPlugins = [];
 }
-subsPlugins.push(searchSubs);
+subsPlugins.push(searchMySubs);
 
 
-function searchSubs(name, season, episode, languages) {
+function searchMySubs(name, season, episode, languages) {
+
+    let MYSUBS_BASE = "https://my-subs.co/";
+    let SIMILARTY_THRESHOLD = 0.7;
+    let MAX_SUBTITLES = 3;
+
+
     let SEARCH_API = MYSUBS_BASE + "search.php";
     console.debug("searching subs: "+SEARCH_API);
     params = {};
@@ -105,6 +106,9 @@ function searchSubs(name, season, episode, languages) {
                         let subtitle = subtitles[i];
                         TiviProvider.sendSubtitle(req, subtitle.name, subtitle.url, subtitle.language);   
                     }
+                    if(subtitles.length > 0) { // found at least one matching subtitle
+                        return true;
+                    }
                 }
                 else {
                     console.error("Cannot open search result page: "+SEARCH_RESULT_PAGE);
@@ -118,4 +122,5 @@ function searchSubs(name, season, episode, languages) {
     else {
         console.error("Can't fetch subtitles for: "+name+" languages="+languages);
     }
+    return false;
 }
