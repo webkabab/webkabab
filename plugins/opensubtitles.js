@@ -94,7 +94,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                         let link = downloadJSON.link;
                         console.debug("Download link from sub:" + link);
                         found = true;
-                        TiviProvider.sendSubtitle(req, "", link, sub.language);
+                        TiviProvider.sendSubtitle(req, CODE_TO_LANGUAGE[sub.language], link, sub.language);
                     }
                     else {
                         console.error("Cannot download from OS: "+DOWNLOAD_SUBS_API);
