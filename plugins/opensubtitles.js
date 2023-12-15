@@ -7,8 +7,8 @@ subsPlugins.push(searchOpenSubtitles);
 function searchOpenSubtitles(name, season, episode, languages) {
 
     let API_BASE = "https://api.opensubtitles.com/api/v1/";
-    let SIMILARTY_THRESHOLD = 0.7;
-    let MAX_SUBTITLES = 3;
+    let SIMILARTY_THRESHOLD = 0.8;
+    let MAX_SUBTITLES = 1;
     let API_KEY = "gSpy0LRf1Rez8yR96GB2orq7r9niG937";
 
     // search for subtitles:
@@ -68,7 +68,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                 let tempA = a.name.toLowerCase();
                 let tempB = b.name.toLowerCase();         
                 let original = name.toLowerCase();                           
-                let similarityA = exports.stringSimilarity(tempA, original);                    
+                let similarityA = exports.stringSimilarity(tempA, original);
                 let similarityB = exports.stringSimilarity(tempB, original);
                 return similarityB - similarityA;
             }); 
@@ -79,7 +79,11 @@ function searchOpenSubtitles(name, season, episode, languages) {
                     break;
                 }
                 let sub = subs[i];
+                let similarity = exports.stringSimilarity(sub.name.toLowerCase(), name.toLowerCase());                  
                 console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
+                if(similarity < SIMILARTY_THRESHOLD) {
+                    console.debug("Too low similarity for: "+sub.name+" with: "+similarity);
+                }
     
                 let DOWNLOAD_SUBS_API = API_BASE + "download";
                 params = {};

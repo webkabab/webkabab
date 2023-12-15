@@ -189,6 +189,10 @@ function doInBackground() {
 
     // TODO: debug experiment with cookies
 
+    let t = Cookies.get('test');
+    console.debug("Got cookie="+t);
+    Cookies.set('test', 'kuku');
+    /*
     var name = "username=";
     var cookies = document.cookie.split(';');
     for (var i = 0; i < cookies.length; i++) {
@@ -202,12 +206,11 @@ function doInBackground() {
         break; // found the cookie
       }
     }
-
-
     var date = new Date();
     date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)); // 7 days in milliseconds
     var expires = "; expires=" + date.toUTCString();
     document.cookie = "username=John Doe" + expires + "; path=/";
+    */
 
 
     
