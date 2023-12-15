@@ -92,6 +92,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                 if(link) {
                     console.debug("Using cached subtitile: "+link);
                     TiviProvider.sendSubtitle(req, CODE_TO_LANGUAGE[sub.language], link, sub.language);
+                    return true;
                 }
                 else {
                     let DOWNLOAD_SUBS_API = API_BASE + "download";
