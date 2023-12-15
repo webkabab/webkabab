@@ -31,78 +31,90 @@ function searchOpenSubtitles(name, season, episode, languages) {
     }
     params["languages"] = languagesSet;
 
-    let result = sendHTTPRequest(req, SEARCH_SUBS_API, "GET", headers, params, true);
-    let message = result.message;
-    if(message) {
-        message = decodeURIComponent(message);
-        console.debug("Got subs from OpenSubtitles: "+message);
-        let subs = [];
-        let resultJSON = JSON.parse(message);
-        let data = resultJSON.data;
-        for(var i in data) {
-            let details = data[i].attributes.feature_details;
-            let titleName = null;
-            if(season > 0 && episode > 0) {
-                titleName = details.parent_title;
-            }            
-            if(titleName == null) {
-                titleName = details.title;
+    try {
+        let result = sendHTTPRequest(req, SEARCH_SUBS_API, "GET", headers, params, true);
+        let message = result.message;
+        if(message) {
+            message = decodeURIComponent(message);
+            console.debug("Got subs from OpenSubtitles: "+message);
+            let subs = [];
+            let resultJSON = JSON.parse(message);
+            let data = resultJSON.data;
+            for(var i in data) {
+                let details = data[i].attributes.feature_details;
+                let titleName = null;
+                if(season > 0 && episode > 0) {
+                    titleName = details.parent_title;
+                }            
+                if(titleName == null) {
+                    titleName = details.title;
+                }
+                let sub = {};
+                sub.name = titleName;
+                sub.language = data[i].attributes.language;
+                let files = data[i].attributes.files;
+                if(files.length > 0) {
+                    sub.file_id = files[0].file_id;
+                    subs.push(sub);
+                }
+                else {
+                    console.error("The sub "+data[i].id+" has not files");
+                }            
             }
-            let sub = {};
-            sub.name = titleName;
-            sub.language = data[i].attributes.language;
-            let files = data[i].attributes.files;
-            if(files.length > 0) {
-                sub.file_id = files[0].file_id;
-                subs.push(sub);
+            // sort the files
+            subs.sort(function(a,b) {
+                let tempA = a.name.toLowerCase();
+                let tempB = b.name.toLowerCase();         
+                let original = name.toLowerCase();                           
+                let similarityA = exports.stringSimilarity(tempA, original);                    
+                let similarityB = exports.stringSimilarity(tempB, original);
+                return similarityB - similarityA;
+            }); 
+    
+            let found = false;
+            for(var i in subs) {
+                if(i >= MAX_SUBTITLES) {
+                    break;
+                }
+                let sub = subs[i];
+                console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
+    
+                let DOWNLOAD_SUBS_API = API_BASE + "download";
+                params = {};
+                params["file_id"] = sub.file_id;
+                try {
+                    let result = sendHTTPRequest(req, DOWNLOAD_SUBS_API, "POST", headers, params, true);
+                    let message = result.message;
+                    if(message) {
+                        message = decodeURIComponent(message);
+                        console.debug("Download sub JSON: "+message);
+                        let downloadJSON = JSON.parse(message);
+                        let link = downloadJSON.link;
+                        console.debug("Download link from sub:" + link);
+                        found = true;
+                        TiviProvider.sendSubtitle(req, "", link, sub.language);
+                    }
+                    else {
+                        console.error("Cannot download from OS: "+DOWNLOAD_SUBS_API);
+                    }
+                }
+                catch(e) {
+                    console.error(e);
+                }
+                
             }
-            else {
-                console.error("The sub "+data[i].id+" has not files");
-            }            
+            if(found) {
+                return true;
+            }
         }
-        // sort the files
-        subs.sort(function(a,b) {
-            let tempA = a.name.toLowerCase();
-            let tempB = b.name.toLowerCase();         
-            let original = name.toLowerCase();                           
-            let similarityA = exports.stringSimilarity(tempA, original);                    
-            let similarityB = exports.stringSimilarity(tempB, original);
-            return similarityB - similarityA;
-        }); 
-
-        let found = false;
-        for(var i in subs) {
-            if(i >= MAX_SUBTITLES) {
-                break;
-            }
-            let sub = subs[i];
-            console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
-
-            let DOWNLOAD_SUBS_API = API_BASE + "download";
-            params = {};
-            params["file_id"] = sub.file_id;
-            let result = sendHTTPRequest(req, DOWNLOAD_SUBS_API, "POST", headers, params, true);
-            let message = result.message;
-            if(message) {
-                message = decodeURIComponent(message);
-                console.debug("Download sub JSON: "+message);
-                let downloadJSON = JSON.parse(message);
-                let link = downloadJSON.link;
-                console.debug("Download link from sub:" + link);
-                found = true;
-                TiviProvider.sendSubtitle(req, "", link, sub.language);
-            }
-            else {
-                console.error("Cannot download from OS: "+DOWNLOAD_SUBS_API);
-            }
-        }
-        if(found) {
-            return true;
+        else {
+            console.error("Got nothing from OS search API: "+SEARCH_SUBS_API);
         }
     }
-    else {
-        console.error("Got nothing from OS search API: "+SEARCH_SUBS_API);
+    catch (e) {
+        console.error(e);
     }
+    
 
     return false;
     
