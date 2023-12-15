@@ -478,7 +478,7 @@ function extractPerviyKanal(url) {
 
 function sendHTTPRequest(req, url, method, headers, params, readResponse)  {
     
-    console.debug("Sending HTTP request...");
+    console.debug("Sending HTTP request: "+url+" headers: "+JSON.stringify(headers)+" params: "+JSON.stringify(params));
     let response = TiviProvider.sendHTTPRequest(req, method, url, JSON.stringify(headers), JSON.stringify(params), readResponse);
     console.debug("Got response="+response);
 
