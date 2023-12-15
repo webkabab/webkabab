@@ -15,6 +15,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
     let SEARCH_SUBS_API = API_BASE + "subtitles";
     let headers = {};
     headers["Api-Key"] = API_KEY;
+    headers["User-Agent"] = "WebKabab/1.0.0"
     let params = {};
     params["query"] = name;
     if(season > 0 && episode > 0) {
