@@ -83,6 +83,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                 console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
                 if(similarity < SIMILARTY_THRESHOLD) {
                     console.debug("Too low similarity for: "+sub.name+" with: "+similarity);
+                    break;
                 }
     
                 let DOWNLOAD_SUBS_API = API_BASE + "download";
