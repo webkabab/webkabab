@@ -10,9 +10,12 @@ addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_ur
 #EXTINF:-1 tvg-id="2671" tvg-name="רשת" group-title="ישראל" tvg-logo="https://play-lh.googleusercontent.com/jASs65c2HfEmGU5Jz-Ogz7BaHgmL8YY41xYXbdQM84Tbh8WMvGw_HTwRasAjnHt_oQ" radio="false",רשת
 https://cdnapisec.kaltura.com/p/2748741/sp/2748741/playManifest/entryId/1_ubg28z0w/deliveryProfileId/672/protocol/https/format/applehttp/a.m3u8
 
+
 #EXTINF:-1 tvg-id="4296" group-title="ישראל" tvg-logo="https://www.now14.co.il/wp-content/themes/14-child/assets/logo14/logoHeader.png" radio="false",ערוץ 14
 https://now14.g-mana.live/media/91517161-44ab-4e46-af70-e9fe26117d2e/mainManifest.m3u8
-#https://ch14-channel14.akamaized.net/hls/live/2097589/CH14_CHANNEL14/3/streamPlaylist.m3u8
+
+#EXTINF:-1 group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,רלוונט
+https://6180c994cb835402.mediapackage.eu-west-1.amazonaws.com/out/v1/06e44cd7f7e0445fbd669f279c997fd4/index.mpd
 
 #EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ישראל פלוס 
 http://ovego.tv/publ/live_tv/razvlekatelnye/9channel_israel/7-1-0-950
