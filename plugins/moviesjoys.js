@@ -408,7 +408,7 @@ function extractMovie(results, name, id) {
     let params = {};
     let headers = {};
 
-    let MOVIE_API = SITE_BASE + "/movie-watch/" + name + "-" + id;
+    let MOVIE_API = SITE_BASE + "/movie-watch/" + name; //+ "-" + id;
     let result = sendHTTPRequest(req, MOVIE_API, "GET", headers, params, true);
     let moviesInfo = result.message;
     if(moviesInfo) {
