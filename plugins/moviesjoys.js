@@ -69,11 +69,11 @@ function resolveMoviesJoysVOD(parts, onSuccess, onError) {
         }
     }
 
-    if(series && season && episode && server && type) {
+    if(series && season && episode && type) {
         console.debug("extract moviesjoys series="+series+", s="+season+", e="+episode);    
         extractMoviesJoysSeries(series, season, episode, server, type, onSuccess, onError);
     }
-    else if(movie && server && id && token) {
+    else if(movie) {
         console.debug("extract moviesjoys movie="+movie);    
         extractMoviesJoysMovie(movie, id, server, token, onSuccess, onError);
     }
@@ -310,8 +310,7 @@ function extractTvShow(results, name, seasons) {
                         "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys"
                         + "&series=" + name
                         + "&season=" + season
-                        + "&ep=" + episode
-                        + "&server=" + server
+                        + "&ep=" + episode                        
                         + "&type=" + type;                    
                 }
                 else {
@@ -344,10 +343,7 @@ function extractMovie(results, name, id) {
             let token = match[2];
             results[formatName(name)] = 
                         "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/moviesjoys"
-                        + "&movie=" + name
-                        + "&server=" + serverId
-                        + "&id=" + id
-                        + "&token=" + token;
+                        + "&movie=" + name;                        
         }
         else {
             console.error("Can't find any server... "+MOVIE_API);
