@@ -77,10 +77,8 @@ function resolveMoviesJoysVOD(parts, onSuccess, onError) {
         console.debug("extract moviesjoys movie="+movie);    
         extractMoviesJoysMovie(movie, id, server, token, onSuccess, onError);
     }
-    else {
-        if(onError) {
-            onError.error("Invalid MoviesJoys query=" + query);
-        }
+    else if(onError) {
+        onError("Invalid MoviesJoys query=" + query);        
     }    
 }
 
