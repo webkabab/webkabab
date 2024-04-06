@@ -1,4 +1,4 @@
-var SITE_BASE = "https://moviesjoys.cc";
+var SITE_BASE = "https://watchmoveishd.bz";
 var MAX_SEARCH_PAGES = 3;
 var MAX_SEARCH_ITEMS = 3;
 
@@ -8,15 +8,15 @@ var MAX_SEARCH_ITEMS = 3;
 if(typeof resolverPlugins === 'undefined') {
     resolverPlugins = {};
 }
-resolverPlugins["moviesjoys"] = resolveMoviesJoysVOD; 
+resolverPlugins["watchmovieshd"] = resolveWatchMoviesHDVOD; 
 
 // register for search plugins
 if(typeof searchPlugins === 'undefined') {
     searchPlugins = [];
 }
-searchPlugins.push(searchMoviesJoys);
+searchPlugins.push(WatchMoviesHD);
 
-function resolveMoviesJoysVOD(parts, onSuccess, onError) {
+function resolveWatchMoviesHDVOD(parts, onSuccess, onError) {
     console.debug("inside resolve moviesjoys VOD");
     var series = null;
     var season = null;
@@ -85,23 +85,99 @@ function resolveMoviesJoysVOD(parts, onSuccess, onError) {
 }
 
 function extractMoviesJoysStream(streamApi, name, season, episode, onSuccess, onError) {
+    let matchURL = new URL(streamApi);
+    let refererStr = matchURL.protocol + "//"+matchURL.host;
+    params = {};
+    headers = {};    
+    for (const [key, value] of matchURL.searchParams) {
+        params[key] = value;
+    }                    
+    streamApi = refererStr + matchURL.pathname;                                                        
+    headers["Referer"] = refererStr;
+    result = sendHTTPRequest(req, streamApi, "GET", headers, params, true);
+    message = result.message;           
+    cookies = result.cookies;
                 
-    if(subsPlugins) {
-        //fetchExternalSubs(name, ["he"]);
-        for(var i in subsPlugins) {
-            let fetchExtSubtitle = subsPlugins[i];
-            if(fetchExtSubtitle(name, season, episode, ["he"])) {
-                break;
+    if(message) {       
+        // Get the subtitles
+        let subRegex = /tracks:[+](.*?),[+\s]*?image/g;
+        let match = subRegex.exec(message);        
+        if(match) {
+            let tracks = match[1];
+            console.debug("Got subs JSON: "+tracks);
+            let subs = JSON.parse(tracks);
+            let hebrewFound = false;
+            for(var i in subs) {
+                let track = subs[i];
+                let subURL = track.file;
+                let language = track.label;                
+                let languageCode = LANGUAGE_CODES[language];
+                if(languageCode == "he") {
+                    hebrewFound = true;
+                }
+                if(!languageCode) languageCode = "en" // default
+                console.debug("Found sub: "+subURL+" language: "+language+" code: "+languageCode);
+                TiviProvider.sendSubtitle(req, language, subURL, languageCode);                
+            }
+            if(!hebrewFound && subsPlugins) {
+                //fetchExternalSubs(name, ["he"]);
+                for(var i in subsPlugins) {
+                    let fetchExtSubtitle = subsPlugins[i];
+                    if(fetchExtSubtitle(name, season, episode, ["he"])) {
+                        break;
+                    }
+                }
             }
         }
+        else {
+            console.error("Failed to fetch subtitles "+message);
+        }
+         // Get the stream
+         console.debug("Got server API response: "+message);
+         let re = /file:[+]"(.*?)"/g;
+         match = re.exec(message);                      
+         if(match)  {
+             let stream_url = match[1];
+             if(stream_url) {                                                    
+                 console.debug("Got json response from stream server="+stream_url);                        
+                 onSuccess(stream_url);                            
+             }
+         }
+         else {
+             onError("Bad server API response: "+message);
+         }
     }
-
-    onSuccess(streamApi);          
+    else {
+        onError("Can't get valid response from the server API");
+    }    
 }
 
 function extractMoviesJoysMovie(movie, id, server, token, onSuccess, onError) {
-    try {        
-        extractMoviesJoysStream(SITE_BASE + "/movie-watch/" + movie, formatName(movie), -1, -1, onSuccess, onError);
+    try {
+
+        let MOVIE_STREAM_API = SITE_BASE + "/ajax/episode/info/";
+
+        let headers = {};
+        headers["Accept"] =  "*/*";
+        headers["Referer"] = SITE_BASE;
+    
+        let params = {};
+        params["id"] = String(token);
+        params["server"] = String(server);
+       
+        let result = sendHTTPRequest(req, MOVIE_STREAM_API, "GET", headers, params, true);
+        let message = result.message;
+        if(message) {
+            console.debug("Got result: "+message);
+            let moviesJson = JSON.parse(message);
+            let target = moviesJson.target;
+            target = target.replace(SITE_BASE, movie + "-" + id);
+            console.debug("Got stream API: "+ target);
+            extractMoviesJoysStream(target, formatName(movie), -1, -1, onSuccess, onError);            
+        }
+        else {
+            onError("Can't get response from movies API: "+MOVIE_STREAM_API);
+        }        
     }
     catch(e) {
         onError(e);
@@ -154,9 +230,10 @@ function extractMoviesJoysSeries(series, season, episode, server, type, onSucces
     }        
 }
 
-function searchMoviesJoys(req, query) {
+function searchWatchMoviesHD(req, query) {
     
-    let SEARCH_API = SITE_BASE + "/searchs/";
+    //let SEARCH_API = SITE_BASE + "/ajax/film/search";
+    let SEARCH_API = SITE_BASE + "/filter";
     
     let LIMIT_RESULTS = 3;
 
@@ -165,58 +242,24 @@ function searchMoviesJoys(req, query) {
     let series = {};
     let mediaItems = [];
 
-    params["s"] = query;
+    params["keyword"] = query;
     let result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
     let searchResults = result.message;
     console.log("Got search results for q="+query+": "+searchResults);    
     if(searchResults) {                
-        let pageMatch;
-        let pageRegex = /[&]page=([0-9])">/g;
-        let pageIdx = 0;
-        do {
-            if(pageMatch) {
-                pageIdx = pageMatch[1];
-                console.debug("Found page: "+pageIdx);
-                if(pageIdx && pageIdx > 1 && pageIdx <= MAX_SEARCH_PAGES) {
-                    params["page"] = pageIdx;
-                    result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
-                    searchResults = result.message;
-                }
-            }
 
-            if((pageIdx == 0 || pageIdx > 1) && searchResults) {
-                let itemRegex = /class="name"[+]href="\/([a-zA-Z]*?)-watch\/(.*?)"/g;        
-                while(match = itemRegex.exec(searchResults)) {
-                    let type = match[1];
-                    let name = match[2];        
-                    let season = -1;
-                    // check for series
-                    if(type == "tvshow") {
-                        let tvShowsRegex = /(.*?)-season-([0-9]+)/g
-                        let showMatch = tvShowsRegex.exec(name);
-                        if(showMatch) {
-                            name = showMatch[1];
-                            season = showMatch[2];
-                        }
-                    }
-                    else if(type == "movie") {
-                        let movieRegex = /(.*)-([0-9]+)/g;
-                        let movieMatch = movieRegex.exec(name);
-                        if(movieMatch) {
-                            name = movieMatch[1];
-                            season = movieMatch[2];
-                        }
-                    }
-                    console.debug("Got media item: "+name+" of type: "+type+" season: "+season);
-                    mediaItems.push({
-                        'name' : name,
-                        'type' : type,
-                        'season' : season
-                    });           
-                }
-            }
-                        
-        } while(pageMatch = pageRegex.exec(searchResults));
+        let itemRegex = /class="m-title"[+]href="\/([a-zA-Z]+?)\/(.+?)">(.+?)<.*?>SS[+]([0-9]+)"/g;        
+        while(match = itemRegex.exec(searchResults)) {
+            let type = match[1];
+            let url = SITE_BASE + "/" + match[1] + "/" + match[2];
+            let name = match[3];                                
+            console.debug("Got media item: "+name+" of type: "+type+" url: "+url);
+            mediaItems.push({
+                'name' : name,
+                'type' : type,
+                'url' : url
+            });           
+        }
 
         return filterSearchResults(query, mediaItems);    
         
@@ -233,28 +276,8 @@ function filterSearchResults(query, mediaItems) {
     let results = {};
     let tvShows = {};
     let movies = {};
-    let uniqueNames = [];
-    for(var i in mediaItems) {            
-        let item = mediaItems[i];
-        if(item.type == "tvshow") {                
-            if(!tvShows[item.name]) {
-                tvShows[item.name] = [];
-                uniqueNames.push({
-                    'name' : item.name,
-                    'type' : item.type
-                });
-            }
-            tvShows[item.name].push(item.season);
-        }
-        else {
-            movies[item.name] = item.season;            
-            uniqueNames.push({
-                'name' : item.name,
-                'type' : item.type                
-            });
-        }
-    }
-
+    let uniqueNames = mediaItems;
+    
     let cleanQuery = query.toLowerCase();
     uniqueNames.sort(function(a,b) {
         console.log("a="+JSON.stringify(a));
@@ -274,20 +297,22 @@ function filterSearchResults(query, mediaItems) {
         }             
         let uniqueItem = uniqueNames[item];           
         console.debug(" Item: "+uniqueItem.name);  
-        if(uniqueItem.type == 'tvshow') {
+        if(uniqueItem.type == 'tv') {
             // extract all episodes
-            extractTvShow(results, uniqueItem.name, tvShows[uniqueItem.name]);
+            extractTvShow(results, uniqueItem.name, uniqueItem);
         }
         else {
-            extractMovie(results, uniqueItem.name, movies[uniqueItem.name]);
+            extractMovie(results, uniqueItem.name, uniqueItem);
         }
     }
 
     return results;
 }
 
-function extractTvShow(results, name, seasons) {
+function extractTvShow(results, name, show) {
        
+    
+
     for(var i in seasons) {
         let season = seasons[i];
         // Get all episodes of this season
