@@ -186,10 +186,11 @@ function extractTvShow(req, results, name, show) {
                         + "&season=" + season
                         + "&ep=" + episodeNum
                         + "&id=" + episodeId
-                        + "&type=tvshow";                    
+                        + "&type=tvshow";                
             }
         }
         else {
+            // send erro
             console.error("Can't open series page: "+SEASON_PAGE);
         }
     }    
