@@ -180,7 +180,7 @@ function extractTvShow(req, results, name, show) {
             while(match = episodesRegex.exec(resultHTML)) {
                 let episodeId = match[1];
                 let parts = episodeId.split("/");
-                episodeId = parts[parts.length - 1];
+                episodeId = parts[parts.length - 2] + "/" + parts[parts.length - 1];
                 let episodeNum = match[2];
                 console.debug("Found episode for series="+name+" s="+season+" ep="+episodeNum+" id="+episodeId);
                 results[formatName(name) + " S"+season+"E"+episodeNum] = 
