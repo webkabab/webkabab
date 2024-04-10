@@ -175,7 +175,7 @@ function extractTvShow(req, results, name, show) {
         if(resultHTML) {
             console.log("Got episodes for: "+name+" url="+SEASON_PAGE);
             // Get all episodes for this season:
-            let episodesRegex = /class="episode[+]episode_series_link[+]esp-circle"[+]href="(.*?)[.]html">([0-9]+)</g;
+            let episodesRegex = /class="episode[+]episode_series_link[+](?:active[+])?esp-circle"[+]href="(.*?)[.]html">([0-9]+)</g;
             let match;
             while(match = episodesRegex.exec(resultHTML)) {
                 let episodeId = match[1];
