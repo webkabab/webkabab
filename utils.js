@@ -206,6 +206,6 @@ function formatName(name) {
     });
     // join the array of words back into a string
     result = capitalizedWords.join (' '); 
-    console.debug("Formatted name: "+name+" into: "+result);
+    //console.debug("Formatted name: "+name+" into: "+result);
     return result;
 }
