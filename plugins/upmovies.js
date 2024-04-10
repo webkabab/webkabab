@@ -134,7 +134,7 @@ function filterSearchResults(req, query, mediaItems) {
 
     let cleanQuery = query.toLowerCase();
     uniqueNames.sort(function(a,b) {
-        console.log("a="+JSON.stringify(a));
+        //console.log("a="+JSON.stringify(a));
         let cleanA = a.name.replace(/-/g, " ");
         cleanA = cleanA.toLowerCase();
         let similarityA = exports.stringSimilarity(cleanA, cleanQuery);
@@ -150,7 +150,7 @@ function filterSearchResults(req, query, mediaItems) {
             break;
         }             
         let uniqueItem = uniqueNames[item];           
-        console.debug(" Item: "+uniqueItem.name);  
+        console.debug(" Item: "+uniqueItem.name+" of type: "+uniqueItem.type);  
         if(uniqueItem.type == 'tvshow') {
             // extract all episodes
             extractTvShow(req, results, tvShows[uniqueItem.name]);
@@ -172,6 +172,7 @@ function extractTvShow(req, results, name, show) {
         let result = sendHTTPRequest(req, SEASON_PAGE, "GET", {}, {}, true);
         let resultHTML = result.message;
         if(resultHTML) {
+            console.log("Got episodes for: "+name+" url="+SEASON_PAGE);
             // Get all episodes for this season:
             let episodesRegex = /class="episode[+]episode_series_link[+]esp-circle"[+]href="(.*?)[.]html">([0-9]+)</g;
             let match;
