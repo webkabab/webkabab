@@ -58,7 +58,7 @@ function searchUpMovies(req, query) {
                 while(match = itemRegex.exec(searchResults)) {
                     let url = match[1];
                     let name = match[2];    
-                    name = name.replace("+", " ");
+                    name = name.replaceAll("+", " ");
                     console.debug("Got title: "+name+" url="+url);
                     let parts = url.split("/");
                     let id = parts[parts.length - 1];
