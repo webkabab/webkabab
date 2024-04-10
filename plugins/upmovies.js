@@ -153,10 +153,10 @@ function filterSearchResults(req, query, mediaItems) {
         console.debug(" Item: "+uniqueItem.name+" of type: "+uniqueItem.type);  
         if(uniqueItem.type == 'tvshow') {
             // extract all episodes
-            extractTvShow(req, results, tvShows[uniqueItem.name]);
+            extractTvShow(req, results, uniqueItem.name, tvShows[uniqueItem.name]);
         }
         else {
-            extractMovie(req, results, movies[uniqueItem.name]);
+            extractMovie(req, results, uniqueItem.name, movies[uniqueItem.name]);
         }
     }
 
