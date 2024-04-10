@@ -58,10 +58,11 @@ function searchUpMovies(req, query) {
                 while(match = itemRegex.exec(searchResults)) {
                     let url = match[1];
                     let name = match[2];                      
-                                                                          
+                    console.debug("Got title: "+name+" url="+url);
                     let parts = url.split("/");
                     let id = parts[parts.length - 1];
                     id = id.replace(".html", "");
+                    console.debug("Clean ID="+id);
                     // extract type
                     let typeRegex = /(.*)-season-([0-9]+)[.]html/g;
                     let typeMatch = typeRegex.exec(id);
