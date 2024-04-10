@@ -57,14 +57,15 @@ function searchUpMovies(req, query) {
                              
                 while(match = itemRegex.exec(searchResults)) {
                     let url = match[1];
-                    let name = match[2];                      
+                    let name = match[2];    
+                    name = name.replace("+", " ");
                     console.debug("Got title: "+name+" url="+url);
                     let parts = url.split("/");
                     let id = parts[parts.length - 1];
                     id = id.replace(".html", "");
                     console.debug("Clean ID="+id);
                     // extract type
-                    let typeRegex = /(.*)-season-([0-9]+)[.]html/g;
+                    let typeRegex = /(.*)-season-([0-9]+)/g;
                     let typeMatch = typeRegex.exec(id);
                     let type = typeMatch ? "tvshow" : "movie";  
 
@@ -74,7 +75,7 @@ function searchUpMovies(req, query) {
                         id = typeMatch[1];
                         season = typeMatch[2];
                         // clean the series name
-                        let seriesNameRegex = /(.*)[:]Season\s*[0-9]+/g;
+                        let seriesNameRegex = /(.*)[:]\s*?Season\s*[0-9]+/g;
                         let seriesNameMatch = seriesNameRegex.exec(name);
                         if(seriesNameMatch) {
                             name = seriesNameMatch[1];
