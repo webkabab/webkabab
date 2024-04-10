@@ -164,7 +164,8 @@ function filterSearchResults(req, query, mediaItems) {
 }
 
 function extractTvShow(req, results, name, show) {
-           
+    
+    console.debug("Extractin TV SHOW: "+name);
     for(var i in show) {
         let season = show[i].season;
         let id = show[i].id;
@@ -194,8 +195,9 @@ function extractTvShow(req, results, name, show) {
     }    
 }
 
-function extractMovie(req, results, movie) {
+function extractMovie(req, results, name, movie) {
 
+    console.debug("Extractin MOVIE: "+name);
     results[formatName(movie.name)] = 
         "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies"        
         + "&type=movie"
