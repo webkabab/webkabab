@@ -179,9 +179,11 @@ function extractTvShow(req, results, name, show) {
             let match;
             while(match = episodesRegex.exec(resultHTML)) {
                 let episodeId = match[1];
+                let parts = episodeId.split("/");
+                episodeId = parts[parts.length - 1];
                 let episodeNum = match[2];
                 console.debug("Found episode for series="+name+" s="+season+" ep="+episodeNum+" id="+episodeId);
-                results[formatName(name) + " S"+season+"E"+episodeId] = 
+                results[formatName(name) + " S"+season+"E"+episodeNum] = 
                         "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies"                        
                         + "&season=" + season
                         + "&ep=" + episodeNum
