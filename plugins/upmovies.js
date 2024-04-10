@@ -199,10 +199,10 @@ function extractTvShow(req, results, name, show) {
 function extractMovie(req, results, name, movie) {
 
     console.debug("Extractin MOVIE: "+name);
-    results[formatName(movie.name)] = 
+    results[formatName(name)] = 
         "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies"        
         + "&type=movie"
-        + "&id=" + movie.id;
+        + "&id=" + movie;
 }
 
 
