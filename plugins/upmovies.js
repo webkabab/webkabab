@@ -82,10 +82,12 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
             let serverHTML = atob(base64);
             console.debug("decoded="+serverHTML);
             let streamRegex = /src="(.*?)"/g;
-            let match = streamRegex.exec(serverHTML);
-            if(match && onSuccess) {
+            let streamMatch = streamRegex.exec(serverHTML);
+            if(streamMatch && onSuccess) {
                 // Send the server as a response
-                onSuccess(match[1]);
+                let streamURL = streamMatch[1];
+                console.debug("Got stream URL="+streamURL);
+                onSuccess(streamURL);
             }
             else if(onError) {
                 onError("Cannot extract server");
