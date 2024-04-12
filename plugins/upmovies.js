@@ -103,6 +103,24 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
                 let streamURL = streamMatch[1];
                 const url = new URL(streamURL);                    
                 const referer = "Referer=" + url.protocol + "//" + url.hostname;
+                if(url.hostname === "eplayvid.net") {
+                    console.debug("Special case for eplayvid");
+                    let server = sendHTTPRequest(req, url, "GET", {}, {}, true);
+                    if(server) {
+                        let streamRegex = /<source[+]src="(.*?)"/g;
+                        let streamResult = streamRegex.exec(server);
+                        if(streamResult) {
+                            streamURL = streamResult[1];
+                            streamURL = streamURL + "|" + referer;
+                            console.debug("Grabbed video: "+streamResult);
+                            onSuccess(streamURL);
+                            return;
+                        }
+                        else {
+                            console.debug("Failed to grab="+server);
+                        }
+                    }
+                }
                 streamURL = streamURL + "|" + referer;
                 console.debug("Got stream URL="+streamURL);                
                 onSuccess(streamURL);
