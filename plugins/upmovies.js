@@ -74,18 +74,21 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
     let result = sendHTTPRequest(req, pageURL, "GET", {}, {}, true);
     let html = result.message;
     if(html) {
-        let playerIframeRegex = /class="player-iframe.*?decode[(]"(.*?)"/g;
+        const playerIframeRegex = /class="player-iframe.*?decode[(]"(.*?)"/g;
         let match = playerIframeRegex.exec(html);
         if(match) {
-            let base64 = match[1];
+            const base64 = match[1];
             console.debug("base64 url="+base64);
-            let serverHTML = atob(base64);
+            const serverHTML = atob(base64);
             console.debug("decoded="+serverHTML);
-            let streamRegex = /src="(.*?)"/g;
-            let streamMatch = streamRegex.exec(serverHTML);
-            if(streamMatch && onSuccess) {
-                // Send the server as a response
+            const streamRegex = /src="(.*?)"/g;
+            const streamMatch = streamRegex.exec(serverHTML);
+            if(streamMatch && onSuccess) {                
                 let streamURL = streamMatch[1];
+                const url = new URL(streamURL);
+                
+                const referer = "Referer=" + url.protocol + "//" + url.hostname;
+                streamURL = streamURL + "|" + referer;
                 console.debug("Got stream URL="+streamURL);
                 onSuccess(streamURL);
             }
