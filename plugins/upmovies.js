@@ -106,6 +106,7 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
                 if(url.hostname === "eplayvid.net") {
                     console.debug("Special case for eplayvid");
                     let server = sendHTTPRequest(req, url, "GET", {}, {}, true);
+                    server = server.message;
                     if(server) {
                         let streamRegex = /<source[+]src="(.*?)"/g;
                         let streamResult = streamRegex.exec(server);
