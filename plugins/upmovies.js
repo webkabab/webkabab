@@ -28,6 +28,7 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
         var token = null;
         var movie = null;
         var id = null;
+        var fullName = null;
         
         for(let i in parts) {
             let part = parts[i];
@@ -37,16 +38,15 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
                 let value = keyValue[1];
                 switch(key) {
 
-                    case "season":
+                    case 'name':
+                        fullName = value;
+
+                    case "s":
                         season = value;
                         break;
 
                     case "ep":
                         episode = value;
-                        break;
-
-                    case "type":
-                        type = value;
                         break;
 
                     case "id":
@@ -56,9 +56,25 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
             }
         }
         
-        if(id) {
+        if(id && fullName) {
             console.debug("extract UpMovies item="+id);   
-            extractUpMoviesStream(req, SITE_BASE + "/watch/" + id + ".html", onSuccess, onError);
+            let pageURL = SITE_BASE + "/watch/" + id;
+            if(episode) {
+                pageURL = pageURL + "/episode-"+episode;
+            }
+            pageURL = pageURL + ".html";
+            if(!episode) episode = -1;
+            if(!season) season = -1;
+
+            // Fetch subtitles            
+            for(var i in subsPlugins) {
+                let fetchExtSubtitle = subsPlugins[i];
+                if(fetchExtSubtitle(fullName, season, episode, ["he"])) {
+                    break;
+                }
+            }
+
+            extractUpMoviesStream(req, pageURL, episode, onSuccess, onError);
         }
         else if(onError) {
             onError.error("Invalid MoviesJoys query=" + query);        
@@ -85,11 +101,10 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
             const streamMatch = streamRegex.exec(serverHTML);
             if(streamMatch && onSuccess) {                
                 let streamURL = streamMatch[1];
-                const url = new URL(streamURL);
-                
+                const url = new URL(streamURL);                    
                 const referer = "Referer=" + url.protocol + "//" + url.hostname;
                 streamURL = streamURL + "|" + referer;
-                console.debug("Got stream URL="+streamURL);
+                console.debug("Got stream URL="+streamURL);                
                 onSuccess(streamURL);
             }
             else if(onError) {
@@ -265,11 +280,14 @@ function extractTvShow(req, results, name, show) {
             while(match = episodesRegex.exec(resultHTML)) {
                 let episodeId = match[1];
                 let parts = episodeId.split("/");
-                episodeId = parts[parts.length - 2] + "/" + parts[parts.length - 1];
+                episodeId = parts[parts.length - 2];
                 let episodeNum = match[2];
                 console.debug("Found episode for series="+name+" s="+season+" ep="+episodeNum+" id="+episodeId);
                 results[formatName(name) + " S"+season+"E"+episodeNum] = 
-                    "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies&id=" + episodeId;
+                    "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies&id=" + episodeId 
+                    + "&s=" + season 
+                    + "&ep=" + episodeNum 
+                    + "&name="+name;
             }
         }
         else {
@@ -283,7 +301,7 @@ function extractMovie(req, results, name, movie) {
 
     console.debug("Extractin MOVIE: "+name);
     results[formatName(name)] = 
-        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies&id=" + movie;
+        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies&id=" + movie + "&name="+name;
 }
 
 
