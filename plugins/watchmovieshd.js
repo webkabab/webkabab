@@ -18,7 +18,7 @@ if(typeof searchPlugins === 'undefined') {
 }
 searchPlugins.push(WatchMoviesHD);
 
-function resolveWatchMoviesHDVOD(parts, onSuccess, onError) {
+function resolveWatchMoviesHDVOD(req, parts, onSuccess, onError) {
     console.debug("inside resolve moviesjoys VOD");
     var series = null;
     var season = null;

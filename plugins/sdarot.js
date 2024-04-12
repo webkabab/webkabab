@@ -13,7 +13,7 @@ if(typeof searchPlugins === 'undefined') {
 //searchPlugins.push(searchSdarot); // TODO: enable once working
 
 
-function resolveSdarotVOD(parts, onSucess, onError) {
+function resolveSdarotVOD(req, parts, onSucess, onError) {
     console.debug("inside resolve sdarot VOD");
     var series = null;
     var season = null;

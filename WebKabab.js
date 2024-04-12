@@ -304,7 +304,7 @@ function doInBackground() {
                             TiviProvider.sendError(req, "Error in query=" + query + "for resolver="+resolverName+" error: "+ error);
                             TiviProvider.done(req);    
                         }                        
-                        resolverPlugins[resolverName](parts, onSucess, onError);
+                        resolverPlugins[resolverName](req, parts, onSucess, onError);
                     }
                     
                     TiviProvider.sendError(req, "Cannot identify query=" + query);
@@ -471,7 +471,7 @@ function extractPerviyKanal(url) {
     try {
         return json["mpd"][0];           
     } catch(error) {
-        console.error(error);
+        console.error(error);se
         return "";
     }    
 }

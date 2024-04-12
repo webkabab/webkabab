@@ -17,11 +17,91 @@ if(typeof searchPlugins === 'undefined') {
 searchPlugins.push(searchUpMovies);
 
 
-function resolveUpMoviesVOD(parts, onSuccess, onError) {
-    if(onError) {
-        onError("Not Implemented Yet!");
+function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
+    try {
+        console.debug("inside resolve UpMovies VOD");
+        var series = null;
+        var season = null;
+        var episode = null;    
+        var server = null;
+        var type = null;
+        var token = null;
+        var movie = null;
+        var id = null;
+        
+        for(let i in parts) {
+            let part = parts[i];
+            let keyValue = part.split("=");
+            if(keyValue.length === 2) {
+                let key = keyValue[0];
+                let value = keyValue[1];
+                switch(key) {
+
+                    case "season":
+                        season = value;
+                        break;
+
+                    case "ep":
+                        episode = value;
+                        break;
+
+                    case "type":
+                        type = value;
+                        break;
+
+                    case "id":
+                        id = value;
+                        break;
+                }
+            }
+        }
+        
+        if(id) {
+            console.debug("extract UpMovies item="+id);   
+            extractUpMoviesStream(req, SITE_BASE + "/watch/" + id + ".html", onSuccess, onError);
+        }
+        else if(onError) {
+            onError.error("Invalid MoviesJoys query=" + query);        
+        }
+    }
+    catch(e) {
+        onError(e);
     }
 }
+
+function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
+        
+    let result = sendHTTPRequest(req, pageURL, "GET", {}, {}, true);
+    let html = result.message;
+    if(html) {
+        let playerIframeRegex = /class="player-iframe.*?decode[(]"(.*?)"/g;
+        let match = playerIframeRegex.exec(html);
+        if(match) {
+            let base64 = match[1];
+            console.debug("base64 url="+base64);
+            let serverHTML = atob(base64);
+            console.debug("decoded="+serverHTML);
+            let streamRegex = /src="(.*?)"/g;
+            let server = streamRegex.exec(serverHTML);
+            if(server && onSuccess) {
+                // Send the server as a response
+                onSuccess(server);
+            }
+            else if(onError) {
+                onError("Cannot extract server");
+            }
+        }
+        else if(onError) {
+            onError("Cannot find base64: "+html);
+        }
+    }
+    else if(onError) {
+        onError("Failed to open movie page="+MOVIE_PAGE);
+    }    
+}
+
+
+
 
 function searchUpMovies(req, query) {
     
@@ -184,11 +264,7 @@ function extractTvShow(req, results, name, show) {
                 let episodeNum = match[2];
                 console.debug("Found episode for series="+name+" s="+season+" ep="+episodeNum+" id="+episodeId);
                 results[formatName(name) + " S"+season+"E"+episodeNum] = 
-                        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies"                        
-                        + "&season=" + season
-                        + "&ep=" + episodeNum
-                        + "&id=" + episodeId
-                        + "&type=tvshow";                
+                    "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies&id=" + episodeId;
             }
         }
         else {
@@ -202,9 +278,7 @@ function extractMovie(req, results, name, movie) {
 
     console.debug("Extractin MOVIE: "+name);
     results[formatName(name)] = 
-        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies"        
-        + "&type=movie"
-        + "&id=" + movie;
+        "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies&id=" + movie;
 }
 
 
