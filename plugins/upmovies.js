@@ -74,7 +74,7 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
                 }
             }
 
-            extractUpMoviesStream(req, pageURL, episode, onSuccess, onError);
+            extractUpMoviesStream(req, pageURL, onSuccess, onError);
         }
         else if(onError) {
             onError.error("Invalid MoviesJoys query=" + query);        
@@ -113,7 +113,7 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
                         if(streamResult) {
                             streamURL = streamResult[1];
                             streamURL = streamURL + "|" + referer;
-                            console.debug("Grabbed video: "+streamResult);
+                            console.debug("Grabbed video: "+streamURL);
                             onSuccess(streamURL);
                             return;
                         }
