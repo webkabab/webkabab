@@ -57,7 +57,7 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
         }
         
         if(id && fullName) {
-            console.debug("extract UpMovies item="+id);   
+            console.debug("extract UpMovies item="+id+" season="+season+" episode="+episode);
             let pageURL = SITE_BASE + "/watch/" + id;
             if(episode) {
                 pageURL = pageURL + "/episode-"+episode;
