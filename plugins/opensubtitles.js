@@ -81,6 +81,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                 }
                 let sub = subs[i];
                 console.debug("Looking for similarity between sub-name="+sub.name+" and name="+name);
+                sub.name = sub.name.replaceAll("+", " ");
                 let similarity = exports.stringSimilarity(sub.name.toLowerCase(), name.toLowerCase());                  
                 console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
                 if(similarity < SIMILARTY_THRESHOLD) {

@@ -73,7 +73,7 @@ function searchMySubs(name, season, episode, languages) {
                         let language = match[1];
                         let subtitleUrl = match[2];
                         console.debug("Found ext. subtitle: "+subtitleUrl+" language: "+language);
-                        if(languages.includes(LANGUAGE_CODES[language])) {
+                        if(languages.includes(LANGUAGE_CODES[formatWord(language)])) {
                             console.debug("Found ext subtitle of langauge: "+language);
                             // get the subs download page
                             let downloadUrl = MYSUBS_BASE + subtitleUrl;
@@ -87,7 +87,7 @@ function searchMySubs(name, season, episode, languages) {
                                     console.debug("Got sub download link: "+ subUrl);
                                     subtitles.push({
                                         "name" : language,
-                                        "language" : LANGUAGE_CODES[language],
+                                        "language" : LANGUAGE_CODES[formatWord(language)],
                                         "url" : MYSUBS_BASE + subUrl + "|Referer=https://my-subs.co"
                                     });
                                 }

@@ -209,3 +209,7 @@ function formatName(name) {
     //console.debug("Formatted name: "+name+" into: "+result);
     return result;
 }
+
+function formatWord(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
