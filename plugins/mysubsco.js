@@ -13,7 +13,7 @@ function searchMySubs(name, season, episode, languages) {
 
 
     let SEARCH_API = MYSUBS_BASE + "search.php";
-    console.debug("searching subs: "+SEARCH_API);
+    console.debug("Searching MySubs.co subs: "+SEARCH_API+" languages="+languages);
     params = {};
     params["key"] = name;
 
