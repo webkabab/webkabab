@@ -66,10 +66,17 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
             if(!episode) episode = -1;
             if(!season) season = -1;
 
-            // Fetch subtitles            
+            // Fetch subtitles - hebrew           
             for(var i in subsPlugins) {
                 let fetchExtSubtitle = subsPlugins[i];
-                if(fetchExtSubtitle(fullName, season, episode, ["he", "en"])) {
+                if(fetchExtSubtitle(fullName, season, episode, ["he"])) {
+                    break;
+                }
+            }
+            // Fetch subtitles - english
+            for(var i in subsPlugins) {
+                let fetchExtSubtitle = subsPlugins[i];
+                if(fetchExtSubtitle(fullName, season, episode, ["en"])) {
                     break;
                 }
             }
