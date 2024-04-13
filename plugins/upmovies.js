@@ -40,6 +40,7 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
 
                     case 'name':
                         fullName = value;
+                        break;
 
                     case "s":
                         season = value;
