@@ -75,54 +75,63 @@ function searchOpenSubtitles(name, season, episode, languages) {
             }); 
     
             let found = false;
-            for(var i in subs) {
-                if(i >= MAX_SUBTITLES) {
-                    break;
-                }
-                let sub = subs[i];
-                console.debug("Looking for similarity between sub-name="+sub.name+" and name="+name);
-                sub.name = sub.name.replaceAll("+", " ");
-                let similarity = exports.stringSimilarity(sub.name.toLowerCase(), name.toLowerCase());                  
-                console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
-                if(similarity < SIMILARTY_THRESHOLD) {
-                    console.debug("Too low similarity for: "+sub.name+" with: "+similarity);
-                    break;
-                }
-    
-                // Try cache:
-                /* Cache doesn't work
-                let link = Cookies.get(OPENSUBTITLES_CACHE_KEY + "_" + sub.file_id);
-                if(link) {
-                    console.debug("Using cached subtitile: "+link);
-                    TiviProvider.sendSubtitle(req, CODE_TO_LANGUAGE[sub.language], link, sub.language);
-                    found = true;
-                }
-                */
-                //else {
-                let DOWNLOAD_SUBS_API = API_BASE + "download";
-                params = {};
-                params["file_id"] = sub.file_id;
-                try {
-                    let result = sendHTTPRequest(req, DOWNLOAD_SUBS_API, "POST", headers, params, true);
-                    let message = result.message;
-                    if(message) {
-                        message = decodeURIComponent(message);
-                        console.debug("Download sub JSON: "+message);
-                        let downloadJSON = JSON.parse(message);
-                        let link = downloadJSON.link;
-                        console.debug("Download link from sub:" + link);
-                        //Cookies.set(OPENSUBTITLES_CACHE_KEY + "_" + sub.file_id, link, { expires: 1 });
-                        found = true;
+            for(var j in languages) {
+                let searchLang = languages[j];
+                console.debug("Filtering subs with language="+searchLang);
+                for(var i in subs) {
+                    if(i >= MAX_SUBTITLES) {
+                        break;
+                    }
+                    
+                    let sub = subs[i];
+                    if(sub.language != searchLang) {
+                        continue;
+                    }
+                    sub.name = sub.name.replaceAll("+", " ");                    
+                    console.debug("Looking for similarity between sub-name="+sub.name+" and name="+name);
+                    
+                    let similarity = exports.stringSimilarity(sub.name.toLowerCase(), name.toLowerCase());                  
+                    console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
+                    if(similarity < SIMILARTY_THRESHOLD) {
+                        console.debug("Too low similarity for: "+sub.name+" with: "+similarity);
+                        break;
+                    }
+        
+                    // Try cache:
+                    /* Cache doesn't work
+                    let link = Cookies.get(OPENSUBTITLES_CACHE_KEY + "_" + sub.file_id);
+                    if(link) {
+                        console.debug("Using cached subtitile: "+link);
                         TiviProvider.sendSubtitle(req, CODE_TO_LANGUAGE[sub.language], link, sub.language);
+                        found = true;
                     }
-                    else {
-                        console.error("Cannot download from OS: "+DOWNLOAD_SUBS_API);
+                    */
+                    //else {
+                    let DOWNLOAD_SUBS_API = API_BASE + "download";
+                    params = {};
+                    params["file_id"] = sub.file_id;
+                    try {
+                        let result = sendHTTPRequest(req, DOWNLOAD_SUBS_API, "POST", headers, params, true);
+                        let message = result.message;
+                        if(message) {
+                            message = decodeURIComponent(message);
+                            console.debug("Download sub JSON: "+message);
+                            let downloadJSON = JSON.parse(message);
+                            let link = downloadJSON.link;
+                            console.debug("Download link from sub:" + link);
+                            //Cookies.set(OPENSUBTITLES_CACHE_KEY + "_" + sub.file_id, link, { expires: 1 });
+                            found = true;
+                            TiviProvider.sendSubtitle(req, CODE_TO_LANGUAGE[sub.language], link, sub.language);
+                        }
+                        else {
+                            console.error("Cannot download from OS: "+DOWNLOAD_SUBS_API);
+                        }
                     }
+                    catch(e) {
+                        console.error(e);
+                    }
+                    //}                                
                 }
-                catch(e) {
-                    console.error(e);
-                }
-                //}                                
             }
             if(found) {
                 return true;
