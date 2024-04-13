@@ -20,6 +20,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
     headers["Accept"] = "*/*";    
     let params = {};
     params["query"] = name;
+    params["machine_translated"] = false;
     if(season > 0 && episode > 0) {
         params["season_number"] = season;
         params["episode_number"] = episode;
