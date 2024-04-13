@@ -58,6 +58,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                 let files = data[i].attributes.files;
                 if(files.length > 0) {
                     sub.file_id = files[0].file_id;
+                    console.debug("Found sub: "+details.title+" parent="+details.parent_title);
                     subs.push(sub);
                 }
                 else {
