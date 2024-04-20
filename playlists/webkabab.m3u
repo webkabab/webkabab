@@ -1,10 +1,7 @@
 #EXTM3U
 
 
-#EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",כאן 11
-https://kan11.media.kan.org.il/hls/live/2024514/2024514/master.m3u8
-
-#EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",כאן_ 11 
+#EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",כאן 11 
 https://kan11w.media.kan.org.il/hls/live/2105694/2105694/source1_4k/chunklist.m3u8
 
 #EXTINF:-1 tvg-id="2670" tvg-name="קשת" group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Keshet12_2018.svg/1200px-Keshet12_2018.svg.png" radio="false",קשת
