@@ -132,3 +132,6 @@ http://smotri.only-tv.org/disney.html
 
 #EXTINF:-1 tvg-name="JimJam"  group-title="Disney" tvg-logo="" radio="false",JimJam
 http://smotri.only-tv.org/jimjam.html
+
+#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false",ספורט 5
+http://85.215.49.113:9999/channel/928346e/index.mpeg?q=36ca1a617b74b0f114851c335e1834ce
