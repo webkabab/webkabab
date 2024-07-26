@@ -16,7 +16,7 @@ if(typeof searchPlugins === 'undefined') {
 }
 searchPlugins.push(searchMoviesJoys);
 
-function resolveMoviesJoysVOD(parts, onSuccess, onError) {
+function resolveMoviesJoysVOD(req, parts, onSuccess, onError) {
     console.debug("inside resolve moviesjoys VOD");
     var series = null;
     var season = null;
