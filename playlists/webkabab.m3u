@@ -144,7 +144,9 @@ http://85.215.49.113:9999/channel/928346e/index.mpeg?q=36ca1a617b74b0f114851c335
 http://85.215.49.113:9999/channel/544c6876/index.mpeg?q=36ca1a617b74b0f114851c335e1834ce
 
 #EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", Eurosport 1 (1)
-https://ok.ru/videoembed/7322436443771?autoplay=1&nochat=1
+http://myru.cc/online/eurosport
+#http://edge02.odtv.az/o7/eurosport/playlist.m3u8
+
 
 #EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", Eurosport 2
 https://varlive.top/stream/live/eurosport2.html?autoplay=1
