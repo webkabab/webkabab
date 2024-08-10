@@ -159,3 +159,12 @@ http://85.215.49.113:9999/channel/26caff51/index.mpeg?q=36ca1a617b74b0f114851c33
 
 #EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", USA Network
 https://pl.ifndhhr876hj.shop/playlist/24107/gozow.nbuyt4lk8.space/caxi.m3u8
+
+#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false",ספורט 5 LIVE
+http://31.43.191.59:80/Dmitry98/5Gnsc24k9y/1105545.ts
+
+#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false",ספורט 5 PLUS
+http://31.43.191.59:80/Dmitry98/5Gnsc24k9y/1105547.ts
+
+#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false",ספורט 5 GOLD
+http://31.43.191.59:80/Dmitry98/5Gnsc24k9y/1105549.ts
