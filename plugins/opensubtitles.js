@@ -124,7 +124,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                             console.debug("Download link from sub:" + link);
                             //Cookies.set(OPENSUBTITLES_CACHE_KEY + "_" + sub.file_id, link, { expires: 1 });
                             found = true;
-                            TiviProvider.sendSubtitle(req, CODE_TO_LANGUAGE[sub.language], link, sub.language);
+                            TiviProvider.sendSubtitle(req, "[OpenSubtitles]" + CODE_TO_LANGUAGE[sub.language], link, sub.language);
                         }
                         else {
                             console.error("Cannot download from OS: "+DOWNLOAD_SUBS_API);
