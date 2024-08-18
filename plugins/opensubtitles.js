@@ -89,7 +89,8 @@ function searchOpenSubtitles(name, season, episode, languages) {
                     if(sub.language != searchLang) {
                         continue;
                     }
-                    sub.name = sub.name.replaceAll("+", " ");                    
+                    //sub.name = sub.name.replaceAll("+", " ");  // replaceAll not supported by all browsers
+                    sub.name = sub.name.replace(/[+]/g, " ");
                     console.debug("Looking for similarity between sub-name="+sub.name+" and name="+name);
                     
                     let similarity = exports.stringSimilarity(sub.name.toLowerCase(), name.toLowerCase());                  
