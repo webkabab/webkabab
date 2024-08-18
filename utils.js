@@ -218,10 +218,12 @@ function stringSimilarity(str1, str2) {
     //return exports.stringSimilarity(str1, str2);
 
 
-    const normalizedString1 = diacritics.remove(str1).toLowerCase();
-    const normalizedString2 = diacritics.remove(str2).toLowerCase(); 
+    //const normalizedString1 = diacritics.remove(str1).toLowerCase();
+    //const normalizedString2 = diacritics.remove(str2).toLowerCase(); 
+    const normalizedString1 = str1.toLowerCase();
+    const normalizedString2 = str2.toLowerCase(); 
 
-    const distance = levenshtein.get(normalizedString1, normalizedString2);
+    const distance = exports.levenshtein.get(normalizedString1, normalizedString2);
     const maxLength = Math.max(normalizedString1.length, normalizedString2.length);
     return 1 - (distance / maxLength);
 }
