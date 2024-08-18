@@ -213,3 +213,7 @@ function formatName(name) {
 function formatWord(word) {
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
+
+function stringSimilarity(str1, str2) {
+    return exports.stringSimilarity(str1, str2);
+}
