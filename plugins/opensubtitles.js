@@ -92,11 +92,11 @@ function searchOpenSubtitles(name, season, episode, languages) {
                     //sub.name = sub.name.replaceAll("+", " ");  // replaceAll not supported by all browsers
 
                     let filteredName = name.replace(/\s*[(].*[)]\s*/g, "");
-                    sub.name = sub.name.replace(/[+]/g, " ");
-                    console.debug("Looking for similarity between sub-name="+sub.name+" and name="+filteredName);
+                    sub.name = sub.name.replace(/[+]/g, " ");                    
                     
                     //let similarity = exports.stringSimilarity(sub.name.toLowerCase(), filteredName.toLowerCase());                  
                     let similarity = stringSimilarity(sub.name.toLowerCase(), filteredName.toLowerCase());
+                    console.debug("Looking for similarity between sub-name="+sub.name+" and name="+filteredName+" result="+similarity);
                     console.debug("Found sub on OpenSubtitles: "+sub.name+" language="+sub.language);
                     if(similarity < SIMILARTY_THRESHOLD) {
                         console.debug("Too low similarity for: "+sub.name+" with: "+similarity);
