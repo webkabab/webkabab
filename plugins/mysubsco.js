@@ -34,15 +34,15 @@ function searchMySubs(name, season, episode, languages) {
         searchResults.sort(function(a,b) {
             let tempA = a.name.toLowerCase();
             let tempB = b.name.toLowerCase();                                    
-            let similarityA = exports.stringSimilarity(tempA, name);                    
-            let similarityB = exports.stringSimilarity(tempB, name);
+            let similarityA = stringSimilarity(tempA, name);                    
+            let similarityB = stringSimilarity(tempB, name);
             return similarityB - similarityA;
         }); 
         
         if(searchResults.length > 0) {
             let beseResult = searchResults[0];
             // calculate similarity to ensure the right match
-            let similarity = exports.stringSimilarity(beseResult.name, name);
+            let similarity = stringSimilarity(beseResult.name, name);
             console.debug("The best subs search result for: "+name+" is: "+beseResult.name+" with similarity: "+similarity);
             if(similarity > SIMILARTY_THRESHOLD) {
                 let url = beseResult.url;
@@ -104,7 +104,7 @@ function searchMySubs(name, season, episode, languages) {
                     for(var i in subtitles) {
                         if(i >= MAX_SUBTITLES) break;
                         let subtitle = subtitles[i];
-                        TiviProvider.sendSubtitle(req, subtitle.name, subtitle.url, subtitle.language);   
+                        TiviProvider.sendSubtitle(req, "[MySubs] " + subtitle.name, subtitle.url, subtitle.language);   
                     }
                     if(subtitles.length > 0) { // found at least one matching subtitle
                         return true;

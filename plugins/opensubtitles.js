@@ -71,8 +71,8 @@ function searchOpenSubtitles(name, season, episode, languages) {
                 let tempA = a.name.toLowerCase();
                 let tempB = b.name.toLowerCase();         
                 let original = name.toLowerCase();                           
-                let similarityA = exports.stringSimilarity(tempA, original);
-                let similarityB = exports.stringSimilarity(tempB, original);
+                let similarityA = stringSimilarity(tempA, original);
+                let similarityB = stringSimilarity(tempB, original);
                 return similarityB - similarityA;
             }); 
     
@@ -127,7 +127,7 @@ function searchOpenSubtitles(name, season, episode, languages) {
                             console.debug("Download link from sub:" + link);
                             //Cookies.set(OPENSUBTITLES_CACHE_KEY + "_" + sub.file_id, link, { expires: 1 });
                             found = true;
-                            TiviProvider.sendSubtitle(req, "[OpenSubtitles]" + CODE_TO_LANGUAGE[sub.language], link, sub.language);
+                            TiviProvider.sendSubtitle(req, "[OpenSubtitles] " + CODE_TO_LANGUAGE[sub.language], link, sub.language);
                         }
                         else {
                             console.error("Cannot download from OS: "+DOWNLOAD_SUBS_API);
