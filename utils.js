@@ -223,7 +223,7 @@ function stringSimilarity(str1, str2) {
     const normalizedString1 = str1.toLowerCase();
     const normalizedString2 = str2.toLowerCase(); 
 
-    const distance = exports.levenshtein.get(normalizedString1, normalizedString2);
+    const distance = module.exports.Levenshtein.get(normalizedString1, normalizedString2);
     const maxLength = Math.max(normalizedString1.length, normalizedString2.length);
     return 1 - (distance / maxLength);
 }
