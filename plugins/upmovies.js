@@ -86,7 +86,7 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
             extractUpMoviesStream(req, pageURL, onSuccess, onError);
         }
         else if(onError) {
-            onError.error("Invalid MoviesJoys query=" + query);        
+            onError("Invalid MoviesJoys query=" + query);        
         }
     }
     catch(e) {
