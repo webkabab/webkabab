@@ -110,11 +110,12 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
         let match;
         console.debug("Before founding sources...");
         while(match = sourcesRegex.exec(html)) {
-            const sourceId = match[1];
+            const sourceId =  match[1].replace(/[+]/g, " ");
             const videoId = match[2];
             const season = match[3];
             const episodeNum = match[4];
-            const sourceName = match[5];
+            const sourceName = match[5].replace(/[+]/g, " ");
+            
             const url = "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies" 
                     + "&id=" + sourceId 
                     + "&s=" + season 
