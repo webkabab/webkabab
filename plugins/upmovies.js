@@ -105,7 +105,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
         sources["urls"] = [];
         sources["selected"] = 0;
         sources["stream"] = "";
-        const sourcesRegex = /<p\s+class="server_servername"><a\s+href="https:\/\/upmovies[.]net\/watch\/((.*)-.*-season-(.*))\/episode-(.*)[.].*">(.*)<\/a>/gm;
+        const sourcesRegex = /<p[+]class="server_servername"><a[+]href="https:\/\/upmovies[.]net\/watch\/((.*)-.*-season-(.*))\/episode-(.*)[.].*">(.*)<\/a>/gm;
         let i = 0;                
         let match;
         console.debug("Before founding sources...");
