@@ -114,6 +114,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
             const videoId = match[2];
             const season = match[3];
             const episodeNum = match[4];
+            const sourceName = match[5];
             const url = "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies" 
                     + "&id=" + sourceId 
                     + "&s=" + season 
