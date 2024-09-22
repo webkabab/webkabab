@@ -155,7 +155,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
                             console.debug("Grabbed video: "+streamURL);
                             sources["stream"] = streamURL;
                             //onSuccess(streamURL);
-                            onSuccess(sources);
+                            onSuccess(JSON.stringify(sources));
                             return;
                         }
                         else {
@@ -167,7 +167,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
                 console.debug("Got stream URL="+streamURL);
                 sources["stream"] = streamURL;
                 //onSuccess(streamURL);
-                onSuccess(sources);
+                onSuccess(JSON.stringify(sources));
             }
             else if(onError) {
                 onError("Cannot extract server");
