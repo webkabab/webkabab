@@ -106,7 +106,8 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
         sources["selected"] = 0;
         sources["stream"] = "";
         const sourcesRegex = /<p class="server_servername"><a href="https:[/][/]upmovies[.]net[/]watch[/]((.*)-.*-season-(.*))[/]episode-(.*)[.].*">(.*)<\/a>/g;
-        let i = 0;
+        let i = 0;                
+        let match;
         while(match = sourcesRegex.exec(html)) {
             const sourceId = match[1];
             const videoId = match[2];
@@ -129,7 +130,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
         }
 
         const playerIframeRegex = /class="player-iframe.*?decode[(]"(.*?)"/g;
-        let match = playerIframeRegex.exec(html);
+        match = playerIframeRegex.exec(html);
         if(match) {
             const base64 = match[1];
             console.debug("base64 url="+base64);
