@@ -108,6 +108,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
         const sourcesRegex = /<p class="server_servername"><a href="https:[/][/]upmovies[.]net[/]watch[/]((.*)-.*-season-(.*))[/]episode-(.*)[.].*">(.*)<\/a>/g;
         let i = 0;                
         let match;
+        console.debug("Before founding sources...");
         while(match = sourcesRegex.exec(html)) {
             const sourceId = match[1];
             const videoId = match[2];
@@ -128,6 +129,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
             }
             i++;
         }
+        console.debug("After founding sources...");
 
         const playerIframeRegex = /class="player-iframe.*?decode[(]"(.*?)"/g;
         match = playerIframeRegex.exec(html);
