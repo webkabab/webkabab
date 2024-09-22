@@ -83,10 +83,10 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
                 }
             }
 
-            extractUpMoviesStream(req, pageURL, onSuccess, onError);
+            extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError);
         }
         else if(onError) {
-            onError("Invalid UpMovies query=" + query);        
+            onError.error("Invalid MoviesJoys query=" + query);        
         }
     }
     catch(e) {
@@ -94,11 +94,40 @@ function resolveUpMoviesVOD(req, parts, onSuccess, onError) {
     }
 }
 
-function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
+function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
         
     let result = sendHTTPRequest(req, pageURL, "GET", {}, {}, true);
     let html = result.message;
     if(html) {
+
+        // Extract all alternative sources
+        let sources = {};
+        sources["urls"] = [];
+        sources["selected"] = 0;
+        sources["stream"] = "";
+        const sourcesRegex = /<p class="server_servername"><a href="https:[/][/]upmovies[.]net[/]watch[/]((.*)-.*-season-(.*))[/]episode-(.*)[.].*">(.*)<\/a>/g;
+        let i = 0;
+        while(match = sourcesRegex.exec(html)) {
+            const sourceId = match[1];
+            const videoId = match[2];
+            const season = match[3];
+            const episodeNum = match[4];
+            const url = "addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/upmovies" 
+                    + "&id=" + sourceId 
+                    + "&s=" + season 
+                    + "&ep=" + episodeNum 
+                    + "&name="+ fullName;
+            console.debug("Found source="+sourceName+" uri="+url);
+            sources["urls"].push({
+                "name" : sourceName,
+                "url" : url
+            });
+            if(id === videoId) {
+                sources["selected"] = i;
+            }
+            i++;
+        }
+
         const playerIframeRegex = /class="player-iframe.*?decode[(]"(.*?)"/g;
         let match = playerIframeRegex.exec(html);
         if(match) {
@@ -123,7 +152,9 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
                             streamURL = streamResult[1];
                             streamURL = streamURL + "|" + referer;
                             console.debug("Grabbed video: "+streamURL);
-                            onSuccess(streamURL);
+                            sources["stream"] = streamURL;
+                            //onSuccess(streamURL);
+                            onSuccess(sources);
                             return;
                         }
                         else {
@@ -132,8 +163,10 @@ function extractUpMoviesStream(req, pageURL, onSuccess, onError) {
                     }
                 }
                 streamURL = streamURL + "|" + referer;
-                console.debug("Got stream URL="+streamURL);                
-                onSuccess(streamURL);
+                console.debug("Got stream URL="+streamURL);
+                sources["stream"] = streamURL;
+                //onSuccess(streamURL);
+                onSuccess(sources);
             }
             else if(onError) {
                 onError("Cannot extract server");
