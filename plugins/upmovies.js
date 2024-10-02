@@ -126,7 +126,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
                 "name" : sourceName,
                 "url" : url
             });            
-            if(id === videoId) {
+            if(id === sourceId) {
                 sources["selected"] = i;
             }
             i++;
