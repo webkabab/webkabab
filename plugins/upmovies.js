@@ -108,7 +108,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
         const sourcesRegex = /<p[+]class="server_servername"><a[+]href="https:\/\/upmovies[.]net\/watch\/((.*?)-.*?-season-(.*?))\/episode-(.*?)[.].*?">(.*?)<\/a>/gm;
         let i = 0;                
         let match;
-        console.debug("Before founding sources...");
+        console.debug("Before founding sources... id="+id);
         while(match = sourcesRegex.exec(html)) {
             const sourceId =  match[1].replace(/[+]/g, " ");
             const videoId = match[2];
@@ -121,11 +121,11 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
                     + "&s=" + season 
                     + "&ep=" + episodeNum 
                     + "&name="+ fullName;
-            console.debug("Found source="+sourceName+" uri="+url);
+            console.debug("Found source="+sourceName+" uri="+url+" videoId="+videoId);
             sources["urls"].push({
                 "name" : sourceName,
                 "url" : url
-            });
+            });            
             if(id === videoId) {
                 sources["selected"] = i;
             }
