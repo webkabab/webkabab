@@ -121,7 +121,7 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
                     + "&s=" + season 
                     + "&ep=" + episodeNum 
                     + "&name="+ fullName;
-            console.debug("Found source="+sourceName+" uri="+url+" videoId="+videoId);
+            console.debug("Found source="+sourceName+" uri="+url+" sourceId="+sourceId);
             sources["urls"].push({
                 "name" : sourceName,
                 "url" : url
