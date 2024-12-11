@@ -192,7 +192,8 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
 
 function searchUpMovies(req, query) {
     
-    let SEARCH_API = SITE_BASE + "/search-movies/" + query + ".html";
+    //let SEARCH_API = SITE_BASE + "/search-movies/" + query + ".html";
+    let SEARCH_API = SITE_BASE + "/s=" + query;
     
     let params = {};    
     let mediaItems = [];        
