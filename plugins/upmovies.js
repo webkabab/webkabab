@@ -193,11 +193,11 @@ function extractUpMoviesStream(req, pageURL, fullName, id, onSuccess, onError) {
 function searchUpMovies(req, query) {
     
     //let SEARCH_API = SITE_BASE + "/search-movies/" + query + ".html";
-    let SEARCH_API = SITE_BASE + "/s=" + query;
+    let SEARCH_API = SITE_BASE;
     
     let params = {};    
     let mediaItems = [];        
-    let result = sendHTTPRequest(req, SEARCH_API, "GET", {}, params, true);
+    let result = sendHTTPRequest(req, SEARCH_API, "GET", {"s" : query}, params, true);
     let searchResults = result.message;
     console.log("Got search results from UpMovies for q="+query+": "+searchResults); 
     if(searchResults) {    
