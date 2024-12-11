@@ -1,4 +1,5 @@
-var SITE_BASE = "https://upmovies.net";
+//var SITE_BASE = "https://upmovies.net";
+var SITE_BASE = "https://freemovies.homes"
 var MAX_SEARCH_PAGES = 3;
 var MAX_SEARCH_ITEMS = 3;
 
