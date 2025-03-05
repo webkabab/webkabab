@@ -21,8 +21,8 @@ https://now14.g-mana.live/media/91517161-44ab-4e46-af70-e9fe26117d2e/mainManifes
 https://6180c994cb835402.mediapackage.eu-west-1.amazonaws.com/out/v1/06e44cd7f7e0445fbd669f279c997fd4/index.mpd
 
 #EXTINF:-1 group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/LOGO_i24NEWS.png/900px-LOGO_i24NEWS.png" ,i24 News
-https://bcovlive-a.akamaihd.net/d89ede8094c741b7924120b27764153c/eu-central-1/5377161796001/profile_0/chunklist.m3u8
-#https://bcovlive-a.akamaihd.net/54b8e6b753e3409c91856201d1f08731/eu-central-1/5377161796001/playlist.m3u8
+https://bcovlive-a.akamaihd.net/d89ede8094c741b7924120b27764153c/eu-central-1/5377161796001/playlist.m3u8
+#https://bcovlive-a.akamaihd.net/d89ede8094c741b7924120b27764153c/eu-central-1/5377161796001/profile_0/chunklist.m3u8
 
 #EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ישראל פלוס 
 http://ovego.tv/publ/live_tv/razvlekatelnye/9channel_israel/7-1-0-950
