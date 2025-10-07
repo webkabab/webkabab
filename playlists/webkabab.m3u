@@ -20,6 +20,9 @@ https://ch14-channel14-content.akamaized.net/hls/live/2104807-b/CH14_CHANNEL14/2
 #EXTINF:-1 group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/LOGO_i24NEWS.png/900px-LOGO_i24NEWS.png" ,i24 News
 https://bcovlive-a.akamaihd.net/d89ede8094c741b7924120b27764153c/eu-central-1/5377161796001/playlist.m3u8
 
+#EXTINF:-1 group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/LOGO_i24NEWS.png/900px-LOGO_i24NEWS.png" ,ואללה+
+https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01742-walla-wallanews-ono/playlist.m3u8
+
 #EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="http://isc.wcdn.co.il/w6/v/tv/ch_icons/9.jpg" ,ישראל פלוס 
 http://ovego.tv/publ/live_tv/razvlekatelnye/9channel_israel/7-1-0-950
 
