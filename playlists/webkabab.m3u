@@ -14,7 +14,7 @@ https://cdnapisec.kaltura.com/p/2748741/sp/2748741/playManifest/entryId/1_ubg28z
 #EXTINF:-1 tvg-id="4296" group-title="ישראל" tvg-logo="https://www.now14.co.il/wp-content/themes/14-child/assets/logo14/logoHeader.png" radio="false",ערוץ 14
 https://n-121-6.il.cdn-redge.media/livedash/oil/ch14/live/ch14/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/LOGO_i24NEWS.png/900px-LOGO_i24NEWS.png" ,i24 News
+#EXTINF:-1 group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/7/79/LOGO_i24NEWS.png" ,i24 News
 addon://https%3A%2F%2Fwebkabab.github.io%2Fwebkabab%2Faddon.html/request_live_url/i24news&id=he
 
 #EXTINF:-1 group-title="ישראל" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSihsEr9i58GynkzCxlI-nQCVeBwVxV3X9IIw&s" ,ואללה+
