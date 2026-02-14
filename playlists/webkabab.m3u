@@ -30,7 +30,7 @@ https://kneset.gostreaming.tv/p2-kneset/_definst_/myStream/playlist.m3u8
 #EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",מכאן 
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/kan11/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/HtuClSDdyUIU2Ptof2wk53xn6YhKSAcAQnUMdixj.png" ,כאן ב 
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.radio-head.co.il/images/stations/kan-beit.webp" ,כאן ב 
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_reshet_bet/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/tdGoDH47Dvfknxn1UDfuqhgqFr8XTxTIlxVNhJPn.png",88 FM
