@@ -541,6 +541,7 @@ function executeAsync() {
             importScripts(path + 'KababConfig.js');
             importScripts(path + 'KababMain.js');
             importScripts(path + 'plugins/sdarot.js');
+            importScripts(path + 'plugins/i24news.js');
             
         }        
     }
