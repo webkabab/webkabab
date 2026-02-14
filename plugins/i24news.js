@@ -246,6 +246,8 @@ function getI24NewsContents(accessToken, contentId, onSuccess, onError) {
         }
         
         console.debug("✓ Contents response is an array with " + contentsResponse.length + " items");
+        // print the array
+        console.debug("Contents items: " + contentsResponse.map(function(c) { return c.id; }).join(", "));
         
         // If no contentId specified, use the first available or default to "he" (Hebrew)
         var targetId = contentId || "he";
