@@ -30,25 +30,25 @@ https://kneset.gostreaming.tv/p2-kneset/_definst_/myStream/playlist.m3u8
 #EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",מכאן 
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/kan11/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.radio-head.co.il/images/stations/kan-beit.webp" ,כאן ב 
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/718/kan-bet.3c64f3a2.png" ,כאן ב 
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_reshet_bet/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/tdGoDH47Dvfknxn1UDfuqhgqFr8XTxTIlxVNhJPn.png",88 FM
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/546/kan-88.547e91e6.png",88 FM
 https://n-121-3.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_88/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/Q4IUO2dHHBgUhGxvj5jvCiOGOPedRATh0yvbuzeU.png",כאן ג
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/719/kan-gimel.c17ccb24.png",כאן ג
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_gimel/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/k06ZnxGIJJYJs4P3OFBm4NWTnvsHSNJ4puVsPk02.png",כאן תרבות
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/720/kan-tarbut.17461622.png",כאן תרבות
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_tarbut/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/ljI0mzQdkQZBzL8MZ29OQSQQ0zHRWPoxnHYlkPF0.png",קול המוסיקה
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/722/kan-kol-ha-music.302f54c8.png",קול המוסיקה
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_kol_hamuzika/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/E3WqpMPnuIumjkgAdpMuJ8cYzabsVJpL0A1wDpG9.png",כאן מורשת
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/721/kan-moreshet.b55a3107.png",כאן מורשת
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_moreshet/live.livx?dvr=36000000
 
-#EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/JjGq4Fr3bg6xJoceNcKXih2kx10QD51bmI81N5ki.png",Рэка כאן
+#EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/144/israel-radio-international.21246ce4.jpg",Рэка כאן
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_reka/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/rcnSeagIC4FdJ5MW0902ptuJiezUQPmR7jVJIxIJ.png",גלגל"צ
