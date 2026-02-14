@@ -210,8 +210,16 @@ function getI24NewsContents(accessToken, contentId, onSuccess, onError) {
     try {
         console.debug("Getting i24news contents with accessToken...");
         
-        // Build contents URL
-        var contentsUrl = "https://api.i24news.wiztivi.io/contents?provider=brightcove&type=DYNAMIC&key=channel&value=all";
+        // Build contents URL (base URL without parameters)
+        var contentsUrl = "https://api.i24news.wiztivi.io/contents";
+        
+        // Build parameters object
+        var params = {
+            "provider": "brightcove",
+            "type": "DYNAMIC",
+            "key": "channel",
+            "value": "all"
+        };
         
         // Build Authorization header with Bearer token
         var headers = {
@@ -219,7 +227,7 @@ function getI24NewsContents(accessToken, contentId, onSuccess, onError) {
         };
         
         // Send GET request to get contents
-        var result = sendHTTPRequest(req, contentsUrl, "GET", headers, {}, true);
+        var result = sendHTTPRequest(req, contentsUrl, "GET", headers, params, true);
         
         console.debug("Contents response received");
         
