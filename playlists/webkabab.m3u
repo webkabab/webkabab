@@ -2,7 +2,7 @@
 
 
 #EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",כאן 11 
-https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/kan11/live.livx?dvr=36000000
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/kan11_subs/live.livx?dvr=36000000
 #https://n-121-5.il.cdn-redge.media/livedash/oil/kancdn-live/live/kan11/live.livx?indexMode&futc&dvr=36000000
 
 #EXTINF:-1 tvg-id="2670" tvg-name="קשת" group-title="ישראל" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Keshet12_2018.svg/1200px-Keshet12_2018.svg.png" radio="false",קשת
@@ -27,26 +27,29 @@ http://ontivi.net/9-kanal-izrailtv.html
 #EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRwVXx5XIzb0lAFxGiscEqCocYm4-dwx5U8g&s" ,ערוץ הכנסת
 https://kneset.gostreaming.tv/p2-kneset/_definst_/myStream/playlist.m3u8
 
+#EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",מכאן 
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/kan11/live.livx?dvr=36000000
+
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/HtuClSDdyUIU2Ptof2wk53xn6YhKSAcAQnUMdixj.png" ,כאן ב 
-https://kanbet.media.kan.org.il/hls/live/2024811/2024811/kanbet_mp3/chunklist.m3u8
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_reshet_bet/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/tdGoDH47Dvfknxn1UDfuqhgqFr8XTxTIlxVNhJPn.png",88 FM
-https://kan88.media.kan.org.il/hls/live/2024812/2024812/kan88_mp3/chunklist.m3u8
+https://n-121-3.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_88/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/Q4IUO2dHHBgUhGxvj5jvCiOGOPedRATh0yvbuzeU.png",כאן ג
-https://kangimmel.media.kan.org.il/hls/live/2024813/2024813/kangimmel_mp3/chunklist.m3u8
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_gimel/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/k06ZnxGIJJYJs4P3OFBm4NWTnvsHSNJ4puVsPk02.png",כאן תרבות
-https://kantarbut.media.kan.org.il/hls/live/2024816/2024816/kantarbut_mp3/chunklist.m3u8
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_tarbut/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/ljI0mzQdkQZBzL8MZ29OQSQQ0zHRWPoxnHYlkPF0.png",קול המוסיקה
-https://kankolhamusica.media.kan.org.il/hls/live/2024817/2024817/kanclassical_mp3/chunklist.m3u8
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_kol_hamuzika/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/E3WqpMPnuIumjkgAdpMuJ8cYzabsVJpL0A1wDpG9.png",כאן מורשת
-https://kanmoreshet.media.kan.org.il/hls/live/2024814/2024814/kanmoreshet_mp3/chunklist.m3u8
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_moreshet/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/JjGq4Fr3bg6xJoceNcKXih2kx10QD51bmI81N5ki.png",Рэка כאן
-https://kanreka.media.kan.org.il/hls/live/2024815/2024815/kanreka_mp3/chunklist.m3u8
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_reka/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://www.rlive.co.il/storage/uploads/stations/rcnSeagIC4FdJ5MW0902ptuJiezUQPmR7jVJIxIJ.png",גלגל"צ
 https://glzwizzlv.bynetcdn.com/glglz_mp3
