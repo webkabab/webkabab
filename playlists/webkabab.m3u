@@ -27,8 +27,8 @@ http://ontivi.net/9-kanal-izrailtv.html
 #EXTINF:-1 tvg-id="TV50" group-title="ישראל" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRwVXx5XIzb0lAFxGiscEqCocYm4-dwx5U8g&s" ,ערוץ הכנסת
 https://kneset.gostreaming.tv/p2-kneset/_definst_/myStream/playlist.m3u8
 
-#EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://www.ckl.co.il/wp-content/uploads/elementor/thumbs/logo-kan-p5f9evqp2s5blxvleeu1ccvpsibeagbpc9wbq9dqs0.jpg" radio="false",מכאן 
-https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/kan11/live.livx?dvr=36000000
+#EXTINF:-1 tvg-id="2673" group-title="ישראל" tvg-logo="https://fm1.co.il/assets/stations/kan-makan.png" radio="false",מכאן 
+https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/makan/live.livx?dvr=36000000
 
 #EXTINF:-1 group-title="רדיו" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/718/kan-bet.3c64f3a2.png" ,כאן ב 
 https://n-121-6.il.cdn-redge.media/livedash/oil/kancdn-live/live/radio/kan_reshet_bet/live.livx?dvr=36000000
