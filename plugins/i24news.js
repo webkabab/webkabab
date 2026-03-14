@@ -1,3 +1,5 @@
+"use strict";
+
 var I24NEWS_BASE = "https://www.i24news.tv";
 
 // register for resolver plugins

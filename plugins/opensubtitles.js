@@ -1,3 +1,5 @@
+"use strict";
+
 // register for subtitle search plugins
 if(typeof subsPlugins === 'undefined') {
     subsPlugins = [];

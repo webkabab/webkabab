@@ -1,3 +1,5 @@
+"use strict";
+
 var CODE_TO_LANGUAGE = {
     "aa": "Afar",
     "ab": "Abkhazian",

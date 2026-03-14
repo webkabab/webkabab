@@ -1,3 +1,5 @@
+"use strict";
+
 var SDAROT_BASE = "https://sdarot.tw";
 
 // register for resolver plugins
