@@ -188,7 +188,7 @@ var CODE_TO_LANGUAGE = {
 };
 
 
-var LANGUAGE_CODES = Object.keys(CODE_TO_LANGUAGE).reduce((acc, key) => {
+var LANGUAGE_CODES = Object.keys(CODE_TO_LANGUAGE).reduce(function(acc, key) {
     acc[CODE_TO_LANGUAGE[key]] = key;
     return acc;
 }, {});
@@ -198,7 +198,7 @@ function formatName(name) {
     // split the string into an array of words
     let words = result.split (' ');
     // map each word to a new word with the first letter capitalized
-    let capitalizedWords = words.map (word => {
+    let capitalizedWords = words.map (function(word) {
         // get the first letter and make it uppercase
         let firstLetter = word[0].toUpperCase ();
         // get the rest of the word and keep it lowercase

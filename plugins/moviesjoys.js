@@ -1,3 +1,5 @@
+"use strict";
+
 var SITE_BASE = "https://moviesjoys.cc";
 var MAX_SEARCH_PAGES = 3;
 var MAX_SEARCH_ITEMS = 3;
@@ -6,13 +8,13 @@ var MAX_SEARCH_ITEMS = 3;
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
-    resolverPlugins = {};
+    var resolverPlugins = {};
 }
 resolverPlugins["moviesjoys"] = resolveMoviesJoysVOD; 
 
 // register for search plugins
 if(typeof searchPlugins === 'undefined') {
-    searchPlugins = [];
+    var searchPlugins = [];
 }
 searchPlugins.push(searchMoviesJoys);
 

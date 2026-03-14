@@ -4,13 +4,13 @@ var SDAROT_BASE = "https://sdarot.tw";
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
-    resolverPlugins = {};
+    var resolverPlugins = {};
 }
 resolverPlugins["sdarot"] = resolveSdarotVOD; 
 
 // register for search plugins
 if(typeof searchPlugins === 'undefined') {
-    searchPlugins = [];
+    var searchPlugins = [];
 }
 //searchPlugins.push(searchSdarot); // TODO: enable once working
 

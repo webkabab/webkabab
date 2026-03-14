@@ -1,3 +1,5 @@
+"use strict";
+
 // TODO: NOT FINISHED!!!!
 
 var SITE_BASE = "https://watchmoveishd.bz";
@@ -8,7 +10,7 @@ var MAX_SEARCH_ITEMS = 3;
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
-    resolverPlugins = {};
+    var resolverPlugins = {};
 }
 resolverPlugins["watchmovieshd"] = resolveWatchMoviesHDVOD; 
 

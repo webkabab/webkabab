@@ -4,13 +4,13 @@ var I24NEWS_BASE = "https://www.i24news.tv";
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
-    resolverPlugins = {};
+    var resolverPlugins = {};
 }
 resolverPlugins["i24news"] = resolveI24NewsVOD;
 
 // register for search plugins
 if(typeof searchPlugins === 'undefined') {
-    searchPlugins = [];
+    var searchPlugins = [];
 }
 searchPlugins.push(searchI24News);
 

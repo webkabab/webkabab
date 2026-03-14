@@ -9,13 +9,13 @@ var MAX_SEARCH_ITEMS = 3;
 
 // register for resolver plugins
 if(typeof resolverPlugins === 'undefined') {
-    resolverPlugins = {};
+    var resolverPlugins = {};
 }
 resolverPlugins["upmovies"] = resolveUpMoviesVOD; 
 
 // register for search plugins
 if(typeof searchPlugins === 'undefined') {
-    searchPlugins = [];
+    var searchPlugins = [];
 }
 searchPlugins.push(searchUpMovies);
 
