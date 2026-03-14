@@ -2,7 +2,7 @@
 
 // register for subtitle search plugins
 if(typeof subsPlugins === 'undefined') {
-    subsPlugins = [];
+    var subsPlugins = [];
 }
 subsPlugins.push(searchOpenSubtitles);
 
