@@ -85,6 +85,9 @@ https://freedom.cdn-02.cosmonova.net.ua/mobile-app/main/freedom/master.m3u8
 #EXTINF:-1 tvg-name="Дождь"  group-title="רוסיה" tvg-logo="" radio="false",Дождь
 http://smotri.only-tv.org/dozhd.html
 
+#EXTINF:-1 tvg-name="CNN International"  group-title="חדשות" tvg-logo="" radio="false",CNN International
+http://smotrim.org/000000707.m3u8
+
 #EXTINF:-1 tvg-name="Discovery science"  group-title="מדע וטבע" tvg-logo="" radio="false",Discovery Science
 http://smotri.only-tv.org/discovery-science.html
 
@@ -92,7 +95,7 @@ http://smotri.only-tv.org/discovery-science.html
 http://smotrim.org/000000034.m3u8
 
 #EXTINF:-1 tvg-name="Discovery"  group-title="מדע וטבע" tvg-logo="" radio="false",Discovery
-http://smotri.only-tv.org/discovery.html
+http://smotrim.org/000001496.m3u8
 
 #EXTINF:-1 tvg-name="Nat GEo Wild"  group-title="מדע וטבע" tvg-logo="" radio="false",Nat GEo Wild
 http://smotri.only-tv.org/nat-geo-wild.html
@@ -103,8 +106,11 @@ http://smotri.only-tv.org/viasat-nature.html
 #EXTINF:-1 tvg-name="Viasat History"  group-title="מדע וטבע" tvg-logo="" radio="false",Viasat History
 http://smotri.only-tv.org/viasat-history.html
 
+#EXTINF:-1 tvg-name="Animal Planet"  group-title="מדע וטבע" tvg-logo="" radio="false",Animal Planet
+http://smotrim.org/000000216.m3u8
+
 #EXTINF:-1 tvg-name="Техно 24"  group-title="מדע וטבע" tvg-logo="" radio="false",Техно 24
-http://smotri.only-tv.org/24-tekhno.html
+http://smotrim.org/000000008.m3u8
 
 #EXTINF:-1 tvg-name="History Channel"  group-title="מדע וטבע" tvg-logo="" radio="false",History Channel
 http://smotri.only-tv.org/history-channel.html
@@ -148,19 +154,11 @@ https://smotru.tv/cartoon-network.html
 #EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false",ספורט 5
 http://85.215.49.113:9999/channel/928346e/index.mpeg?q=36ca1a617b74b0f114851c335e1834ce
 
-#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", Eurosport 1
-http://85.215.49.113:9999/channel/544c6876/index.mpeg?q=36ca1a617b74b0f114851c335e1834ce
+#EXTINF:-1 tvg-name="Eurosport 1" group-title="ספורט" tvg-logo="" radio="false", Eurosport 1
+http://smotrim.org/000002478.m3u8
 
-#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", Eurosport 1 (1)
-http://myru.cc/c.php?channel=58
-#http://myru.cc/online/eurosport
-#http://edge02.odtv.az/o7/eurosport/playlist.m3u8
-
-#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", Eurosport 2 (2)
-http://myru.cc/c.php?channel=59
-
-#EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", Eurosport 2
-https://varlive.top/stream/live/eurosport2.html?autoplay=1
+#EXTINF:-1 tvg-name="Eurosport 2" group-title="ספורט" tvg-logo="" radio="false", Eurosport 2
+http://smotrim.org/000002479.m3u8
 
 #EXTINF:-1 tvg-name="Sport5" group-title="ספורט" tvg-logo="" radio="false", Eurosport 2 UK
 http://85.215.49.113:9999/channel/26caff51/index.mpeg?q=36ca1a617b74b0f114851c335e1834ce
