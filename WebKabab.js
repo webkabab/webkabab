@@ -251,7 +251,7 @@ function doInBackground() {
                     var json = JSON.parse(makoJson);
                     var tickets = json['tickets'];                    
                     //var result = "https://mako-streaming.akamaized.net/stream/hls/live/2033791/k12dvr/index.m3u8?" + tickets[0]['ticket'] + "&as=1&b-in-range=800-2400";
-                    var result = "https://mako-streaming.akamaized.net/direct/hls/live/20000821/k12rh-clean/index.m3u8" + tickets[0]['ticket'] + "&as=1&b-in-range=800-2400";
+                    var result = "https://mako-streaming.akamaized.net/direct/hls/live/20000821/k12rh-clean/index.m3u8?" + tickets[0]['ticket'] + "&as=1&b-in-range=800-2400";
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
