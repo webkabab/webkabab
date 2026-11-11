@@ -245,13 +245,14 @@ function doInBackground() {
             switch (resolverName) {
                 case "keshet":                    
                     //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/2033791/k12dvr/index.m3u8?&rv=AKAMAI";
-                    var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/direct/hls/live/20000821/k12rh-clean/index.m3u8?&rv=AKAMAI";
+                    //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/direct/hls/live/20000821/k12rh-clean/index.m3u8?&rv=AKAMAI";
+                    var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/20000821/k12rh-dvr/index.m3u8?&rv=AKAMAI";
                     var makoJson = com.montezumba.lib.io.StorageHandler.instance().openFile$java_lang_String$java_lang_String(tokenUrl, "UTF-8").readAll();
                     //console.debug(makoJson);
                     var json = JSON.parse(makoJson);
                     var tickets = json['tickets'];                    
-                    //var result = "https://mako-streaming.akamaized.net/stream/hls/live/2033791/k12dvr/index.m3u8?" + tickets[0]['ticket'] + "&as=1&b-in-range=800-2400";
-                    var result = "https://mako-streaming.akamaized.net/direct/hls/live/20000821/k12rh-clean/index.m3u8?" + tickets[0]['ticket'] + "&as=1&b-in-range=800-2400";
+                    var result = "https://mako-streaming.akamaized.net/stream/hls/live/20000821/k12rh-dvr/index.m3u8?" + tickets[0]['ticket'] + "&as=1&b-in-range=800-2400";
+                    //var result = "https://mako-streaming.akamaized.net/direct/hls/live/20000821/k12rh-clean/index.m3u8?" + tickets[0]['ticket'] + "&as=1&b-in-range=800-2400";
                     TiviProvider.sendResolvedVideo(req, result);
                     TiviProvider.done(req);
                     break;
