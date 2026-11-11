@@ -244,6 +244,7 @@ function doInBackground() {
             
             switch (resolverName) {
                 case "keshet":                    
+                    // NOTE: For future updates, usually what is changing is one of the URL mechanisms like stream id or k12dvr or something. The overall mechanism remains the same
                     //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/2033791/k12dvr/index.m3u8?&rv=AKAMAI";
                     //var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/direct/hls/live/20000821/k12rh-clean/index.m3u8?&rv=AKAMAI";
                     var tokenUrl = "https://mass.mako.co.il/ClicksStatistics/entitlementsServicesV2.jsp?et=ngt&lp=/stream/hls/live/20000821/k12rh-dvr/index.m3u8?&rv=AKAMAI";
